@@ -24,9 +24,9 @@ export default function Navigation() {
                 <Carousel className="w-full">
                     <CarouselContent>
                     {Array.from({ length: 10 }).map((_, index) => (
-                    <CarouselItem key={index} className="max-2xl:basis-[20%] 2xl:basis-[15%] max-sm:basis-[32%]">
+                    <CarouselItem key={index} className="max-2xl:basis-[20%] 2xl:basis-[14%] max-sm:basis-[32%]">
                     <NavigationMenuItem className="block">
-                        <NavigationMenuTrigger className="w-full text-[12px] font-normal">deneme</NavigationMenuTrigger>
+                        <NavigationMenuTrigger className="w-full text-[14px] font-normal">deneme</NavigationMenuTrigger>
                     </NavigationMenuItem>
                     </CarouselItem>
                     ))}
