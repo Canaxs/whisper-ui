@@ -14,7 +14,7 @@ export default function CarouselTwo(props) {
             <Carousel className={props.bigClass}>
                 <CarouselContent className={props.bigClass}>
                 {Array.from({ length: 10 }).map((_, index) => (
-                        <CarouselItem className={props.bigClass} >
+                        <CarouselItem className={props.bigClass} key={index} >
                             <div className={props.bigClass}>
                                 <Card className={props.bigClass}>
                                     <CardContent className={"flex items-center justify-center "+props.bigClass}>
@@ -31,7 +31,7 @@ export default function CarouselTwo(props) {
             <Carousel className={"mt-2 "+props.smallClass}>
                 <CarouselContent className={"flex ml-0 "+props.smallClass}>
                 {Array.from({ length: 10 }).map((_, index) => (
-                    <CarouselItem className={"pl-0 basis-[10%] ml-[1%] cursor-pointer h-full"}>
+                    <CarouselItem className={"pl-0 basis-[10%] ml-[1%] cursor-pointer h-full"} key={index}>
                         <div className={props.smallClass}>
                             <Card className={props.smallClass}>
                             <CardContent className={"flex items-center justify-center h-full p-0"}>
