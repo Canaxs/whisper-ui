@@ -46,7 +46,7 @@ export default function Home() {
 
 
     return (
-        <div style={{fontFamily: 'Poppins,sans-serif'}}>
+        <div>
         <div className="lg:w-[98%] 2xl:w-[65%] pt-1 lg:ml-[1%] 2xl:ml-[17%]">
             <Header />
             <ContentCarousel />

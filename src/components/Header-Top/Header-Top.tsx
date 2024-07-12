@@ -11,7 +11,7 @@ export default function HeaderTop() {
                 <img src="siyah-flag.png" className="ml-2" width="100px" height="50px" alt="Türk Bayrağı" />
             </div>
             <div className="flex items-center max-md:mr-[1%]">
-                <a href="" className="text-sm text-slate-700 font-medium">Giriş Yap</a>
+                <a href="/login" className="text-sm text-slate-700 font-medium">Giriş Yap / Kayıt Ol</a>
             </div>
         </div>
     )

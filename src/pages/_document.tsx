@@ -6,7 +6,7 @@ export default function Document() {
       <Head>
         <title>Söylenti - Haber Sitesi</title>
         </Head>
-      <body>
+      <body style={{fontFamily: 'Poppins,sans-serif'}}>
         <Main />
         <NextScript />
       </body>
