@@ -34,11 +34,11 @@ export default function LoginRegist() {
             <CardContent className="space-y-2">
                 <div className="space-y-1">
                 <Label htmlFor="username">Kullanıcı Adı</Label>
-                <Input id="username" defaultValue="Kullanıcı Adı" />
+                <Input id="username" placeholder="Kullanıcı Adı" />
                 </div>
                 <div className="space-y-1">
                 <Label htmlFor="password">Şifre</Label>
-                <Input id="password" defaultValue="Şifre" />
+                <Input id="password" placeholder="Şifre" />
                 </div>
             </CardContent>
             <CardFooter>
@@ -57,19 +57,19 @@ export default function LoginRegist() {
             <CardContent className="space-y-2">
                 <div className="space-y-1">
                 <Label htmlFor="current">Kullanıcı Adı</Label>
-                <Input id="username" type="text" />
+                <Input id="username" type="text" placeholder="Kullanıcı Adı"/>
                 </div>
                 <div className="space-y-1">
                 <Label htmlFor="current">Mail Adresi</Label>
-                <Input id="mail" type="text" />
+                <Input id="mail" type="text" placeholder="Mail Adresi"/>
                 </div>
                 <div className="space-y-1">
                 <Label htmlFor="newpassword">Şifre</Label>
-                <Input id="newpassword" type="password" />
+                <Input id="newpassword" type="password" placeholder="Şifre"/>
                 </div>
                 <div className="space-y-1">
                 <Label htmlFor="repeatpassword">Tekrar Şifre</Label>
-                <Input id="repeatpassword" type="password" />
+                <Input id="repeatpassword" type="password" placeholder="Tekrar Şifre"/>
                 </div>
             </CardContent>
             <CardFooter>

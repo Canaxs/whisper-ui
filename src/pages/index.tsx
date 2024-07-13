@@ -48,7 +48,7 @@ export default function Home() {
     return (
         <div>
         <div className="lg:w-[98%] 2xl:w-[65%] pt-1 lg:ml-[1%] 2xl:ml-[17%]">
-            <Header />
+            <Header flag={"siyah-flag.png"} logo={"logo-black.png"} />
             <ContentCarousel />
             <div className="mt-8 flex flex-wrap">
                 {Array.from({ length: 24 }).map((_, index) => advertisingBoolean(index) ?  
@@ -63,7 +63,7 @@ export default function Home() {
             <AbsoluteAdversiting class="left"/>
             <AbsoluteAdversiting class="right"/>
         </div>
-        <FooterArea />
+        <FooterArea src={"logo-white.png"}/>
         </div>
     )
 }
