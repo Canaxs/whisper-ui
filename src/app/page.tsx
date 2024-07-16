@@ -1,3 +1,4 @@
+"use client";
 import AbsoluteAdversiting from "@/components/Advertising-Space/AbsoluteAdversiting";
 import Adversiting from "@/components/Advertising-Space/Advertising";
 import ContentCarousel from "@/components/Content/ContentCarousel";
@@ -8,7 +9,6 @@ import Navigation from "@/components/Navigation-Menu/Navigation";
 import NewsCard from "@/components/News-Card/NewsCard";
 import { Head } from "next/document";
 import React, { useState, useEffect } from "react";
-
 
 export default function Home() { 
 

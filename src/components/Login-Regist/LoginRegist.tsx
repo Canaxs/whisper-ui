@@ -1,3 +1,4 @@
+import { generateToken } from "@/api/apiCalls"
 import { Button } from "@/components/ui/button"
 import {
   Card,
@@ -15,8 +16,50 @@ import {
   TabsList,
   TabsTrigger,
 } from "@/components/ui/tabs"
+import { RootState } from "@/store/store"
+import { addUser } from "@/store/user-store"
+import { useEffect, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { useNavigate } from "react-router-dom";
+import TokenDTO from '@/models/TokenDTO';
+import { redirect } from "next/navigation"
+
 
 export default function LoginRegist() {
+
+    const [username,setUsername] = useState("");
+    const [password,setPassword] = useState("");
+
+    const dispatch = useDispatch();
+
+    const { data } = useSelector((store: RootState) => store.user);
+
+
+    function login() {
+        const authModel = {
+            username: username,
+            password: password
+        }
+        const responseModel = {
+            token : "",
+            username: "",
+            userPoint: "",
+            role: ""
+        }
+        try {
+            generateToken(authModel).then((res) => {
+                res.data = responseModel;
+                console.log("responseModel: "+res.data.token);
+            })
+            dispatch(addUser(responseModel));
+            console.log("responseModel: "+responseModel.token);
+            redirect("/account");
+        }
+        catch(e) {
+            console.log("Login Error: "+e);
+        }
+    }
+
     return (
         <Tabs defaultValue="login" className="w-[400px]">
         <TabsList className="grid w-full grid-cols-2">
@@ -34,15 +77,15 @@ export default function LoginRegist() {
             <CardContent className="space-y-2">
                 <div className="space-y-1">
                 <Label htmlFor="username">Kullanıcı Adı</Label>
-                <Input id="username" placeholder="Kullanıcı Adı" />
+                <Input id="username" placeholder="Kullanıcı Adı" onChange={(e) => setUsername(e.target.value.toString())}/>
                 </div>
                 <div className="space-y-1">
                 <Label htmlFor="password">Şifre</Label>
-                <Input id="password" placeholder="Şifre" />
+                <Input id="password" placeholder="Şifre" onChange={(e) => setPassword(e.target.value.toString())}/>
                 </div>
             </CardContent>
             <CardFooter>
-                <Button>Giriş Yap</Button>
+                <Button onClick={() => login()}>Giriş Yap</Button>
             </CardFooter>
             </Card>
         </TabsContent>
@@ -57,7 +100,7 @@ export default function LoginRegist() {
             <CardContent className="space-y-2">
                 <div className="space-y-1">
                 <Label htmlFor="current">Kullanıcı Adı</Label>
-                <Input id="username" type="text" placeholder="Kullanıcı Adı"/>
+                <Input id="usernameReq" type="text" placeholder="Kullanıcı Adı"/>
                 </div>
                 <div className="space-y-1">
                 <Label htmlFor="current">Mail Adresi</Label>

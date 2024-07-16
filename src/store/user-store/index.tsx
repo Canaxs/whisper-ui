@@ -1,8 +1,12 @@
 import { createSlice } from "@reduxjs/toolkit";
-import type { RootState } from '../store'
 
 const initialState = {
-  data: {},
+  data: {
+    username:"",
+    token: "",
+    point: "",
+    role: ""
+  },
 };
 
 export const userSlice = createSlice({
@@ -11,13 +15,19 @@ export const userSlice = createSlice({
   reducers: {
     addUser : (state , action) => {
         state.data = action.payload
+        localStorage.setItem("token",state.data.token);
+        localStorage.setItem("username",state.data.username);
+    },
+    clearUser : (state) => {
+      state.data = {
+        username:"",
+        token: "",
+        point: "",
+        role: ""
+      };
     }
   }
 });
 
-export const { addUser } = userSlice.actions
-
-// Other code such as selectors can use the imported `RootState` type
-export const selectCount = (state: RootState) => state.user.data
-
-export default userSlice.reducer
+export const { addUser } = userSlice.actions;
+export default userSlice.reducer;

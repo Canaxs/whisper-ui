@@ -14,9 +14,9 @@ import NewsCard from "@/components/News-Card/NewsCard";
 export default function AccountInfo() {
     return (
         <div className="mt-20">
-            <div className="flex max-lg:flex-col">
-                <Card className="w-1/2 m-2 h-full max-lg:w-[98%] max-lg:ml-[1%]">
-            <CardHeader className="text-center">
+            <div className="flex max-lg:flex-col" key={"card1"}>
+                <Card className="w-1/2 m-2 h-full max-lg:w-[98%] max-lg:ml-[1%]" key={"card1"}>
+            <CardHeader className="text-center" key={"card1"}>
                 <CardTitle>Hesap Bilgileri</CardTitle>
                 <CardDescription style={{marginTop: "15px"}}>Değiştirmek istediğiniz bilginizin üzerine çift tıklayın</CardDescription>
             </CardHeader>
@@ -38,7 +38,7 @@ export default function AccountInfo() {
             <img src="../logo-black.png" width={"50px"} height={"50px"} alt="Söylenti" className="float-right"/>
             </CardFooter>
                 </Card>
-                <Card className="w-1/2 m-2 max-lg:w-[98%] max-lg:ml-[1%]">
+                <Card className="w-1/2 m-2 max-lg:w-[98%] max-lg:ml-[1%]" key={"card3"}>
             <CardHeader className="text-center">
                 <CardTitle>Kullanıcı Bilgileri</CardTitle>
                 <CardDescription style={{marginTop: "15px"}}>Puanınız , paylaşımlarınız göz önünde bulundurularak arttırılır</CardDescription>
@@ -63,9 +63,9 @@ export default function AccountInfo() {
                 </Card>
             </div>
             <div>
-            <div className="w-full flex justify-center">
-                <Card className="w-1/2 m-2 max-lg:w-[98%] max-lg:ml-[1%]">
-            <CardHeader className="text-center">
+            <div className="w-full flex justify-center" key={"card2"}> 
+                <Card className="w-1/2 m-2 max-lg:w-[98%] max-lg:ml-[1%]" key={"card2"}>
+            <CardHeader className="text-center" key={"card2"}>
                 <CardTitle>Paylaşım Bilgileri</CardTitle>
                 <CardDescription style={{marginTop: "15px"}}>Kazancınız, paylaşmış olduğunuz haberlerin tıklanma sayısına göre belirlenmektedir</CardDescription>
             </CardHeader>

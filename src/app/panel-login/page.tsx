@@ -1,3 +1,4 @@
+"use client";
 import PanelLogin from "@/components/Panel-Login/Panel-Login";
 
 export default function Login() {

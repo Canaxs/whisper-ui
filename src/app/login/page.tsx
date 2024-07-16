@@ -1,3 +1,4 @@
+"use client";
 import LoginRegist from "@/components/Login-Regist/LoginRegist";
 
 export default function Login() {
