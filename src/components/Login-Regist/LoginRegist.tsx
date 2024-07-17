@@ -22,7 +22,7 @@ import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import TokenDTO from '@/models/TokenDTO';
-import { redirect } from "next/navigation"
+import { useRouter } from 'next/navigation'
 
 
 export default function LoginRegist() {
@@ -32,28 +32,22 @@ export default function LoginRegist() {
 
     const dispatch = useDispatch();
 
+    const router = useRouter();
+
     const { data } = useSelector((store: RootState) => store.user);
 
 
-    function login() {
+    async function login() {
         const authModel = {
             username: username,
             password: password
         }
-        const responseModel = {
-            token : "",
-            username: "",
-            userPoint: "",
-            role: ""
-        }
         try {
-            generateToken(authModel).then((res) => {
-                res.data = responseModel;
-                console.log("responseModel: "+res.data.token);
+            await generateToken(authModel).then((res) => {
+                dispatch(addUser(res.data));
             })
-            dispatch(addUser(responseModel));
-            console.log("responseModel: "+responseModel.token);
-            redirect("/account");
+            console.log("Data: "+data.username);
+            router.push("/account");
         }
         catch(e) {
             console.log("Login Error: "+e);

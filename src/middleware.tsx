@@ -11,8 +11,16 @@ export function middleware(request: NextRequest) {
         }
     })
 
-    if(isAuth()) {
+    if(isAuth(request)) {
         return response;
+    } 
+    else {
+        if(request.url.substring(22) === "account") {
+            return NextResponse.redirect(new URL('/login', request.url))
+        }
+        else if (request.url.substring(22) === "panel") {
+            return NextResponse.redirect(new URL('/panel-login', request.url))
+        }
     }
 }
 

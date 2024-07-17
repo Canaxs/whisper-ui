@@ -1,4 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
+import Cookies from 'js-cookie'
 
 const initialState = {
   data: {
@@ -15,8 +16,8 @@ export const userSlice = createSlice({
   reducers: {
     addUser : (state , action) => {
         state.data = action.payload
-        localStorage.setItem("token",state.data.token);
-        localStorage.setItem("username",state.data.username);
+        Cookies.set("token",state.data.token);
+        Cookies.set("username",state.data.username);
     },
     clearUser : (state) => {
       state.data = {
