@@ -5,7 +5,7 @@ const initialState = {
   data: {
     username:"",
     token: "",
-    point: "",
+    userPoint: "",
     role: ""
   },
 };
@@ -16,19 +16,17 @@ export const userSlice = createSlice({
   reducers: {
     addUser : (state , action) => {
         state.data = action.payload
-        Cookies.set("token",state.data.token);
-        Cookies.set("username",state.data.username);
     },
     clearUser : (state) => {
       state.data = {
         username:"",
         token: "",
-        point: "",
+        userPoint: "",
         role: ""
       };
     }
   }
 });
 
-export const { addUser } = userSlice.actions;
+export const { addUser , clearUser } = userSlice.actions;
 export default userSlice.reducer;

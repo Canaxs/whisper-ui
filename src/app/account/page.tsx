@@ -2,8 +2,8 @@
 import AccountInfo from "@/components/Account-Info/AccountInfo";
 import FooterArea from "@/components/Footer-Area/FooterArea";
 import Header from "@/components/Header/Header";
-import { RootState } from "@/store/store";
-import { addUser } from "@/store/user-store";
+import { useAppSelector } from "@/lib/hooks";
+import { RootState } from "@/lib/store";
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 
@@ -11,7 +11,10 @@ export default function Info() {
 
     const dispatch = useDispatch();
 
-    const { data } = useSelector((store: RootState) => store.user);
+    const {data} = useAppSelector((store) => store.user);
+
+
+    console.log(data);
 
     function deneme() {
         console.log("Data: "+data.username);

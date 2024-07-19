@@ -16,8 +16,8 @@ import {
   TabsList,
   TabsTrigger,
 } from "@/components/ui/tabs"
-import { RootState } from "@/store/store"
-import { addUser } from "@/store/user-store"
+import { RootState } from "@/lib/store";
+import { addUser } from "@/lib/features/userSlice";
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
