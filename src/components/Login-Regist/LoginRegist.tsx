@@ -46,7 +46,6 @@ export default function LoginRegist() {
             await generateToken(authModel).then((res) => {
                 dispatch(addUser(res.data));
             })
-            console.log("Data: "+data.username);
             router.push("/account");
         }
         catch(e) {

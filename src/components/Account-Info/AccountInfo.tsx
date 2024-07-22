@@ -11,11 +11,30 @@ import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
 import NewsCard from "@/components/News-Card/NewsCard";
 import { useDispatch, useSelector } from "react-redux";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { useAppSelector } from "@/lib/hooks";
+import Cookies from 'js-cookie'
 
 
 export default function AccountInfo() {
+
+    const [userData,setUserData] = useState({
+        username: "",
+        userPoint: "",
+        role: "",
+    });
+
+    function uploadInformation() {
+        setUserData({
+            username: Cookies.get("username"),
+            userPoint: Cookies.get("userPoint"),
+            role: Cookies.get("role"),
+        })
+    }
+
+    useEffect(() => {
+        uploadInformation();
+    }, [])
 
     const data = useAppSelector((state) => state.user.data); 
 
@@ -32,7 +51,7 @@ export default function AccountInfo() {
                         <div className="grid w-full items-center gap-4">
                             <div className="flex flex-col space-y-2.5 pt-2 pb-2">
                             <Label htmlFor="name" className="text-base">Kullanıcı Adı</Label>
-                            <Label htmlFor="name" className="font-normal cursor-pointer">{data.username}</Label>
+                            <Label htmlFor="name" className="font-normal cursor-pointer">{userData.username}</Label>
                             </div>
                             <div className="flex flex-col space-y-2.5 pt-2 pb-2">
                             <Label htmlFor="name" className="text-base">Şifre</Label>
@@ -55,11 +74,11 @@ export default function AccountInfo() {
                         <div className="grid w-full items-center gap-4">
                             <div className="flex flex-col space-y-2.5 pt-2 pb-2">
                             <Label htmlFor="name" className="text-base">Puan</Label>
-                            <Label htmlFor="name" className="font-normal cursor-pointer">{data.userPoint}</Label>
+                            <Label htmlFor="name" className="font-normal cursor-pointer">{userData.userPoint}</Label>
                             </div>
                             <div className="flex flex-col space-y-2.5 pt-2 pb-2">
                             <Label htmlFor="name" className="text-base">Yetki Tipi</Label>
-                            <Label htmlFor="name" className="font-normal cursor-pointer">{data.role}</Label>
+                            <Label htmlFor="name" className="font-normal cursor-pointer">{userData.role}</Label>
                             </div>
                         </div>
                         </form>
@@ -123,7 +142,7 @@ export default function AccountInfo() {
                 <div className="flex flex-wrap mt-8">
                     {Array.from({ length: 5 }).map((_, index) => 
                     <div key={"right-package"+index} className="w-[24%] ml-[1%] mt-3 max-lg:w-[32%] max-md:w-[49%]">
-                        <NewsCard title={"Söylenti"} img="../logo-black.png" keyNumber={Math.random()} name={"deneme"} />
+                        <NewsCard title={"Söylenti"} img="../logo-black.png" name={"deneme"} />
                     </div>
                     )
                     }

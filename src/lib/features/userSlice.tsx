@@ -16,6 +16,10 @@ export const userSlice = createSlice({
   reducers: {
     addUser : (state , action) => {
         state.data = action.payload
+        Cookies.set("token",state.data.token);
+        Cookies.set("username",state.data.username);
+        Cookies.set("userPoint",state.data.userPoint);
+        Cookies.set("role",state.data.role);
     },
     clearUser : (state) => {
       state.data = {

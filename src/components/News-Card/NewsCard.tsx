@@ -11,7 +11,7 @@ import HovCard from "../Hov-Card/HovCard"
 
 export default function NewsCard(props) {
     return(
-        <Card>
+        <Card className="w-[24%] ml-[1%] mt-3 max-lg:w-[32%] max-md:w-[49%]">
             <CardHeader>
                 <CardTitle>{props.title}</CardTitle>
                 <CardDescription>Lorem ipsum sit amet.</CardDescription>
