@@ -19,7 +19,9 @@ export function HeaderNotify() {
         <div className="flex mr-5">
             <DropdownMenu>
                 <DropdownMenuTrigger asChild>
-                        <label>Bildirimler</label>
+                        <div className="cursor-pointer">
+                            <IoIosNotifications className="size-7 mr-2 text-gray-400 hover:text-gray-700 transition-all"/>
+                        </div>
                 </DropdownMenuTrigger>
                 <DropdownMenuContent className="w-80">
                     <DropdownMenuLabel>Bildirimler</DropdownMenuLabel>

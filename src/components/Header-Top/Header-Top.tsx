@@ -8,6 +8,7 @@ import { TfiWrite } from "react-icons/tfi";
 import { IoIosNotifications } from "react-icons/io";
 import { HeaderNotify } from "../Header-Notify/HeaderNotify";
 import { Progress } from "@/components/ui/progress"
+import { useRouter } from 'next/navigation';
 
 
 export default function HeaderTop(props) { 
@@ -18,6 +19,8 @@ export default function HeaderTop(props) {
         role: null,
     });
     const [isUser , setIsUser] = useState(false);
+
+    const router = useRouter();
 
     async function uploadInformation() {
         if(Cookies.get("username") != null) {
@@ -33,14 +36,18 @@ export default function HeaderTop(props) {
         uploadInformation();
     },[])
 
+    function onClickLogo() {
+        router.push("/");
+    }
+
 
 
     return(
         <div className="flex justify-between">
             <div className="flex max-lg:ml-3">
-                <img src={props.logo} width="100" height="100" alt="Söylenti" />
+                <img src={props.logo} width="100" height="100" alt="Söylenti" onClick={() => onClickLogo()} className="cursor-pointer"/>
                 <div className="h-1/2 mt-[8%] w-[1px] bg-slate-300 ml-5"></div>
-                <img src={props.flag} className="ml-2" width="100px" height="50px" alt="Türk Bayrağı" />
+                <img src={props.flag} className="ml-2 mb-1" width="100px" height="50px" alt="Türk Bayrağı" />
             </div>
             <div className="flex items-center max-md:mr-[1%]">
                 {isUser === false ? (
@@ -54,8 +61,10 @@ export default function HeaderTop(props) {
                 ) : ( userData.username != null ?
                 <React.Fragment>
                     <div className="flex mr-5 cursor-pointer text-gray-500">
+                        <a href="/account/write">
                         <TfiWrite className="mr-2 size-5" />
                         <Label className="cursor-pointer text-sm">Write</Label>
+                        </a>
                     </div>
                     <HeaderNotify />
                     <HeaderUser username={userData.username}  userPoint={userData.userPoint} /> 
