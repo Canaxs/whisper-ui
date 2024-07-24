@@ -61,7 +61,7 @@ export default function HeaderTop(props) {
                 ) : ( userData.username != null ?
                 <React.Fragment>
                     <div className="flex mr-5 cursor-pointer text-gray-500">
-                        <a href="/account/write">
+                        <a href="/account/write" className="flex">
                         <TfiWrite className="mr-2 size-5" />
                         <Label className="cursor-pointer text-sm">Write</Label>
                         </a>

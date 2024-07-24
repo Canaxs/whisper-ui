@@ -1,6 +1,7 @@
 import { NextRequest, NextResponse } from "next/server";
 import { isExpiredToken } from "./api/apiCalls";
 import { isAuth } from "./lib/auth";
+import { Menus } from "./lib/menuEnum";
 
 export function middleware(request: NextRequest) {
     
@@ -9,6 +10,18 @@ export function middleware(request: NextRequest) {
             headers: request.headers
         }
     })
+
+    if(request.url.substring(22).includes('kategori')) {
+        if(request.url.substring(31).split("/").length > 2) {
+            return NextResponse.redirect(new URL('/404', request.url))
+        }
+        else if(Object.values(Menus).includes(request.url.substring(31).split('/')[0])) {
+            return response;
+        }
+        else {
+            return NextResponse.redirect(new URL('/404', request.url))
+        }
+    }
 
     if(isAuth(request)) {
         return response;
@@ -24,5 +37,5 @@ export function middleware(request: NextRequest) {
 }
 
 export const config = {
-    matcher: ['/account'],
+    matcher: ['/account/:path*','/panel/:path*','/kategori/:path*'],
 };

@@ -5,6 +5,7 @@ import StoreProvider from '@/app/StoreProvider';
 import { useAppSelector, useAppDispatch, useAppStore } from '../lib/hooks'
 import { useSelector } from "react-redux";
 import { RootState } from "@/lib/store";
+import { Toaster } from "@/components/ui/toaster"
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -22,6 +23,7 @@ export default function RootLayout({children,}: Readonly<{children: React.ReactN
         <div>
           {children}
         </div>
+        <Toaster />
       </StoreProvider>
       </body>
     </html>

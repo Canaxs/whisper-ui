@@ -21,13 +21,52 @@ import {
     AlertDialogTitle,
     AlertDialogTrigger,
   } from "@/components/ui/alert-dialog"
+import { useState } from "react"
+import { createWhisper } from "@/api/apiCalls"
+import Cookies from 'js-cookie';
+import { ToastAction } from "@/components/ui/toast"
+import { useToast } from "@/components/ui/use-toast"
 
 export default function WriteContent() {
+
+    const [title,setTitle] = useState("");
+    const [description,setDescription] = useState("");
+    const [source,setSource] = useState("");
+    const [category,setCategory] = useState("");
+    const [image,setImage] = useState("");
+
+    const { toast } = useToast();
 
 
 
     function onClickPublish() {
-
+        let bool = true;
+        const whisperModel = {
+            title: title,
+            description: description,
+            source: source,
+            category: category,
+            image: image
+        }
+        //createWhisper(whisperModel,Cookies.get("token")).then((res) => {
+//
+  //      },(exception) => {
+   //         bool = false;
+    //    })
+        if(!bool) {
+            toast({
+                variant: "destructive",
+                title: "Hata Oluştu",
+                description: "Haber Kayıt Edilirken Sorun Meydana Geldi Tekrar Deneyiniz.",
+              })
+        }
+        else {
+            toast({
+                variant: "success",
+                title: "Söylenti Haber Kayıt Edildi",
+                description: ""+new Date().toLocaleDateString("tr-TR"),
+              })
+        }
     }
 
 
@@ -35,27 +74,27 @@ export default function WriteContent() {
     return( 
         <div>
             <div className=" shadow-xl rounded transition-all">
-                <Input type="text" placeholder="Başlık" className="border-none h-16 focus-visible:ring-white text-5xl text-gray-900 transition-all outline-none"/>
+                <Input type="text" placeholder="Başlık" className="border-none h-16 focus-visible:ring-white text-5xl text-gray-900 transition-all outline-none" onChange={(e) => setTitle(e.target.value.toString())}/>
             </div>
             <div className="h-[500px] shadow-xl mt-2 rounded transition-all">
-                <Textarea placeholder="Haberinizi Yazınız..." className="border-none h-full focus-visible:ring-white text-2xl text-gray-600 transition-all outline-none"/>
+                <Textarea placeholder="Haberinizi Yazınız..." className="border-none h-full focus-visible:ring-white text-2xl text-gray-600 transition-all outline-none" onChange={(e) => setDescription(e.target.value.toString())}/>
             </div>
             <div className="w-full max-w-sm items-center gap-1.5 mt-5 flex">
                 <Label htmlFor="picture" className="w-5/12">Resim Yükle</Label>
-                <Input id="picture" type="file" />
+                <Input id="picture" type="file"  onChange={(e) => setImage(e.target.value.toString())}/>
             </div>
             <div className="shadow-xl rounded transition-all mt-5 w-2/4">
-                <Input type="text" placeholder="Kaynak Belirtiniz..." className="border-none h-12 w-full focus-visible:ring-white text-base text-gray-900 transition-all outline-none"/>
+                <Input type="text" placeholder="Kaynak Belirtiniz..." className="border-none h-12 w-full focus-visible:ring-white text-base text-gray-900 transition-all outline-none" onChange={(e) => setSource(e.target.value.toString())}/>
             </div>
             <div className="mt-5">
-                <Select>
+                <Select onValueChange={(e) => setCategory(e)}>
                     <SelectTrigger className="w-[180px]">
                         <SelectValue placeholder="Kategori" />
                     </SelectTrigger>
                     <SelectContent>
-                        <SelectItem value="SPORT">Spor</SelectItem>
-                        <SelectItem value="dark">Magazin</SelectItem>
-                        <SelectItem value="system">Finans</SelectItem>
+                        <SelectItem value="Spor">Spor</SelectItem>
+                        <SelectItem value="Magazin">Magazin</SelectItem>
+                        <SelectItem value="Finans">Finans</SelectItem>
                     </SelectContent>
                 </Select>   
             </div>

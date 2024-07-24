@@ -52,9 +52,14 @@ export default function Home() {
             <ContentCarousel />
             <div className="mt-8 flex flex-wrap">
                 {Array.from({ length: 24 }).map((_, index) => advertisingBoolean(index) ?  
-                <NewsCard title={"Söylenti"} img="logo-black.png" name={"deneme "+index} />: 
+                    <div className="w-[24%] ml-[1%] mt-3 max-lg:w-[32%] max-md:w-[49%]">
+                        <NewsCard title={"Söylenti"} img="logo-black.png" name={"deneme "+index} />
+                    </div>
+                : 
                     <React.Fragment>
-                        <NewsCard title={"Söylenti"} img="logo-black.png" keyNumber={index} name={"deneme "+index} />
+                        <div className="w-[24%] ml-[1%] mt-3 max-lg:w-[32%] max-md:w-[49%]">
+                            <NewsCard title={"Söylenti"} img="logo-black.png" keyNumber={index} name={"deneme "+index} />
+                        </div>
                         <Adversiting oneClass="w-[98%] ml-[1%] h-[100px] mt-5 mb-2 rounded" />
                     </React.Fragment>
                 )}

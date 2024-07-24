@@ -141,10 +141,10 @@ export default function AccountInfo() {
                 <span className="text-xl font-medium ml-3 text-slate-600">Paylaşımlarınız</span>
                 <div className="flex flex-wrap mt-8">
                     {Array.from({ length: 5 }).map((_, index) => 
-                    <div key={"right-package"+index} className="w-[24%] ml-[1%] mt-3 max-lg:w-[32%] max-md:w-[49%]">
-                        <NewsCard title={"Söylenti"} img="../logo-black.png" name={"deneme"} />
-                    </div>
-                    )
+                        <div key={"right-package"+index} className="w-[24%] ml-[1%] mt-3 max-lg:w-[32%] max-md:w-[49%]">
+                            <NewsCard title={"Söylenti"} img="../logo-black.png" name={"deneme"} />
+                        </div>
+                        )
                     }
                 </div>
             </div>
