@@ -12,10 +12,20 @@ export function middleware(request: NextRequest) {
     })
 
     if(request.url.substring(22).includes('kategori')) {
+        let requestString = request.url.substring(31).split('/')[0];
+        
         if(request.url.substring(31).split("/").length > 2) {
             return NextResponse.redirect(new URL('/404', request.url))
         }
-        else if(Object.values(Menus).includes(request.url.substring(31).split('/')[0])) {
+        else if (requestString.indexOf("?s=") > -1) {
+            if(Object.values(Menus).includes(requestString.split("?")[0])) {
+                return response;
+            }
+            else {
+                return NextResponse.redirect(new URL('/404', request.url))
+            }
+        }
+        else if (Object.values(Menus).includes(requestString)) {
             return response;
         }
         else {

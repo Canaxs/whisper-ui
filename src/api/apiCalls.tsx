@@ -17,3 +17,7 @@ export const createWhisper = (whisperModel, headerToken) => {
 export const getWhisper = (urlName) => {
     return axios.get(Environment.baseUrl+"whisper/getUrlName/"+urlName);
 }
+
+export const getPageableWhispers = (categoryName,page) => {
+    return axios.get(Environment.baseUrl+"whisper/category/"+categoryName,{params: {page , size: 10}});
+}
