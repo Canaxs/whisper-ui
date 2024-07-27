@@ -19,14 +19,14 @@ import {
 
 export default function PanelLogin() {
     return (
-        <Tabs defaultValue="login" className="w-[400px]">
+        <Tabs defaultValue="login" className="w-[400px] shadow-2xl rounded">
         <TabsList className="grid w-full grid-cols-2">
             <TabsTrigger value="login">Panel Girişi</TabsTrigger>
         </TabsList>
         <TabsContent value="login">
             <Card>
             <CardHeader>
-                <CardTitle>Panel'e Giriş Yap</CardTitle>
+                <CardTitle className="text-gray-700 drop-shadow-lg">Panel'e Giriş Yap</CardTitle>
                 <CardDescription>
                 Kullanıcı adı ve şifrenizi giriniz
                 </CardDescription>
@@ -42,7 +42,7 @@ export default function PanelLogin() {
                 </div>
             </CardContent>
             <CardFooter>
-                <Button>Giriş Yap</Button>
+                <Button className="bg-white border text-black hover:bg-black hover:text-white transition-all">Giriş Yap</Button>
             </CardFooter>
             </Card>
         </TabsContent>

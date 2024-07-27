@@ -6,6 +6,7 @@
     "strict": true,
     "noImplicitAny": false,
     "noEmit": true,
+    "target": "es5",
     "esModuleInterop": true,
     "module": "esnext",
     "moduleResolution": "bundler",

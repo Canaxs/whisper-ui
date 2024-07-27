@@ -11,6 +11,15 @@ import {
     CardHeader,
     CardTitle,
   } from "@/components/ui/card"
+  import {
+    Pagination,
+    PaginationContent,
+    PaginationEllipsis,
+    PaginationItem,
+    PaginationLink,
+    PaginationNext,
+    PaginationPrevious,
+  } from "@/components/ui/pagination"
 import { describe } from "node:test";
 import { useEffect, useState } from "react";
 import { getWhisper , getPageableWhispers } from "@/api/apiCalls";
@@ -72,17 +81,46 @@ export default function Docs({
         }
     },[])
 
+    function numberNext() {
+        let num = searchParams.get("s");
+        if(isNumber(num)) {
+            return JSON.parse(num!) + 1;
+        }
+    }
+
+    function numberBack() {
+        let num = searchParams.get("s");
+        if(isNumber(num)) {
+            return JSON.parse(num!) - 1;
+        }
+    }
+
+    function numberRet() {
+        let num = searchParams.get("s");
+        if(isNumber(num)) {
+            return JSON.parse(num!);
+        }
+    }
+
+
+    function isNumber(value) {
+        return !isNaN(value);
+    }
+
+
     async function pageSearch() {
         if(searchParams.get("s") != null) {
             const searchParamsPage = searchParams.get("s");
             const categoryName = params.slug[0];
             const response = await getPageableWhispers(convertMenus(categoryName),searchParamsPage);
             setWhispers(response.data);
+            console.log(response.data)
         }
         else {
             const categoryName = params.slug[0];
             const response = await getPageableWhispers(convertMenus(categoryName),0);
             setWhispers(response.data);
+            console.log(response.data)
         }
 
     }
@@ -121,7 +159,23 @@ export default function Docs({
                         <span className="sr-only">Loading...</span>
                 </div>
                 }
+                <div className="mt-10">
+                    <Pagination>
+                        <PaginationContent>
+                            <PaginationItem>
+                                {  <PaginationPrevious href={searchParams.get("s") == null || numberRet() <= 0 ? "" :"/kategori/"+params.slug[0]+"?s="+ numberBack() } className={searchParams.get("s") == null || numberRet() <= 0 ? "opacity-20 cursor-default" : ""} />}
+                            </PaginationItem>
+                            <PaginationItem>
+                                    <PaginationLink href={"/kategori/"+params.slug[0]+"?s="+numberNext()}>{searchParams.get("s") == null ? 1 : numberNext()}</PaginationLink>
+                                </PaginationItem>
+                            <PaginationItem>
+                                <PaginationNext href={numberRet() >= whispers.totalPages-1 ? "" : "/kategori/"+params.slug[0]+"?s="+numberNext()} className={numberRet() >= whispers.totalPages-1 ? "opacity-20 cursor-default" : ""} />
+                            </PaginationItem>
+                        </PaginationContent>
+                    </Pagination>
                 </div>
+                </div>
+                
             </div>
             <FooterArea src={"../../logo-white.png"}/>
         </div>

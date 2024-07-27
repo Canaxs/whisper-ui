@@ -67,6 +67,9 @@ export default function WhisperContent(props) {
                     </div>
                 </div>
             </div>
+            <div className="mt-3">
+                <span className="text-xs">000.000 Görüntülenme</span>  
+            </div>
         </div>
     )
 }

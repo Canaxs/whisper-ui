@@ -19,5 +19,17 @@ export const getWhisper = (urlName) => {
 }
 
 export const getPageableWhispers = (categoryName,page) => {
-    return axios.get(Environment.baseUrl+"whisper/category/"+categoryName,{params: {page , size: 10}});
+    return axios.get(Environment.baseUrl+"whisper/category/"+categoryName,{params: {page , size: 2}});
+}
+
+export const getWhispers = () => {
+    return axios.get(Environment.baseUrl+"whisper/getWhispers");
+}
+
+export const getPendingWhispers = () => {
+    return axios.get(Environment.baseUrl+"whisper/getPendingWhispers");
+}
+
+export const getUsers = () => {
+    return axios.get(Environment.baseUrl+"user/getUsers");
 }

@@ -17,10 +17,10 @@ export const metadata: Metadata = {
 export default function RootLayout({children,}: Readonly<{children: React.ReactNode;}>) {
 
   return (
-    <html lang="en">
-      <body className={inter.className} style={{fontFamily: 'Poppins,sans-serif'}}>
+    <html lang="en" className="w-full h-full">
+      <body className={inter.className+" w-full h-full"} style={{fontFamily: 'Poppins,sans-serif'}} >
       <StoreProvider>
-        <div>
+        <div className="w-full h-full">  
           {children}
         </div>
         <Toaster />

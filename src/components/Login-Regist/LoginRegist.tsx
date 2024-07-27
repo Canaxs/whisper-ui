@@ -54,7 +54,7 @@ export default function LoginRegist() {
     }
 
     return (
-        <Tabs defaultValue="login" className="w-[400px]">
+        <Tabs defaultValue="login" className="w-[400px] shadow-2xl rounded">
         <TabsList className="grid w-full grid-cols-2">
             <TabsTrigger value="login">Giriş Yap</TabsTrigger>
             <TabsTrigger value="register">Kayıt Ol</TabsTrigger>
@@ -62,7 +62,7 @@ export default function LoginRegist() {
         <TabsContent value="login">
             <Card>
             <CardHeader>
-                <CardTitle>Giriş Yap</CardTitle>
+                <CardTitle className="text-gray-700 drop-shadow-lg">Giriş Yap</CardTitle>
                 <CardDescription>
                 Kullanıcı adı ve şifrenizi giriniz
                 </CardDescription>
@@ -78,14 +78,14 @@ export default function LoginRegist() {
                 </div>
             </CardContent>
             <CardFooter>
-                <Button onClick={() => login()}>Giriş Yap</Button>
+                <Button onClick={() => login()} className="bg-white border text-black hover:bg-black hover:text-white transition-all">Giriş Yap</Button>
             </CardFooter>
             </Card>
         </TabsContent>
         <TabsContent value="register">
             <Card>
             <CardHeader>
-                <CardTitle>Kayıt Ol</CardTitle>
+                <CardTitle className="text-gray-700 drop-shadow-lg">Kayıt Ol</CardTitle>
                 <CardDescription>
                 Haydi, Sen de Söylenti Ailesine katıl !
                 </CardDescription>
@@ -109,7 +109,7 @@ export default function LoginRegist() {
                 </div>
             </CardContent>
             <CardFooter>
-                <Button>Kayıt Ol</Button>
+                <Button className="bg-white border text-black hover:bg-black hover:text-white transition-all">Kayıt Ol</Button>
             </CardFooter>
             </Card>
         </TabsContent>
