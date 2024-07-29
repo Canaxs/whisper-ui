@@ -51,9 +51,14 @@ export function PendingTable2<TData, TValue>({columns , data}: DataTableProps<TD
     getCoreRowModel: getCoreRowModel(),
   })
 
-  function openPopup(data) {
-    setSelectWhisper(data);
+  function openPopup(popupData) {
+    setSelectWhisper(popupData);
     setIsDialogOpen(true);
+  }
+
+  function rejectWhisper() {
+    const gg = data.filter((res) => res['id'] != selectWhisper.id);
+    console.log(gg);
   }
 
     return (
@@ -133,7 +138,7 @@ export function PendingTable2<TData, TValue>({columns , data}: DataTableProps<TD
                     <DialogFooter>
                       <div>
                         <Button className="mr-2 bg-green-500 hover:bg-white  border hover:text-green-500 transition-all">Onayla</Button>
-                        <Button className=" bg-red-500 hover:bg-white border hover:text-red-500 transition-all">Reddet</Button>
+                        <Button className=" bg-red-500 hover:bg-white border hover:text-red-500 transition-all" onClick={() => rejectWhisper()}>Reddet</Button>
                       </div>
                 </DialogFooter>
                 </DialogContent>

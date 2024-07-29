@@ -22,9 +22,10 @@ import { useEffect, useState } from "react";
 import { Whisper } from "next/font/google";
 import { useQuery } from "@tanstack/react-query";
 import { UserPendingTable } from "@/components/Whisper-Pending-Table/UserPendingTable";
+import { UserPendingTable2 } from "@/components/Whisper-Pending-Table/UserPendingTable2";
 
 
-
+/*
 export type User = {
     username: string
     password: string
@@ -85,25 +86,17 @@ export const columns: ColumnDef<User>[] = [
       cell: ({ row }) => { return <div className="font-medium pl-5">{row.getValue("userPoint")}</div> },
     },
 ]
-
-async function getData(): Promise<User[]> {
-  const user = await getUsers();
-  return user.data;
-}
+*/
 
 
-export default async function UsersPage() {
-
-    const data = await getData();
+export default function UsersPage() {
 
     return (
         <div className="w-full h-[95%] flex"> 
             <DashboardMenu />
             <div className="ml-[1%] mr-[1%] w-[98%] mt-5 flex">
-                <div className="w-[45%] shadow-2xl pl-5 pr-5 pt-3">
-                    <UserPendingTable columns={columns} data={data} />
-                </div>
-                <div className="w-[45%] shadow-2xl pl-5 pr-5 pt-3 ml-[4%]">
+                <div className="w-[85%] shadow-2xl pl-5 pr-5 pt-3">
+                    <UserPendingTable2 />
                 </div>
             </div>
         </div>

@@ -23,9 +23,12 @@ import { Whisper } from "next/font/google";
 import { useQuery } from "@tanstack/react-query";
 import { PendingTable } from "@/components/Whisper-Pending-Table/PostPendingTable";
 import { PendingTable2 } from "@/components/Whisper-Pending-Table/PostPendingTable2";
+import { PostPendingTable3 } from "@/components/Whisper-Pending-Table/PostPendingTable3";
+import { PostPendingTable4 } from "@/components/Whisper-Pending-Table/PostPendingTable4";
 
 
 
+/*
 export type Whisper = {
     authorName: string
     title: string
@@ -107,33 +110,33 @@ export const columns: ColumnDef<Whisper>[] = [
       },
     },
 ]
+*/
+
+//async function getData(): Promise<Whisper[]> {
+//  const whisper = await getWhispers();
+//  return whisper.data;
+//}
+
+//async function getData2(): Promise<Whisper[]> {
+//  const whisper = await getPendingWhispers();
+//  return whisper.data;
+//}
 
 
-async function getData(): Promise<Whisper[]> {
-  const whisper = await getWhispers();
-  return whisper.data;
-}
+export default function WhispersPage() {
 
-async function getData2(): Promise<Whisper[]> {
-  const whisper = await getPendingWhispers();
-  return whisper.data;
-}
-
-
-export default async function WhispersPage() {
-
-    const data = await getData();
-    const data2 = await getData2();
+    //const data = await getData();
+    //const data2 = await getData2();
 
     return (
         <div className="w-full h-[95%] flex"> 
             <DashboardMenu />
             <div className="ml-[1%] mr-[1%] w-[98%] mt-5 flex">
                 <div className="w-[45%] shadow-2xl pl-5 pr-5 pt-3">
-                    <PendingTable columns={columns} data={data} />
+                    <PostPendingTable3 />
                 </div>
                 <div className="w-[45%] shadow-2xl pl-5 pr-5 pt-3 ml-[4%]">
-                    <PendingTable2 columns={columns} data={data2} />
+                    <PostPendingTable4 />
                 </div>
             </div>
         </div>
