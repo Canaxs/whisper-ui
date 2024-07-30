@@ -1,4 +1,4 @@
-import { getUsers } from "@/api/apiCalls";
+import { deleteUser, getUsers } from "@/api/apiCalls";
 import { useEffect, useState } from "react"
 import { Checkbox } from "@/components/ui/checkbox"
 import {
@@ -23,17 +23,20 @@ import {
     AlertDialogTitle,
     AlertDialogTrigger,
   } from "@/components/ui/alert-dialog"
+  import Cookies from 'js-cookie';
 
-  export type User = {
+
+export type User = {
     username: string
     userPoint: string
     authorities: string[],
     password: string,
     id: number
 }
+
 export const variablePageNumber = [0,2];
 
-export function UserPendingTable2() {
+export function ModPendingTable2() {
 
     const [currentPage , setCurrentPage] = useState<number[]>(variablePageNumber);
     const [filterCurrentPage , setFilterCurrentPage] = useState<number[]>([0,2]);
@@ -63,7 +66,7 @@ export function UserPendingTable2() {
             header: "Puan",
         }
     ]);
-    const [selectUser, setSelectUser] = useState({ id: 0 , username: "" , userPoint: "" , password: "" , authorities: [""] })
+    const [selectUser, setSelectUser] = useState({ id: 0 , username: "" , userPoint: "" , password: "" , authorities: [""]})
     const [isDialogOpen, setIsDialogOpen] = useState(false);
 
     useEffect(() => {
@@ -89,6 +92,12 @@ export function UserPendingTable2() {
         const dataFilter = data.filter((res) => res.id != selectUser.id);
         setData(dataFilter);
         setDataBackup(dataFilter);
+        try {
+            deleteUser(selectUser.id,Cookies.get("token"));
+        }
+        catch(e) {
+            console.log("Error: "+e);
+        }
     }
 
     function filterWhisper(str) {
@@ -121,7 +130,7 @@ export function UserPendingTable2() {
 
     return (
         <div> 
-            <h1 className="font-medium drop-shadow-sm">Tüm Kullanıcılar</h1>
+            <h1 className="font-medium drop-shadow-sm">Tüm Yetkililer</h1>
             <h6 className="text-gray-600 text-xs mt-2">Görüntülemek İstediğiniz kullanıcının üzerine çift tıklayın</h6>
             <div className="mt-5">
             <Input placeholder="Başlık Filtrele..." className="max-w-sm" onChange={(e) => filterWhisper(e.target.value)}/>
@@ -193,19 +202,20 @@ export function UserPendingTable2() {
                       <div>
                         <AlertDialog>
                             <AlertDialogTrigger asChild>
-                                <Button variant="outline" className="mr-2 bg-green-500 hover:bg-white  border hover:text-green-500 transition-all text-white">Yetki Yükselt</Button>
+                                <Button variant="outline" className="mr-2 bg-green-500 hover:bg-white  border hover:text-green-500 transition-all text-white">Yetki Düzenle</Button>
                             </AlertDialogTrigger>
                             <AlertDialogContent>
                                 <AlertDialogHeader>
-                                <AlertDialogTitle>Yetkilendirmek İstediğinden Emin misin ?</AlertDialogTitle>
+                                <AlertDialogTitle>Yetkilendirme Ekranı</AlertDialogTitle>
                                 <AlertDialogDescription>
-            
+                                Bu Ekrandan Yetki Düzenleyebilirsiniz.
                                 </AlertDialogDescription>
                                 </AlertDialogHeader>
                                 <AlertDialogFooter>
-                                <AlertDialogCancel>Vazgeç</AlertDialogCancel>
-                                <AlertDialogAction className={selectUser.authorities.includes("ROLE_MOD") ? "hidden" : "text-white bg-green-600 hover:bg-white hover:text-green-600 transition-all"} onClick={() => null}>Mod'a Yükselt</AlertDialogAction>
-                                <AlertDialogAction className={selectUser.authorities.includes("ROLE_ADMIN") ? "hidden" :"text-white bg-green-600 hover:bg-white hover:text-green-600 transition-all"} onClick={() => null}>Admin'e Yükselt</AlertDialogAction>
+                                    <AlertDialogCancel>Vazgeç</AlertDialogCancel>
+                                    <AlertDialogAction className={selectUser.authorities.includes("ROLE_MOD") ? "text-white bg-red-600 hover:bg-white hover:text-rd-600 transition-all text-xs" : "hidden"} onClick={() => null}>Kullanıcı Yetkisine Düşür</AlertDialogAction>
+                                    <AlertDialogAction className={selectUser.authorities.includes("ROLE_ADMIN") ? "text-white bg-red-600 hover:bg-white hover:text-red-600 transition-all text-xs mt-3" : "hidden"} onClick={() => null}>Moderatör Yetkisine Düşür</AlertDialogAction>
+                                    <AlertDialogAction className={selectUser.authorities.includes("ROLE_ADMIN") ? "hidden": "text-white bg-green-600 hover:bg-white hover:text-green-600 transition-all"} onClick={() => null}>Admin'e Yükselt</AlertDialogAction>
                                 </AlertDialogFooter>
                             </AlertDialogContent>
                         </AlertDialog>

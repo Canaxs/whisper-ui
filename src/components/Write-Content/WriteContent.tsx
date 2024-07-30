@@ -48,11 +48,11 @@ export default function WriteContent() {
             category: category,
             image: image
         }
-        //createWhisper(whisperModel,Cookies.get("token")).then((res) => {
-//
-  //      },(exception) => {
-   //         bool = false;
-    //    })
+        createWhisper(whisperModel,Cookies.get("token")).then((res) => {
+
+       },(exception) => {
+            bool = false;
+        })
         if(!bool) {
             toast({
                 variant: "destructive",

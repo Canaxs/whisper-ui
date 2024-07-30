@@ -13,8 +13,8 @@ export default function NewsCard(props) {
     return(
         <Card>
             <CardHeader>
-                <CardTitle>{props.title}</CardTitle>
-                <CardDescription>Lorem ipsum sit amet.</CardDescription>
+                <CardTitle className="text-base">{props.title}</CardTitle>
+                <CardDescription>{props.category}</CardDescription>
             </CardHeader>
             <CardContent className="p-2">
                 <img src={props.img} height={"50px"} width={"100%"}/>

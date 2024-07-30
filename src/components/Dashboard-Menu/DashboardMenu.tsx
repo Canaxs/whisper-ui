@@ -14,7 +14,7 @@ export default function DashboardMenu(props) {
                 <li className="p-3 border m-3 opacity-70 hover:opacity-100 transition-all hover:bg-gray-600 hover:text-white hover:rounded-xl"><a href="/panel/dashboard" className="flex items-center font-medium text-sm"><BiSolidDashboard className="size-5 mr-3" />Anasayfa</a></li>
                 <li className="p-3 border m-3 opacity-70 hover:opacity-100 transition-all hover:bg-gray-600 hover:text-white hover:rounded-xl"><a href="/panel/whispers" className="flex items-center font-medium text-sm"><GiPostStamp className="size-5 mr-3" />Paylaşımlar</a></li>
                 <li className="p-3 border m-3 opacity-70 hover:opacity-100 transition-all hover:bg-gray-600 hover:text-white hover:rounded-xl"><a href="/panel/users" className="flex items-center font-medium text-sm"><FaUsers className="size-5 mr-3" />Kullanıcılar</a></li>
-                <li className="p-3 border m-3 opacity-70 hover:opacity-100 transition-all hover:bg-gray-600 hover:text-white hover:rounded-xl"><a href="/panel/mods" className="flex items-center font-medium text-sm"><FaUsersGear className="size-5 mr-3" />Moderatörler</a></li>
+                <li className="p-3 border m-3 opacity-70 hover:opacity-100 transition-all hover:bg-gray-600 hover:text-white hover:rounded-xl"><a href="/panel/mods" className="flex items-center font-medium text-sm"><FaUsersGear className="size-5 mr-3" />Yetkililer</a></li>
             </ul>
         </div>
     )

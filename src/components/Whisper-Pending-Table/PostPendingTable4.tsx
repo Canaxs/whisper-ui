@@ -186,8 +186,8 @@ export function PostPendingTable4() {
                     </DialogDescription>
                     <DialogFooter>
                       <div>
-                        <Button className="mr-2 bg-green-500 hover:bg-white  border hover:text-green-500 transition-all">Onayla</Button>
-                        <Button className=" bg-red-500 hover:bg-white border hover:text-red-500 transition-all" onClick={() => rejectWhisper()}>Reddet</Button>
+                        <Button className="mr-2 bg-gray-500 hover:bg-white  border hover:text-gray-500 transition-all">Düzenle</Button>
+                        <Button className=" bg-red-500 hover:bg-white border hover:text-red-500 transition-all" onClick={() => rejectWhisper()}>Sil</Button>
                       </div>
                 </DialogFooter>
                 </DialogContent>
