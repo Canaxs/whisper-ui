@@ -12,7 +12,10 @@ export const isExpiredToken = (headerToken) => {
 }
 
 export const createWhisper = (whisperModel, headerToken) => {
-    return axios.post(Environment.baseUrl+"whisper/locked/create",{headers: {Authorization: headerToken}},whisperModel);
+    return axios.post(Environment.baseUrl+"whisper/locked/create",whisperModel,{
+        headers: {
+            Authorization : 'Bearer '+headerToken
+        } });
 }
 
 export const getWhisper = (urlName) => {

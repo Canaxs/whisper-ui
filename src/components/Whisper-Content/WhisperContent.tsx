@@ -24,7 +24,7 @@ export default function WhisperContent(props) {
                 </div>
                 <div className="flex flex-col ml-2">
                     <span className="text-sm">{props.whisper.authorName}</span>
-                    <span className="text-xs">{props.whisper.createdDate}</span>
+                    <span className="text-xs">Oluşturulma Tarihi: {props.whisper.createdDate}</span>
                 </div>
             </div>
             <div className="mt-10">
@@ -52,8 +52,9 @@ export default function WhisperContent(props) {
                     </span>
                 </div>
             </div>
-            <div className="m-0 p-0">
-                <span>Yazar: <HovCard name={props.whisper.authorName} /> </span>
+            <div className="ml-0 mr-0 mt-5 p-0 flex flex-col text-base">
+                <span>Yazar : <HovCard name={props.whisper.authorName} /> </span>
+                <span className="drop-shadow">Kaynak : <a href={"https://"+props.whisper.source} className="font-medium text-slate-600 drop-shadow">{props.whisper.source}</a> </span>
             </div>
             <div className="mt-10">
                 <div className="flex">

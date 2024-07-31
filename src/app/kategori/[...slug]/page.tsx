@@ -71,6 +71,7 @@ export default function Docs({
             getWhisper(params.slug[1]).then((res) => {
                 if(res.data.category.toLowerCase() === params.slug[0]) {
                     setWhisper(res.data);
+                    console.log(res.data);
                 }
                 else {
                     router.push("/404");

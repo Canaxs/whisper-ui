@@ -93,8 +93,12 @@ export default function WriteContent() {
                     </SelectTrigger>
                     <SelectContent>
                         <SelectItem value="Spor">Spor</SelectItem>
+                        <SelectItem value="Magazin">Teknoloji</SelectItem>
+                        <SelectItem value="Magazin">Politika</SelectItem>
+                        <SelectItem value="Magazin">Finans</SelectItem>
+                        <SelectItem value="Magazin">Gündem</SelectItem>
+                        <SelectItem value="Magazin">Dünya</SelectItem>
                         <SelectItem value="Magazin">Magazin</SelectItem>
-                        <SelectItem value="Finans">Finans</SelectItem>
                     </SelectContent>
                 </Select>   
             </div>
