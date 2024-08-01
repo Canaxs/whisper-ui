@@ -11,6 +11,8 @@ import {
     HoverCardTrigger,
   } from "@/components/ui/hover-card"
 import HovCard from "../Hov-Card/HovCard";
+import { GrResources } from "react-icons/gr";
+import { TbWriting } from "react-icons/tb";
 
 export default function WhisperContent(props) {
     return (
@@ -53,8 +55,14 @@ export default function WhisperContent(props) {
                 </div>
             </div>
             <div className="ml-0 mr-0 mt-5 p-0 flex flex-col text-base">
-                <span>Yazar : <HovCard name={props.whisper.authorName} /> </span>
-                <span className="drop-shadow">Kaynak : <a href={"https://"+props.whisper.source} className="font-medium text-slate-600 drop-shadow">{props.whisper.source}</a> </span>
+                <div className="flex items-center mt-5">
+                    <TbWriting className="size-8 mr-2"/>
+                    <HovCard name={props.whisper.authorName} />
+                </div>
+                <div className="flex items-center mt-1">
+                    <GrResources className="size-8 mr-2"/>
+                    <span className="text-base drop-shadow-2xl">{props.whisper.source}</span>
+                </div>
             </div>
             <div className="mt-10">
                 <div className="flex">

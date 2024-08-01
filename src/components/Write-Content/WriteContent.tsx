@@ -92,13 +92,13 @@ export default function WriteContent() {
                         <SelectValue placeholder="Kategori" />
                     </SelectTrigger>
                     <SelectContent>
-                        <SelectItem value="Spor">Spor</SelectItem>
-                        <SelectItem value="Magazin">Teknoloji</SelectItem>
-                        <SelectItem value="Magazin">Politika</SelectItem>
-                        <SelectItem value="Magazin">Finans</SelectItem>
-                        <SelectItem value="Magazin">Gündem</SelectItem>
-                        <SelectItem value="Magazin">Dünya</SelectItem>
-                        <SelectItem value="Magazin">Magazin</SelectItem>
+                        <SelectItem value="SPORT">Spor</SelectItem>
+                        <SelectItem value="TECHNOLOGY">Teknoloji</SelectItem>
+                        <SelectItem value="POLITICS">Politika</SelectItem>
+                        <SelectItem value="FINANCE">Finans</SelectItem>
+                        <SelectItem value="AGENDA">Gündem</SelectItem>
+                        <SelectItem value="WORLD">Dünya</SelectItem>
+                        <SelectItem value="MAGAZINE">Magazin</SelectItem>
                     </SelectContent>
                 </Select>   
             </div>

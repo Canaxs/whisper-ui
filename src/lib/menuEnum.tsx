@@ -34,14 +34,42 @@ export function convertMenus(enumMenu: string) {
         case "finans":
             return "FINANCE"
             break;
-        case "gündem":
+        case "gundem":
             return "AGENDA"
             break;
-        case "dünya":
+        case "dunya":
             return "WORLD"
             break;
         case "magazin":
             return "MAGAZINE"
+            break;
+        default:
+            return null
+    }
+}
+
+export function convertMenusTR(enumMenu: string) {
+    switch(enumMenu) {
+        case "spor":
+            return "Spor"
+            break;
+        case "teknoloji":
+            return "Teknoloji"
+            break;
+        case "politika":
+            return "Politika"
+            break;
+        case "finans":
+            return "Finans"
+            break;
+        case "gundem":
+            return "Gündem"
+            break;
+        case "dunya":
+            return "Dünya"
+            break;
+        case "magazin":
+            return "Magazin"
             break;
         default:
             return null

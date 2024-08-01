@@ -2,13 +2,14 @@ import axios from 'axios';
 import { Environment } from '../environments/environments';
 import TokenDTO from '@/models/TokenDTO';
 import { Artifika } from 'next/font/google';
+import { Whisper } from '@/components/Account-Info/AccountInfo';
 
 export const generateToken = authModel => {
     return axios.post(Environment.baseUrl+"auth/generateToken" ,authModel);
 };
 
-export const isExpiredToken = (headerToken) => {
-    return axios.get(Environment.baseUrl+"auth/isExpiredToken",{headers: {Authorization: headerToken}});
+export const isExpiredToken = (expireRequest) => {
+    return axios.post<Boolean>(Environment.baseUrl+"auth/isExpiredToken",expireRequest);
 }
 
 export const createWhisper = (whisperModel, headerToken) => {
@@ -73,3 +74,16 @@ export const updateWhisper = (updateWhisper) => {
 export const getBestUserPoint = () => {
     return axios.get(Environment.baseUrl+"whisper/getBestUserPoint");
 }
+
+export const getUserWhispersCalls = (username) => {
+    return axios.get<Whisper[]>(Environment.baseUrl+"whisper/getUserWhispers/"+username);
+}
+
+export const getCarouselBig = () => {
+    return axios.get<Whisper[]>(Environment.baseUrl+"whisper/carousel/big");
+}
+
+export const getCarouselSmall = () => {
+    return axios.get<Whisper[]>(Environment.baseUrl+"whisper/carousel/small");
+}
+

@@ -19,8 +19,19 @@ import {
     AvatarFallback,
     AvatarImage,
   } from "@/components/ui/avatar"
+  import Cookies from 'js-cookie'
+
 
 export function HeaderUser(props) {
+
+
+    function logout() {
+        Cookies.remove("token");
+        Cookies.remove("username");
+        Cookies.remove("userPoint");
+        Cookies.remove("role");
+    }
+
     return (
         <div className="flex">
             <DropdownMenu>
@@ -41,7 +52,7 @@ export function HeaderUser(props) {
                     <DropdownMenuItem><a href="/">Yardım</a></DropdownMenuItem>
                     <DropdownMenuItem disabled><a href="/">Söylenti</a></DropdownMenuItem>
                     <DropdownMenuSeparator />
-                    <DropdownMenuItem>Çıkış Yap</DropdownMenuItem>
+                    <DropdownMenuItem onClick={() => logout()}>Çıkış Yap</DropdownMenuItem>
                 </DropdownMenuContent>
             </DropdownMenu>
         </div>

@@ -36,16 +36,12 @@ export default function HeaderTop(props) {
         uploadInformation();
     },[])
 
-    function onClickLogo() {
-        router.push("/");
-    }
-
 
 
     return(
         <div className="flex justify-between">
             <div className="flex max-lg:ml-3">
-                <img src={props.logo} width="100" height="100" alt="Söylenti" onClick={() => onClickLogo()} className="cursor-pointer"/>
+                <a href="/"><img src={props.logo} width="110" height="110" alt="Söylenti" className="cursor-pointer mt-1"/></a>
                 <div className="h-1/2 mt-[8%] w-[1px] bg-slate-300 ml-5"></div>
                 <img src={props.flag} className="ml-2 mb-1" width="100px" height="50px" alt="Türk Bayrağı" />
             </div>
@@ -60,10 +56,10 @@ export default function HeaderTop(props) {
                 </div>
                 ) : ( userData.username != null ?
                 <React.Fragment>
-                    <div className="flex mr-5 cursor-pointer text-gray-500">
+                    <div className="flex mr-5 cursor-pointer text-gray-700 transition-all hover:scale-110">
                         <a href="/account/write" className="flex">
-                        <TfiWrite className="mr-2 size-5" />
-                        <Label className="cursor-pointer text-sm">Write</Label>
+                        <TfiWrite className="mr-2 size-5 hover:text-black transition-all" />
+                        <Label className="cursor-pointer text-sm drop-shadow-xl">Write</Label>
                         </a>
                     </div>
                     <HeaderNotify />

@@ -3,7 +3,7 @@ import { isExpiredToken } from "./api/apiCalls";
 import { isAuth } from "./lib/auth";
 import { Menus } from "./lib/menuEnum";
 
-export function middleware(request: NextRequest) {
+export async function middleware(request: NextRequest) {
     
     const response = NextResponse.next({
         request: {
@@ -32,12 +32,14 @@ export function middleware(request: NextRequest) {
             return NextResponse.redirect(new URL('/404', request.url))
         }
     }
-
-    if(isAuth(request)) {
+    const bool = await isAuth(request);
+    if(bool) {
+        console.log("1: ");
         return response;
     } 
     else {
         if(request.url.substring(22) === "account") {
+            console.log("133: ");
             return NextResponse.redirect(new URL('/login', request.url))
         }
         else if (request.url.substring(22) === "panel") {

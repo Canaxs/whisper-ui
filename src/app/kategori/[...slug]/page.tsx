@@ -24,7 +24,9 @@ import { describe } from "node:test";
 import { useEffect, useState } from "react";
 import { getWhisper , getPageableWhispers } from "@/api/apiCalls";
 import { useRouter,useSearchParams } from 'next/navigation'
-import { convertMenus } from "@/lib/menuEnum";
+import { convertMenus, convertMenusTR } from "@/lib/menuEnum";
+import { GrResources } from "react-icons/gr";
+import { TbWriting } from "react-icons/tb";
 
 export default function Docs({
     params,
@@ -69,7 +71,7 @@ export default function Docs({
         }
         else {
             getWhisper(params.slug[1]).then((res) => {
-                if(res.data.category.toLowerCase() === params.slug[0]) {
+                if(res.data.category === convertMenusTR(params.slug[0])) {
                     setWhisper(res.data);
                     console.log(res.data);
                 }
@@ -134,17 +136,26 @@ export default function Docs({
                 <div className="mt-10 ml-[10%] mr-[10%] mb-4">
                 { whispers.content.length != 0 ? whispers.content?.map((content,index) =>
                 <a href={"/kategori/"+params.slug[0]+"/"+content["urlName"]} key={index}>
-                    <Card className="mt-3">
+                    <Card className="mt-3 shadow-xl">
                         <CardContent className="p-3">
                             <div className="flex">
-                                <div>
+                                <div className="flex items-center">
                                     <img src="../../logo-black.png" width={"200"} height={"200"} />
                                 </div>
                                 <div className="flex flex-col pt-7 pl-7">
                                     <span className="text-gray-400 text-xs font-medium">{params.slug[0].toUpperCase()}</span>
-                                    <span className="text-3xl mt-2 font-medium">{content["title"]}</span>
+                                    <span className="text-3xl mt-2 font-medium line-clamp-1">{content["title"]}</span>
                                     <div className="p-0 mt-3 mb-3 ml-0">
-                                        <HovCard name={content["authorName"]} />
+                                        <div className="flex flex-col">
+                                            <div className="flex items-center">
+                                                <TbWriting className="size-5 mr-2"/>
+                                                <HovCard name={content["authorName"]} />
+                                            </div>
+                                            <div className="flex mt-1 items-center">
+                                                <GrResources className="size-5 mr-2"/>
+                                                <span className="text-xs drop-shadow-lg">{content["source"]}</span>
+                                            </div>
+                                        </div>
                                     </div>
                                 </div>
                             </div>

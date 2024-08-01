@@ -79,12 +79,12 @@ export default function Home() {
             <div className="mt-8 flex flex-wrap">
                 {whispers.map((obj, index) => advertisingBoolean(index) ?  
                     <div className="w-[24%] ml-[1%] mt-3 max-lg:w-[32%] max-md:w-[49%]">
-                        <NewsCard title={obj.title} img="logo-black.png" name={obj.authorName} category={obj.category} />
+                        <a href={"kategori/"+obj.category+"/"+obj.urlName}><NewsCard title={obj.title} img="logo-black.png" name={obj.authorName} category={obj.category} source={obj.source} /></a>
                     </div>
                 : 
                     <React.Fragment>
                         <div className="w-[24%] ml-[1%] mt-3 max-lg:w-[32%] max-md:w-[49%]">
-                            <NewsCard title={obj.title} img="logo-black.png" keyNumber={index} name={obj.authorName} category={obj.category} />
+                        <a href={"kategori/"+obj.category+"/"+obj.urlName}><NewsCard title={obj.title} img="logo-black.png" keyNumber={index} name={obj.authorName} category={obj.category} source={obj.source} /></a>
                         </div>
                         <Adversiting oneClass="w-[98%] ml-[1%] h-[100px] mt-5 mb-2 rounded" />
                     </React.Fragment>

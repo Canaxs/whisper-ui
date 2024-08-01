@@ -27,7 +27,6 @@ export default function Info() {
                 <AccountInfo />
             </div>
             <FooterArea src={"../logo-white.png"} />
-            <button onClick={() => deneme()} className="w-10 h-10 bg-black text-white">Gönder</button>
         </div>
     )
 }
