@@ -75,3 +75,31 @@ export function convertMenusTR(enumMenu: string) {
             return null
     }
 }
+
+export function convertMenusEn(enumMenu: string) {
+    switch(enumMenu) {
+        case "SPORT":
+            return "spor"
+            break;
+        case "TECHNOLOGY":
+            return "teknoloji"
+            break;
+        case "POLITICS":
+            return "politika"
+            break;
+        case "FINANCE":
+            return "finans"
+            break;
+        case "AGENDA":
+            return "gundem"
+            break;
+        case "WORLD":
+            return "dunya"
+            break;
+        case "MAGAZINE":
+            return "magazin"
+            break;
+        default:
+            return null
+    }
+}

@@ -8,6 +8,7 @@ import HeaderTop from "@/components/Header-Top/Header-Top";
 import Header from "@/components/Header/Header";
 import Navigation from "@/components/Navigation-Menu/Navigation";
 import NewsCard from "@/components/News-Card/NewsCard";
+import { convertMenusEn } from "@/lib/menuEnum";
 import { Head } from "next/document";
 import React, { useState, useEffect } from "react";
 
@@ -70,6 +71,11 @@ export default function Home() {
        })
     }
 
+    function convertCategoryName(str) {
+        str = str[0].toUpperCase() + str.slice(1);
+        return str;
+    }
+
 
     return (
         <div>
@@ -79,18 +85,19 @@ export default function Home() {
             <div className="mt-8 flex flex-wrap">
                 {whispers.map((obj, index) => advertisingBoolean(index) ?  
                     <div className="w-[24%] ml-[1%] mt-3 max-lg:w-[32%] max-md:w-[49%]">
-                        <a href={"kategori/"+obj.category+"/"+obj.urlName}><NewsCard title={obj.title} img="logo-black.png" name={obj.authorName} category={obj.category} source={obj.source} /></a>
+                        <a href={"kategori/"+convertMenusEn(obj.category)+"/"+obj.urlName}><NewsCard title={obj.title} img="logo-black.png" name={obj.authorName} category={convertCategoryName(convertMenusEn(obj.category))} source={obj.source} /></a>
                     </div>
                 : 
                     <React.Fragment>
                         <div className="w-[24%] ml-[1%] mt-3 max-lg:w-[32%] max-md:w-[49%]">
-                        <a href={"kategori/"+obj.category+"/"+obj.urlName}><NewsCard title={obj.title} img="logo-black.png" keyNumber={index} name={obj.authorName} category={obj.category} source={obj.source} /></a>
+                        <a href={"kategori/"+convertMenusEn(obj.category)+"/"+obj.urlName}><NewsCard title={obj.title} img="logo-black.png" keyNumber={index} name={obj.authorName} category={convertCategoryName(convertMenusEn(obj.category))} source={obj.source} /></a>
                         </div>
                         <Adversiting oneClass="w-[98%] ml-[1%] h-[100px] mt-5 mb-2 rounded" />
                     </React.Fragment>
                 )}
             </div>
-            <Adversiting oneClass="w-[98%] ml-[1%] h-[100px] mt-5 mb-2 rounded"/>
+            <div className={whispers.length == 0 ? "h-64" : "hidden"}></div>
+            <Adversiting oneClass={"w-[98%] ml-[1%] h-[100px] mt-5 mb-2 rounded"}/>
             <AbsoluteAdversiting class="left"/>
             <AbsoluteAdversiting class="right"/>
         </div>

@@ -32,6 +32,7 @@ export async function middleware(request: NextRequest) {
             return NextResponse.redirect(new URL('/404', request.url))
         }
     }
+    
     const bool = await isAuth(request);
     if(bool) {
         console.log("1: ");

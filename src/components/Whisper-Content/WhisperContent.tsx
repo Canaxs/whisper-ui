@@ -13,6 +13,7 @@ import {
 import HovCard from "../Hov-Card/HovCard";
 import { GrResources } from "react-icons/gr";
 import { TbWriting } from "react-icons/tb";
+import AbsoluteAdversiting from "../Advertising-Space/AbsoluteAdversiting";
 
 export default function WhisperContent(props) {
     return (
@@ -79,6 +80,8 @@ export default function WhisperContent(props) {
             <div className="mt-3">
                 <span className="text-xs">000.000 Görüntülenme</span>  
             </div>
+            <AbsoluteAdversiting class="left"/>
+            <AbsoluteAdversiting class="right"/>
         </div>
     )
 }
