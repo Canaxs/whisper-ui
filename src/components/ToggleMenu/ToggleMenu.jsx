@@ -27,9 +27,9 @@ export default function ToggleMenu() {
                     <SheetTitle>Menüler</SheetTitle>
                     </SheetHeader>
                     <ul className="mt-10">
-                        <li className="p-3 mt-1 text-gray-500 font-sm font-medium border cursor-pointer rounded hover:text-gray-600 transition-all hover:bg-gray-300">Hakkında</li>
-                        <li className="p-3 mt-1 text-gray-500 font-sm font-medium border cursor-pointer rounded hover:text-gray-600 transition-all hover:bg-gray-300">Amacımız</li>
-                        <li className="p-3 mt-1 text-gray-500 font-sm font-medium border cursor-pointer rounded hover:text-gray-600 transition-all hover:bg-gray-300">Yardım</li>
+                        <a href="/soylenti/hakkimizda"><li className="p-3 mt-1 text-gray-500 font-sm font-medium border cursor-pointer rounded hover:text-gray-600 transition-all hover:bg-gray-300">Hakkında</li></a>
+                        <a href="/soylenti/iletisim"><li className="p-3 mt-1 text-gray-500 font-sm font-medium border cursor-pointer rounded hover:text-gray-600 transition-all hover:bg-gray-300">İletişim</li></a>
+                        <a href="/soylenti/yardim"><li className="p-3 mt-1 text-gray-500 font-sm font-medium border cursor-pointer rounded hover:text-gray-600 transition-all hover:bg-gray-300">Yardım</li></a>
                     </ul>
                 </SheetContent>
             </Sheet>
