@@ -4,16 +4,12 @@ import {
     AvatarImage,
   } from "@/components/ui/avatar"
   import { SlLike  , SlDislike  } from "react-icons/sl";
-
-  import {
-    HoverCard,
-    HoverCardContent,
-    HoverCardTrigger,
-  } from "@/components/ui/hover-card"
 import HovCard from "../Hov-Card/HovCard";
 import { GrResources } from "react-icons/gr";
 import { TbWriting } from "react-icons/tb";
 import AbsoluteAdversiting from "../Advertising-Space/AbsoluteAdversiting";
+import WhisperComment from "../Whisper-Comment/WhisperComment";
+
 
 export default function WhisperContent(props) {
     return (
@@ -75,6 +71,9 @@ export default function WhisperContent(props) {
                         <SlDislike  className="size-7 mt-1"/>
                         <span className="mt-[5px] font-medium ml-1">0</span>
                     </div>
+                    <div className=" flex justify-center items-center">
+                        <WhisperComment />
+                    </div>
                 </div>
             </div>
             <div className="mt-3">
@@ -82,6 +81,7 @@ export default function WhisperContent(props) {
             </div>
             <AbsoluteAdversiting class="left"/>
             <AbsoluteAdversiting class="right"/>
+            
         </div>
     )
 }
