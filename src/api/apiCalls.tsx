@@ -87,3 +87,8 @@ export const getCarouselSmall = () => {
     return axios.get<Whisper[]>(Environment.baseUrl+"whisper/carousel/small");
 }
 
+export const controlLike = (whisperId , headerToken) => {
+    return axios.get(Environment.baseUrl+"whisper/control/like/"+whisperId,{headers: {Authorization: "Bearer "+headerToken}});
+}
+
+

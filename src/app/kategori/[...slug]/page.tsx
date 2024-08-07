@@ -45,6 +45,11 @@ export default function Docs({
         urlName: null,
         image: null,
         createdDate: null,
+        whisperLike: {
+            id: null,
+            numberLike: null,
+            numberDislike: null
+        },
      });
 
      const [whispers,setWhispers] = useState({

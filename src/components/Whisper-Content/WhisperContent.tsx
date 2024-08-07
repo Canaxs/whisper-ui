@@ -9,9 +9,29 @@ import { GrResources } from "react-icons/gr";
 import { TbWriting } from "react-icons/tb";
 import AbsoluteAdversiting from "../Advertising-Space/AbsoluteAdversiting";
 import WhisperComment from "../Whisper-Comment/WhisperComment";
+import { useEffect, useState } from "react";
+import { controlLike } from "@/api/apiCalls";
+import Cookies from 'js-cookie'
 
 
 export default function WhisperContent(props) {
+
+
+    const [likeExists, setLikeExists] = useState(false);
+
+    useEffect(() => {
+        if(Cookies.get("username") != null) {
+            control();
+        }
+    }, [])
+
+
+    async function control() {
+        await controlLike(props.whisper.whisperLike.id,Cookies.get("token")).then((res) => {
+            setLikeExists(res.data)
+        })
+    }
+
     return (
         <div className="mt-10 ml-[2%]">
             <div className="flex">  
@@ -30,12 +50,12 @@ export default function WhisperContent(props) {
                 <div className="h-[0.1px] w-full bg-gray-100"></div>
                 <div className="flex">
                     <div className="p-2 flex items-center hover:text-black text-gray-400 transition-all cursor-pointer">
-                        <SlLike className="size-7"/>
-                        <span className="mt-[5px] font-medium ml-1">0</span>
+                        <SlLike className={likeExists ? "size-7 text-green-500" : "size-7"}/>
+                        <span className={likeExists ? "mt-[5px] font-medium ml-1 text-green-500" : "mt-[5px] font-medium ml-1"}>{props.whisper.whisperLike.numberLike}</span>
                     </div>
                     <div className="p-2 flex items-center hover:text-black text-gray-400 transition-all cursor-pointer">
                         <SlDislike  className="size-7 mt-1"/>
-                        <span className="mt-[5px] font-medium ml-1">0</span>
+                        <span className="mt-[5px] font-medium ml-1">{props.whisper.whisperLike.numberDislike}</span>
                     </div>
                 </div>
                 <div className="h-[0.1px] w-full bg-gray-100"></div>
@@ -64,12 +84,12 @@ export default function WhisperContent(props) {
             <div className="mt-10">
                 <div className="flex">
                     <div className="p-2 flex items-center hover:text-black text-gray-400 transition-all cursor-pointer">
-                        <SlLike className="size-7"/>
-                        <span className="mt-[5px] font-medium ml-1">0</span>
+                        <SlLike className={likeExists ? " text-green-500 size-7": "size-7"}/>
+                        <span className={likeExists ? "mt-[5px] font-medium ml-1 text-green-500" : "mt-[5px] font-medium ml-1" }>{props.whisper.whisperLike.numberLike}</span>
                     </div>
                     <div className="p-2 flex items-center hover:text-black text-gray-400 transition-all cursor-pointer">
                         <SlDislike  className="size-7 mt-1"/>
-                        <span className="mt-[5px] font-medium ml-1">0</span>
+                        <span className="mt-[5px] font-medium ml-1">{props.whisper.whisperLike.numberDislike}</span>
                     </div>
                     <div className=" flex justify-center items-center">
                         <WhisperComment />
