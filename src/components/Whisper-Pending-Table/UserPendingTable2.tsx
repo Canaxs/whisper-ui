@@ -24,6 +24,8 @@ import {
     AlertDialogTrigger,
   } from "@/components/ui/alert-dialog"
 
+  import Cookies from 'js-cookie';
+
   export type User = {
     username: string
     userPoint: string
@@ -71,7 +73,7 @@ export function UserPendingTable2() {
     },[])
 
     async function uploadData() {
-        await getUsers().then((res) => {
+        await getUsers(Cookies.get("token")).then((res) => {
             setData(res.data);
             setDataBackup(res.data);
             setSelectData(res.data.slice(currentPage[0],currentPage[1]));

@@ -74,7 +74,7 @@ export function ModPendingTable2() {
     },[])
 
     async function uploadData() {
-        await getUsers().then((res) => {
+        await getUsers(Cookies.get("token")).then((res) => {
             setData(res.data);
             setDataBackup(res.data);
             setSelectData(res.data.slice(currentPage[0],currentPage[1]));

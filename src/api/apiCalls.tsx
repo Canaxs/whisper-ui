@@ -35,20 +35,20 @@ export const getPendingWhispers = () => {
     return axios.get(Environment.baseUrl+"whisper/getPendingWhispers");
 }
 
-export const getUsers = () => {
-    return axios.get(Environment.baseUrl+"user/getUsers");
+export const getUsers = (headerToken) => {
+    return axios.get(Environment.baseUrl+"user/getUsers",{headers: {Authorization: "Bearer "+headerToken}});
 }
 
 export const deleteUser = (userId, headerToken) => {
-    return axios.delete(Environment.baseUrl+"user/delete/"+userId,{headers: {Authorization: headerToken}});
+    return axios.delete(Environment.baseUrl+"user/delete/"+userId,{headers: {Authorization: "Bearer "+headerToken}});
 }
 
 export const updateRole = (updateDTO,headerToken) => {
-    return axios.put(Environment.baseUrl+"user/updateRole",{headers: {Authorization: headerToken}},updateDTO)
+    return axios.put(Environment.baseUrl+"user/updateRole",{headers: {Authorization: "Bearer "+headerToken}},updateDTO)
 }
 
-export const getMods = () => {
-    return axios.get(Environment.baseUrl+"user/getMods");
+export const getMods = (headerToken) => {
+    return axios.get(Environment.baseUrl+"user/getMods",{headers: {Authorization: "Bearer "+headerToken}});
 }
 
 export const getUser = (username) => {
@@ -89,6 +89,10 @@ export const getCarouselSmall = () => {
 
 export const controlLike = (whisperId , headerToken) => {
     return axios.get(Environment.baseUrl+"whisper/control/like/"+whisperId,{headers: {Authorization: "Bearer "+headerToken}});
+}
+
+export const likeWhisper = (whisperId , headerToken) => {
+    return axios.get(Environment.baseUrl+"whisper/locked/like/"+whisperId,{headers: {Authorization: "Bearer "+headerToken}});
 }
 
 

@@ -20,9 +20,12 @@ import {
     AvatarImage,
   } from "@/components/ui/avatar"
   import Cookies from 'js-cookie'
+import { useRouter } from "next/router";
 
 
 export function HeaderUser(props) {
+
+    const router = useRouter();
 
 
     function logout() {
@@ -30,6 +33,7 @@ export function HeaderUser(props) {
         Cookies.remove("username");
         Cookies.remove("userPoint");
         Cookies.remove("role");
+        router.push(window.location.href);
     }
 
     return (
