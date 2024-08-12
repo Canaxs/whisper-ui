@@ -12,10 +12,12 @@ import WhisperComment from "../Whisper-Comment/WhisperComment";
 import { useEffect, useState } from "react";
 import { controlLike, likeWhisper } from "@/api/apiCalls";
 import Cookies from 'js-cookie'
+import { useToast } from "@/components/ui/use-toast"
 
 
 export default function WhisperContent(props) {
-
+    
+    const { toast } = useToast();
 
     const [likeExists, setLikeExists] = useState(false);
 
@@ -33,12 +35,21 @@ export default function WhisperContent(props) {
     }
 
     async function like() {
-        await likeWhisper(props.whisper.whisperLike.id,Cookies.get("token")).then((res) => {
-            setLikeExists(true);
-            props.whisper.whisperLike.numberLike++;
-        }, (exception) => {
-            setLikeExists(false);
-        })
+        if(Cookies.get("username") != null) {
+            await likeWhisper(props.whisper.whisperLike.id,Cookies.get("token")).then((res) => {
+                setLikeExists(true);
+                props.whisper.whisperLike.numberLike++;
+            }, (exception) => {
+                setLikeExists(false);
+            })
+        }
+        else {
+            toast({
+                variant: "destructive",
+                title: "Bu gönderiyi beğenemezsiniz.",
+                description: "Gönderiyi beğenmeniz için giriş yapmanız gerekiyor.",
+              })
+        }
     }
 
     return (
@@ -58,11 +69,11 @@ export default function WhisperContent(props) {
             <div className="mt-10">
                 <div className="h-[0.1px] w-full bg-gray-100"></div>
                 <div className="flex">
-                    <div className="p-2 flex items-center hover:text-black text-gray-400 transition-all cursor-pointer" onClick={likeExists ? () => null : () => like()}>
+                    <div className={Cookies.get("username") != null ? "p-2 flex items-center hover:text-black text-gray-400 transition-all cursor-pointer" : "p-2 flex items-center hover:text-black text-gray-400 transition-all cursor-no-drop opacity-60"} onClick={likeExists ? () => null : () => like()}>
                         <SlLike className={likeExists ? "size-7 text-green-500" : "size-7"}/>
                         <span className={likeExists ? "mt-[5px] font-medium ml-1 text-green-500" : "mt-[5px] font-medium ml-1"}>{props.whisper.whisperLike.numberLike}</span>
                     </div>
-                    <div className="p-2 flex items-center hover:text-black text-gray-400 transition-all cursor-pointer">
+                    <div className={Cookies.get("username") ? "p-2 flex items-center hover:text-black text-gray-400 transition-all cursor-pointer" : "p-2 flex items-center hover:text-black text-gray-400 transition-all cursor-no-drop opacity-60"}>
                         <SlDislike  className="size-7 mt-1"/>
                         <span className="mt-[5px] font-medium ml-1">{props.whisper.whisperLike.numberDislike}</span>
                     </div>
@@ -92,11 +103,11 @@ export default function WhisperContent(props) {
             </div>
             <div className="mt-10">
                 <div className="flex">
-                    <div className="p-2 flex items-center hover:text-black text-gray-400 transition-all cursor-pointer" onClick={likeExists ? () => null : () => like()}>
+                    <div className={Cookies.get("username") != null ? "p-2 flex items-center hover:text-black text-gray-400 transition-all cursor-pointer" : "p-2 flex items-center hover:text-black text-gray-400 transition-all cursor-no-drop opacity-60"} onClick={likeExists ? () => null : () => like()}>
                         <SlLike className={likeExists ? " text-green-500 size-7": "size-7"}/>
                         <span className={likeExists ? "mt-[5px] font-medium ml-1 text-green-500" : "mt-[5px] font-medium ml-1" }>{props.whisper.whisperLike.numberLike}</span>
                     </div>
-                    <div className="p-2 flex items-center hover:text-black text-gray-400 transition-all cursor-pointer">
+                    <div className={Cookies.get("username") ? "p-2 flex items-center hover:text-black text-gray-400 transition-all cursor-pointer" : "p-2 flex items-center hover:text-black text-gray-400 transition-all cursor-no-drop opacity-60"}>
                         <SlDislike  className="size-7 mt-1"/>
                         <span className="mt-[5px] font-medium ml-1">{props.whisper.whisperLike.numberDislike}</span>
                     </div>

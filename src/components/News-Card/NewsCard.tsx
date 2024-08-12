@@ -15,7 +15,7 @@ import { TbWriting } from "react-icons/tb";
 export default function NewsCard(props) {
     return(
         <Card className="shadow-xl">
-            <CardHeader>
+            <CardHeader className="h-32">
                 <CardTitle className="text-base line-clamp-2">{props.title}</CardTitle>
                 <CardDescription>{props.category}</CardDescription>
             </CardHeader>

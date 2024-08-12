@@ -9,6 +9,7 @@ import { IoIosNotifications } from "react-icons/io";
 import { HeaderNotify } from "../Header-Notify/HeaderNotify";
 import { Progress } from "@/components/ui/progress"
 import { useRouter } from 'next/navigation';
+import { isExpiredToken } from "@/api/apiCalls";
 
 
 export default function HeaderTop(props) { 
@@ -32,8 +33,32 @@ export default function HeaderTop(props) {
         }
         setIsUser(true);
     }
+
+    async function controlInformation() {
+        if(Cookies.get("token") != null) {
+            const expireRequest = {
+                authorization: Cookies.get("token")
+            }
+            await isExpiredToken(expireRequest).then((res) => {
+                if(res.data) {
+                    Cookies.remove("token");
+                    Cookies.remove("username");
+                    Cookies.remove("userPoint");
+                    Cookies.remove("role");
+                }
+                else {
+                    uploadInformation();
+                }
+            })
+        }
+        else {
+            setIsUser(true);
+        }
+    }
+
+
     useEffect(() => {
-        uploadInformation();
+        controlInformation();
     },[])
 
 

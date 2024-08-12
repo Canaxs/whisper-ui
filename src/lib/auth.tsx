@@ -1,6 +1,5 @@
 "use client";
 import { isExpiredToken } from "@/api/apiCalls";
-import Cookies from 'js-cookie'
 
 export const  isAuth = async (request) => {
     const token = request.cookies.get("token")?.value;
@@ -23,7 +22,6 @@ export const  isAuth = async (request) => {
             return true;
         }
     }
-    console.log("4: ")
     return bool;
 }
 
