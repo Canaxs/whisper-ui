@@ -1,4 +1,4 @@
-import { getUsers } from "@/api/apiCalls";
+import { deleteUser, getUsers, updateRole } from "@/api/apiCalls";
 import { useEffect, useState } from "react"
 import { Checkbox } from "@/components/ui/checkbox"
 import {
@@ -25,6 +25,7 @@ import {
   } from "@/components/ui/alert-dialog"
 
   import Cookies from 'js-cookie';
+import { useToast } from "../ui/use-toast";
 
   export type User = {
     username: string
@@ -68,6 +69,8 @@ export function UserPendingTable2() {
     const [selectUser, setSelectUser] = useState({ id: 0 , username: "" , userPoint: "" , password: "" , authorities: [""] })
     const [isDialogOpen, setIsDialogOpen] = useState(false);
 
+    const { toast } = useToast();
+
     useEffect(() => {
         uploadData();
     },[])
@@ -87,10 +90,23 @@ export function UserPendingTable2() {
         setIsDialogOpen(true);
     }
 
-    function rejectWhisper() {
+    async function rejectWhisper() {
         const dataFilter = data.filter((res) => res.id != selectUser.id);
         setData(dataFilter);
         setDataBackup(dataFilter);
+        await deleteUser(selectUser.id, Cookies.get("token")).then((res) => {
+            toast({
+                variant: "success",
+                title: "Kullanıcı Silindi",
+                description: "İşlem Başarılı",
+              })
+        }, (exception) => {
+            toast({
+                variant: "destructive",
+                title: "Silme İşlemi Sırasında Hata oluştu",
+                description: "Tekrar Deneyiniz.",
+              })
+        })
     }
 
     function filterWhisper(str) {
@@ -118,6 +134,26 @@ export function UserPendingTable2() {
         const currentPageVariable = [currentPage[0]-pageVariable , currentPage[1]-pageVariable];
         setCurrentPage(currentPageVariable);
         setSelectData(data.slice(currentPageVariable[0],currentPageVariable[1]));
+    }
+
+    async function updateRoles(roleStr) {
+        const updateDTO = {
+            role : roleStr,
+            userId: selectUser.id
+        } 
+        await updateRole(updateDTO , Cookies.get("token")).then((res) => {
+            toast({
+                variant: "success",
+                title: "Yetkilendirme Başarıyla Sonuçlandırıldı",
+                description: "İşlem Başarılı",
+              })
+        },(exception) => {
+            toast({
+                variant: "destructive",
+                title: "Yetkilendirme Yapılırken Hata oluştu",
+                description: "Tekrar Deneyiniz.",
+              })
+        })
     }
 
 
@@ -206,8 +242,8 @@ export function UserPendingTable2() {
                                 </AlertDialogHeader>
                                 <AlertDialogFooter>
                                 <AlertDialogCancel>Vazgeç</AlertDialogCancel>
-                                <AlertDialogAction className={selectUser.authorities.includes("ROLE_MOD") ? "hidden" : "text-white bg-green-600 hover:bg-white hover:text-green-600 transition-all"} onClick={() => null}>Mod'a Yükselt</AlertDialogAction>
-                                <AlertDialogAction className={selectUser.authorities.includes("ROLE_ADMIN") ? "hidden" :"text-white bg-green-600 hover:bg-white hover:text-green-600 transition-all"} onClick={() => null}>Admin'e Yükselt</AlertDialogAction>
+                                <AlertDialogAction className={selectUser.authorities.includes("ROLE_MOD") ? "hidden" : "text-white bg-green-600 hover:bg-white hover:text-green-600 transition-all"} onClick={() => updateRoles("MOD")}>Mod'a Yükselt</AlertDialogAction>
+                                <AlertDialogAction className={selectUser.authorities.includes("ROLE_ADMIN") ? "hidden" :"text-white bg-green-600 hover:bg-white hover:text-green-600 transition-all"} onClick={() => updateRoles("ADMIN")}>Admin'e Yükselt</AlertDialogAction>
                                 </AlertDialogFooter>
                             </AlertDialogContent>
                         </AlertDialog>

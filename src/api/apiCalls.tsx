@@ -24,7 +24,7 @@ export const getWhisper = (urlName) => {
 }
 
 export const getPageableWhispers = (categoryName,page) => {
-    return axios.get(Environment.baseUrl+"whisper/category/"+categoryName,{params: {page , size: 2}});
+    return axios.get(Environment.baseUrl+"whisper/category/"+categoryName,{params: {page , size: 10}});
 }
 
 export const getWhispers = () => {
