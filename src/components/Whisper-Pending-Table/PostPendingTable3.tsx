@@ -1,4 +1,4 @@
-import { getPendingWhispers } from "@/api/apiCalls";
+import { getPendingWhispers, updateIsActive, updateIsDelete } from "@/api/apiCalls";
 import { useEffect, useState } from "react"
 import { Checkbox } from "@/components/ui/checkbox"
 import {
@@ -11,7 +11,8 @@ import {
 
   import { Button } from "@/components/ui/button"
   import { Input } from "@/components/ui/input"
-import { current } from "@reduxjs/toolkit";
+  import Cookies from 'js-cookie';
+  import { useToast } from "@/components/ui/use-toast"
 
 export type Whisper = {
     authorName: string
@@ -57,6 +58,9 @@ export function PostPendingTable3() {
     const [selectWhisper, setSelectWhisper] = useState({ id: 0 , authorName: "" , title: "" , description: "" , source: "" , category: ""})
     const [isDialogOpen, setIsDialogOpen] = useState(false);
 
+    
+    const { toast } = useToast();
+
     useEffect(() => {
         uploadData();
     },[])
@@ -77,10 +81,57 @@ export function PostPendingTable3() {
         setIsDialogOpen(true);
     }
 
-    function rejectWhisper() {
+    async function rejectWhisper() {
         const dataFilter = data.filter((res) => res.id != selectWhisper.id);
         setData(dataFilter);
         setDataBackup(dataFilter);
+        await updateIsDelete(selectWhisper.id , Cookies.get("token")).then((res) => {
+            if(res.data) {
+                toast({
+                    variant: "success",
+                    title: "Silme İşlemi Başarılı",
+                    description: "İşlem Başarılı",
+                  })
+            }
+            else {
+                toast({
+                    variant: "destructive",
+                    title: "Silme İşlemi Yapılırken Hata oluştu",
+                    description: "Tekrar Deneyiniz.",
+                  })
+            }
+        } , (exception) => {
+            toast({
+                variant: "destructive",
+                title: "Silme İşlemi Yapılırken Hata oluştu",
+                description: "Tekrar Deneyiniz.",
+              })
+        })
+    }
+
+    async function confirmWhisper() {
+        await updateIsActive(selectWhisper.id , Cookies.get("token")).then((res) => {
+            if(res.data) {
+                toast({
+                    variant: "success",
+                    title: "Whisper Onaylandı",
+                    description: "İşlem Başarılı",
+                  })
+            }
+            else {
+                toast({
+                    variant: "destructive",
+                    title: "Whisper İşlemi Yapılırken Hata oluştu",
+                    description: "Tekrar Deneyiniz.",
+                  })
+            }
+        } , (exception) => {
+            toast({
+                variant: "destructive",
+                title: "Whisper İşlemi Yapılırken Hata oluştu",
+                description: "Tekrar Deneyiniz.",
+              })
+        })
     }
 
     function filterWhisper(str) {
@@ -186,7 +237,7 @@ export function PostPendingTable3() {
                     </DialogDescription>
                     <DialogFooter>
                       <div>
-                        <Button className="mr-2 bg-green-500 hover:bg-white  border hover:text-green-500 transition-all">Onayla</Button>
+                        <Button className="mr-2 bg-green-500 hover:bg-white  border hover:text-green-500 transition-all" onClick={() => confirmWhisper()}>Onayla</Button>
                         <Button className=" bg-red-500 hover:bg-white border hover:text-red-500 transition-all" onClick={() => rejectWhisper()}>Reddet</Button>
                       </div>
                 </DialogFooter>

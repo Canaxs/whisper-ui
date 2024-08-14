@@ -95,4 +95,13 @@ export const likeWhisper = (whisperId , headerToken) => {
     return axios.get(Environment.baseUrl+"whisper/locked/like/"+whisperId,{headers: {Authorization: "Bearer "+headerToken}});
 }
 
+export const updateIsActive = (whisperId , headerToken) => {
+    return axios.get(Environment.baseUrl+"whisper/updateActive/"+whisperId,{headers: {Authorization: "Bearer "+headerToken}});
+}
+
+export const updateIsDelete = (whisperId , headerToken) => {
+    return axios.get(Environment.baseUrl+"whisper/updateDelete/"+whisperId,{headers: {Authorization: "Bearer "+headerToken}});
+}
+
+
 
