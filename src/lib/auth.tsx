@@ -18,8 +18,14 @@ export const  isAuth = async (request) => {
             })
             return bool; 
         }
-        else if (request.url.substring(22) === urlConfig[1] && (role === "mod" || role === "admin")) {
-            return true;
+        else if (request.url.substring(22) === urlConfig[1] && (role === "ROLE_MOD" || role === "ROLE_ADMIN")) {
+            const authorizationModel = {
+                authorization : token
+            }
+            await isExpiredToken(authorizationModel).then((res) => {
+                bool = !res.data;
+            })
+            return bool; 
         }
     }
     return bool;

@@ -1,3 +1,4 @@
+import { generateToken } from "@/api/apiCalls"
 import { Button } from "@/components/ui/button"
 import {
   Card,
@@ -15,9 +16,75 @@ import {
   TabsList,
   TabsTrigger,
 } from "@/components/ui/tabs"
+import { addUser } from "@/lib/features/userSlice"
+import { useRouter } from "next/router"
+import { useEffect, useState } from "react"
+import { useDispatch } from "react-redux"
+import { useToast } from "../ui/use-toast"
+import Cookies from 'js-cookie';
 
 
 export default function PanelLogin() {
+
+    const [username,setUsername] = useState("");
+    const [password,setPassword] = useState("");
+
+    const [loginBool , setLoginBool] = useState(false);
+
+    const dispatch = useDispatch();
+
+    const router = useRouter();
+
+    const { toast } = useToast();
+
+    useEffect(() => {
+        redirectIfAuthorization();
+    }, [])
+
+    function redirectIfAuthorization() {
+        if(Cookies.get("role").includes("ROLE_MOD")) {
+            router.push("/panel/dashboard");
+        }
+    }
+
+
+    async function loginPanel() {
+        setLoginBool(true);
+        const authModel = {
+            username: username,
+            password: password
+        }
+        try {
+            await generateToken(authModel).then((res) => {
+                if(res.data['role'].includes("ROLE_MOD")) {
+                    dispatch(addUser(res.data));
+                }
+                else {
+                    toast({
+                        variant: "destructive",
+                        title: "Giriş Başarısız.",
+                        description: "Yetkiniz bu panele giriş yapmak için yetersiz.",
+                      })
+                }
+            })
+            toast({
+                variant: "success",
+                title: "Giriş Başarılı",
+                description: "Hoşgeldiniz.",
+            })
+            router.push("/panel/dashboard");
+        }
+        catch(e) {
+            setLoginBool(false);
+            toast({
+                variant: "destructive",
+                title: "Giriş Başarısız.",
+                description: "Kullanıcı Adı Veya Şifreniz Hatalı.",
+              })
+        }
+
+    }
+
     return (
         <Tabs defaultValue="login" className="w-[400px] shadow-2xl rounded">
         <TabsList className="grid w-full grid-cols-2">
@@ -34,15 +101,15 @@ export default function PanelLogin() {
             <CardContent className="space-y-2">
                 <div className="space-y-1">
                 <Label htmlFor="username">Kullanıcı Adı</Label>
-                <Input id="username" placeholder="Kullanıcı Adı" />
+                <Input id="username" placeholder="Kullanıcı Adı" onChange={(e) => setUsername(e.target.value.toString())}/>
                 </div>
                 <div className="space-y-1">
                 <Label htmlFor="password">Şifre</Label>
-                <Input id="password" placeholder="Şifre" />
+                <Input id="password" placeholder="Şifre" onChange={(e) => setPassword(e.target.value.toString())}/>
                 </div>
             </CardContent>
             <CardFooter>
-                <Button className="bg-white border text-black hover:bg-black hover:text-white transition-all">Giriş Yap</Button>
+                <Button className="bg-white border text-black hover:bg-black hover:text-white transition-all" onClick={() => loginPanel()}>Giriş Yap</Button>
             </CardFooter>
             </Card>
         </TabsContent>

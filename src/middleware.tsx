@@ -39,7 +39,6 @@ export async function middleware(request: NextRequest) {
     } 
     else {
         if(request.url.substring(22) === "account") {
-            console.log("133: ");
             return NextResponse.redirect(new URL('/login', request.url))
         }
         else if (request.url.substring(22) === "panel") {
