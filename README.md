@@ -15,7 +15,7 @@
 <!-- ABOUT THE PROJECT -->
 ## About The Project
 
-
+An application where users can make rumor-based news and earn money in return
 
 ### Built With
 
