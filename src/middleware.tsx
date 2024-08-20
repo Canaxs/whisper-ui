@@ -11,6 +11,8 @@ export async function middleware(request: NextRequest) {
         }
     })
 
+    return NextResponse.redirect(new URL('/', request.url));
+
     if(request.url.substring(22).includes('kategori')) {
         let requestString = request.url.substring(31).split('/')[0];
         
@@ -48,5 +50,12 @@ export async function middleware(request: NextRequest) {
 }
 
 export const config = {
-    matcher: ['/account/:path*','/panel/:path*','/kategori/:path*'],
+    matcher: [
+        '/account/:path*',
+        '/panel/:path*',
+        '/kategori/:path*',
+        '/panel-login/:path*',
+        '/soylenti/:path*',
+        '/login'
+    ],
 };

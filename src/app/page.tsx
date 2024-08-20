@@ -28,6 +28,9 @@ export default function Home() {
 
     const [width, setWidth] = useState(0);
     const [ whispers, setWhispers] = useState<Whisper[]>([]);
+    const [ care , setCare] = useState(true);
+
+
     const handleWindowResize = () => {
         setWidth(window.innerWidth);
       }
@@ -40,7 +43,8 @@ export default function Home() {
     }, [width]);
 
     useEffect(() => {
-        getBestWhispers()
+        onCare()
+       // getBestWhispers()
     }, [])
 
     function advertisingBoolean(indexNum: number) {
@@ -76,32 +80,45 @@ export default function Home() {
         return str;
     }
 
+    function onCare() {
+        if(!care){
+            return (
+                <div>
+                <div className="lg:w-[98%] 2xl:w-[65%] pt-1 lg:ml-[1%] 2xl:ml-[17%]">
+                    <Header flag={"siyah-flag.png"} logo={"logo-black.png"} />
+                    <ContentCarousel />
+                    <div className="mt-8 flex flex-wrap">
+                        {whispers.map((obj, index) => advertisingBoolean(index) ?  
+                            <div className="w-[24%] ml-[1%] mt-3 max-lg:w-[32%] max-md:w-[49%]">
+                                <a href={"kategori/"+convertMenusEn(obj.category)+"/"+obj.urlName}><NewsCard title={obj.title} img="logo-black.png" name={obj.authorName} category={convertCategoryName(convertMenusEn(obj.category))} source={obj.source} /></a>
+                            </div>
+                        : 
+                            <React.Fragment>
+                                <div className="w-[24%] ml-[1%] mt-3 max-lg:w-[32%] max-md:w-[49%]">
+                                <a href={"kategori/"+convertMenusEn(obj.category)+"/"+obj.urlName}><NewsCard title={obj.title} img="logo-black.png" keyNumber={index} name={obj.authorName} category={convertCategoryName(convertMenusEn(obj.category))} source={obj.source} /></a>
+                                </div>
+                                <Adversiting oneClass="w-[98%] ml-[1%] h-[100px] mt-5 mb-2 rounded" />
+                            </React.Fragment>
+                        )}
+                    </div>
+                    <div className={whispers.length == 0 ? "h-64" : "hidden"}></div>
+                    <Adversiting oneClass={"w-[98%] ml-[1%] h-[100px] mt-5 mb-2 rounded"}/>
+                    <AbsoluteAdversiting class="left"/>
+                    <AbsoluteAdversiting class="right"/>
+                </div>
+                <FooterArea src={"logo-white.png"}/>
+                </div>
+            )
+        }
+    }
 
     return (
-        <div>
-        <div className="lg:w-[98%] 2xl:w-[65%] pt-1 lg:ml-[1%] 2xl:ml-[17%]">
-            <Header flag={"siyah-flag.png"} logo={"logo-black.png"} />
-            <ContentCarousel />
-            <div className="mt-8 flex flex-wrap">
-                {whispers.map((obj, index) => advertisingBoolean(index) ?  
-                    <div className="w-[24%] ml-[1%] mt-3 max-lg:w-[32%] max-md:w-[49%]">
-                        <a href={"kategori/"+convertMenusEn(obj.category)+"/"+obj.urlName}><NewsCard title={obj.title} img="logo-black.png" name={obj.authorName} category={convertCategoryName(convertMenusEn(obj.category))} source={obj.source} /></a>
-                    </div>
-                : 
-                    <React.Fragment>
-                        <div className="w-[24%] ml-[1%] mt-3 max-lg:w-[32%] max-md:w-[49%]">
-                        <a href={"kategori/"+convertMenusEn(obj.category)+"/"+obj.urlName}><NewsCard title={obj.title} img="logo-black.png" keyNumber={index} name={obj.authorName} category={convertCategoryName(convertMenusEn(obj.category))} source={obj.source} /></a>
-                        </div>
-                        <Adversiting oneClass="w-[98%] ml-[1%] h-[100px] mt-5 mb-2 rounded" />
-                    </React.Fragment>
-                )}
+        <div className="w-full h-full">
+            <div className="flex justify-center items-center h-full flex-col bg-gradient-to-r from-white to-gray-200"> 
+                <a href="/"><img src="../logo-black.png" width={"100px"} height={"100px"} alt="Söylenti" /></a>
+                <p className="font-medium mb-5 mt-2 text-sm text-slate-600 drop-shadow-lg">Söylenti - Bir Haber Sitesinden Çok Daha Fazlası</p>
+                <h4 className="font-medium mb-5 mt-2 text-xl text-slate-600 drop-shadow-lg">Yakında ...</h4>
             </div>
-            <div className={whispers.length == 0 ? "h-64" : "hidden"}></div>
-            <Adversiting oneClass={"w-[98%] ml-[1%] h-[100px] mt-5 mb-2 rounded"}/>
-            <AbsoluteAdversiting class="left"/>
-            <AbsoluteAdversiting class="right"/>
-        </div>
-        <FooterArea src={"logo-white.png"}/>
         </div>
     )
 }
