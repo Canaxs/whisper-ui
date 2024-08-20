@@ -55,7 +55,7 @@ export function HeaderUser(props) {
                     <DropdownMenuSeparator />
                     <DropdownMenuItem><a href="/">Yardım</a></DropdownMenuItem>
                     <DropdownMenuItem disabled><a href="/">Söylenti</a></DropdownMenuItem>
-                    <DropdownMenuItem disabled={!Cookies.get("role").includes("ROLE_MOD")}><a href="/panel/dashboard">Panel'e Git</a></DropdownMenuItem>
+                    <DropdownMenuItem disabled={!Cookies.get("role").includes("ROLE_MOD")}><a href="/panel/dashboard">Panel&apos;e Git</a></DropdownMenuItem>
                     <DropdownMenuSeparator />
                     <DropdownMenuItem onClick={() => logout()}>Çıkış Yap</DropdownMenuItem>
                 </DropdownMenuContent>

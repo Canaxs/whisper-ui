@@ -162,7 +162,7 @@ export function ModPendingTable2() {
             <div className="w-full h-full border shadow-lg mt-5">
                 <div className="flex justify-between border-b-1">
                     {columns.map((obj,index) => (
-                        <span className={obj.header != "" ? "p-3 w-[22%] text-center" : "p-3 w-[12%] flex justify-center"}>
+                        <span className={obj.header != "" ? "p-3 w-[22%] text-center" : "p-3 w-[12%] flex justify-center"} key={"index"+index}>
                         {obj.header != "" ? obj.header : <Checkbox /> }
                         </span>
                     )
@@ -170,7 +170,7 @@ export function ModPendingTable2() {
                 </div>
                 <div>
                     {selectData.map((obj,index) => (
-                        <div>
+                        <div key={"indexe"+index}>
                             <div className="flex justify-between cursor-pointer hover:bg-gray-300 transition-all shadow-md" onDoubleClick={() => openPopup(obj)}>
                                 <div className="w-[12%] flex justify-center items-center">
                                     <Checkbox />
@@ -238,7 +238,7 @@ export function ModPendingTable2() {
                                     <AlertDialogCancel>Vazgeç</AlertDialogCancel>
                                     <AlertDialogAction className={selectUser.authorities.includes("ROLE_MOD") ? "text-white bg-red-600 hover:bg-white hover:text-rd-600 transition-all text-xs" : "hidden"} onClick={() => updateRoles("USER")}>Kullanıcı Yetkisine Düşür</AlertDialogAction>
                                     <AlertDialogAction className={selectUser.authorities.includes("ROLE_ADMIN") ? "text-white bg-red-600 hover:bg-white hover:text-red-600 transition-all text-xs mt-3" : "hidden"} onClick={() => updateRoles("MOD")}>Moderatör Yetkisine Düşür</AlertDialogAction>
-                                    <AlertDialogAction className={selectUser.authorities.includes("ROLE_ADMIN") ? "hidden": "text-white bg-green-600 hover:bg-white hover:text-green-600 transition-all"} onClick={() => updateRoles("ADMIN")}>Admin'e Yükselt</AlertDialogAction>
+                                    <AlertDialogAction className={selectUser.authorities.includes("ROLE_ADMIN") ? "hidden": "text-white bg-green-600 hover:bg-white hover:text-green-600 transition-all"} onClick={() => updateRoles("ADMIN")}>Admin&apos;e Yükselt</AlertDialogAction>
                                 </AlertDialogFooter>
                             </AlertDialogContent>
                         </AlertDialog>

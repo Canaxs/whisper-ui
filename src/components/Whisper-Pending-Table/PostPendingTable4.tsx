@@ -147,7 +147,7 @@ export function PostPendingTable4() {
             <div className="w-full h-full border shadow-lg mt-5">
                 <div className="flex justify-between border-b-1">
                     {columns.map((obj,index) => (
-                        <span className={obj.header != "" ? "p-3 w-[22%] text-center" : "p-3 w-[12%] flex justify-center"}>
+                        <span className={obj.header != "" ? "p-3 w-[22%] text-center" : "p-3 w-[12%] flex justify-center"} key={"index"+index}>
                         {obj.header != "" ? obj.header : <Checkbox /> }
                         </span>
                     )
@@ -155,7 +155,7 @@ export function PostPendingTable4() {
                 </div>
                 <div>
                     {selectData.map((obj,index) => (
-                        <div>
+                        <div key={"indexe"+index}>
                             <div className="flex justify-between cursor-pointer hover:bg-gray-300 transition-all shadow-md" onDoubleClick={() => openPopup(obj)}>
                                 <div className="w-[12%] flex justify-center items-center">
                                     <Checkbox />

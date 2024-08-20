@@ -89,11 +89,11 @@ export default function Home() {
                     <ContentCarousel />
                     <div className="mt-8 flex flex-wrap">
                         {whispers.map((obj, index) => advertisingBoolean(index) ?  
-                            <div className="w-[24%] ml-[1%] mt-3 max-lg:w-[32%] max-md:w-[49%]">
+                            <div className="w-[24%] ml-[1%] mt-3 max-lg:w-[32%] max-md:w-[49%]" key={"index"+index}>
                                 <a href={"kategori/"+convertMenusEn(obj.category)+"/"+obj.urlName}><NewsCard title={obj.title} img="logo-black.png" name={obj.authorName} category={convertCategoryName(convertMenusEn(obj.category))} source={obj.source} /></a>
                             </div>
                         : 
-                            <React.Fragment>
+                            <React.Fragment key={"key2"}>
                                 <div className="w-[24%] ml-[1%] mt-3 max-lg:w-[32%] max-md:w-[49%]">
                                 <a href={"kategori/"+convertMenusEn(obj.category)+"/"+obj.urlName}><NewsCard title={obj.title} img="logo-black.png" keyNumber={index} name={obj.authorName} category={convertCategoryName(convertMenusEn(obj.category))} source={obj.source} /></a>
                                 </div>

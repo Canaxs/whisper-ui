@@ -24,26 +24,25 @@ export default function Help() {
                     <AccordionItem value="item-2">
                         <AccordionTrigger className="text-gray-700 drop-shadow hover:no-underline hover:text-gray-900 transition-all">Is it styled?</AccordionTrigger>
                         <AccordionContent>
-                        Yes. It comes with default styles that matches the other
-                        components&apos; aesthetic.
+                        Lorem ipsum dolor sit, amet consectetur adipisicing elit. Non, ratione consequuntur neque pariatur veniam ut dolor voluptatum repudiandae quia doloremque autem, soluta nihil recusandae exercitationem commodi dignissimos! Harum, error doloremque!
                         </AccordionContent>
                     </AccordionItem>
                     <AccordionItem value="item-3">
                         <AccordionTrigger className="text-gray-700 drop-shadow hover:no-underline hover:text-gray-900 transition-all">Kullanılan Teknolojiler ?</AccordionTrigger>
                         <AccordionContent>
-                        Yes. It's animated by default, but you can disable it if you prefer.
+                        Lorem ipsum dolor sit amet consectetur, adipisicing elit. Iure culpa rem quisquam tenetur ipsa porro. Saepe omnis atque officiis culpa ut tempora minima facilis, quasi mollitia. Earum amet officia magni!
                         </AccordionContent>
                     </AccordionItem>
                     <AccordionItem value="item-4">
                         <AccordionTrigger className="text-gray-700 drop-shadow hover:no-underline hover:text-gray-900 transition-all">Kullanılan Teknolojiler ?</AccordionTrigger>
                         <AccordionContent>
-                        Yes. It's animated by default, but you can disable it if you prefer.
+                        Lorem ipsum dolor sit amet consectetur adipisicing elit. Sequi, esse porro. Odio odit velit quas, architecto illum quidem totam iure perferendis maxime error fugiat voluptatem aperiam a nisi consectetur omnis?
                         </AccordionContent>
                     </AccordionItem>
                     <AccordionItem value="item-5">
                         <AccordionTrigger className="text-gray-700 drop-shadow hover:no-underline hover:text-gray-900 transition-all">Kullanılan Teknolojiler ?</AccordionTrigger>
                         <AccordionContent>
-                        Yes. It's animated by default, but you can disable it if you prefer.
+                        Lorem ipsum dolor, sit amet consectetur adipisicing elit. Dicta recusandae officia molestias sed neque? Tenetur asperiores ipsam nobis laboriosam optio laborum earum enim, reprehenderit repellendus ullam magni cumque nesciunt consequatur?
                         </AccordionContent>
                     </AccordionItem>
                 </Accordion>

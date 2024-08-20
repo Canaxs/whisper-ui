@@ -93,7 +93,7 @@ export default function PanelLogin() {
         <TabsContent value="login">
             <Card>
             <CardHeader>
-                <CardTitle className="text-gray-700 drop-shadow-lg">Panel'e Giriş Yap</CardTitle>
+                <CardTitle className="text-gray-700 drop-shadow-lg">Panel&apos;e Giriş Yap</CardTitle>
                 <CardDescription>
                 Kullanıcı adı ve şifrenizi giriniz
                 </CardDescription>
