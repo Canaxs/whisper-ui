@@ -13,6 +13,8 @@ import { useEffect, useState } from "react";
 import { controlLike, likeWhisper } from "@/api/apiCalls";
 import Cookies from 'js-cookie'
 import { useToast } from "@/components/ui/use-toast"
+import { TbCategory } from "react-icons/tb";
+
 
 
 export default function WhisperContent(props) {
@@ -54,7 +56,7 @@ export default function WhisperContent(props) {
 
     return (
         <div className="mt-10 ml-[2%]">
-            <div className="flex">  
+            <div className="flex">
                 <div>
                     <Avatar>
                         <AvatarImage src="https://github.com/shadcn.png" alt="@shadcn" />
@@ -93,12 +95,16 @@ export default function WhisperContent(props) {
             </div>
             <div className="ml-0 mr-0 mt-5 p-0 flex flex-col text-base">
                 <div className="flex items-center mt-5">
-                    <TbWriting className="size-8 mr-2"/>
+                    <TbWriting className="size-8 mr-2" title="Yazar"/>
                     <HovCard name={props.whisper.authorName} />
                 </div>
-                <div className="flex items-center mt-1">
-                    <GrResources className="size-8 mr-2"/>
-                    <span className="text-base drop-shadow-2xl">{props.whisper.source}</span>
+                <div className="flex items-center mt-2">
+                    <GrResources className="size-8 mr-2" title="Kaynak"/>
+                    <span className="text-sm drop-shadow">{props.whisper.source}</span>
+                </div>
+                <div className="flex items-center mt-2">
+                    <TbCategory  className="size-8 mr-2" title="Kategori"/>
+                    <span className="text-sm drop-shadow">{props.categoryName} </span>
                 </div>
             </div>
             <div className="mt-10">
