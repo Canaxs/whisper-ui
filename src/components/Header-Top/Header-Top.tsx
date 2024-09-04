@@ -66,9 +66,9 @@ export default function HeaderTop(props) {
     return(
         <div className="flex justify-between">
             <div className="flex max-lg:ml-3">
-                <a href="/"><img src={props.logo} width="110" height="110" alt="Söylenti" className="cursor-pointer mt-1"/></a>
+                <a href="/"><img src={props.logo} alt="Söylenti" className="cursor-pointer mt-1 w-[100px] h-[95px] max-sm:w-[80px] max-sm:h-[75px]"/></a>
                 <div className="h-1/2 mt-[8%] w-[1px] bg-slate-300 ml-5"></div>
-                <img src={props.flag} className="ml-2 mb-1" width="100px" height="50px" alt="Türk Bayrağı" />
+                    <img src={props.flag} className="ml-2 mb-1 w-[100px] h-[90px]  max-sm:w-[80px] max-sm:h-[75px]" alt="Türk Bayrağı" />
             </div>
             <div className="flex items-center max-md:mr-[1%]">
                 {isUser === false ? (
@@ -82,15 +82,15 @@ export default function HeaderTop(props) {
                 ) : ( userData.username != null ?
                 <React.Fragment>
                     <div className="flex mr-5 cursor-pointer text-gray-700 transition-all hover:scale-110">
-                        <a href="/account/write" className="flex">
-                        <TfiWrite className="mr-2 size-5 hover:text-black transition-all" />
-                        <Label className="cursor-pointer text-sm drop-shadow-xl">Write</Label>
+                        <a href="/account/write" className="flex max-sm:hidden">
+                            <TfiWrite className="mr-2 size-5 hover:text-black transition-all" />
+                            <Label className="cursor-pointer text-sm drop-shadow-xl">Yaz</Label>
                         </a>
                     </div>
                     <HeaderNotify />
                     <HeaderUser username={userData.username}  userPoint={userData.userPoint} /> 
                 </React.Fragment>
-                : <a href="/login" className="text-sm text-slate-700 font-medium">Giriş Yap / Kayıt Ol</a>
+                : <a href="/login" className="text-sm text-slate-700 font-medium max-sm:text-[11px] max-sm:mr-2">Giriş Yap / Kayıt Ol</a>
                 )
                 }
             </div>

@@ -65,19 +65,19 @@ export default function AccountInfo() {
             <div className="flex max-lg:flex-col">
                 <Card className="w-1/2 m-2 h-full max-lg:w-[98%] max-lg:ml-[1%]" key={"card1"}>
                     <CardHeader className="text-center">
-                        <CardTitle>Hesap Bilgileri</CardTitle>
-                        <CardDescription style={{marginTop: "15px"}}>Değiştirmek istediğiniz bilginizin üzerine çift tıklayın</CardDescription>
+                        <CardTitle className="max-sm:text-xl">Hesap Bilgileri</CardTitle>
+                        <CardDescription style={{marginTop: "15px"}} className="max-sm:text-xs">Değiştirmek istediğiniz bilginizin üzerine çift tıklayın</CardDescription>
                     </CardHeader>
                     <CardContent>
                         <form>
                         <div className="grid w-full items-center gap-4">
                             <div className="flex flex-col space-y-2.5 pt-2 pb-2">
-                            <Label htmlFor="name" className="text-base">Kullanıcı Adı</Label>
-                            <Label htmlFor="name" className="font-normal cursor-pointer">{userData.username}</Label>
+                            <Label htmlFor="name" className="text-base max-sm:text-sm">Kullanıcı Adı</Label>
+                            <Label htmlFor="name" className="font-normal cursor-pointer max-sm:text-sm">{userData.username}</Label>
                             </div>
                             <div className="flex flex-col space-y-2.5 pt-2 pb-2">
-                            <Label htmlFor="name" className="text-base">Şifre</Label>
-                            <Label htmlFor="name" className="font-normal cursor-pointer">********</Label>
+                                <Label htmlFor="name" className="text-base max-sm:text-sm">Şifre</Label>
+                                <Label htmlFor="name" className="font-normal cursor-pointer max-sm:text-sm">********</Label>
                             </div>
                         </div>
                         </form>
@@ -88,19 +88,19 @@ export default function AccountInfo() {
                 </Card>
                 <Card className="w-1/2 m-2 max-lg:w-[98%] max-lg:ml-[1%]" key={"card3"}>
                     <CardHeader className="text-center">
-                        <CardTitle>Kullanıcı Bilgileri</CardTitle>
-                        <CardDescription style={{marginTop: "15px"}}>Puanınız , paylaşımlarınız göz önünde bulundurularak arttırılır</CardDescription>
+                        <CardTitle className="max-sm:text-xl">Kullanıcı Bilgileri</CardTitle>
+                        <CardDescription style={{marginTop: "15px"}} className="max-sm:text-xs">Puanınız , paylaşımlarınız göz önünde bulundurularak arttırılır</CardDescription>
                     </CardHeader>
                     <CardContent>
                         <form>
                         <div className="grid w-full items-center gap-4">
                             <div className="flex flex-col space-y-2.5 pt-2 pb-2">
-                            <Label htmlFor="name" className="text-base">Puan</Label>
-                            <Label htmlFor="name" className="font-normal cursor-pointer">{userData.userPoint}</Label>
+                            <Label htmlFor="name" className="text-base max-sm:text-sm">Puan</Label>
+                            <Label htmlFor="name" className="font-normal cursor-pointer max-sm:text-sm">{userData.userPoint}</Label>
                             </div>
                             <div className="flex flex-col space-y-2.5 pt-2 pb-2">
-                            <Label htmlFor="name" className="text-base">Yetki Tipi</Label>
-                            <Label htmlFor="name" className="font-normal cursor-pointer">{userData.role}</Label>
+                            <Label htmlFor="name" className="text-base max-sm:text-sm">Yetki Tipi</Label>
+                            <Label htmlFor="name" className="font-normal cursor-pointer max-sm:text-sm">{userData.role}</Label>
                             </div>
                         </div>
                         </form>
@@ -114,40 +114,40 @@ export default function AccountInfo() {
                 <div className="w-full flex justify-center"> 
                     <Card className="w-1/2 m-2 max-lg:w-[98%] max-lg:ml-[1%]" key={"card2"}>
                         <CardHeader className="text-center">
-                            <CardTitle>Paylaşım Bilgileri</CardTitle>
-                            <CardDescription style={{marginTop: "15px"}}>Kazancınız, paylaşmış olduğunuz haberlerin tıklanma sayısına göre belirlenmektedir</CardDescription>
+                            <CardTitle className="max-sm:text-xl">Paylaşım Bilgileri</CardTitle>
+                            <CardDescription style={{marginTop: "15px"}} className="max-sm:text-xs">Kazancınız, paylaşmış olduğunuz haberlerin tıklanma sayısına göre belirlenmektedir</CardDescription>
                         </CardHeader>
                         <CardContent>
                             <form>
                             <div className="grid w-full items-center gap-4">
                                 <div className="flex justify-around w-9/12 ml-[7.5%]">
                                     <div className="flex flex-col space-y-2.5 pt-2 pb-2 w-1/2">
-                                    <Label htmlFor="name" className="text-base">Toplam Tıklanma</Label>
-                                    <Label htmlFor="name" className="font-normal cursor-pointer">51.462</Label>
+                                    <Label htmlFor="name" className="text-base max-sm:text-sm">Toplam Tıklanma</Label>
+                                    <Label htmlFor="name" className="font-normal cursor-pointer max-sm:text-sm">51.462</Label>
                                     </div>
                                     <div className="flex flex-col space-y-2.5 pt-2 pb-2 ml-10 w-1/2 ">
-                                    <Label htmlFor="name" className="text-base">Ortalama Tıklanma</Label>
-                                    <Label htmlFor="name" className="font-normal cursor-pointer">7.345</Label>
+                                    <Label htmlFor="name" className="text-base max-sm:text-sm">Ortalama Tıklanma</Label>
+                                    <Label htmlFor="name" className="font-normal cursor-pointer max-sm:text-sm">7.345</Label>
                                     </div>
                                 </div>
                                 <div className="flex justify-between w-9/12 ml-[7.5%]">
                                     <div className="flex flex-col space-y-2.5 pt-2 pb-2 w-1/2">
-                                    <Label htmlFor="name" className="text-base">Toplam Paylaşım</Label>
-                                <Label htmlFor="name" className="font-normal cursor-pointer">7</Label>
+                                    <Label htmlFor="name" className="text-base max-sm:text-sm">Toplam Paylaşım</Label>
+                                <Label htmlFor="name" className="font-normal cursor-pointer max-sm:text-sm">7</Label>
                                     </div>
                                     <div className="flex flex-col space-y-2.5 pt-2 pb-2 ml-10 w-1/2">
-                                    <Label htmlFor="name" className="text-base">Aylık Ortalama Paylaşım</Label>
-                                    <Label htmlFor="name" className="font-normal cursor-pointer">3</Label>
+                                    <Label htmlFor="name" className="text-base max-sm:text-sm">Aylık Ortalama Paylaşım</Label>
+                                    <Label htmlFor="name" className="font-normal cursor-pointer max-sm:text-sm">3</Label>
                                     </div>
                                 </div>
                                 <div className="flex justify-between w-9/12 ml-[7.5%]">
                                     <div className="flex flex-col space-y-2.5 pt-2 pb-2 w-1/2">
-                                    <Label htmlFor="name" className="text-base">Toplam Kazanç</Label>
-                                    <Label htmlFor="name" className="font-normal cursor-pointer">245 TL</Label>
+                                    <Label htmlFor="name" className="text-base max-sm:text-sm">Toplam Kazanç</Label>
+                                    <Label htmlFor="name" className="font-normal cursor-pointer max-sm:text-sm">245 TL</Label>
                                     </div>
                                     <div className="flex flex-col space-y-2.5 pt-2 pb-2 ml-10 w-1/2">
-                                    <Label htmlFor="name" className="text-base">Ortalama Kazanç</Label>
-                                    <Label htmlFor="name" className="font-normal cursor-pointer">35 TL</Label>
+                                    <Label htmlFor="name" className="text-base max-sm:text-sm">Ortalama Kazanç</Label>
+                                    <Label htmlFor="name" className="font-normal cursor-pointer max-sm:text-sm">35 TL</Label>
                                     </div>
                                 </div>
                             </div>
@@ -164,7 +164,7 @@ export default function AccountInfo() {
                 {whispers.length != 0 ? 
                 <div className="flex flex-wrap mt-8">
                     {whispers.map((obj, index) => 
-                        <div key={"right-package"+index} className="w-[24%] ml-[1%] mt-3 max-lg:w-[32%] max-md:w-[49%]">
+                        <div key={"right-package"+index} className="w-[24%] ml-[1%] mt-3 max-lg:w-[32%] max-md:w-[49%] max-sm:w-[46%] max-sm:ml-[2%]">
                             <NewsCard title={obj.title} img="../logo-black.png" name={obj.authorName} source={obj.source} category={obj.category} />
                         </div>
                         )

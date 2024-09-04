@@ -37,7 +37,7 @@ export function HeaderUser(props) {
     }
 
     return (
-        <div className="flex">
+        <div className="flex max-sm:mr-3">
             <DropdownMenu>
                 <DropdownMenuTrigger asChild>
                         <Avatar className="cursor-pointer border">
@@ -51,10 +51,11 @@ export function HeaderUser(props) {
                     <DropdownMenuSeparator />
                     <DropdownMenuGroup>
                         <DropdownMenuItem> <a href="/account">Profil</a></DropdownMenuItem>
+                        <DropdownMenuItem> <a href="/account">Bildirimler</a></DropdownMenuItem>
+                        <DropdownMenuItem> <a href="/account/write">Paylaşım Yap</a></DropdownMenuItem>
                     </DropdownMenuGroup>
                     <DropdownMenuSeparator />
                     <DropdownMenuItem><a href="/">Yardım</a></DropdownMenuItem>
-                    <DropdownMenuItem disabled><a href="/">Söylenti</a></DropdownMenuItem>
                     <DropdownMenuItem disabled={!Cookies.get("role").includes("ROLE_MOD")}><a href="/panel/dashboard">Panel&apos;e Git</a></DropdownMenuItem>
                     <DropdownMenuSeparator />
                     <DropdownMenuItem onClick={() => logout()}>Çıkış Yap</DropdownMenuItem>

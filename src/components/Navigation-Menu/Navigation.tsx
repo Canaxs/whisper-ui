@@ -34,7 +34,7 @@ export default function Navigation() {
                         <CarouselItem key={index} className="max-2xl:basis-[20%] 2xl:basis-[14%] max-sm:basis-[32%]">
                         <NavigationMenuItem className="block">
                         <Link href={"/kategori/"+Menus[index]}>
-                            <NavigationMenuTrigger className="w-full text-[14px] font-normal">{ menusGet(index) }</NavigationMenuTrigger>
+                            <NavigationMenuTrigger className="w-full text-[14px] font-normal max-sm:text-[13px]">{ menusGet(index) }</NavigationMenuTrigger>
                         </Link>
                         </NavigationMenuItem>
                         </CarouselItem>

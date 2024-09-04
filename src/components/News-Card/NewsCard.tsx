@@ -16,11 +16,13 @@ export default function NewsCard(props) {
     return(
         <Card className="shadow-xl">
             <CardHeader className="h-32">
-                <CardTitle className="text-base line-clamp-2">{props.title}</CardTitle>
-                <CardDescription>{props.category}</CardDescription>
+                <CardTitle className="text-base line-clamp-2 max-sm:text-sm">{props.title}</CardTitle>
+                <CardDescription className="max-sm:text-xs drop-shadow-sm">{props.category}</CardDescription>
             </CardHeader>
             <CardContent className="p-2">
-                <img src={props.img} height={"50px"} width={"100%"}/>
+                <div className="h-[200px] w-full max-md:h-[150px]">
+                    <img src={props.img} className="w-full h-full"/>
+                </div>
             </CardContent>
             <CardFooter className="pl-3 mt-1 mb-0">
                 <div className="flex flex-col">

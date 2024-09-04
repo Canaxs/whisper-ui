@@ -16,7 +16,7 @@ import {
 
 export function HeaderNotify() {
     return (
-        <div className="flex mr-5">
+        <div className="flex mr-5 max-sm:hidden">
             <DropdownMenu>
                 <DropdownMenuTrigger asChild>
                         <div className="cursor-pointer">

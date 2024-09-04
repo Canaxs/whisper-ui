@@ -69,7 +69,7 @@ export default function LoginRegist() {
     }
 
     return (
-        <Tabs defaultValue="login" className="w-[400px] shadow-2xl rounded">
+        <Tabs defaultValue="login" className="w-[400px] shadow-2xl rounded bg-gradient-to-r from-gray-200 to-gray-200 max-sm:from-gray-100 max-sm:to-gray-200">
         <TabsList className="grid w-full grid-cols-2">
             <TabsTrigger value="login">Giriş Yap</TabsTrigger>
             <TabsTrigger value="register">Kayıt Ol</TabsTrigger>
