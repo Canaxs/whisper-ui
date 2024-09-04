@@ -11,7 +11,7 @@ import {
 export default function Help() {
     return (
         <div>
-        <div className="lg:w-[98%] 2xl:w-[65%] pt-1 lg:ml-[1%] 2xl:ml-[17%]">
+        <div className="w-[98%] 2xl:w-[65%] pt-1 ml-[1%] 2xl:ml-[17%]">
             <Header flag={"../../siyah-flag.png"} logo={"../../logo-black.png"} />
             <div className="mt-10">
                 <Accordion type="single" collapsible className="w-full">
