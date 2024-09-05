@@ -55,11 +55,11 @@ export default function WhisperComment() {
             <SheetTitle className="mb-3">
                 <div onClick={Cookies.get("token") ? () => null : () =>  toast({variant: "destructive", title: "Yorum Yapamazsın.", description: "Yorum Yapmak için giriş yapmanız gerekiyor.",})}>
                     <span>Yorumlar</span>
-                    <AlertDialog open={Cookies.get("token") ? true : false}>
+                    <AlertDialog>
                     <AlertDialogTrigger asChild>
                         <Button variant="outline" className={Cookies.get("token") ? "absolute right-20 top-4 w-30 h-10 text-sm border bg-white text-black hover:bg-black hover:text-white transition-all" : "absolute right-20 top-4 w-30 h-10 text-sm cursor-no-drop hover:bg-white opacity-60"}>Yorum Yaz</Button>
                     </AlertDialogTrigger>
-                    <AlertDialogContent>
+                    <AlertDialogContent className={Cookies.get("token") ? "" : "hidden"}>
                         <AlertDialogHeader>
                         <AlertDialogTitle>Yorum Yaz</AlertDialogTitle>
                         <AlertDialogDescription>
