@@ -41,7 +41,7 @@ export function HeaderUser(props) {
             <DropdownMenu>
                 <DropdownMenuTrigger asChild>
                         <Avatar className="cursor-pointer border">
-                            <AvatarImage src="../logo-black.png" alt="@shadcn" />
+                            <AvatarImage src="../../logo-black.png" alt="@shadcn" />
                             <AvatarFallback>Logo</AvatarFallback>
                         </Avatar>
                 </DropdownMenuTrigger>
