@@ -35,9 +35,16 @@ import {
     AlertDialogTrigger,
   } from "@/components/ui/alert-dialog"
   import { Textarea } from "@/components/ui/textarea"
+  import Cookies from 'js-cookie'
+  import { useToast } from "@/components/ui/use-toast"
 
 
 export default function WhisperComment() {
+
+    const { toast } = useToast();
+
+
+
   return (
     <Sheet>
         <SheetTrigger asChild>
@@ -46,11 +53,11 @@ export default function WhisperComment() {
         <SheetContent side={"bottom"}>
             <SheetHeader>
             <SheetTitle className="mb-3">
-                <div>
+                <div onClick={Cookies.get("token") ? () => null : () =>  toast({variant: "destructive", title: "Yorum Yapamazsın.", description: "Yorum Yapmak için giriş yapmanız gerekiyor.",})}>
                     <span>Yorumlar</span>
-                    <AlertDialog>
+                    <AlertDialog open={Cookies.get("token") ? true : false}>
                     <AlertDialogTrigger asChild>
-                        <Button variant="outline" className="absolute right-20 top-4 w-30 h-10 text-sm border bg-white text-black hover:bg-black hover:text-white transition-all">Yorum Yaz</Button>
+                        <Button variant="outline" className={Cookies.get("token") ? "absolute right-20 top-4 w-30 h-10 text-sm border bg-white text-black hover:bg-black hover:text-white transition-all" : "absolute right-20 top-4 w-30 h-10 text-sm cursor-no-drop hover:bg-white opacity-60"}>Yorum Yaz</Button>
                     </AlertDialogTrigger>
                     <AlertDialogContent>
                         <AlertDialogHeader>
