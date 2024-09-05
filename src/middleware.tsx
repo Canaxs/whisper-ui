@@ -52,8 +52,5 @@ export const config = {
         '/account/:path*',
         '/panel/:path*',
         '/kategori/:path*',
-        '/panel-login',
-        '/soylenti/:path*',
-        '/login'
     ],
 };
