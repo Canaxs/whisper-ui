@@ -1,5 +1,6 @@
 "use client";
 import { isExpiredToken } from "@/api/apiCalls";
+import { Environment } from "@/environments/environments";
 
 export const  isAuth = async (request) => {
     const token = request.cookies.get("token")?.value;
@@ -8,7 +9,7 @@ export const  isAuth = async (request) => {
     let bool: Boolean = false;
 
     if(token != null) {
-        if(request.url.substring(22) === urlConfig[0]) {
+        if(request.url.substring(Environment.domain.length) === urlConfig[0]) {
            
             const authorizationModel = {
                 authorization : token
@@ -18,7 +19,7 @@ export const  isAuth = async (request) => {
             })
             return bool; 
         }
-        else if (request.url.substring(22) === urlConfig[1] && (role === "ROLE_MOD" || role === "ROLE_ADMIN")) {
+        else if (request.url.substring(Environment.domain.length) === urlConfig[1] && (role === "ROLE_MOD" || role === "ROLE_ADMIN")) {
             const authorizationModel = {
                 authorization : token
             }

@@ -2,6 +2,7 @@ import { NextRequest, NextResponse } from "next/server";
 import { isExpiredToken } from "./api/apiCalls";
 import { isAuth } from "./lib/auth";
 import { Menus } from "./lib/menuEnum";
+import { Environment } from "./environments/environments";
 
 export async function middleware(request: NextRequest) {
     
@@ -11,10 +12,16 @@ export async function middleware(request: NextRequest) {
         }
     })
 
-    if(request.url.substring(22).includes('kategori')) {
-        let requestString = request.url.substring(31).split('/')[0];
+    const domainLength = Environment.domain.length;
+
+    const categoryTurkishName = "kategori/";
+
+    console.log(request.url.substring(domainLength));
+
+    if(request.url.substring(domainLength).includes('kategori')) {
+        let requestString = request.url.substring(domainLength+categoryTurkishName.length).split('/')[0];
         
-        if(request.url.substring(31).split("/").length > 2) {
+        if(request.url.substring(domainLength+categoryTurkishName.length).split("/").length > 2) {
             return NextResponse.redirect(new URL('/404', request.url))
         }
         else if (requestString.indexOf("?s=") > -1) {
@@ -38,13 +45,15 @@ export async function middleware(request: NextRequest) {
         return response;
     } 
     else {
-        if(request.url.substring(22) === "account") {
+        if(request.url.substring(domainLength) === "account") {
             return NextResponse.redirect(new URL('/login', request.url))
         }
-        else if (request.url.substring(22) === "panel") {
+        else if (request.url.substring(domainLength) === "panel") {
             return NextResponse.redirect(new URL('/panel-login', request.url))
         }
     }
+
+    return NextResponse.redirect(new URL('/404', request.url))
 }
 
 export const config = {
