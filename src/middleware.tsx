@@ -16,8 +16,6 @@ export async function middleware(request: NextRequest) {
 
     const categoryTurkishName = "kategori/";
 
-    console.log(request.url.substring(domainLength));
-
     if(request.url.substring(domainLength).includes('kategori')) {
         let requestString = request.url.substring(domainLength+categoryTurkishName.length).split('/')[0];
         
