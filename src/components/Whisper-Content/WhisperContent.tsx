@@ -41,6 +41,11 @@ export default function WhisperContent(props) {
             await likeWhisper(props.whisper.whisperLike.id,Cookies.get("token")).then((res) => {
                 setLikeExists(true);
                 props.whisper.whisperLike.numberLike++;
+                toast({
+                    variant: "success",
+                    title: "Bu Gönderiyi Beğendiniz",
+                    description: ":)",
+                  })
             }, (exception) => {
                 setLikeExists(false);
             })

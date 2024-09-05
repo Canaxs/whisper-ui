@@ -110,7 +110,6 @@ export default function Docs({
         }
     }
 
-
     function isNumber(value) {
         return !isNaN(value);
     }
