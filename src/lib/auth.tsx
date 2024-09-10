@@ -9,7 +9,7 @@ export const  isAuth = async (request) => {
     let bool: Boolean = false;
 
     if(token != null) {
-        if(request.url.substring(Environment.domain.length) === urlConfig[0]) {
+        if(request.url.substring(Environment.domain.length).includes(urlConfig[0])) {
            
             const authorizationModel = {
                 authorization : token
