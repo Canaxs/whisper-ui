@@ -23,7 +23,7 @@ export type Whisper = {
     id: number
 }
 
-export const variablePageNumber = [0,2];
+export const variablePageNumber = [0,10];
 
 export function PostPendingTable3() {
 

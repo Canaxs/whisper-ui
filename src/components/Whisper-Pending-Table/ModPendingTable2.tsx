@@ -35,7 +35,7 @@ export type User = {
     id: number
 }
 
-export const variablePageNumber = [0,2];
+export const variablePageNumber = [0,10];
 
 export function ModPendingTable2() {
 

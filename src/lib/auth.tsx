@@ -19,7 +19,7 @@ export const  isAuth = async (request) => {
             })
             return bool; 
         }
-        else if (request.url.substring(Environment.domain.length) === urlConfig[1] && (role === "ROLE_MOD" || role === "ROLE_ADMIN")) {
+        else if (request.url.substring(Environment.domain.length).includes(urlConfig[1]) && role.includes("ROLE_MOD") ) {
             const authorizationModel = {
                 authorization : token
             }

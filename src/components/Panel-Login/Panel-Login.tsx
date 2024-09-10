@@ -42,7 +42,7 @@ export default function PanelLogin() {
     }, [])
 
     function redirectIfAuthorization() {
-        if(Cookies.get("role").includes("ROLE_MOD")) {
+        if(Cookies.get("role") === "ROLE_MOD" &&  Cookies.get("role") === "ROLE_ADMIN") {
             router.push("/panel/dashboard");
         }
     }

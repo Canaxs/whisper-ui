@@ -34,7 +34,7 @@ import { useToast } from "../ui/use-toast";
     password: string,
     id: number
 }
-export const variablePageNumber = [0,2];
+export const variablePageNumber = [0,10];
 
 export function UserPendingTable2() {
 
