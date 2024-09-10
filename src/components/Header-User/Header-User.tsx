@@ -21,11 +21,18 @@ import {
   } from "@/components/ui/avatar"
   import Cookies from 'js-cookie'
 import { useRouter } from "next/navigation";
+import { useEffect, useState } from "react";
 
 
 export function HeaderUser(props) {
 
     const router = useRouter();
+
+    const [role , setRole] = useState("");
+
+    useEffect(() => {
+        setRole(Cookies?.get("role"));
+    }, [])
 
 
     function logout() {
@@ -33,7 +40,7 @@ export function HeaderUser(props) {
         Cookies.remove("username");
         Cookies.remove("userPoint");
         Cookies.remove("role");
-        router.push("/");
+        router.push("/login");
     }
 
     return (
@@ -56,9 +63,9 @@ export function HeaderUser(props) {
                     </DropdownMenuGroup>
                     <DropdownMenuSeparator />
                     <DropdownMenuItem><a href="/">Yardım</a></DropdownMenuItem>
-                    <DropdownMenuItem disabled={!Cookies.get("role").includes("ROLE_MOD")}><a href="/panel/dashboard">Panel&apos;e Git</a></DropdownMenuItem>
+                    <DropdownMenuItem disabled={role.includes("ROLE_MOD")}><a href="/panel/dashboard">Panel&apos;e Git</a></DropdownMenuItem>
                     <DropdownMenuSeparator />
-                    <DropdownMenuItem onClick={() => logout()}>Çıkış Yap</DropdownMenuItem>
+                    <DropdownMenuItem onClick={() => logout()} className="cursor-pointer">Çıkış Yap</DropdownMenuItem>
                 </DropdownMenuContent>
             </DropdownMenu>
         </div>
