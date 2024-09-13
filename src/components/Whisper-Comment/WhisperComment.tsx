@@ -37,11 +37,23 @@ import {
   import { Textarea } from "@/components/ui/textarea"
   import Cookies from 'js-cookie'
   import { useToast } from "@/components/ui/use-toast"
+import { useState } from "react";
 
 
 export default function WhisperComment() {
 
+    const [openAlert , setOpenAlert] = useState(false);
+
     const { toast } = useToast();
+
+    function openAlertFunc() {
+        if(Cookies.get("token")) {
+            setOpenAlert(true);
+        }
+        else {
+            setOpenAlert(false);
+        }
+    }
 
 
 
@@ -55,10 +67,14 @@ export default function WhisperComment() {
             <SheetTitle className="mb-3">
                 <div onClick={Cookies.get("token") ? () => null : () =>  toast({variant: "destructive", title: "Yorum Yapamazsın.", description: "Yorum Yapmak için giriş yapmanız gerekiyor.",})}>
                     <span>Yorumlar</span>
-                    <AlertDialog>
-                    <AlertDialogTrigger asChild>
-                        <Button variant="outline" className={Cookies.get("token") ? "absolute right-20 top-4 w-30 h-10 text-sm border bg-white text-black hover:bg-black hover:text-white transition-all max-sm:right-10" : "absolute right-20 top-4 w-30 h-10 text-sm cursor-no-drop hover:bg-white opacity-60 max-sm:right-10"}>Yorum Yaz</Button>
-                    </AlertDialogTrigger>
+                    <AlertDialog open={openAlert} >
+                        <AlertDialogTrigger asChild >
+                            <Button variant="outline" className={Cookies.get("token") ? 
+                            "absolute right-20 top-4 w-30 h-10 text-sm border bg-white text-black hover:bg-black hover:text-white transition-all max-sm:right-10 focus-visible:ring-white" 
+                                : "absolute right-20 top-4 w-30 h-10 text-sm cursor-no-drop hover:bg-white opacity-60 max-sm:right-10 focus-visible:ring-white"} onClick={() => openAlertFunc()}>
+                                    Yorum Yaz
+                        </Button>
+                        </AlertDialogTrigger>
                     <AlertDialogContent className={Cookies.get("token") ? "" : "hidden"}>
                         <AlertDialogHeader>
                         <AlertDialogTitle>Yorum Yaz</AlertDialogTitle>
@@ -69,8 +85,8 @@ export default function WhisperComment() {
                         </AlertDialogDescription>
                         </AlertDialogHeader>
                         <AlertDialogFooter>
-                        <AlertDialogCancel>Vazgeç</AlertDialogCancel>
-                        <AlertDialogAction className="text-white bg-green-600 hover:bg-white hover:text-green-600 transition-all">Gönder</AlertDialogAction>
+                            <AlertDialogCancel onClick={() => setOpenAlert(false)}>Vazgeç</AlertDialogCancel>
+                            <AlertDialogAction className="text-white bg-green-600 hover:bg-white hover:text-green-600 transition-all" onClick={() => setOpenAlert(false)}>Gönder</AlertDialogAction>
                         </AlertDialogFooter>
                     </AlertDialogContent>
                 </AlertDialog>

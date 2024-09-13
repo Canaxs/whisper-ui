@@ -98,7 +98,7 @@ export default function UserPage() {
                             <div className="flex flex-wrap mt-8">
                                 {whispers.map((obj, index) => 
                                     <div key={"right-package"+index} className="w-[24%] ml-[1%] mt-3 max-lg:w-[32%] max-md:w-[49%] max-sm:w-[46%] max-sm:ml-[2%]">
-                                        <NewsCard title={obj.title} img="../logo-black.png" name={obj.authorName} source={obj.source} category={obj.category} />
+                                        <a href={"/user/"+obj.authorName}><NewsCard title={obj.title} img="../logo-black.png" name={obj.authorName} source={obj.source} category={obj.category} /></a>
                                     </div>
                                     )
                                 }

@@ -17,7 +17,7 @@ export default function HovCard(props) {
     return (
         <HoverCard>
             <HoverCardTrigger asChild>
-                <a href={"user/"+props.name}><Button variant="link" className="p-0">@{props.name}</Button></a>
+                <a href={"/user/"+props.name}><Button variant="link" className="p-0">@{props.name}</Button></a>
             </HoverCardTrigger>
             <HoverCardContent className="w-80">
                 <div className="flex justify-between space-x-4">
