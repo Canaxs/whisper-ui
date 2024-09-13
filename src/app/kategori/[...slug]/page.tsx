@@ -148,7 +148,7 @@ export default function Docs({
                                 </div>
                                 <div className="flex flex-col pt-7 pl-7">
                                     <span className="text-gray-400 text-xs font-medium">{params.slug[0].toUpperCase()}</span>
-                                    <span className="text-3xl mt-2 font-medium line-clamp-1">{content["title"]}</span>
+                                    <span className="text-3xl mt-2 font-medium line-clamp-1 max-md:line-clamp-2 max-sm:text-sm max-md:text-lg max-lg:text-xl max-xl:text-2xl">{content["title"]}</span>
                                     <div className="p-0 mt-3 mb-3 ml-0">
                                         <div className="flex flex-col">
                                             <div className="flex items-center">

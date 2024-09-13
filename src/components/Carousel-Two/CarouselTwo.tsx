@@ -30,7 +30,7 @@ export default function CarouselTwo(props) {
         <div>
             {whispers.length != 0 ? 
             <React.Fragment>
-                <Carousel className={props.bigClass}>
+                <Carousel className={props.bigClass+" drop-shadow-xl"}>
                     <CarouselContent className={props.bigClass}>
                     {whispers.map((obj, index) => (
                             <CarouselItem className={props.bigClass} key={index} >
@@ -47,10 +47,10 @@ export default function CarouselTwo(props) {
                             </CarouselItem>
                             ))}
                         </CarouselContent>
-                        <CarouselPrevious className="left-3"/>
-                        <CarouselNext  className="right-3"/>
+                        <CarouselPrevious className="left-3 drop-shadow-lg"/>
+                        <CarouselNext  className="right-3 drop-shadow-lg"/>
                 </Carousel>
-                <Carousel className={"mt-2 "+props.smallClass}>
+                <Carousel className={"mt-2 drop-shadow-lg "+props.smallClass}>
                     <CarouselContent className={"flex ml-0 "+props.smallClass}>
                     {whispers.map((obj, index) => (
                         <CarouselItem className={"pl-0 basis-[10%] ml-[1%] cursor-pointer h-full"} key={index}>

@@ -10,6 +10,8 @@ import { HeaderNotify } from "../Header-Notify/HeaderNotify";
 import { Progress } from "@/components/ui/progress"
 import { useRouter } from 'next/navigation';
 import { isExpiredToken } from "@/api/apiCalls";
+import { IoMdLogIn } from "react-icons/io";
+import { RiUserAddFill } from "react-icons/ri";
 
 
 export default function HeaderTop(props) { 
@@ -67,7 +69,7 @@ export default function HeaderTop(props) {
         <div className="flex justify-between">
             <div className="flex max-lg:ml-3">
                 <a href="/"><img src={props.logo} alt="Söylenti" className="cursor-pointer mt-1 w-[100px] h-[95px] max-sm:w-[80px] max-sm:h-[75px]"/></a>
-                <div className="h-1/2 mt-[8%] w-[1px] bg-slate-300 ml-5"></div>
+                <div className="h-1/2 mt-[8%] w-[1px] bg-slate-300 ml-5 "></div>
                     <img src={props.flag} className="ml-2 mb-1 w-[100px] h-[90px]  max-sm:w-[80px] max-sm:h-[75px]" alt="Türk Bayrağı" />
             </div>
             <div className="flex items-center max-md:mr-[1%]">
@@ -90,7 +92,13 @@ export default function HeaderTop(props) {
                     <HeaderNotify />
                     <HeaderUser username={userData.username}  userPoint={userData.userPoint} /> 
                 </React.Fragment>
-                : <a href="/login" className="text-sm text-slate-700 font-medium max-sm:text-[11px] max-sm:mr-2">Giriş Yap / Kayıt Ol</a>
+                : //<a href="/login" className="text-sm text-slate-700 font-medium max-sm:text-[11px] max-sm:mr-2">Giriş Yap / Kayıt Ol</a>
+                    <a href="/login" className="flex justify-between items-center text-gray-500">
+                        <IoMdLogIn className="size-7 m-3 drop-shadow-xl" title="Giriş Yap"/>
+                        <span className="text-2xl drop-shadow-xl"> / </span>
+                        <RiUserAddFill className="size-7 m-3 drop-shadow-xl" title="Kayıt Ol" />
+                        
+                    </a>
                 )
                 }
             </div>

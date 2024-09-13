@@ -88,7 +88,7 @@ export default function WhisperContent(props) {
                 <div className="h-[0.1px] w-full bg-gray-100"></div>
             </div>
             <div className="mt-8">
-                <h1 className="text-5xl">{props.whisper.title}</h1>
+                <h1 className="text-5xl max-sm:text-xl max-md:text-2xl max-lg:text-3xl max-xl:text-4xl">{props.whisper.title}</h1>
                 <div className="flex justify-center">
                     <img src="../../logo-black.png" width={"70%"} height={"70%"} />
                 </div>

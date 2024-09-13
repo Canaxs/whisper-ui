@@ -96,10 +96,10 @@ export default function Writers() {
         <div>
             <div className="w-[98%] ml-[1%]">
                 <a href="/">
-                <MdOutlineKeyboardBackspace className="absolute left-2 top-2 size-10 cursor-pointer hover:scale-125 transition-all" title="Anasayfa'ya Git" />
+                <MdOutlineKeyboardBackspace className="absolute left-2 top-2 size-10 cursor-pointer hover:scale-125 transition-all max-md:top-5 max-md:size-7" title="Anasayfa'ya Git" />
                 </a>
                 <div className="w-3/4 ml-[12.5%] mt-6 mb-6 flex justify-between items-center">
-                    <span className="drop-shadow text-2xl">Popüler Yazarlar</span>
+                    <span className="drop-shadow text-2xl max-lg:text-xl max-md:text-lg max-sm:text-base">Popüler Yazarlar</span>
                     <div>
                         <img src="../../logo-black.png" width={50} height={50} />
                     </div>

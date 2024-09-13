@@ -27,13 +27,13 @@ export function HeaderNotify() {
                     <DropdownMenuLabel>Bildirimler</DropdownMenuLabel>
                     <DropdownMenuSeparator />
                     <DropdownMenuGroup>
-                        <DropdownMenuItem>Söylenti , Deneme Paylaşımını Beğendi. </DropdownMenuItem>
+                        <DropdownMenuItem>Söylenti Başlıklı Paylaşımınız Onaylandı. </DropdownMenuItem>
                         <DropdownMenuSeparator />
-                        <DropdownMenuItem>Söylenti , Deneme Paylaşımını Beğendi. </DropdownMenuItem>
+                        <DropdownMenuItem>Deniz Başlıklı Paylaşımınız Onaylandı. </DropdownMenuItem>
                         <DropdownMenuSeparator />
-                        <DropdownMenuItem>Söylenti , Deneme Paylaşımını Beğendi. </DropdownMenuItem>
+                        <DropdownMenuItem>Sweet Paylaşımına yorum yaptı . </DropdownMenuItem>
                         <DropdownMenuSeparator />
-                        <DropdownMenuItem>Söylenti , Deneme Paylaşımını Beğendi. </DropdownMenuItem>
+                        <DropdownMenuItem>Sparkly Paylaşımını Beğendi. </DropdownMenuItem>
                     </DropdownMenuGroup>
                 </DropdownMenuContent>
             </DropdownMenu>

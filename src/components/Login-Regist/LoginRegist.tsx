@@ -96,7 +96,7 @@ export default function LoginRegist() {
                     </div>
                     <div className="space-y-1">
                         <Label htmlFor="password">Şifre</Label>
-                        <Input id="password" placeholder="Şifre" onChange={(e) => setPassword(e.target.value.toString())}/>
+                        <Input type="password" id="password" placeholder="Şifre" onChange={(e) => setPassword(e.target.value.toString())}/>
                     </div>
             </CardContent>
             <CardFooter>

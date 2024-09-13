@@ -51,13 +51,13 @@ export default function WhisperComment() {
             <HiMiniChatBubbleLeftRight className="size-10 ml-2 mt-1 cursor-pointer text-gray-300 hover:text-gray-400 transition-all hover:scale-90" />
         </SheetTrigger>
         <SheetContent side={"bottom"}>
-            <SheetHeader>
+            <SheetHeader className="text-left">
             <SheetTitle className="mb-3">
                 <div onClick={Cookies.get("token") ? () => null : () =>  toast({variant: "destructive", title: "Yorum Yapamazsın.", description: "Yorum Yapmak için giriş yapmanız gerekiyor.",})}>
                     <span>Yorumlar</span>
                     <AlertDialog>
                     <AlertDialogTrigger asChild>
-                        <Button variant="outline" className={Cookies.get("token") ? "absolute right-20 top-4 w-30 h-10 text-sm border bg-white text-black hover:bg-black hover:text-white transition-all" : "absolute right-20 top-4 w-30 h-10 text-sm cursor-no-drop hover:bg-white opacity-60"}>Yorum Yaz</Button>
+                        <Button variant="outline" className={Cookies.get("token") ? "absolute right-20 top-4 w-30 h-10 text-sm border bg-white text-black hover:bg-black hover:text-white transition-all max-sm:right-10" : "absolute right-20 top-4 w-30 h-10 text-sm cursor-no-drop hover:bg-white opacity-60 max-sm:right-10"}>Yorum Yaz</Button>
                     </AlertDialogTrigger>
                     <AlertDialogContent className={Cookies.get("token") ? "" : "hidden"}>
                         <AlertDialogHeader>
@@ -80,7 +80,7 @@ export default function WhisperComment() {
                 <Carousel className="w-full">
                     <CarouselContent>
                         {Array.from({ length: 20 }).map((_, index) => (
-                        <CarouselItem key={index} className="basis-[15%]">
+                        <CarouselItem key={index} className="basis-[16.6%] max-xl:basis-[20%] max- max-lg:basis-[33%] max-md:basis-[50%] max-sm:basis-[100%]">
                             <div className="p-1">
                             <Card>
                                 <CardContent className="pt-2 pb-3 pl-2 ">
@@ -96,7 +96,7 @@ export default function WhisperComment() {
                                             <span className="text-[10px]">3 Gün Önce</span>
                                         </div>
                                     </div>
-                                    <div className="text-sm text-gray-500 p-1 pt-3">
+                                    <div className="text-sm text-gray-500 p-1 pt-3 max-xl:text-xs">
                                         Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptatem dolore beatae accusamus facilis doloremque, 
                                         in quibusdam saepe, totam eum ipsa nostrum aliquid deleniti natus libero voluptatum reiciendis cumque aspernatur quae?
                                     </div>
