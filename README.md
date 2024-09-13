@@ -17,6 +17,8 @@
 
 An application where users can make rumor-based news and earn money in return
 
+[About The Soylenti](https://medium.com/@mericcana/soylenti-news-site-9ea142ea9845)
+
 ### Built With
 
 
