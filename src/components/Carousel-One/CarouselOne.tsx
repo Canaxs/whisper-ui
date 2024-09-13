@@ -9,6 +9,7 @@ import {
 import React ,{ useEffect, useState } from "react";
 import { Whisper } from "../Account-Info/AccountInfo";
 import { getCarouselBig } from "@/api/apiCalls";
+import { convertMenusEn } from "@/lib/menuEnum";
 
 
 export default function CarouselOne(props) {
@@ -22,6 +23,7 @@ export default function CarouselOne(props) {
     async function getCarousel() {
         await getCarouselBig().then((res) => {
             setWhispers(res.data)
+            console.log(res.data);
         })
     }
 
@@ -31,12 +33,12 @@ export default function CarouselOne(props) {
             <React.Fragment>
                 <Carousel className={props.bigClass+" drop-shadow-xl"}>
                     <CarouselContent className={props.bigClass}>
-                    {whispers.map((obj, index) => (
+                    {whispers.map((obj, index) => ( 
                             <CarouselItem className={props.bigClass} key={index}>
                                 <div className={props.bigClass}>
                                     <Card className={""+props.bigClass}>
                                         <CardContent className={"flex items-center justify-center p-0 w-full "+props.bigClass}>
-                                            <img  src="../logo-black.png" width={"100"} height={"100"} />
+                                            <a href={"/kategori/"+convertMenusEn(obj.category)+"/"+obj.urlName}><img  src="../logo-black.png" width={"100"} height={"100"} /></a>
                                             <div className="absolute bottom-10 w-5/6 text-center line-clamp-2">
                                                 <span className="drop-shadow text-base font-medium">{obj.title}</span>
                                             </div>
@@ -56,7 +58,7 @@ export default function CarouselOne(props) {
                             <div className={props.smallClass}>
                                 <Card className={props.smallClass}>
                                 <CardContent className={"flex items-center justify-center h-full p-0"}>
-                                    <img src="../logo-black.png"/>
+                                <a href={"/kategori/"+convertMenusEn(obj.category)+"/"+obj.urlName}><img src="../logo-black.png"/></a>
                                 </CardContent>
                                 </Card>
                             </div>

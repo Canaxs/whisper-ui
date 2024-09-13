@@ -9,6 +9,7 @@ import {
 import React, { useState, useEffect } from "react";
 import { Whisper } from "../Account-Info/AccountInfo";
 import { getCarouselSmall } from "@/api/apiCalls";
+import { convertMenusEn } from "@/lib/menuEnum";
 
 
 export default function CarouselTwo(props) {
@@ -37,7 +38,7 @@ export default function CarouselTwo(props) {
                                 <div className={props.bigClass}>
                                     <Card className={props.bigClass}>
                                         <CardContent className={"flex items-center justify-center "+props.bigClass}>
-                                            <img src={"../logo-black.png"}  width={"100"} height={"100"} />
+                                            <a href={"/kategori/"+convertMenusEn(obj.category)+"/"+obj.urlName}><img src={"../logo-black.png"}  width={"100"} height={"100"} /></a>
                                             <div className="absolute bottom-10 w-5/6 text-center line-clamp-2">
                                                 <span className="drop-shadow text-base font-medium">{obj.title}</span>
                                             </div>
@@ -57,7 +58,7 @@ export default function CarouselTwo(props) {
                             <div className={props.smallClass}>
                                 <Card className={props.smallClass}>
                                 <CardContent className={"flex items-center justify-center h-full p-0"}>
-                                    <img src="../logo-black.png"/>
+                                    <a href={"/kategori/"+convertMenusEn(obj.category)+"/"+obj.urlName}><img src="../logo-black.png"/></a>
                                 </CardContent>
                                 </Card>
                             </div>
