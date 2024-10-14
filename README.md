@@ -6,7 +6,7 @@
 <br />
 <div align="center">
   <a href="https://github.com/Canaxs/trendyol-clone-ui">
-    <img src="https://www.cdnlogo.com/logos/w/39/whisper.svg" alt="Logo" width="80" height="80">
+    <img src="https://www.cdnlogo.com/logos/w/39/whisper.svg" alt="Logo" width="150" height="150">
   </a>
 
 <h3 align="center">Whisper UI App</h3>
@@ -18,6 +18,7 @@
 An application where users can make rumor-based news and earn money in return
 
 [About The Soylenti](https://medium.com/@mericcana/soylenti-news-site-9ea142ea9845)
+[Söylenti Hakkında](https://medium.com/@mericcana/s%C3%B6ylenti-haber-sitesi-9f3cea065002)
 
 ### Built With
 
@@ -36,15 +37,6 @@ Mail and Twitter - [@your_twitter](https://twitter.com/cana_meric) - mmericcana@
 
 Project Link: [https://github.com/Canaxs/whisper-ui](https://github.com/Canaxs/whisper-ui)
 
-
-
-<!-- ACKNOWLEDGMENTS -->
-## Acknowledgments
-
-Use this space to list resources you find helpful and would like to give credit to. I've included a few of my favorites to kick things off!
-
-* [Choose an Open Source License](https://choosealicense.com)
-* [GitHub Pages](https://pages.github.com)
 
 
 <!-- MARKDOWN LINKS & IMAGES -->
