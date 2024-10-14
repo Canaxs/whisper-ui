@@ -123,7 +123,7 @@ export default function WhisperContent(props) {
                         <span className="mt-[5px] font-medium ml-1">{props.whisper.whisperLike.numberDislike}</span>
                     </div>
                     <div className=" flex justify-center items-center">
-                        <WhisperComment />
+                        <WhisperComment comment={props.whisper.whisperComment} whisperId={props.whisper['id']} />
                     </div>
                 </div>
             </div>

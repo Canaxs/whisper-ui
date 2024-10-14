@@ -28,6 +28,10 @@ import { convertMenus, convertMenusTR } from "@/lib/menuEnum";
 import { GrResources } from "react-icons/gr";
 import { TbWriting } from "react-icons/tb";
 
+
+
+
+
 export default function Docs({
     params,
 }: {
@@ -50,6 +54,7 @@ export default function Docs({
             numberLike: null,
             numberDislike: null
         },
+        whisperComment : []
      });
 
      const [whispers,setWhispers] = useState({

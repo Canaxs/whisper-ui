@@ -103,5 +103,8 @@ export const updateIsDelete = (whisperId , headerToken) => {
     return axios.get(Environment.baseUrl+"whisper/updateDelete/"+whisperId,{headers: {Authorization: "Bearer "+headerToken}});
 }
 
+export const createComment = (whisperComment , headerToken) => {
+    return axios.post(Environment.baseUrl+"whisper/locked/comment/create",whisperComment,{headers: {Authorization: "Bearer "+headerToken}})
+}
 
 

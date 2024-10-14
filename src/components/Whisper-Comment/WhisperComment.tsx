@@ -37,12 +37,14 @@ import {
   import { Textarea } from "@/components/ui/textarea"
   import Cookies from 'js-cookie'
   import { useToast } from "@/components/ui/use-toast"
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import { createComment } from "@/api/apiCalls";
 
 
-export default function WhisperComment() {
+export default function WhisperComment(props) {
 
     const [openAlert , setOpenAlert] = useState(false);
+    const [commentState , setCommentState] = useState("");
 
     const { toast } = useToast();
 
@@ -55,7 +57,27 @@ export default function WhisperComment() {
         }
     }
 
+    function commentSend() {
+        setOpenAlert(false);
+        const whisperComment = {
+            comment: commentState ,
+            whisperId: props.whisperId
+        }
+        createComment(whisperComment,Cookies.get("token")).then((res) => {
+            toast({
+                variant: "success",
+                title: "Yorum Yapıldı",
+                description: "Yorum Kaydedildi",
+              })
+        } , (exception) => {
+            toast({
+                variant: "destructive",
+                title: "Yorum Yapılırken Hata Oluştu",
+                description: "Tekrar deneyiniz.",
+              })
+        })
 
+    }
 
   return (
     <Sheet>
@@ -80,22 +102,23 @@ export default function WhisperComment() {
                         <AlertDialogTitle>Yorum Yaz</AlertDialogTitle>
                         <AlertDialogDescription>
                             <div>
-                                <Textarea placeholder="Bu Gönderi Hakkında Fikirlerini Paylaş..." className="h-40" />
+                                <Textarea placeholder="Bu Gönderi Hakkında Fikirlerini Paylaş..." className="h-40" onChange={(e) => setCommentState(e.target.value.toString())} />
                             </div>
                         </AlertDialogDescription>
                         </AlertDialogHeader>
                         <AlertDialogFooter>
                             <AlertDialogCancel onClick={() => setOpenAlert(false)}>Vazgeç</AlertDialogCancel>
-                            <AlertDialogAction className="text-white bg-green-600 hover:bg-white hover:text-green-600 transition-all" onClick={() => setOpenAlert(false)}>Gönder</AlertDialogAction>
+                            <AlertDialogAction className="text-white bg-green-600 hover:bg-white hover:text-green-600 transition-all" onClick={() => commentSend()}>Gönder</AlertDialogAction>
                         </AlertDialogFooter>
                     </AlertDialogContent>
                 </AlertDialog>
                 </div>
             </SheetTitle>
             </SheetHeader>
+            {props.comment.length === 0  ? <span className="flex justify-center text-lg p-5">Yorum Yok</span> : ""}
                 <Carousel className="w-full">
                     <CarouselContent>
-                        {Array.from({ length: 20 }).map((_, index) => (
+                        {props.comment.map((obj, index) => (
                         <CarouselItem key={index} className="basis-[16.6%] max-xl:basis-[20%] max- max-lg:basis-[33%] max-md:basis-[50%] max-sm:basis-[100%]">
                             <div className="p-1">
                             <Card>
@@ -108,13 +131,12 @@ export default function WhisperComment() {
                                             </Avatar>
                                         </div>
                                         <div className="flex flex-col ml-2">
-                                            <span className="text-sm">{index++} Name</span>
+                                            <span className="text-sm">{obj['user']['username']}</span>
                                             <span className="text-[10px]">3 Gün Önce</span>
                                         </div>
                                     </div>
                                     <div className="text-sm text-gray-500 p-1 pt-3 max-xl:text-xs">
-                                        Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptatem dolore beatae accusamus facilis doloremque, 
-                                        in quibusdam saepe, totam eum ipsa nostrum aliquid deleniti natus libero voluptatum reiciendis cumque aspernatur quae?
+                                        {obj['comment']}
                                     </div>
                                 </CardContent>
                             </Card>
