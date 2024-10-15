@@ -107,4 +107,8 @@ export const createComment = (whisperComment , headerToken) => {
     return axios.post(Environment.baseUrl+"whisper/locked/comment/create",whisperComment,{headers: {Authorization: "Bearer "+headerToken}})
 }
 
+export const getWhispersFilter = (whisperFilter , page) => {
+    return axios.post(Environment.baseUrl+"whisper/getWhispersFilter",whisperFilter,{params: {page , size: 10}})
+}
+
 

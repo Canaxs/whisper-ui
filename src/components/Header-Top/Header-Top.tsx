@@ -9,13 +9,23 @@ import { IoIosNotifications } from "react-icons/io";
 import { HeaderNotify } from "../Header-Notify/HeaderNotify";
 import { Progress } from "@/components/ui/progress"
 import { useRouter } from 'next/navigation';
-import { isExpiredToken } from "@/api/apiCalls";
+import { getWhispersFilter, isExpiredToken } from "@/api/apiCalls";
 import { IoMdLogIn } from "react-icons/io";
 import { RiUserAddFill } from "react-icons/ri";
 import { BiSolidLogInCircle } from "react-icons/bi";
-
-
-
+import {
+    Command,
+    CommandDialog,
+    CommandEmpty,
+    CommandGroup,
+    CommandInput,
+    CommandItem,
+    CommandList,
+    CommandSeparator,
+    CommandShortcut,
+  } from "@/components/ui/command";
+import { Input } from "../ui/input";
+import { convertMenus, convertMenusEn } from "@/lib/menuEnum";
 
 export default function HeaderTop(props) { 
 
@@ -25,6 +35,20 @@ export default function HeaderTop(props) {
         role: null,
     });
     const [isUser , setIsUser] = useState(false);
+
+    const [filterData , setFilterData] = useState({
+        content: [],
+        last: false,
+        empty: false,
+        first: false,
+        number: 0,
+        numberOfElements: 0,
+        pageable: {},
+        size: 0,
+        sort: {},
+        totalElements: 0,
+        totalPages: 0
+    });
 
     const router = useRouter();
 
@@ -61,6 +85,35 @@ export default function HeaderTop(props) {
         }
     }
 
+    async function filterSearch(filterText) {
+        let page = 0;
+        const whisperFilter = {
+            title : filterText
+        }
+        if(filterText != ""){
+            getWhispersFilter(whisperFilter,page).then((res) => {
+                setFilterData(res.data)
+            },(exception) => {
+                console.log("Error Filter");
+            })
+        }
+        else {
+            setFilterData({
+                content: [],
+                last: false,
+                empty: false,
+                first: false,
+                number: 0,
+                numberOfElements: 0,
+                pageable: {},
+                size: 0,
+                sort: {},
+                totalElements: 0,
+                totalPages: 0
+            });
+        }
+    }
+
 
     useEffect(() => {
         controlInformation();
@@ -74,6 +127,26 @@ export default function HeaderTop(props) {
                 <a href="/"><img src={props.logo} alt="Söylenti" className="cursor-pointer mt-1 w-[100px] h-[95px] max-sm:w-[80px] max-sm:h-[75px] hover:-rotate-6 transition-all" title="Söylenti"/></a>
                 <div className="h-1/2 mt-[8%] w-[1px] bg-slate-300 ml-5 "></div>
                     <img src={props.flag} className="ml-2 mb-1 w-[100px] h-[90px]  max-sm:w-[80px] max-sm:h-[75px]" alt="Türk Bayrağı" title="Türk Bayrağı" />
+            </div>
+            <div className="flex items-center">
+                <div className="flex flex-col">
+                    <Input type="text" placeholder="&#128270; Haber Ara..." className="rounded-lg border shadow-md md:min-w-[450px] h-10 focus-visible:ring-0 focus-visible:ring-white" onChange={(e) => filterSearch(e.target.value.toString())}/> 
+                    <div className={filterData.content.length === 0 ? "hidden" :"h-auto w-[450px] absolute top-[90px] rounded-b-lg z-40 bg-white shadow-xl"}>
+                        {filterData.content.map((obj, index) => 
+                            <a href={"kategori/"+convertMenusEn(obj['category'])+"/"+obj['urlName']}>
+                            <div className="h-10 w-full flex cursor-pointer shadow-md mt-2 items-center p-2 rounded-b-lg">
+                                <div className="w-[20%]">
+                                    <img src={props.logo} alt="Söylenti" className="w-[50px] h-[35px] max-sm:w-[30px] max-sm:h-[25px] " title="Söylenti"/>
+                                </div>
+                                <div className="ml-[1%] w-[75%]">
+                                    <span className="line-clamp-1 text-[10px] font-medium text-gray-700">{obj['category']}</span>
+                                    <span className="line-clamp-1 text-sm font-medium text-gray-800">{obj['title']}</span>
+                                </div>
+                            </div>
+                            </a>
+                        )}
+                    </div>
+                </div>
             </div>
             <div className="flex items-center max-md:mr-[1%]">
                 {isUser === false ? (
