@@ -36,6 +36,12 @@ export default function HeaderTop(props) {
     });
     const [isUser , setIsUser] = useState(false);
 
+    const [filterText , setFilterText] = useState("");
+
+    const [notNew , setNotNew] = useState(false);
+
+    const [emptyFilterText , setEmptyFilterText] = useState(false);
+
     const [filterData , setFilterData] = useState({
         content: [],
         last: false,
@@ -85,11 +91,34 @@ export default function HeaderTop(props) {
         }
     }
 
-    async function filterSearch(filterText) {
+    async function filterSearch() {
+        console.log("İlk: "+filterText)
         let page = 0;
         const whisperFilter = {
             title : filterText
         }
+        if(filterText.trim().length != 0){
+            console.log("if içi");
+            getWhispersFilter(whisperFilter,page).then((res) => {
+                setFilterData(res.data)
+                if(res.data['totalElements'] === 0) {
+                    setNotNew(true);
+                }
+                else {
+                    setNotNew(false);
+                }
+            },(exception) => {
+                console.log("Error Filter");
+            })
+        }
+        else {
+            setEmptyFilterText(true);
+        }
+         console.log("Son: "+filterText)
+         console.log(filterData);
+    }
+
+    useEffect(() => {
         setFilterData({
             content: [],
             last: false,
@@ -103,19 +132,30 @@ export default function HeaderTop(props) {
             totalElements: 0,
             totalPages: 0
         });
-        if(filterText.trim().length != 0){
-            getWhispersFilter(whisperFilter,page).then((res) => {
-                setFilterData(res.data)
-            },(exception) => {
-                console.log("Error Filter");
-            })
+        filterSearch();
+
+        if(filterText.trim().length === 0) {
+            setFilterData({
+                content: [],
+                last: false,
+                empty: false,
+                first: false,
+                number: 0,
+                numberOfElements: 0,
+                pageable: {},
+                size: 0,
+                sort: {},
+                totalElements: 0,
+                totalPages: 0
+            });
         }
-    }
+
+    },[filterText])
+
 
     useEffect(() => {
         controlInformation();
     },[])
-
 
 
     return(
@@ -128,9 +168,10 @@ export default function HeaderTop(props) {
                 </div>
                 <div className="flex items-center max-md:hidden">
                     <div className="flex flex-col">
-                        <Input type="text" placeholder="&#128270; Haber Ara..." className="rounded-lg border shadow-md md:min-w-[450px] h-10 focus-visible:ring-0 focus-visible:ring-white" onChange={(e) => filterSearch(e.target.value.toString())}/> 
-                        <div id="filterData" className={filterData.content.length === 0 ? "hidden" :"h-[300px] w-[450px] absolute top-[90px] rounded-b-lg z-40 bg-white shadow-xl overflow-y-scroll"}>
-                            {filterData.content.map((obj, index) => 
+                        <Input type="text" id="search" placeholder="&#128270; Haber Ara..." className="rounded-lg border shadow-md md:min-w-[450px] h-10 focus-visible:ring-0 focus-visible:ring-white" onChange={(e) => setFilterText(e.target.value.toString())} /> 
+                        <div id="filterData" className={filterData.content.length != 0 ? "h-[300px] w-[450px] absolute top-[90px] rounded-b-lg z-40 bg-white shadow-xl overflow-y-scroll" : "w-[450px] h-auto absolute top-[90px] rounded-b-lg z-40 "}>
+                            { filterData.totalElements > 0 ?
+                            filterData.content.map((obj, index) => 
                                 <a href={"kategori/"+convertMenusEn(obj['category'])+"/"+obj['urlName']} key={"filterData"+index} >
                                     <div className="h-10 w-full flex cursor-pointer shadow-md mt-2 items-center p-2 rounded-b-lg">
                                         <div className="w-[20%]">
@@ -142,7 +183,16 @@ export default function HeaderTop(props) {
                                         </div>
                                     </div>
                                 </a>
-                            )}
+                            )
+                            : 
+                            notNew ? 
+                            <div className="h-[50px] shadow-md rounded-b-lg flex justify-center items-center">
+                                <span className="text-center p-5 text-black">Haber Bulunamadı</span>
+                            </div>
+                            :
+                            <div>
+                            </div>
+                            }
                         </div>
                     </div>
                 </div>
@@ -179,9 +229,10 @@ export default function HeaderTop(props) {
             </div>
             <div className="flex items-center justify-center md:hidden mb-5 mt-3">
                 <div className="flex flex-col">
-                        <Input type="text" placeholder="&#128270; Haber Ara..." className="rounded-lg border shadow-md min-w-[450px] h-10 focus-visible:ring-0 focus-visible:ring-white" onChange={(e) => filterSearch(e.target.value.toString())}/> 
-                        <div id="filterData" className={filterData.content.length === 0 ? "hidden" :"h-[300px] w-[450px] absolute top-[140px] rounded-b-lg z-40 bg-white shadow-xl overflow-y-scroll"}>
-                            {filterData.content.map((obj, index) => 
+                        <Input type="text" placeholder="&#128270; Haber Ara..." className="rounded-lg border shadow-md min-w-[450px] h-10 focus-visible:ring-0 focus-visible:ring-white" onChange={(e) => setFilterText(e.target.value.toString())} /> 
+                        <div id="filterData" className={filterData.content.length != 0 ? "h-[300px] w-[450px] absolute top-[170px] rounded-b-lg z-40 bg-white shadow-xl overflow-y-scroll" : "w-[450px] h-auto absolute top-[170px] rounded-b-lg z-40 "} >
+                            { filterData.totalElements != 0 ?
+                                filterData.content.map((obj, index) => 
                                 <a href={"kategori/"+convertMenusEn(obj['category'])+"/"+obj['urlName']} key={"filterData"+index} >
                                     <div className="h-10 w-full flex cursor-pointer shadow-md mt-2 items-center p-2 rounded-b-lg">
                                         <div className="w-[20%]">
@@ -193,7 +244,13 @@ export default function HeaderTop(props) {
                                         </div>
                                     </div>
                                 </a>
-                            )}
+                            )
+                            : filterText.length > 0 ? 
+                            <div className="h-[35px] shadow-md rounded-b-lg flex justify-center items-center">
+                                <span className="text-center text-black">Haber Bulunamadı</span>
+                            </div>
+                            : ""
+                            }
                         </div>
                     </div>
             </div>
