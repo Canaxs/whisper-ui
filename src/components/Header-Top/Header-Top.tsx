@@ -133,7 +133,7 @@ export default function HeaderTop(props) {
                     <Input type="text" placeholder="&#128270; Haber Ara..." className="rounded-lg border shadow-md md:min-w-[450px] h-10 focus-visible:ring-0 focus-visible:ring-white" onChange={(e) => filterSearch(e.target.value.toString())}/> 
                     <div className={filterData.content.length === 0 ? "hidden" :"h-auto w-[450px] absolute top-[90px] rounded-b-lg z-40 bg-white shadow-xl"}>
                         {filterData.content.map((obj, index) => 
-                            <a href={"kategori/"+convertMenusEn(obj['category'])+"/"+obj['urlName']}>
+                            <a href={"kategori/"+convertMenusEn(obj['category'])+"/"+obj['urlName']} key={"filterData"+index} >
                             <div className="h-10 w-full flex cursor-pointer shadow-md mt-2 items-center p-2 rounded-b-lg">
                                 <div className="w-[20%]">
                                     <img src={props.logo} alt="Söylenti" className="w-[50px] h-[35px] max-sm:w-[30px] max-sm:h-[25px] " title="Söylenti"/>
