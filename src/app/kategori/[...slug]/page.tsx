@@ -184,13 +184,21 @@ export default function Docs({
                         <Pagination>
                             <PaginationContent>
                                 <PaginationItem>
-                                    {  <PaginationPrevious href={searchParams.get("s") == null || numberRet() <= 0 ? "" :"/kategori/"+params.slug[0]+"?s="+ numberBack() } className={searchParams.get("s") == null || numberRet() <= 0 ? "opacity-20 cursor-no-drop" : ""} />}
+                                    {searchParams.get("s") == null || numberRet() <= 0 ? <PaginationPrevious className="opacity-20 cursor-no-drop"/>
+                                    : <PaginationPrevious href={"/kategori/"+params.slug[0]+"?s="+ numberBack() } />
+                                    }
                                 </PaginationItem>
                                 <PaginationItem>
-                                        <PaginationLink href={"/kategori/"+params.slug[0]+"?s="+numberNext()}>{searchParams.get("s") == null ? 1 : numberNext()}</PaginationLink>
+                                        {searchParams.get("s") == null || numberRet() == 0 ? ""  
+                                        : <PaginationLink className='cursor-pointer m-1'  href={"/kategori/"+params.slug[0]+"?s="+ numberBack()} >{numberRet()}</PaginationLink> }
+                                        <PaginationLink isActive>{searchParams.get("s") == null ? 1 : numberNext()}</PaginationLink>
+                                        {numberRet() < whispers.totalPages-1 ? <PaginationLink className='cursor-pointer m-1'  href={"/kategori/"+params.slug[0]+"?s="+numberNext()} >{numberNext()+1}</PaginationLink> 
+                                        : "" }
                                     </PaginationItem>
                                 <PaginationItem>
-                                    <PaginationNext href={numberRet() >= whispers.totalPages-1 ? "" : "/kategori/"+params.slug[0]+"?s="+numberNext()} className={numberRet() >= whispers.totalPages-1 ? "opacity-20 cursor-no-drop" : ""} />
+                                    {numberRet() < whispers.totalPages-1 ? <PaginationNext href={"/kategori/"+params.slug[0]+"?s="+numberNext()} /> 
+                                    : <PaginationNext className="opacity-20 cursor-no-drop" /> 
+                                    }
                                 </PaginationItem>
                             </PaginationContent>
                         </Pagination>

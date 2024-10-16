@@ -6,6 +6,7 @@ import { GrResources } from 'react-icons/gr';
 import { TbWriting } from 'react-icons/tb';
 import { LiaTimesCircleSolid } from "react-icons/lia";
 import { convertMenusEn } from '@/lib/menuEnum';
+import { useEffect } from 'react';
 
 
 export default function SearchCompo(props) {
@@ -81,13 +82,17 @@ export default function SearchCompo(props) {
                     <Pagination>
                         <PaginationContent>
                             <PaginationItem>
-                                {  <PaginationPrevious href={props.p == null || numberRet() <= 0 ? "" :"/search?t="+props.t+"&p="+ numberBack() } className={props.p == null || numberRet() <= 0 ? "opacity-20 cursor-no-drop" : ""} />}
+                                { props.p != null || numberRet() > 0 ? <PaginationPrevious href={"/search?t="+props.t+"&p="+ numberBack()}  /> 
+                                : <PaginationPrevious className={"opacity-20 cursor-no-drop"} />  }
                             </PaginationItem>
                             <PaginationItem>
-                                    <PaginationLink>{props.p == null ? 1 : numberNext()}</PaginationLink>
+                                    {props.p == null || props.p == 0 ? ""  : <PaginationLink className='cursor-pointer m-1' href={"/search?t="+props.t+"&p="+ numberBack()}>{numberRet()}</PaginationLink> }
+                                    <PaginationLink isActive>{props.p === null || props.p === 0 ? 1 : numberNext()}</PaginationLink>
+                                    {numberRet() < props.filterData.totalPages-1 ? <PaginationLink className='cursor-pointer m-1' href={"/search?t="+props.t+"&p="+numberNext()}>{numberNext()+1}</PaginationLink> : "" }
                                 </PaginationItem>
                             <PaginationItem>
-                                <PaginationNext href={numberRet() >= props.filterData.totalPages-1 ? "" : "/search?t="+props.t+"&p="+numberNext()} className={numberRet() >= props.filterData.totalPages-1 ? "opacity-20 cursor-no-drop" : ""} />
+                            { numberRet() < props.filterData.totalPages-1 ? <PaginationNext href={"/search?t="+props.t+"&p="+numberNext()} />
+                            : <PaginationNext className={"opacity-20 cursor-no-drop"} />  }
                             </PaginationItem>
                         </PaginationContent>
                     </Pagination>
