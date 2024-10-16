@@ -26,6 +26,7 @@ import {
   } from "@/components/ui/command";
 import { Input } from "../ui/input";
 import { convertMenus, convertMenusEn } from "@/lib/menuEnum";
+import { useToast } from "@/components/ui/use-toast"
 
 export default function HeaderTop(props) { 
 
@@ -36,11 +37,11 @@ export default function HeaderTop(props) {
     });
     const [isUser , setIsUser] = useState(false);
 
+    const { toast } = useToast();
+
     const [filterText , setFilterText] = useState("");
 
     const [notNew , setNotNew] = useState(false);
-
-    const [emptyFilterText , setEmptyFilterText] = useState(false);
 
     const [filterData , setFilterData] = useState({
         content: [],
@@ -55,6 +56,8 @@ export default function HeaderTop(props) {
         totalElements: 0,
         totalPages: 0
     });
+
+    const [filterOnEnter , setFilterOnEnter] = useState(false);
 
     const router = useRouter();
 
@@ -92,14 +95,12 @@ export default function HeaderTop(props) {
     }
 
     async function filterSearch() {
-        console.log("İlk: "+filterText)
         let page = 0;
         const whisperFilter = {
             title : filterText
         }
         if(filterText.trim().length != 0){
-            console.log("if içi");
-            getWhispersFilter(whisperFilter,page).then((res) => {
+            await getWhispersFilter(whisperFilter,page).then((res) => {
                 setFilterData(res.data)
                 if(res.data['totalElements'] === 0) {
                     setNotNew(true);
@@ -109,12 +110,8 @@ export default function HeaderTop(props) {
                 }
             },(exception) => {
                 console.log("Error Filter");
-            })
+            });
         }
-        else {
-            setEmptyFilterText(true);
-        }
-         console.log("Son: "+filterText)
          console.log(filterData);
     }
 
@@ -133,7 +130,14 @@ export default function HeaderTop(props) {
             totalPages: 0
         });
         filterSearch();
+    },[filterText])
 
+
+    useEffect(() => {
+        controlInformation();
+    },[])
+
+    function mouseLeave() {
         if(filterText.trim().length === 0) {
             setFilterData({
                 content: [],
@@ -148,14 +152,29 @@ export default function HeaderTop(props) {
                 totalElements: 0,
                 totalPages: 0
             });
+            setNotNew(false);
         }
+    }
 
-    },[filterText])
-
-
-    useEffect(() => {
-        controlInformation();
-    },[])
+    function enterKey(e) {
+        if(e.key === 'Enter'){
+            if(filterText.trim().length != 0) { 
+                toast({
+                    variant: "success",
+                    title: "Arama Sayfasına Yönlendiriliyorsunuz.",
+                    description: "Aranan Kelime: "+filterText.trim(),
+                  })
+                router.push("/search?t="+filterText.trim());
+            }
+            else {
+                toast({
+                    variant: "destructive",
+                    title: "Boş olarak arama yapamazsınız",
+                    description: "Lütfen arama kutusunu doldurun.",
+                })
+            }
+        }
+    }
 
 
     return(
@@ -168,8 +187,12 @@ export default function HeaderTop(props) {
                 </div>
                 <div className="flex items-center max-md:hidden">
                     <div className="flex flex-col">
-                        <Input type="text" id="search" placeholder="&#128270; Haber Ara..." className="rounded-lg border shadow-md md:min-w-[450px] h-10 focus-visible:ring-0 focus-visible:ring-white" onChange={(e) => setFilterText(e.target.value.toString())} /> 
-                        <div id="filterData" className={filterData.content.length != 0 ? "h-[300px] w-[450px] absolute top-[90px] rounded-b-lg z-40 bg-white shadow-xl overflow-y-scroll" : "w-[450px] h-auto absolute top-[90px] rounded-b-lg z-40 "}>
+                        <Input type="text" id="search" placeholder="&#128270; Haber Ara..." className="rounded-lg border shadow-md md:min-w-[450px] h-10 focus-visible:ring-0 focus-visible:ring-offset-0 focus-visible:ring-white"
+                         onChange={(e) => setFilterText(e.target.value.toString())} 
+                         onKeyDown={(e) => enterKey(e)}
+                         /> 
+                        <div id="filterData" className={filterData.content.length != 0 ? "h-[300px] w-[450px] absolute top-[90px] rounded-b-lg z-40 bg-white shadow-xl overflow-y-scroll" : "w-[450px] h-auto absolute top-[90px] rounded-b-lg z-40 "} 
+                            onMouseLeave={() => mouseLeave()}>
                             { filterData.totalElements > 0 ?
                             filterData.content.map((obj, index) => 
                                 <a href={"kategori/"+convertMenusEn(obj['category'])+"/"+obj['urlName']} key={"filterData"+index} >
@@ -186,7 +209,7 @@ export default function HeaderTop(props) {
                             )
                             : 
                             notNew ? 
-                            <div className="h-[50px] shadow-md rounded-b-lg flex justify-center items-center">
+                            <div className="h-[50px] shadow-md rounded-b-lg flex justify-center items-center z-30">
                                 <span className="text-center p-5 text-black">Haber Bulunamadı</span>
                             </div>
                             :
@@ -229,8 +252,12 @@ export default function HeaderTop(props) {
             </div>
             <div className="flex items-center justify-center md:hidden mb-5 mt-3">
                 <div className="flex flex-col w-3/4">
-                        <Input type="text" placeholder="&#128270; Haber Ara..." className="rounded-lg border shadow-md w-full h-10 focus-visible:ring-0 focus-visible:ring-offset-0 focus-visible:ring-white" onChange={(e) => setFilterText(e.target.value.toString())} /> 
-                        <div id="filterData" className={filterData.content.length != 0 ? "h-[300px] w-3/4 absolute top-[170px] max-sm:top-[150px] rounded-b-lg z-40 bg-white shadow-xl overflow-y-scroll" : "w-3/4 h-auto absolute max-sm:top-[150px] top-[170px] rounded-b-lg z-40 "} >
+                        <Input type="text" placeholder="&#128270; Haber Ara..." className="rounded-lg border shadow-md w-full h-10 focus-visible:ring-0 focus-visible:ring-offset-0 focus-visible:ring-white" 
+                        onChange={(e) => setFilterText(e.target.value.toString())} 
+                        onKeyDown={(e) => enterKey(e)}
+                        /> 
+                        <div id="filterData" className={filterData.content.length != 0 ? "h-[300px] w-3/4 absolute top-[170px] max-sm:top-[150px] rounded-b-lg z-40 bg-white shadow-xl overflow-y-scroll" : "w-3/4 h-auto absolute max-sm:top-[150px] top-[170px] rounded-b-lg z-40 "} 
+                        onMouseLeave={() => mouseLeave()} >
                             { filterData.totalElements != 0 ?
                                 filterData.content.map((obj, index) => 
                                 <a href={"kategori/"+convertMenusEn(obj['category'])+"/"+obj['urlName']} key={"filterData"+index} >
@@ -245,8 +272,8 @@ export default function HeaderTop(props) {
                                     </div>
                                 </a>
                             )
-                            : filterText.length > 0 ? 
-                            <div className="h-[35px] shadow-md rounded-b-lg flex justify-center items-center">
+                            : notNew ? 
+                            <div className="h-[35px] shadow-md rounded-b-lg flex justify-center items-center z-30">
                                 <span className="text-center text-black">Haber Bulunamadı</span>
                             </div>
                             : ""
