@@ -12,7 +12,6 @@ import { GrResources } from 'react-icons/gr';
 import { TbWriting } from 'react-icons/tb';
 import { LiaTimesCircleSolid } from "react-icons/lia";
 import { convertMenusEn } from '@/lib/menuEnum';
-import { Suspense } from 'react'
 import SearchCompo from '@/components/Search-Comp/Search-Compo';
 
 
@@ -60,10 +59,8 @@ export default function SearchPage() {
     return (
         <div>
             <div className="lg:w-[98%] 2xl:w-[65%] pt-1 lg:ml-[1%] 2xl:ml-[17%]">
-                <Header flag={"../../siyah-flag.png"} logo={"../../logo-black.png"} />
-                <Suspense fallback={<>Loading...</>} >
-                    <SearchCompo p={searchParams.get("p")}  t={searchParams.get("t")} notData={notData} filterData={filterData} />
-                </Suspense>
+                <Header flag={"../../siyah-flag.png"} logo={"../../logo-black.png"} /> 
+                <SearchCompo p={searchParams.get("p")}  t={searchParams.get("t")} notData={notData} filterData={filterData} />
             </div>
             <FooterArea src={"../../logo-white.png"}/>
         </div>
