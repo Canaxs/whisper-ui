@@ -228,9 +228,9 @@ export default function HeaderTop(props) {
                 </div>
             </div>
             <div className="flex items-center justify-center md:hidden mb-5 mt-3">
-                <div className="flex flex-col">
-                        <Input type="text" placeholder="&#128270; Haber Ara..." className="rounded-lg border shadow-md min-w-[450px] h-10 focus-visible:ring-0 focus-visible:ring-white" onChange={(e) => setFilterText(e.target.value.toString())} /> 
-                        <div id="filterData" className={filterData.content.length != 0 ? "h-[300px] w-[450px] absolute top-[170px] rounded-b-lg z-40 bg-white shadow-xl overflow-y-scroll" : "w-[450px] h-auto absolute top-[170px] rounded-b-lg z-40 "} >
+                <div className="flex flex-col w-3/4">
+                        <Input type="text" placeholder="&#128270; Haber Ara..." className="rounded-lg border shadow-md w-full h-10 focus-visible:ring-0 focus-visible:ring-white" onChange={(e) => setFilterText(e.target.value.toString())} /> 
+                        <div id="filterData" className={filterData.content.length != 0 ? "h-[300px] w-full absolute top-[170px] rounded-b-lg z-40 bg-white shadow-xl overflow-y-scroll" : "w-[450px] h-auto absolute top-[170px] rounded-b-lg z-40 "} >
                             { filterData.totalElements != 0 ?
                                 filterData.content.map((obj, index) => 
                                 <a href={"kategori/"+convertMenusEn(obj['category'])+"/"+obj['urlName']} key={"filterData"+index} >
