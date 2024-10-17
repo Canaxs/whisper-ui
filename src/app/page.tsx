@@ -3,6 +3,7 @@ import { getBestUserPoint } from "@/api/apiCalls";
 import AbsoluteAdversiting from "@/components/Advertising-Space/AbsoluteAdversiting";
 import Adversiting from "@/components/Advertising-Space/Advertising";
 import ContentCarousel from "@/components/Content/ContentCarousel";
+import FlipCard from "@/components/Flip-Card/FlipCard";
 import FooterArea from "@/components/Footer-Area/FooterArea";
 import HeaderTop from "@/components/Header-Top/Header-Top";
 import Header from "@/components/Header/Header";
@@ -102,14 +103,16 @@ export default function Home() {
                 {whispers.map((obj, index) => advertisingBoolean(index) ?  
                     <div className="w-[24%] ml-[1%] mt-3 max-lg:w-[32%] max-md:w-[49%] max-sm:w-[46%] max-sm:ml-[2%]" key={"index"+index}>
                         <a href={"kategori/"+convertMenusEn(obj.category)+"/"+obj.urlName}>
-                            <NewsCard title={obj.title} img="logo-black.png" name={obj.authorName} category={convertCategoryName(convertMenusEn(obj.category))} source={obj.source} />
+                            <FlipCard title={obj.title} img="logo-black.png" keyNumber={index} name={obj.authorName} category={convertCategoryName(convertMenusEn(obj.category))} source={obj.source} 
+                            description={obj.description} />
                         </a>
                     </div>
                 : 
                     <React.Fragment key={"reactFragmentKey"}>
                         <div className="w-[24%] ml-[1%] mt-3 max-lg:w-[32%] max-md:w-[49%] max-sm:w-[46%] max-sm:ml-[2%]">
                             <a href={"kategori/"+convertMenusEn(obj.category)+"/"+obj.urlName}>
-                                <NewsCard title={obj.title} img="logo-black.png" keyNumber={index} name={obj.authorName} category={convertCategoryName(convertMenusEn(obj.category))} source={obj.source} />
+                            <FlipCard title={obj.title} img="logo-black.png" keyNumber={index} name={obj.authorName} category={convertCategoryName(convertMenusEn(obj.category))} source={obj.source} 
+                            description={obj.description} />
                             </a>
                         </div>
                         <Adversiting oneClass="w-[98%] ml-[1%] h-[100px] mt-5 mb-2 rounded" />

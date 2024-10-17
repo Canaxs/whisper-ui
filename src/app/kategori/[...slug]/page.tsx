@@ -145,7 +145,7 @@ export default function Docs({
                 <div className="mt-10 ml-[10%] mr-[10%] mb-4">
                 { whispers.content.length != 0 ? whispers.content?.map((content,index) =>
                 <a href={"/kategori/"+params.slug[0]+"/"+content["urlName"]} key={index}>
-                    <Card className="mt-3 shadow-xl">
+                    <Card className="mt-3 shadow-xl hover:shadow-2xl hover:shadow-black transition-all">
                         <CardContent className="p-3">
                             <div className="flex">
                                 <div className="flex items-center">

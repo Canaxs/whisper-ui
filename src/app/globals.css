@@ -80,6 +80,18 @@
     width: 8px;
   }
 
+  .flip-card:hover .flip-card-inner {
+    transform: rotateY(180deg);
+  }
+
+  .back-card {
+    transform: rotateY(180deg);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+
 }
 
 @layer base {
