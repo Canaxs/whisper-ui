@@ -13,11 +13,11 @@ export default function FlipCard(props) {
                     <div className="absolute w-full h-full z-10 rounded-md">
                         <img src={props.img} className="relative z-10 object-contain w-full h-full opacity-80 rounded-md" />
                     </div>
-                    <div className="absolute top-0 w-full pl-4 pr-4 pt-3 z-30 rounded-md" style={{background: "rgba(0, 0, 0, 0)"}}>
+                    <div className="absolute top-0 w-full pl-4 pr-4 pt-3 z-30 rounded-md">
                         <span className="text-base line-clamp-2 max-sm:text-sm font-medium drop-shadow tracking-tight">{props.title}</span>
                         <span className="max-sm:text-xs text-sm drop-shadow">{props.category}</span>
                     </div>
-                    <div className="absolute bottom-0 w-full p-3 z-30 rounded-b-md" style={{background: "rgba(0, 0, 0, 0)"}}>
+                    <div className="absolute bottom-0 w-full p-3 z-30 rounded-b-md">
                         <div className="flex flex-col relative z-50">
                             <div className="flex relative items-center">
                                 <TbWriting className="size-5 mr-2"/>
@@ -31,12 +31,12 @@ export default function FlipCard(props) {
                     </div>
                 </div>
                 <div className="back-card absolute w-full h-full shadow-md" style={{backfaceVisibility: "hidden"}}>
-                    <div className="absolute top-0 w-full pl-4 pr-4 pt-3 z-30 rounded-md" style={{background: "rgba(0, 0, 0, 0)"}}>
+                    <div className="absolute top-0 w-full pl-4 pr-4 pt-3 z-30 rounded-md">
                         <span className="text-base line-clamp-2 max-sm:text-sm font-medium drop-shadow tracking-tight">{props.title}</span>
                         <span className="max-sm:text-xs text-sm drop-shadow">{props.category}</span>
                     </div>
                     <span className="line-clamp-4 p-3 text-sm">{props.description}</span>
-                    <div className="absolute bottom-0 w-full p-3 z-30 rounded-b-md" style={{background: "rgba(0, 0, 0, 0)"}}>
+                    <div className="absolute bottom-0 w-full p-3 z-30 rounded-b-md">
                         <div className="flex flex-col relative z-50">
                             <div className="flex relative items-center mb-2">
                                 <BiLike  className="size-5 mr-2 text-green-600"/>

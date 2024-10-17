@@ -37,7 +37,7 @@ export default function SearchCompo(props) {
         <div className="mt-10 ml-[10%] mr-[10%] mb-4">
                     { props.filterData.content.length != 0 ? props.filterData.content.map((obj, index) => 
                             <a href={"/kategori/"+convertMenusEn(obj['category'])+"/"+obj["urlName"]} key={index}>
-                                <Card className="mt-3 shadow-xl">
+                                <Card className="mt-3 shadow-xl hover:shadow-2xl hover:shadow-black transition-all">
                                     <CardContent className="p-3">
                                         <div className="flex">
                                             <div className="flex items-center">
