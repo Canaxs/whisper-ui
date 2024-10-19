@@ -27,9 +27,8 @@ import { useRouter,useSearchParams } from 'next/navigation'
 import { convertMenus, convertMenusTR } from "@/lib/menuEnum";
 import { GrResources } from "react-icons/gr";
 import { TbWriting } from "react-icons/tb";
-
-
-
+import { BiLike , BiDislike } from "react-icons/bi";
+import { TbUserStar } from "react-icons/tb";
 
 
 export default function Docs({
@@ -144,8 +143,11 @@ export default function Docs({
                 <Header flag={"../../siyah-flag.png"} logo={"../../logo-black.png"} />
                 <div className="mt-10 ml-[10%] mr-[10%] mb-4">
                 { whispers.content.length != 0 ? whispers.content?.map((content,index) =>
-                <a href={"/kategori/"+params.slug[0]+"/"+content["urlName"]} key={index}>
-                    <Card className="mt-3 shadow-xl hover:shadow-2xl hover:shadow-black transition-all">
+                <a className="page-card" href={"/kategori/"+params.slug[0]+"/"+content["urlName"]} key={index}>
+                    <Card className="mt-3 shadow-xl hover:shadow-2xl hover:shadow-black transition-all relative">
+                        <div className="circle1 absolute bottom-0 m-auto flex justify-center items-center">
+                            <span className="drop-shadow-xl font-medium text-black hidden line-clamp-3">{content['description']}</span>
+                        </div>
                         <CardContent className="p-3">
                             <div className="flex">
                                 <div className="flex items-center">
