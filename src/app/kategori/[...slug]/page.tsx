@@ -46,7 +46,7 @@ export default function Docs({
         source: null,
         category: null,
         urlName: null,
-        image: null,
+        imageURL: null,
         createdDate: null,
         whisperLike: {
             id: null,
@@ -82,7 +82,6 @@ export default function Docs({
             getWhisper(params.slug[1]).then((res) => {
                 if(res.data.category === convertMenusTR(params.slug[0])) {
                     setWhisper(res.data);
-                    console.log(res.data);
                 }
                 else {
                     router.push("/404");
@@ -125,13 +124,11 @@ export default function Docs({
             const categoryName = params.slug[0];
             const response = await getPageableWhispers(convertMenus(categoryName),searchParamsPage);
             setWhispers(response.data);
-            console.log(response.data)
         }
         else {
             const categoryName = params.slug[0];
             const response = await getPageableWhispers(convertMenus(categoryName),0);
             setWhispers(response.data);
-            console.log(response.data)
         }
 
     }
@@ -151,7 +148,7 @@ export default function Docs({
                         <CardContent className="p-3">
                             <div className="flex">
                                 <div className="flex items-center">
-                                    <img src="../../logo-black.png" width={"200"} height={"200"} />
+                                    <img src={content['imageURL'] ? content['imageURL'] :"../../logo-black.png"} width={"200"} height={"200"} />
                                 </div>
                                 <div className="flex flex-col pt-7 pl-7">
                                     <span className="text-gray-400 text-xs font-medium">{params.slug[0].toUpperCase()}</span>

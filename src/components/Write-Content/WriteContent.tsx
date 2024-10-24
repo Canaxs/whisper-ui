@@ -33,25 +33,36 @@ export default function WriteContent() {
     const [description,setDescription] = useState("");
     const [source,setSource] = useState("");
     const [category,setCategory] = useState("");
-    const [image,setImage] = useState("");
+    const [image,setImage] = useState<File>();
 
     const { toast } = useToast();
 
 
 
-    function onClickPublish() {
+    async function onClickPublish() {
+        let formData = new FormData();
         let bool = true;
         const whisperModel = {
             title: title,
             description: description,
             source: source,
-            category: category,
-            image: image
+            category: category
         }
-        createWhisper(whisperModel,Cookies.get("token")).then((res) => {
+        const blobImage = new Blob([image as Blob], {
+            type: 'multipart/form-data'
+          });
+        formData.set("whisperRequest" , new Blob([JSON.stringify(whisperModel)], {type : 'application/json'}) );
+        formData.set("image",blobImage);
 
-       },(exception) => {
+        await createWhisper(formData,Cookies.get("token")).then((res) => {
+
+        },(exception) => {
             bool = false;
+            toast({
+                variant: "destructive",
+                title: "Hata Oluştu",
+                description: "Haber Kayıt Edilirken Sorun Meydana Geldi Tekrar Deneyiniz.",
+              })
         })
         if(!bool) {
             toast({
@@ -69,6 +80,13 @@ export default function WriteContent() {
         }
     }
 
+    function imageOnChange(e) {
+        const files = (e.target as HTMLInputElement).files
+        if (files && files.length > 0) {
+            setImage(files[0])
+        }
+    }
+
 
 
     return( 
@@ -81,7 +99,7 @@ export default function WriteContent() {
             </div>
             <div className="w-full max-w-sm items-center gap-1.5 mt-5 flex">
                 <Label htmlFor="picture" className="w-5/12">Resim Yükle</Label>
-                <Input id="picture" type="file"  onChange={(e) => setImage(e.target.value.toString())}/>
+                <Input id="picture" accept='image/*' type="file" onChange={(e) => imageOnChange(e)}/>
             </div>
             <div className="shadow-xl rounded transition-all mt-5 w-2/4">
                 <Input type="text" placeholder="Kaynak Belirtiniz..." className="border-none h-12 w-full focus-visible:ring-white text-base text-gray-900 transition-all outline-none" onChange={(e) => setSource(e.target.value.toString())}/>

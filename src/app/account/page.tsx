@@ -12,14 +12,6 @@ export default function Info() {
     const dispatch = useDispatch();
 
     const {data} = useAppSelector((store) => store.user);
-
-
-    console.log(data);
-
-    function deneme() {
-        console.log("Data: "+data.username);
-    }
-
     return (
         <div>
             <div className="lg:w-[98%] 2xl:w-[65%] pt-1 lg:ml-[1%] 2xl:ml-[17%]">

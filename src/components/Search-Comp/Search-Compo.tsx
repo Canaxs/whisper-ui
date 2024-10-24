@@ -41,7 +41,7 @@ export default function SearchCompo(props) {
                                     <CardContent className="p-3">
                                         <div className="flex">
                                             <div className="flex items-center">
-                                                <img src="../../logo-black.png" width={"200"} height={"200"} />
+                                                <img src={obj['imageURL'] ? obj['imageURL'] :"../../logo-black.png"} width={"200"} height={"200"} />
                                             </div>
                                             <div className="flex flex-col pt-7 pl-7">
                                                 <span className="text-gray-400 text-xs font-medium">{obj['category']}</span>

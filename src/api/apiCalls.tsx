@@ -12,8 +12,8 @@ export const isExpiredToken = (expireRequest) => {
     return axios.post<Boolean>(Environment.baseUrl+"auth/isExpiredToken",expireRequest);
 }
 
-export const createWhisper = (whisperModel, headerToken) => {
-    return axios.post(Environment.baseUrl+"whisper/locked/create",whisperModel,{
+export const createWhisper = (formData, headerToken) => {
+    return axios.post(Environment.baseUrl+"whisper/locked/create",formData,{
         headers: {
             Authorization : 'Bearer '+headerToken
         } });
