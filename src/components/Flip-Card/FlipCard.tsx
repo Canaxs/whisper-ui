@@ -11,7 +11,7 @@ export default function FlipCard(props) {
             <div className="flip-card-inner relative w-full max-md:h-[300px] h-[400px] border rounded-md shadow-xl hover:shadow-2xl hover:shadow-black transition-all" style={{transformStyle: "preserve-3d" , transition: "transform 0.6s"}}>
                 <div className="front-card absolute w-full h-full shadow-md overflow-hidden rounded-md" style={{backfaceVisibility: "hidden"}}>
                     <div className="absolute w-full h-full z-10 rounded-md">
-                        <img src={props.imageURL ? props.imageURL : "logo-black.png"} className="relative z-10 object-contain w-full h-full opacity-80 rounded-md" />
+                        <img src={props.imageURL ? props.imageURL : "logo-black.png"} className="relative z-10 object-cover w-full h-full opacity-80 rounded-md" />
                     </div>
                     <div className="absolute top-0 w-full pl-4 pr-4 pt-3 z-30 rounded-md">
                         <span className="text-base line-clamp-2 max-sm:text-sm font-medium drop-shadow tracking-tight">{props.title}</span>
@@ -35,7 +35,7 @@ export default function FlipCard(props) {
                         <span className="text-base line-clamp-2 max-sm:text-sm font-medium drop-shadow tracking-tight">{props.title}</span>
                         <span className="max-sm:text-xs text-sm drop-shadow">{props.category}</span>
                     </div>
-                    <span className="line-clamp-4 p-3 text-sm">{props.description}</span>
+                    <span className="line-clamp-4 m-3 text-sm">{props.description}</span>
                     <div className="absolute bottom-0 w-full p-3 z-30 rounded-b-md">
                         <div className="flex flex-col relative z-50">
                             <div className="flex relative items-center mb-2">
