@@ -145,21 +145,26 @@ export default function Docs({
                         <div className="circle1 absolute bottom-0 m-auto flex justify-center items-center">
                             <span className="drop-shadow-xl font-medium text-black hidden line-clamp-2 ml-5 mr-5">{content['description']}</span>
                         </div>
-                        <CardContent className="p-3">
+                        <CardContent className="p-0">
                             <div className="flex w-full h-full">
-                                <div className="flex items-center w-1/5">
-                                    <img src={content['imageURL'] ? content['imageURL'] :"../../logo-black.png"} className="rounded-lg h-full w-full"/>
+                                <div className="w-full h-full absolute z-0 rounded-lg">
+                                    <img src={content['imageURL'] ? content['imageURL'] :"../../logo-black.png"} className="rounded-lg h-full w-full object-cover"/>
                                 </div>
-                                <div className="flex flex-col pt-7 pl-7 w-4/5">
-                                    <span className="text-gray-400 text-xs font-medium">{params.slug[0].toUpperCase()}</span>
-                                    <span className="text-3xl mt-2 font-medium line-clamp-1 max-md:line-clamp-2 max-sm:text-sm max-md:text-lg max-lg:text-xl max-xl:text-2xl">{content["title"]}</span>
+                                <div className="absolute z-10 w-full h-full rounded-lg" style={{backgroundColor: "rgba(0,0,0,.3)"}}>
+
+                                </div>
+                                <div className="flex flex-col pt-7 pl-7 w-full p-6 z-20">
+                                    <span className="text-white drop-shadow-xl text-xs font-medium">{params.slug[0].toUpperCase()}</span>
+                                    <span className="text-3xl text-slate-100 drop-shadow mt-2 font-medium line-clamp-1 max-md:line-clamp-2 max-sm:text-sm max-md:text-lg max-lg:text-xl max-xl:text-2xl">
+                                        {content["title"]}
+                                    </span>
                                     <div className="p-0 mt-3 mb-3 ml-0">
                                         <div className="flex flex-col">
-                                            <div className="flex items-center">
+                                            <div className="flex items-center text-slate-100">
                                                 <TbWriting className="size-5 mr-2"/>
-                                                <HovCard name={content["authorName"]} />
+                                                <span className="text-xs drop-shadow-lg pt-2 pb-1">{content["authorName"]}</span>
                                             </div>
-                                            <div className="flex mt-1 items-center">
+                                            <div className="flex mt-1 items-center text-slate-100">
                                                 <GrResources className="size-5 mr-2"/>
                                                 <span className="text-xs drop-shadow-lg">{content["source"]}</span>
                                             </div>
