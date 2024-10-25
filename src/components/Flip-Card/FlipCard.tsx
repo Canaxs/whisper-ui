@@ -13,11 +13,11 @@ export default function FlipCard(props) {
                     <div className="absolute w-full h-full z-10 rounded-md">
                         <img src={props.imageURL ? props.imageURL : "logo-black.png"} className="relative z-10 object-cover w-full h-full opacity-100 rounded-md" style={props.imageURL ? {backgroundColor : "rgba(0,0,0,.8)"} : {backgroundColor : ""} } />
                     </div>
-                    <div className="absolute top-0 w-full pl-4 pr-4 pt-3 z-30 rounded-md">
+                    <div className="absolute top-0 w-full pl-4 pr-4 pt-3 z-30 pb-2" style={{backgroundColor : "rgba(0,0,0,.4)"}}>
                         <span className={props.imageURL ? "text-base line-clamp-2 max-sm:text-sm text-white font-medium drop-shadow tracking-tight" : "text-base line-clamp-2 max-sm:text-sm font-medium drop-shadow tracking-tight"}>{props.title}</span>
                         <span className={props.imageURL ? "max-sm:text-xs text-sm text-white drop-shadow" : "max-sm:text-xs text-sm drop-shadow"}>{props.category}</span>
                     </div>
-                    <div className="absolute bottom-0 w-full p-3 z-30 rounded-b-md">
+                    <div className="absolute bottom-0 w-full p-3 z-30" style={{backgroundColor : "rgba(0,0,0,.4)"}}>
                         <div className="flex flex-col relative z-50">
                             <div className="flex relative items-center">
                                 <TbWriting className={props.imageURL ? "size-5 mr-2 text-white" : "size-5 mr-2"} />
