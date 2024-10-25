@@ -143,14 +143,14 @@ export default function Docs({
                 <a className="page-card" href={"/kategori/"+params.slug[0]+"/"+content["urlName"]} key={index}>
                     <Card className="mt-3 shadow-xl hover:shadow-2xl hover:shadow-black transition-all relative">
                         <div className="circle1 absolute bottom-0 m-auto flex justify-center items-center">
-                            <span className="drop-shadow-xl font-medium text-black hidden line-clamp-3">{content['description']}</span>
+                            <span className="drop-shadow-xl font-medium text-black hidden line-clamp-2 ml-5 mr-5">{content['description']}</span>
                         </div>
                         <CardContent className="p-3">
-                            <div className="flex">
-                                <div className="flex items-center">
-                                    <img src={content['imageURL'] ? content['imageURL'] :"../../logo-black.png"} width={"200"} height={"200"} />
+                            <div className="flex w-full h-full">
+                                <div className="flex items-center w-1/5">
+                                    <img src={content['imageURL'] ? content['imageURL'] :"../../logo-black.png"} className="rounded-lg h-full w-full"/>
                                 </div>
-                                <div className="flex flex-col pt-7 pl-7">
+                                <div className="flex flex-col pt-7 pl-7 w-4/5">
                                     <span className="text-gray-400 text-xs font-medium">{params.slug[0].toUpperCase()}</span>
                                     <span className="text-3xl mt-2 font-medium line-clamp-1 max-md:line-clamp-2 max-sm:text-sm max-md:text-lg max-lg:text-xl max-xl:text-2xl">{content["title"]}</span>
                                     <div className="p-0 mt-3 mb-3 ml-0">

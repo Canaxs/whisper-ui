@@ -98,8 +98,8 @@
     z-index: 30;
     width: 100%;
   }
-  .circle1:hover span {
-    display: block;
+  .page-card:hover .circle1 span {
+    display: -webkit-box;
   }
   .page-card:hover .circle1 {
     width: 100% !important;
