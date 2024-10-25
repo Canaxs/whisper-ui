@@ -38,13 +38,16 @@ export default function CarouselTwo(props) {
                                 <div className={props.bigClass}>
                                     <Card className={props.bigClass}>
                                         <CardContent className={"flex items-center justify-center w-full p-0 "+props.bigClass}>
-                                            <a href={"/kategori/"+convertMenusEn(obj.category)+"/"+obj.urlName} className="w-full h-full rounded-md z-10">
-                                            <img src={obj.imageURL ? obj.imageURL : "../logo-black.png"} className="w-full h-full rounded-md" /></a>
+                                            <div className="w-full h-full rounded-md z-10">
+                                                <img src={obj.imageURL ? obj.imageURL : "../logo-black.png"} className="w-full h-full rounded-md object-fill" />
+                                            </div>
                                             <div className="absolute bottom-10 w-5/6 text-center line-clamp-2 p-2 rounded z-30" style={{backgroundColor : "rgba(0,0,0,.5)"}}>
                                                 <span className="drop-shadow text-base font-medium text-white">{obj.title}</span>
                                             </div>
-                                            <div className="absolute w-full h-full z-20" style={{backgroundColor : "rgba(0,0,0,.1)"}}>
-                                            </div>
+                                            <a href={"/kategori/"+convertMenusEn(obj.category)+"/"+obj.urlName} className="absolute w-full h-full rounded-md z-20">
+                                                <div className="w-full h-full" style={{backgroundColor : "rgba(0,0,0,.1)"}}>
+                                                </div>
+                                            </a>
                                         </CardContent>
                                         </Card>
                                 </div>
@@ -62,7 +65,7 @@ export default function CarouselTwo(props) {
                                 <Card className={props.smallClass}>
                                 <CardContent className={"flex items-center justify-center h-full p-0"}>
                                     <a href={"/kategori/"+convertMenusEn(obj.category)+"/"+obj.urlName} className="w-full h-full rounded-md">
-                                    <img src={obj.imageURL ? obj.imageURL :"../logo-black.png"} className="w-full h-full rounded-md"/>
+                                        <img src={obj.imageURL ? obj.imageURL :"../logo-black.png"} className="w-full h-full rounded-md"/>
                                     </a>
                                 </CardContent>
                                 </Card>
