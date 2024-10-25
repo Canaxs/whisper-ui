@@ -11,7 +11,7 @@ export default function FlipCard(props) {
             <div className="flip-card-inner relative w-full max-md:h-[300px] h-[400px] border rounded-md shadow-xl hover:shadow-2xl hover:shadow-black transition-all" style={{transformStyle: "preserve-3d" , transition: "transform 0.6s"}}>
                 <div className="front-card absolute w-full h-full shadow-md overflow-hidden rounded-md" style={{backfaceVisibility: "hidden"}}>
                     <div className="absolute w-full h-full z-10 rounded-md">
-                        <img src={props.imageURL ? props.imageURL : "logo-black.png"} className="relative z-10 object-cover w-full h-full opacity-100 rounded-md" style={{background : "rgba(0,0,0,.5)"}} />
+                        <img src={props.imageURL ? props.imageURL : "logo-black.png"} className="relative z-10 object-cover w-full h-full opacity-100 rounded-md" style={{backgroundColor : "rgba(0,0,0,.5)"}} />
                     </div>
                     <div className="absolute top-0 w-full pl-4 pr-4 pt-3 z-30 rounded-md">
                         <span className="text-base line-clamp-2 max-sm:text-sm text-white font-medium drop-shadow tracking-tight">{props.title}</span>
