@@ -103,7 +103,7 @@ export default function Home() {
                 {whispers.map((obj, index) => advertisingBoolean(index) ?  
                     <div className="w-[24%] ml-[1%] mt-3 max-lg:w-[32%] max-md:w-[49%] max-sm:w-[46%] max-sm:ml-[2%]" key={"index"+index}>
                         <a href={"kategori/"+convertMenusEn(obj.category)+"/"+obj.urlName}>
-                            <FlipCard title={obj.title} img={obj.imageURL} keyNumber={index} name={obj.authorName} category={convertCategoryName(convertMenusEn(obj.category))} source={obj.source} 
+                            <FlipCard title={obj.title} imageURL={obj.imageURL} keyNumber={index} name={obj.authorName} category={convertCategoryName(convertMenusEn(obj.category))} source={obj.source} 
                             description={obj.description} />
                         </a>
                     </div>
