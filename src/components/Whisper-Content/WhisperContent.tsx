@@ -87,12 +87,12 @@ export default function WhisperContent(props) {
                 <div className="h-[0.1px] w-full bg-gray-100"></div>
             </div>
             <div className="mt-8">
-                <h1 className="text-5xl max-sm:text-xl max-md:text-2xl max-lg:text-3xl max-xl:text-4xl">{props.whisper.title}</h1>
+                <h1 className="text-5xl max-sm:text-xl max-md:text-2xl max-lg:text-3xl max-xl:text-4xl drop-shadow-lg font-sans">{props.whisper.title}</h1>
                 <div className="flex justify-center mt-7 mb-2">
                     <img src={props.whisper.imageURL ? props.whisper.imageURL :"../../logo-black.png"} width={"70%"} height={"70%"} className="rounded-lg"/>
                 </div>
                 <div className="mt-5">
-                    <span className="leading-7">
+                    <span className="leading-7 whitespace-pre-wrap">
                         {props.whisper.description} 
                     </span>
                 </div>
