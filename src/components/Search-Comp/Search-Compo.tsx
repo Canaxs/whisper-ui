@@ -38,21 +38,21 @@ export default function SearchCompo(props) {
                     { props.filterData.content.length != 0 ? props.filterData.content.map((obj, index) => 
                             <a href={"/kategori/"+convertMenusEn(obj['category'])+"/"+obj["urlName"]} key={index}>
                                 <Card className="mt-3 shadow-xl hover:shadow-2xl hover:shadow-black transition-all">
-                                    <CardContent className="p-3">
-                                        <div className="flex">
-                                            <div className="flex items-center">
-                                                <img src={obj['imageURL'] ? obj['imageURL'] :"../../logo-black.png"} width={"200"} height={"200"} />
+                                    <CardContent className="p-0">
+                                        <div className="flex w-full h-full">
+                                            <div className="absolute w-full h-full z-0 rounded-lg">
+                                                <img src={obj['imageURL'] ? obj['imageURL'] :"../../logo-black.png"} className='w-full h-full object-cover rounded-lg'/>
                                             </div>
-                                            <div className="flex flex-col pt-7 pl-7">
-                                                <span className="text-gray-400 text-xs font-medium">{obj['category']}</span>
-                                                <span className="text-3xl mt-2 font-medium line-clamp-1 max-md:line-clamp-2 max-sm:text-sm max-md:text-lg max-lg:text-xl max-xl:text-2xl">{obj["title"]}</span>
+                                            <div className="flex flex-col pt-7 pl-7 p-6 z-10">
+                                                <span className="text-white drop-shadow-lg text-xs font-medium">{obj['category']}</span>
+                                                <span className="text-3xl text-slate-100 drop-shadow mt-2 font-medium line-clamp-1 max-md:line-clamp-2 max-sm:text-sm max-md:text-lg max-lg:text-xl max-xl:text-2xl">{obj["title"]}</span>
                                                 <div className="p-0 mt-3 mb-3 ml-0">
                                                     <div className="flex flex-col">
-                                                        <div className="flex items-center">
+                                                        <div className="flex items-center text-slate-100">
                                                             <TbWriting className="size-5 mr-2"/>
-                                                            <HovCard name={obj["authorName"]} />
+                                                            <span className="text-xs drop-shadow-lg pt-2 pb-1">{obj["authorName"]}</span>
                                                         </div>
-                                                        <div className="flex mt-1 items-center">
+                                                        <div className="flex mt-1 items-center text-slate-100">
                                                             <GrResources className="size-5 mr-2"/>
                                                             <span className="text-xs drop-shadow-lg">{obj["source"]}</span>
                                                         </div>
