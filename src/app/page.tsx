@@ -111,7 +111,7 @@ export default function Home() {
                     <React.Fragment key={"reactFragmentKey"}>
                         <div className="w-[24%] ml-[1%] mt-3 max-lg:w-[32%] max-md:w-[49%] max-sm:w-[46%] max-sm:ml-[2%]">
                             <a href={"kategori/"+convertMenusEn(obj.category)+"/"+obj.urlName}>
-                            <FlipCard title={obj.title} img="logo-black.png" keyNumber={index} name={obj.authorName} category={convertCategoryName(convertMenusEn(obj.category))} source={obj.source} 
+                            <FlipCard title={obj.title} imageURL={obj.imageURL} keyNumber={index} name={obj.authorName} category={convertCategoryName(convertMenusEn(obj.category))} source={obj.source} 
                             description={obj.description} />
                             </a>
                         </div>
