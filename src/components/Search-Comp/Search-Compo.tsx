@@ -39,7 +39,7 @@ export default function SearchCompo(props) {
                             <a href={"/kategori/"+convertMenusEn(obj['category'])+"/"+obj["urlName"]} key={index}>
                                 <Card className="mt-3 shadow-xl hover:shadow-2xl hover:shadow-black transition-all">
                                     <CardContent className="p-0">
-                                        <div className="flex w-full h-full">
+                                        <div className="flex w-full h-full relative">
                                             <div className="absolute w-full h-full z-0 rounded-lg">
                                                 <img src={obj['imageURL'] ? obj['imageURL'] :"../../logo-black.png"} className='w-full h-full object-cover rounded-lg'/>
                                             </div>
