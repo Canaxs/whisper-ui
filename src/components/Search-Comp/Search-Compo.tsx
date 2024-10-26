@@ -43,7 +43,9 @@ export default function SearchCompo(props) {
                                             <div className="absolute w-full h-full z-0 rounded-lg">
                                                 <img src={obj['imageURL'] ? obj['imageURL'] :"../../logo-black.png"} className='w-full h-full object-cover rounded-lg'/>
                                             </div>
-                                            <div className="flex flex-col pt-7 pl-7 p-6 z-10">
+                                            <div className="absolute z-10 w-full h-full rounded-lg" style={{backgroundColor: "rgba(0,0,0,.3)"}}>
+                                            </div>
+                                            <div className="flex flex-col pt-7 pl-7 p-6 z-20">
                                                 <span className="text-white drop-shadow-lg text-xs font-medium">{obj['category']}</span>
                                                 <span className="text-3xl text-slate-100 drop-shadow mt-2 font-medium line-clamp-1 max-md:line-clamp-2 max-sm:text-sm max-md:text-lg max-lg:text-xl max-xl:text-2xl">{obj["title"]}</span>
                                                 <div className="p-0 mt-3 mb-3 ml-0">
