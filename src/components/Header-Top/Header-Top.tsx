@@ -165,6 +165,7 @@ export default function HeaderTop(props) {
                     description: "Aranan Kelime: "+filterText.trim(),
                   })
                 router.push("/search?t="+filterText.trim());
+                router.refresh();
             }
             else {
                 toast({
