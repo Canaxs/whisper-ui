@@ -92,8 +92,7 @@ export default function WhisperContent(props) {
                     <img src={props.whisper.imageURL ? props.whisper.imageURL :"../../logo-black.png"} width={"70%"} height={"70%"} className="rounded-lg"/>
                 </div>
                 <div className="mt-5">
-                    <span className="leading-7 whitespace-pre-wrap">
-                        {props.whisper.description} 
+                    <span dangerouslySetInnerHTML={{ __html: props.whisper.description }} className="leading-7 whitespace-pre-wrap">
                     </span>
                 </div>
             </div>

@@ -21,21 +21,26 @@ import {
     AlertDialogTitle,
     AlertDialogTrigger,
   } from "@/components/ui/alert-dialog"
-import { useState } from "react"
+import { useEffect, useState } from "react"
 import { createWhisper } from "@/api/apiCalls"
 import Cookies from 'js-cookie';
 import { ToastAction } from "@/components/ui/toast"
 import { useToast } from "@/components/ui/use-toast"
+import Tiptap from "../Text-Editor/Tiptap"
 
 export default function WriteContent() {
 
     const [title,setTitle] = useState("");
-    const [description,setDescription] = useState("");
+    const [description,setDescription] = useState<string>('');
     const [source,setSource] = useState("");
     const [category,setCategory] = useState("");
     const [image,setImage] = useState<File>();
 
     const { toast } = useToast();
+
+    useEffect(() => {
+        console.log("Desc: "+description);
+    } , [description])
 
 
 
@@ -95,7 +100,7 @@ export default function WriteContent() {
                 <Input type="text" placeholder="Başlık" className="border-none h-16 focus-visible:ring-white text-5xl text-gray-900 transition-all outline-none" onChange={(e) => setTitle(e.target.value.toString())}/>
             </div>
             <div className="h-[500px] shadow-xl mt-2 rounded transition-all">
-                <Textarea placeholder="Haberinizi Yazınız..." className="border-none h-full focus-visible:ring-white text-2xl text-gray-600 transition-all outline-none" onChange={(e) => setDescription(e.target.value.toString())}/>
+                <Tiptap content={description} onChange={(newContent: string) => setDescription(newContent)} />
             </div>
             <div className="w-full max-w-sm items-center gap-1.5 mt-5 flex">
                 <Label htmlFor="picture" className="w-5/12">Resim Yükle</Label>
