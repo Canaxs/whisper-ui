@@ -143,7 +143,8 @@ export default function Docs({
                 <a className="page-card" href={"/kategori/"+params.slug[0]+"/"+content["urlName"]} key={index}>
                     <Card className="mt-3 shadow-xl hover:shadow-2xl hover:shadow-black transition-all relative">
                         <div className="circle1 absolute bottom-0 m-auto flex justify-center items-center">
-                            <span className="drop-shadow-xl font-medium text-black hidden line-clamp-2 ml-5 mr-5">{content['description']}</span>
+                            <span className="drop-shadow-xl font-medium text-black hidden line-clamp-2 ml-5 mr-5" dangerouslySetInnerHTML={{ __html: content['description'] }}>
+                            </span>
                         </div>
                         <CardContent className="p-0">
                             <div className="flex w-full h-full">
