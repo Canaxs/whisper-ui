@@ -37,7 +37,8 @@ export default function FlipCard(props) {
                         <span className="text-base line-clamp-2 max-sm:text-sm font-medium drop-shadow tracking-tight">{props.title}</span>
                         <span className="max-sm:text-xs text-sm drop-shadow">{props.category}</span>
                     </div>
-                    <span className="line-clamp-4 m-3 text-sm">{props.description}</span>
+                    <span className="line-clamp-4 m-3 text-sm" dangerouslySetInnerHTML={{ __html: props.description }}>
+                    </span>
                     <div className="absolute bottom-0 w-full p-3 z-30 rounded-b-md">
                         <div className="flex flex-col relative z-50">
                             <div className="flex relative items-center mb-2">
