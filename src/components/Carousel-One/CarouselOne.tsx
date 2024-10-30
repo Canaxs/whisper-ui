@@ -45,7 +45,7 @@ export default function CarouselOne(props) {
                                                 <span className="drop-shadow text-base font-medium text-white">{obj.title}</span>
                                             </div>
                                             <a href={"/kategori/"+convertMenusEn(obj.category)+"/"+obj.urlName} className="absolute w-full h-full z-20">
-                                                <div className="w-full h-full" style={{backgroundColor : "rgba(0,0,0,.1)"}}>
+                                                <div className="w-full h-full" style={{backgroundColor : "rgba(0,0,0,.3)"}}>
                                             </div>
                                             </a>
                                         </CardContent>
@@ -63,9 +63,12 @@ export default function CarouselOne(props) {
                         <CarouselItem className={"pl-0 basis-[10%] ml-[1%] cursor-pointer"+props.smallClass} key={index}>
                             <div className={props.smallClass}>
                                 <Card className={props.smallClass}>
-                                <CardContent className={"flex items-center justify-center h-full p-0"}>
-                                <a href={"/kategori/"+convertMenusEn(obj.category)+"/"+obj.urlName} className="w-full h-full rounded-md z-10">
-                                    <img src={obj.imageURL ? obj.imageURL :"../logo-black.png"} className="w-full h-full rounded-md"/>
+                                <CardContent className={"flex items-center justify-center h-full p-0 relative"}>
+                                <div className="absolute w-full h-full rounded-md z-10">
+                                    <img src={obj.imageURL ? obj.imageURL :"../logo-black.png"} className="w-full h-full rounded-md object-cover"/>
+                                </div>
+                                <a href={"/kategori/"+convertMenusEn(obj.category)+"/"+obj.urlName} className="absolute w-full h-full rounded-md z-20 flex justify-center items-center" style={{backgroundColor : "rgba(0,0,0,.3)"}}>
+                                    <p className="z-30 text-white text-base">{index+1}</p>
                                 </a>
                                 </CardContent>
                                 </Card>
