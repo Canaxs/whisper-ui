@@ -38,7 +38,7 @@ export default function SearchPage() {
 
     useEffect(() => {
         getFilterData();
-    }, [])
+    }, [searchParams])
 
     async function getFilterData() {
         let page = 0;
@@ -60,7 +60,7 @@ export default function SearchPage() {
         <div>
             <div className="lg:w-[98%] 2xl:w-[65%] pt-1 lg:ml-[1%] 2xl:ml-[17%]">
                 <Header flag={"../../siyah-flag.png"} logo={"../../logo-black.png"} /> 
-                <SearchCompo p={searchParams.get("p")}  t={searchParams.get("t")} notData={notData} filterData={filterData} />
+                <SearchCompo p={searchParams.get("p")}  t={searchParams.get("t")} notData={notData} filterData={filterData} {...filterData} />
             </div>
             <FooterArea src={"../../logo-white.png"}/>
         </div>

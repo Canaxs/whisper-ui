@@ -8,7 +8,7 @@ import { TfiWrite } from "react-icons/tfi";
 import { IoIosNotifications } from "react-icons/io";
 import { HeaderNotify } from "../Header-Notify/HeaderNotify";
 import { Progress } from "@/components/ui/progress"
-import { useRouter } from 'next/navigation';
+import { useRouter } from 'next/navigation'
 import { getWhispersFilter, isExpiredToken } from "@/api/apiCalls";
 import { IoMdLogIn } from "react-icons/io";
 import { RiUserAddFill } from "react-icons/ri";
@@ -59,7 +59,7 @@ export default function HeaderTop(props) {
 
     const [filterOnEnter , setFilterOnEnter] = useState(false);
 
-    const router = useRouter();
+    const router = useRouter()
 
     async function uploadInformation() {
         if(Cookies.get("username") != null) {
@@ -164,8 +164,8 @@ export default function HeaderTop(props) {
                     title: "Arama Sayfasına Yönlendiriliyorsunuz.",
                     description: "Aranan Kelime: "+filterText.trim(),
                   })
-                router.push("/search?t="+filterText.trim());
-                router.refresh();
+                  //window.location.href = '/search?t='+filterText.trim();
+                  router.push('/search?t='+filterText.trim());
             }
             else {
                 toast({
@@ -192,7 +192,7 @@ export default function HeaderTop(props) {
                          onChange={(e) => setFilterText(e.target.value.toString())} 
                          onKeyDown={(e) => enterKey(e)}
                          /> 
-                        <div id="filterData" className={filterData.content.length != 0 ? "h-[300px] w-[450px] absolute top-[90px] rounded-b-lg z-40 bg-white shadow-xl overflow-y-scroll" : "w-[450px] h-auto absolute top-[90px] rounded-b-lg z-40 "} 
+                        <div id="filterData" className={filterData.content.length != 0 ? "max-h-[300px] w-[450px] absolute top-[90px] rounded-b-lg z-40 bg-white shadow-xl overflow-y-scroll" : "w-[450px] h-auto absolute top-[90px] rounded-b-lg z-40 "} 
                             onMouseLeave={() => mouseLeave()}>
                             { filterData.totalElements > 0 ?
                             filterData.content.map((obj, index) => 
@@ -257,7 +257,7 @@ export default function HeaderTop(props) {
                         onChange={(e) => setFilterText(e.target.value.toString())} 
                         onKeyDown={(e) => enterKey(e)}
                         /> 
-                        <div id="filterData" className={filterData.content.length != 0 ? "h-[300px] w-3/4 absolute top-[170px] max-sm:top-[150px] rounded-b-lg z-40 bg-white shadow-xl overflow-y-scroll" : "w-3/4 h-auto absolute max-sm:top-[150px] top-[170px] rounded-b-lg z-40 "} 
+                        <div id="filterData" className={filterData.content.length != 0 ? "max-h-[300px] w-3/4 absolute top-[170px] max-sm:top-[150px] rounded-b-lg z-40 bg-white shadow-xl overflow-y-scroll" : "w-3/4 h-auto absolute max-sm:top-[150px] top-[170px] rounded-b-lg z-40 "} 
                         onMouseLeave={() => mouseLeave()} >
                             { filterData.totalElements != 0 ?
                                 filterData.content.map((obj, index) => 
