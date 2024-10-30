@@ -12,11 +12,23 @@ import {
   } from "@/components/ui/avatar";
   import { HiChatAlt } from "react-icons/hi";
   import { MdOutlineKeyboardBackspace } from "react-icons/md";
+import { useEffect, useState } from "react";
 
+
+export type WriterType = {
+    username: string
+    point: string
+    icon: string
+    comment: string
+}
 
 export default function Writers() {
 
-    const writersExample = [
+    const [writerState , setWriterState] = useState<WriterType[]>([]);
+
+    const [writeCategory , setWriteCategory] = useState("popular");
+
+    const writersPopular = [
         {
             username: "meric",
             point: "2545",
@@ -89,7 +101,82 @@ export default function Writers() {
             icon: "",
             comment: "",
         },
-      ]
+    ]
+
+    const writersMonth = [
+        {
+            username: "fly",
+            point: "5467",
+            icon: "",
+            comment: "",
+        },
+        {
+            username: "kenan",
+            point: "126",
+            icon: "",
+            comment: "",
+        },
+        {
+            username: "princess",
+            point: "6575",
+            icon: "",
+            comment: "",
+        },
+        {
+            username: "sweetie",
+            point: "4533",
+            icon: "",
+            comment: "",
+        }
+    ]
+
+    const writersWeek = [
+        {
+            username: "lolly",
+            point: "664",
+            icon: "",
+            comment: "",
+        },
+        {
+            username: "lovely",
+            point: "653",
+            icon: "",
+            comment: "",
+        },
+        {
+            username: "blossom",
+            point: "2324",
+            icon: "",
+            comment: "",
+        },
+        {
+            username: "cherub",
+            point: "2321",
+            icon: "",
+            comment: "",
+        },
+    ]
+
+    useEffect(() => {
+        if(writeCategory === "popular") {
+            setWriterState(writersPopular)
+        }
+    },[])
+
+    function chooseClick(category) {
+        if(category === "popular") {
+            setWriterState(writersPopular)
+            setWriteCategory("popular")
+        }
+        else if(category === "month") {
+            setWriterState(writersMonth)
+            setWriteCategory("month")
+        }
+        else if(category === "week") {
+            setWriterState(writersWeek)
+            setWriteCategory("week")
+        }
+    }
 
 
     return (
@@ -99,7 +186,11 @@ export default function Writers() {
                 <MdOutlineKeyboardBackspace className="absolute left-2 top-2 size-10 cursor-pointer hover:scale-125 transition-all max-md:top-5 max-md:size-7" title="Anasayfa'ya Git" />
                 </a>
                 <div className="w-3/4 ml-[12.5%] mt-6 mb-6 flex justify-between items-center">
-                    <span className="drop-shadow text-2xl max-lg:text-xl max-md:text-lg max-sm:text-base">Popüler Yazarlar</span>
+                    <div>
+                        <span id="popular" onClick={() => chooseClick("popular")} className={writeCategory == "popular" ? "bg-gray-200 drop-shadow text-2xl max-lg:text-xl max-md:text-lg border border-gray-200 max-sm:text-base shadow-md p-3 m-1 rounded-md cursor-pointer hover:shadow-xl hover:bg-gray-100 transition-all" : "drop-shadow text-2xl max-lg:text-xl max-md:text-lg border border-gray-200 max-sm:text-base shadow-md p-3 cursor-pointer hover:shadow-xl hover:bg-gray-100 transition-all m-1 rounded-md"}>Popüler Yazarlar</span>
+                        <span id="month" onClick={() => chooseClick("month")} className={writeCategory == "month" ? "bg-gray-200 drop-shadow text-2xl max-lg:text-xl max-md:text-lg border border-gray-200 max-sm:text-base shadow-md p-3 m-1 rounded-md cursor-pointer hover:shadow-xl hover:bg-gray-100 transition-all" : "drop-shadow text-2xl max-lg:text-xl max-md:text-lg border border-gray-200 max-sm:text-base shadow-md p-3 cursor-pointer hover:shadow-xl hover:bg-gray-100 transition-al m-1 rounded-md"}>Ayın Yazarları</span>
+                        <span id="week" onClick={() => chooseClick("week")} className={writeCategory == "week" ? "bg-gray-200 drop-shadow text-2xl max-lg:text-xl max-md:text-lg border border-gray-200 max-sm:text-base shadow-md p-3 m-1 rounded-md cursor-pointer hover:shadow-xl hover:bg-gray-100 transition-all" : "drop-shadow text-2xl max-lg:text-xl max-md:text-lg border border-gray-200 max-sm:text-base shadow-md p-3 cursor-pointer hover:shadow-xl hover:bg-gray-100 transition-all m-1 rounded-md"}>Haftanın Yazarları</span>
+                    </div>
                     <div>
                         <img src="../../logo-black.png" width={50} height={50} />
                     </div>
@@ -119,7 +210,7 @@ export default function Writers() {
                             <HiChatAlt className="size-7 text-gray-300" title="Yazar Hakkında Yorumlar"/>
                         </div>
                     </div>
-                    {writersExample.map((obj, index) => (
+                    {writerState.map((obj, index) => (
                         <div className="w-3/4 h-10 border-b border-r border-l flex justify-around text-left pt-10 pb-10 rounded mt-3 shadow-md" key={"index"+index}>
                             <div className="w-1/4 flex justify-center items-center">
                                     <Avatar>
