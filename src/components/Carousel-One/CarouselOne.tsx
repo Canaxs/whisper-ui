@@ -32,7 +32,7 @@ export default function CarouselOne(props) {
         <div>
             {whispers.length != 0 ? 
             <React.Fragment>
-                <Carousel className={props.bigClass+" drop-shadow-xl"} plugins={[Autoplay({delay: 2000, }),]}>
+                <Carousel className={props.bigClass+" drop-shadow-xl"} plugins={[Autoplay({delay: 5000, }),]}>
                     <CarouselContent className={props.bigClass}>
                     {whispers.map((obj, index) => ( 
                             <CarouselItem className={props.bigClass} key={index}>
