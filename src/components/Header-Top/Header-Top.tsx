@@ -112,7 +112,6 @@ export default function HeaderTop(props) {
                 console.log("Error Filter");
             });
         }
-         console.log(filterData);
     }
 
     useEffect(() => {

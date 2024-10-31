@@ -24,7 +24,6 @@ export default function CarouselOne(props) {
     async function getCarousel() {
         await getCarouselBig().then((res) => {
             setWhispers(res.data)
-            console.log(res.data);
         })
     }
 
