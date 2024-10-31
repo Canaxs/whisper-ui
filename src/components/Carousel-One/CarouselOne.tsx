@@ -39,7 +39,7 @@ export default function CarouselOne(props) {
                                     <Card className={""+props.bigClass}>
                                         <CardContent className={"flex items-center justify-center p-0 w-full "+props.bigClass}>
                                             <div className="w-full h-full z-10">
-                                                <img  src={obj.imageURL ? obj.imageURL :"../logo-black.png"} className="w-full h-full rounded-md object-fill" />
+                                                <img  src={obj.imageURL ? obj.imageURL :"../logo-black.png"} className="w-full h-full rounded-md object-cover" />
                                             </div>
                                             <div className="absolute bottom-10 w-5/6 text-center line-clamp-2 p-2 rounded-md z-30 shadow-xl" style={{backgroundColor : "rgba(0,0,0,.5)"}}>
                                                 <span className="drop-shadow text-base font-medium text-white">{obj.title}</span>
