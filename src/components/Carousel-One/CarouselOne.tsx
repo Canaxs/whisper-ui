@@ -45,8 +45,8 @@ export default function CarouselOne(props) {
                                             <div className="absolute bottom-10 w-5/6 text-center line-clamp-2 p-2 rounded-md z-30 shadow-xl" style={{backgroundColor : "rgba(0,0,0,.5)"}}>
                                                 <span className="drop-shadow text-base font-medium text-white">{obj.title}</span>
                                             </div>
-                                            <a href={"/kategori/"+convertMenusEn(obj.category)+"/"+obj.urlName} className="absolute w-full h-full z-20">
-                                                <div className="w-full h-full" style={{backgroundColor : "rgba(0,0,0,.3)"}}>
+                                            <a href={"/kategori/"+convertMenusEn(obj.category)+"/"+obj.urlName} className="absolute w-full h-full z-20 rounded-md">
+                                                <div className="w-full h-full rounded-md" style={{backgroundColor : "rgba(0,0,0,.3)"}}>
                                             </div>
                                             </a>
                                         </CardContent>
