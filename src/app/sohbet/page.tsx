@@ -56,7 +56,7 @@ export default function AllChat() {
     const { toast } = useToast();
 
     function dialogControl() {
-        if(!Cookies.get("token")) {
+        if(Cookies.get("token")) {
             setDialogOpen(true);
         }
         else {
