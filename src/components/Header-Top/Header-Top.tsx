@@ -27,6 +27,9 @@ import {
 import { Input } from "../ui/input";
 import { convertMenus, convertMenusEn } from "@/lib/menuEnum";
 import { useToast } from "@/components/ui/use-toast"
+import { BsChat } from "react-icons/bs";
+
+
 
 export default function HeaderTop(props) { 
 
@@ -218,6 +221,9 @@ export default function HeaderTop(props) {
                             }
                         </div>
                     </div>
+                </div>
+                <div className="flex items-center cursor-pointer">
+                    <a href="/sohbet"><img src="söylesi.png" width={80} height={80} className="transition-all hover:-rotate-6" /></a>
                 </div>
                 <div className="flex items-center max-md:mr-[1%]">
                     {isUser === false ? (

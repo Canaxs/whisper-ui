@@ -1,0 +1,95 @@
+import {
+    Avatar,
+    AvatarFallback,
+    AvatarImage,
+  } from "@/components/ui/avatar"
+  import {
+    Card,
+    CardContent,
+    CardDescription,
+    CardFooter,
+    CardHeader,
+    CardTitle,
+  } from "@/components/ui/card"
+import { GrResources } from "react-icons/gr";
+import { TbWriting } from "react-icons/tb";
+import { useEffect } from "react"
+import { SlLike  , SlDislike  } from "react-icons/sl";
+import { HiMiniChatBubbleLeftRight } from "react-icons/hi2";
+
+export default function ChatCard(props) {
+
+
+    useEffect(() => {
+
+    } ,[])
+
+    function getWhisper() {
+
+    }
+
+
+    return (
+        <div key={props.key} className="mt-5 border-gray-200 border rounded p-2 hover:shadow-xl transition-all">
+            <div className="flex justify-start">
+                <Avatar className="w-7 h-7">
+                    <AvatarImage src="https://github.com/shadcn.png" alt="@shadcn" />
+                    <AvatarFallback>CN</AvatarFallback>
+                </Avatar>
+                <div className="relative bottom-[2px] ml-3">
+                    <div>
+                        <span className="drop-shadow text-black text-sm">meric</span>
+                        <span className="text-gray-400 drop-shadow ml-1 text-base">·</span>
+                        <span className="text-gray-400 drop-shadow ml-1 text-sm">Oct 01</span>
+                    </div>
+                    <div className="mr-5 cursor-pointer">
+                        <span className="text-base line-clamp-2">Lorem ipsum dolor sit, amet consectetur adipisicing elit. Obcaecati laboriosam et at quibusdam accusamus commodi deleniti 
+                        temporibus dicta qui omnis totam odio perferendis doloribus, itaque autem nostrum quaerat numquam repudiandae!</span>
+                    </div>
+                    <div className="w-3/5">
+                        <a className="page-card w-full" href={"/kategori/spor/goztepetrabzonspor-maci-oncesi-son-dakika-37"}>
+                            <Card className="mt-3 shadow-xl hover:shadow-2xl hover:shadow-gray-400 transition-all relative w-full">
+                                <div className="circle1 absolute bottom-0 m-auto flex justify-center items-center">
+                                    <span className="drop-shadow-xl font-medium text-black hidden line-clamp-1 ml-5 mr-5" dangerouslySetInnerHTML={{ __html: "Lorem İpsum dolor" }}>
+                                    </span>
+                                </div>
+                                <CardContent className="p-0">
+                                    <div className="flex w-full h-full">
+                                        <div className="w-full h-full absolute z-0 rounded-lg">
+                                            <img src={"../../logo-black.png"} className="rounded-lg h-full w-full object-cover"/>
+                                        </div>
+                                        <div className="absolute z-10 w-full h-full rounded-lg" style={{backgroundColor: "rgba(0,0,0,.5)"}}>
+                                        </div>
+                                        <div className="flex flex-col w-full p-1 z-20">
+                                            <span className="text-white drop-shadow-xl text-xs font-medium">{"SPOR"}</span>
+                                            <span className="text-xl text-slate-100 drop-shadow mt-2 font-medium line-clamp-1 max-sm:text-sm max-md:text-lg ">
+                                                Bir Haber Sitesinden Daha Fazlası
+                                            </span>
+                                            <div className="p-0 mt-1 mb-1 ml-0">
+                                                <div className="flex flex-col">
+                                                    <div className="flex items-center text-slate-100">
+                                                        <TbWriting className="size-3 mr-2"/>
+                                                        <span className="text-xs drop-shadow-lg pt-1 pb-1">{"meric"}</span>
+                                                    </div>
+                                                    <div className="flex mt-1 items-center text-slate-100">
+                                                        <GrResources className="size-3 mr-2"/>
+                                                        <span className="text-xs drop-shadow-lg">{"söylenti.com"}</span>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </CardContent>
+                            </Card>
+                        </a>
+                    </div>
+                    <div className="flex mt-3">
+                            <SlLike  className="size-5 cursor-pointer hover:scale-110 transition-all hover:text-green-400"/>
+                            <SlDislike  className="size-5 ml-3 cursor-pointer hover:scale-110 transition-all hover:text-red-400"/>
+                            <HiMiniChatBubbleLeftRight className="size-6 ml-5 relative bottom-[2px] text-gray-400 hover:scale-110 transition-all cursor-pointer" />
+                    </div>
+                </div>
+            </div>
+        </div>
+    )
+}
