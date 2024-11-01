@@ -203,7 +203,7 @@ export default function AllChat() {
                                                 onMouseLeave={() => mouseLeave()}>
                                                 { filterData.totalElements > 0 ?
                                                 filterData.content.map((obj, index) => 
-                                                        <div className="h-10 w-full flex cursor-pointer shadow-md mt-2 items-center p-2 rounded-b-lg" onClick={() => whisperClick(obj)}>
+                                                        <div className="h-10 w-full flex cursor-pointer shadow-md mt-2 items-center p-2 rounded-b-lg" key={"filter"+index} onClick={() => whisperClick(obj)}>
                                                             <div className="w-[20%]">
                                                                 <img src={"logo-black.png"} alt="Söylenti" className="w-[50px] h-[35px] max-sm:w-[30px] max-sm:h-[25px] " title="Söylenti"/>
                                                             </div>
