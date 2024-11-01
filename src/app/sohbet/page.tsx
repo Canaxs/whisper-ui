@@ -256,7 +256,11 @@ export default function AllChat() {
                         </div>
                     </div>
                     <div className="mt-14 ml-[20%] w-3/5 max-xl:w-full max-xl:ml-0">
-                        {Array.from({ length: 50 }).map((_ , index) => <ChatCard key={"Deneme"+index} />)}
+                        {Array.from({ length: 50 }).map((obj , index) => 
+                        <div key={"chat"+index}>
+                            <ChatCard />
+                        </div>
+                        )}
                     </div>
                 </div>
             </div>
