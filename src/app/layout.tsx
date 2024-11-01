@@ -7,6 +7,8 @@ import { useSelector } from "react-redux";
 import { RootState } from "@/lib/store";
 import { Toaster } from "@/components/ui/toaster"
 import { Suspense } from "react";
+import { PiChatCircleThin } from "react-icons/pi";
+
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -24,6 +26,12 @@ export default function RootLayout({children,}: Readonly<{children: React.ReactN
         <Suspense fallback={null}>
             <div className="w-full h-full">  
               {children}
+              <a href="/sohbet">
+                <div className="fixed right-3 bottom-3 cursor-pointer flex items-center justify-center opacity-60 hover:opacity-100 transition-all">
+                  <PiChatCircleThin className="size-16" />
+                  <img src="söylesi.png" width={45} height={45} className="absolute"/>
+                </div>
+              </a>
             </div>
           </Suspense>
         <Toaster />

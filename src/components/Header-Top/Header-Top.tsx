@@ -27,7 +27,9 @@ import {
 import { Input } from "../ui/input";
 import { convertMenus, convertMenusEn } from "@/lib/menuEnum";
 import { useToast } from "@/components/ui/use-toast"
-import { BsChat } from "react-icons/bs";
+import { IoIosArrowForward } from "react-icons/io";
+
+
 
 
 
@@ -188,7 +190,7 @@ export default function HeaderTop(props) {
                     <div className="h-1/2 mt-[8%] w-[1px] bg-slate-300 ml-5 "></div>
                         <img src={props.flag} className="ml-2 mb-1 w-[100px] h-[90px]  max-sm:w-[80px] max-sm:h-[75px]" alt="Türk Bayrağı" title="Türk Bayrağı" />
                 </div>
-                <div className="flex items-center max-md:hidden">
+                <div className="items-center flex max-md:hidden">
                     <div className="flex flex-col">
                         <Input type="text" id="search" placeholder="&#128270; Haber Ara..." className="rounded-lg border shadow-md md:min-w-[450px] h-10 focus-visible:ring-0 focus-visible:ring-offset-0 focus-visible:ring-white"
                          onChange={(e) => setFilterText(e.target.value.toString())} 
@@ -222,9 +224,6 @@ export default function HeaderTop(props) {
                         </div>
                     </div>
                 </div>
-                <div className="flex items-center cursor-pointer">
-                    <a href="/sohbet"><img src="söylesi.png" width={80} height={80} className="transition-all hover:-rotate-6" /></a>
-                </div>
                 <div className="flex items-center max-md:mr-[1%]">
                     {isUser === false ? (
                         <div role="status" className="mr-10">
@@ -256,7 +255,7 @@ export default function HeaderTop(props) {
                     }
                 </div>
             </div>
-            <div className="flex items-center justify-center md:hidden mb-5 mt-3">
+            <div className="flex items-center justify-center mb-5 mt-1 md:hidden">
                 <div className="flex flex-col w-3/4">
                         <Input type="text" placeholder="&#128270; Haber Ara..." className="rounded-lg border shadow-md w-full h-10 focus-visible:ring-0 focus-visible:ring-offset-0 focus-visible:ring-white" 
                         onChange={(e) => setFilterText(e.target.value.toString())} 

@@ -30,23 +30,23 @@ export default function ChatCard(props) {
 
 
     return (
-        <div key={props.key} className="mt-5 border-gray-200 border rounded p-2 hover:shadow-xl transition-all">
+        <div key={props.key} className="mt-5 border-gray-200 border rounded p-2 hover:shadow-xl transition-all cursor-pointer">
             <div className="flex justify-start">
                 <Avatar className="w-7 h-7">
                     <AvatarImage src="https://github.com/shadcn.png" alt="@shadcn" />
                     <AvatarFallback>CN</AvatarFallback>
                 </Avatar>
-                <div className="relative bottom-[2px] ml-3">
+                <div className="relative bottom-[2px] ml-3 mr-3">
                     <div>
                         <span className="drop-shadow text-black text-sm">meric</span>
                         <span className="text-gray-400 drop-shadow ml-1 text-base">·</span>
                         <span className="text-gray-400 drop-shadow ml-1 text-sm">Oct 01</span>
                     </div>
-                    <div className="mr-5 cursor-pointer">
+                    <div className="mr-5">
                         <span className="text-base line-clamp-2">Lorem ipsum dolor sit, amet consectetur adipisicing elit. Obcaecati laboriosam et at quibusdam accusamus commodi deleniti 
                         temporibus dicta qui omnis totam odio perferendis doloribus, itaque autem nostrum quaerat numquam repudiandae!</span>
                     </div>
-                    <div className="w-3/5">
+                    <div className="w-3/5 max-sm:w-full">
                         <a className="page-card w-full" href={"/kategori/spor/goztepetrabzonspor-maci-oncesi-son-dakika-37"}>
                             <Card className="mt-3 shadow-xl hover:shadow-2xl hover:shadow-gray-400 transition-all relative w-full">
                                 <div className="circle1 absolute bottom-0 m-auto flex justify-center items-center">
