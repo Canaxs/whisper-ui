@@ -182,8 +182,8 @@ export default function AllChat() {
                             <DialogTrigger asChild>
                                 <div className={Cookies.get("token") ? "flex items-center hover:shadow-gray-200 hover:bg-gray-100 hover:shadow-xl transition-all cursor-pointer border border-gray-200 shadow-md p-2 rounded" : "flex items-center transition-all cursor-no-drop border border-gray-200 shadow-md p-2 rounded"}
                                     onClick={() => dialogControl()}>
-                                    <PiPencilSimpleLine className={Cookies.get("token") ? "mr-1 size-7 max-sm:size-5 hover:text-black transition-all" : "cursor-no-drop mr-1 size-7 max-sm:size-5 hover:text-black transition-all" }/>
-                                    <Label className={Cookies.get("token") ?"text-base max-sm:text-sm drop-shadow-xl" : "cursor-no-drop text-base max-sm:text-sm drop-shadow-xl"}>Yaz</Label>
+                                    <PiPencilSimpleLine className={Cookies.get("token") ? "mr-1 size-7 max-sm:size-5 hover:text-black transition-all cursor-pointer" : "cursor-no-drop mr-1 size-7 max-sm:size-5 hover:text-black transition-all" }/>
+                                    <Label className={Cookies.get("token") ? "text-base max-sm:text-sm drop-shadow-xl cursor-pointer" : "cursor-no-drop text-base max-sm:text-sm drop-shadow-xl"}>Yaz</Label>
                                 </div>
                             </DialogTrigger>
                             <DialogContent className={Cookies.get("token") ? "sm:max-w-[425px]" : "hidden"}>
