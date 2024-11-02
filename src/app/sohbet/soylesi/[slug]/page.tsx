@@ -1,3 +1,5 @@
+"use client";
+import { useRouter } from 'next/router'
 import {
     Avatar,
     AvatarFallback,
@@ -15,22 +17,25 @@ import { GrResources } from "react-icons/gr";
 import { TbWriting } from "react-icons/tb";
 import { useEffect } from "react"
 import { SlLike  , SlDislike  } from "react-icons/sl";
-import { HiMiniChatBubbleLeftRight } from "react-icons/hi2";
+import { MdOutlineKeyboardBackspace } from "react-icons/md";
+import { VscCommentDiscussion } from "react-icons/vsc";
+import { Textarea } from '@/components/ui/textarea';
+import { Button } from '@/components/ui/button';
 
-export default function ChatCard(props) {
+
+export default function SoylesiPage() {
 
 
-    useEffect(() => {
-
-    } ,[])
-
-    function getWhisper() {
-
-    }
+    //const router = useRouter();
 
 
     return (
-        <div key={props.key} className="mt-5 border-gray-200 border rounded p-2 hover:shadow-xl transition-all cursor-pointer">
+        <div className='w-full h-full'>
+            <a href="/sohbet">
+                <MdOutlineKeyboardBackspace className="absolute left-2 top-2 size-10 cursor-pointer hover:scale-125 transition-all max-md:top-5 max-md:size-7 z-50" title="Anasayfa'ya Git" />
+            </a>
+        <div className='w-4/5 ml-[10%]'>
+        <div className="mt-5 border-gray-200 border rounded p-2">
             <div className="flex justify-start">
                 <Avatar className="w-7 h-7">
                     <AvatarImage src="https://github.com/shadcn.png" alt="@shadcn" />
@@ -39,11 +44,9 @@ export default function ChatCard(props) {
                 <div className="relative bottom-[2px] ml-3 mr-3">
                     <div>
                         <span className="drop-shadow text-black text-sm">meric</span>
-                        <span className="text-gray-400 drop-shadow ml-1 text-base">·</span>
-                        <span className="text-gray-400 drop-shadow ml-1 text-sm">Oct 01</span>
                     </div>
                     <div className="mr-5 max-sm:mr-1">
-                        <span className="text-base line-clamp-2 max-sm:text-sm">Lorem ipsum dolor sit, amet consectetur adipisicing elit. Obcaecati laboriosam et at quibusdam accusamus commodi deleniti 
+                        <span className="text-base max-sm:text-sm">Lorem ipsum dolor sit, amet consectetur adipisicing elit. Obcaecati laboriosam et at quibusdam accusamus commodi deleniti 
                         temporibus dicta qui omnis totam odio perferendis doloribus, itaque autem nostrum quaerat numquam repudiandae!</span>
                     </div>
                     <div className="w-3/5 max-sm:w-full">
@@ -83,13 +86,59 @@ export default function ChatCard(props) {
                             </Card>
                         </a>
                     </div>
-                    <div className="flex mt-3">
-                            <SlLike  className="size-5 cursor-pointer hover:scale-110 transition-all hover:text-green-400"/>
-                            <SlDislike  className="size-5 ml-3 cursor-pointer hover:scale-110 transition-all hover:text-red-400"/>
-                            <a href="/sohbet/soylesi/1"><HiMiniChatBubbleLeftRight className="size-6 ml-5 relative bottom-[2px] text-gray-400 hover:scale-110 transition-all cursor-pointer" /></a>
+                    <div className='mt-3'>
+                        <span className="text-gray-400 ml-1 text-sm">11.36 PM</span>
+                        <span className="text-gray-400 ml-2 text-base">·</span>
+                        <span className="text-gray-400 ml-2 text-sm">Oct 01</span>
+                        <span className="text-gray-400 ml-2 text-base">·</span>
+                        <span className="text-gray-400 ml-2 text-sm"><span className='font-medium text-gray-600'>2.8M</span> Views</span>
+                    </div>
+                    <div className="flex mt-3 justify-around">
+                            <SlLike  className="size-7 cursor-pointer hover:scale-110 transition-all hover:text-green-400"/>
+                            <SlDislike  className="size-7 cursor-pointer hover:scale-110 transition-all hover:text-red-400"/>
+                            <span className='flex'>
+                            <VscCommentDiscussion className='size-7'/>
+                            <span className='font-medium ml-1'>20</span>
+                            </span>
+                    </div>
+                    <div className='mt-10 flex'>
+                        <Avatar className="w-7 h-7">
+                            <AvatarImage src="https://github.com/shadcn.png" alt="@shadcn" />
+                            <AvatarFallback>CN</AvatarFallback>
+                        </Avatar>
+                        <Textarea className='ml-2 w-4/5'></Textarea>
+                        <div className='flex items-center ml-5'>
+                            <Button className='bg-gray-400'>Gönder</Button>
+                        </div>
+                    </div>
+                    <div className='mt-10'>
+                    {Array.from({ length: 20 }).map((obj , index) => 
+                        <div className='flex mt-3' key={"obj"+index}>
+                            <div className='flex'>
+                                <Avatar className="w-7 h-7">
+                                    <AvatarImage src="https://github.com/shadcn.png" alt="@shadcn" />
+                                    <AvatarFallback>CN</AvatarFallback>
+                                </Avatar>
+                                <div className='flex flex-col ml-2'>
+                                    <div>
+                                    <span className="drop-shadow text-black text-sm">meric</span>
+                                    <span className="text-gray-400 ml-2 text-base">·</span>
+                                    <span className="text-gray-400 ml-2 text-sm">Oct 01</span>
+                                    </div>
+                                    <span className='mt-1'>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Deserunt voluptatibus id laboriosam expedita, 
+                                    et suscipit est corporis reprehenderit fuga sequi aliquid officia aperiam sunt sed tempore nulla voluptates. Suscipit, laboriosam?</span>
+                                </div>
+                            </div>
+                        </div>
+                        )}
+                    </div>
+                    <div>
+                            
                     </div>
                 </div>
             </div>
+        </div>
+        </div>
         </div>
     )
 }
