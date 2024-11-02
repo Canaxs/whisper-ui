@@ -31,6 +31,8 @@ export default function AllChat() {
 
     const [selectNew , setSelectNew] = useState(false);
 
+    const [isToken , setIsToken] = useState(false);
+
     const [notNew , setNotNew] = useState(false);
 
     const [selectWhisper , setSelectWhisper] = useState({
@@ -54,6 +56,12 @@ export default function AllChat() {
         totalPages: 0
     });
     const { toast } = useToast();
+
+    useEffect(() => {
+        if(Cookies.get("token")) {
+            setIsToken(true);
+        }
+    }, [])
 
     function dialogControl() {
         if(Cookies.get("token")) {
@@ -180,9 +188,9 @@ export default function AllChat() {
                         <div className="flex items-center">
                         <Dialog open={dialogOpen}>
                             <DialogTrigger asChild>
-                                <div className={Cookies.get("token") ? "flex items-center hover:shadow-gray-200 hover:bg-gray-100 hover:shadow-xl transition-all cursor-pointer border border-gray-200 shadow-md p-2 rounded" : "flex items-center transition-all cursor-no-drop border border-gray-200 shadow-md p-2 rounded"} onClick={() => dialogControl()}>
-                                    <PiPencilSimpleLine className={Cookies.get("token") ? "mr-1 size-7 max-sm:size-5 hover:text-black transition-all cursor-pointer" : "cursor-no-drop mr-1 size-7 max-sm:size-5 hover:text-black transition-all" }/>
-                                    <Label className={Cookies.get("token") ? "text-base max-sm:text-sm drop-shadow-xl cursor-pointer" : "cursor-no-drop text-base max-sm:text-sm drop-shadow-xl"}>Yaz</Label>
+                                <div className={isToken ? "flex items-center hover:shadow-gray-200 hover:bg-gray-100 hover:shadow-xl transition-all cursor-pointer border border-gray-200 shadow-md p-2 rounded" : "flex items-center opacity-30 cursor-no-drop transition-all border border-gray-200 shadow-md p-2 rounded"} onClick={() => dialogControl()}>
+                                    <PiPencilSimpleLine className={isToken ? "mr-1 size-7 max-sm:size-5 hover:text-black transition-all cursor-pointer" : "cursor-no-drop mr-1 size-7 max-sm:size-5"}/>
+                                    <Label className={isToken ? "text-base max-sm:text-sm drop-shadow-xl cursor-pointer" : "text-base max-sm:text-sm drop-shadow-xl cursor-no-drop"}>Yaz</Label>
                                 </div>
                             </DialogTrigger>
                             <DialogContent className={Cookies.get("token") ? "sm:max-w-[425px]" : "hidden"}>
