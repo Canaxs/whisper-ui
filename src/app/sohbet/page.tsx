@@ -183,7 +183,7 @@ export default function AllChat() {
                 <a href="/">
                     <MdOutlineKeyboardBackspace className="absolute left-2 top-2 size-10 cursor-pointer hover:scale-125 transition-all max-md:top-5 max-md:size-7 z-50" title="Anasayfa'ya Git" />
                 </a>
-                <div className="w-3/4 ml-[12.5%] relative top-5">
+                <div className="w-3/4 ml-[12.5%] max-sm:w-[90%] max-sm:ml-[5%] max-sm:top-10 relative top-5">
                     <div className="flex justify-between w-full items-center">
                         <div className="flex items-center">
                         <Dialog open={dialogOpen}>

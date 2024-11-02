@@ -42,8 +42,8 @@ export default function ChatCard(props) {
                         <span className="text-gray-400 drop-shadow ml-1 text-base">·</span>
                         <span className="text-gray-400 drop-shadow ml-1 text-sm">Oct 01</span>
                     </div>
-                    <div className="mr-5">
-                        <span className="text-base line-clamp-2">Lorem ipsum dolor sit, amet consectetur adipisicing elit. Obcaecati laboriosam et at quibusdam accusamus commodi deleniti 
+                    <div className="mr-5 max-sm:mr-1">
+                        <span className="text-base line-clamp-2 max-sm:text-sm">Lorem ipsum dolor sit, amet consectetur adipisicing elit. Obcaecati laboriosam et at quibusdam accusamus commodi deleniti 
                         temporibus dicta qui omnis totam odio perferendis doloribus, itaque autem nostrum quaerat numquam repudiandae!</span>
                     </div>
                     <div className="w-3/5 max-sm:w-full">
