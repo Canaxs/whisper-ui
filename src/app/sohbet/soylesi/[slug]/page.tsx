@@ -65,6 +65,7 @@ export default function SoylesiPage({
     }
 
     async function submitComment() {
+        let OK = false;
         const disputeCommentDTO = {
             description : comment,
             disputeId: (await params).slug
@@ -75,12 +76,17 @@ export default function SoylesiPage({
                 title: "Yorum oluşturuldu",
                 description: "Başarıyla Yorum eklendi"
               })
+              OK = true;
         },(exception) => {
             toast({
                 variant: "destructive",
                 title: "Yorum Oluşturulamadı",
                 description: "Tekrar deneyiniz",
               })
+        }).finally(() => {
+            if(OK) {
+                getDisputeFunc();
+            }
         })
     }
 

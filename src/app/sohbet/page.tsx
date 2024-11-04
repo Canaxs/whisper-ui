@@ -21,7 +21,15 @@ import { Input } from "@/components/ui/input";
 import { createDispute, getAllDispute, getWhispersFilter } from "@/api/apiCalls";
 import { convertMenusEn } from "@/lib/menuEnum";
 import { Textarea } from "@/components/ui/textarea";
-
+import {
+    Pagination,
+    PaginationContent,
+    PaginationEllipsis,
+    PaginationItem,
+    PaginationLink,
+    PaginationNext,
+    PaginationPrevious,
+  } from "@/components/ui/pagination"
 
 export default function AllChat() {
 
@@ -37,7 +45,7 @@ export default function AllChat() {
 
     const [description , setDescription] = useState("");
 
-    const [page, setPage] = useState(0); 
+    const [page, setPage] = useState(1); 
 
     const [selectWhisper , setSelectWhisper] = useState({
         id: "",
@@ -200,6 +208,7 @@ export default function AllChat() {
     }
 
     async function submit() {
+        let OK = false;
         const createDisputeRequest = {
             description : description,
             whisperId: selectWhisper.id
@@ -210,6 +219,7 @@ export default function AllChat() {
                 title: "Söyleşi oluşturuldu",
                 description: "Başarıyla kayıt edildi "
               })
+              OK = true;
         }, (exception) => {
             toast({
                 variant: "destructive",
@@ -218,12 +228,15 @@ export default function AllChat() {
               })
         }).finally(() => {
             closeButton()
+            if(OK) {
+                getDisputeData();
+            }
         })
         
     }
 
     async function getDisputeData() {
-        await getAllDispute(page).then((res) => {
+        await getAllDispute(page-1).then((res) => {
             setDisputeData(res.data)
         })
     }
@@ -320,6 +333,27 @@ export default function AllChat() {
                                 <ChatCard obj={obj} />
                             </div>
                         )}
+                    </div>
+                    <div className="mt-5">
+                    <Pagination>
+                            <PaginationContent>
+                                <PaginationItem>
+                                    {page <= 1 ? <PaginationPrevious className="opacity-20 cursor-no-drop"/>
+                                    : <PaginationPrevious onClick={() => setPage(page-1)} />
+                                    }
+                                </PaginationItem>
+                                <PaginationItem>
+                                        <PaginationLink className={(page-1) > 0 ? "" : "hidden"}>{page-1}</PaginationLink>
+                                        <PaginationLink isActive>{page}</PaginationLink>
+                                        <PaginationLink className={(page+1) >= disputeData.totalPages ? "" : "hidden"}>{page+1}</PaginationLink>
+                                    </PaginationItem>
+                                <PaginationItem>
+                                    {page >= 1  && disputeData.totalPages > page ? <PaginationNext onClick={() => setPage(page+1)}/> 
+                                    : <PaginationNext className="opacity-20 cursor-no-drop" /> 
+                                    }
+                                </PaginationItem>
+                            </PaginationContent>
+                        </Pagination>
                     </div>
                 </div>
             </div>
