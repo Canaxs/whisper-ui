@@ -24,6 +24,7 @@ import { createDisputeComment, getDispute } from '@/api/apiCalls';
 import Cookies from 'js-cookie'
 import { description } from "@/components/Chart-Comp/ChartComp";
 import { useToast } from "@/components/ui/use-toast"
+import { useRouter } from "next/navigation";
 
 
 export default function SoylesiPage({
@@ -44,6 +45,8 @@ export default function SoylesiPage({
         disputeComments: [],
     });
 
+    const router = useRouter();
+
     const { toast } = useToast();
 
     const [isLogin , setLogin] = useState(false);
@@ -57,10 +60,13 @@ export default function SoylesiPage({
         }
     }, [])
 
+
     async function getDisputeFunc() {
         const slug = (await params).slug
         await getDispute(slug).then((res) => {
             setDispute(res.data);
+        }, (exception) => {
+            router.push("/404");
         })
     }
 

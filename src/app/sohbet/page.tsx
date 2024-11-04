@@ -92,6 +92,10 @@ export default function AllChat() {
         getDisputeData();
     }, [])
 
+    useEffect(() => {
+        getDisputeData();
+    }, [page])
+
     function dialogControl() {
         if(Cookies.get("token")) {
             setDialogOpen(true);

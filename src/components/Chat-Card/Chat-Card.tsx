@@ -92,7 +92,7 @@ export default function ChatCard(props) {
                                 <span className="ml-1 font-medium text-sm text-gray-500">{"5"}</span>
                             </div>
                             <div className="flex">
-                                <a href="/sohbet/soylesi/1">
+                                <a href={"/sohbet/soylesi/"+props.obj['id']}>
                                     <HiMiniChatBubbleLeftRight className="size-6 ml-5 relative bottom-[2px] text-gray-400 hover:scale-110 transition-all cursor-pointer" />
                                 </a>
                                 <span className="ml-1 font-medium text-sm text-gray-500">{props.obj['commentSize']}</span>
