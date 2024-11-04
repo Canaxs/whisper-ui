@@ -83,13 +83,19 @@ export default function ChatCard(props) {
                         </a>
                     </div>
                     <div className="flex mt-3">
-                            <SlLike  className="size-5 cursor-pointer hover:scale-110 transition-all hover:text-green-400"/>
-                            <SlDislike  className="size-5 ml-3 cursor-pointer hover:scale-110 transition-all hover:text-red-400"/>
-                            <div>
+                            <div className="flex">
+                                <SlLike  className="size-5 cursor-pointer hover:scale-110 transition-all hover:text-green-400"/>
+                                <span className="ml-1 font-medium text-sm text-gray-500">{"5"}</span>
+                            </div>
+                            <div className="flex">
+                                <SlDislike  className="size-5 ml-3 cursor-pointer hover:scale-110 transition-all hover:text-red-400"/>
+                                <span className="ml-1 font-medium text-sm text-gray-500">{"5"}</span>
+                            </div>
+                            <div className="flex">
                                 <a href="/sohbet/soylesi/1">
                                     <HiMiniChatBubbleLeftRight className="size-6 ml-5 relative bottom-[2px] text-gray-400 hover:scale-110 transition-all cursor-pointer" />
                                 </a>
-                                <span className="ml-1 font-medium">{props.obj['commentSize']}</span>
+                                <span className="ml-1 font-medium text-sm text-gray-500">{props.obj['commentSize']}</span>
                             </div>
                     </div>
                 </div>
