@@ -16,21 +16,21 @@ import { TbWriting } from "react-icons/tb";
 import { useEffect } from "react"
 import { SlLike  , SlDislike  } from "react-icons/sl";
 import { HiMiniChatBubbleLeftRight } from "react-icons/hi2";
+import { useRouter } from "next/navigation";
+import { convertMenusEn } from "@/lib/menuEnum";
 
 export default function ChatCard(props) {
 
+    const router = useRouter();
 
-    useEffect(() => {
 
-    } ,[])
-
-    function getWhisper() {
-
+    function routeLink() {
+        router.push("/sohbet/soylesi/"+props.obj['id']);
     }
 
 
     return (
-        <div key={props.key} className="mt-5 border-gray-200 border rounded p-2 hover:shadow-xl transition-all cursor-pointer">
+        <div key={props.key} className="mt-5 border-gray-200 border rounded p-2 hover:shadow-xl transition-all cursor-pointer" onClick={() => routeLink()}>
             <div className="flex justify-start">
                 <Avatar className="w-7 h-7">
                     <AvatarImage src="https://github.com/shadcn.png" alt="@shadcn" />
@@ -46,7 +46,7 @@ export default function ChatCard(props) {
                         <span className="text-base line-clamp-2 max-sm:text-sm">{props.obj['description']}</span>
                     </div>
                     <div className="w-3/5 max-sm:w-full">
-                        <a className="page-card w-full" href={"/kategori/spor/goztepetrabzonspor-maci-oncesi-son-dakika-37"}>
+                        <a className="page-card w-full" href={"/kategori/"+convertMenusEn(props.obj["whisperCategory"])+"/"+props.obj['whisperUrlName']}>
                             <Card className="mt-3 shadow-xl hover:shadow-2xl hover:shadow-gray-400 transition-all relative w-full">
                                 <div className="circle1 absolute bottom-0 m-auto flex justify-center items-center">
                                     <span className="drop-shadow-xl font-medium text-black hidden line-clamp-1 ml-5 mr-5" dangerouslySetInnerHTML={{ __html: props.obj['whisperTitle'] }}>
@@ -55,7 +55,7 @@ export default function ChatCard(props) {
                                 <CardContent className="p-0">
                                     <div className="flex w-full h-full">
                                         <div className="w-full h-full absolute z-0 rounded-lg">
-                                            <img src={props.obj['whisperUrlName']} className="rounded-lg h-full w-full object-cover"/>
+                                            <img src={props.obj['whisperImageURL']} className="rounded-lg h-full w-full object-cover"/>
                                         </div>
                                         <div className="absolute z-10 w-full h-full rounded-lg" style={{backgroundColor: "rgba(0,0,0,.5)"}}>
                                         </div>

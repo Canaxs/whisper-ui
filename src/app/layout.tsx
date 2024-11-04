@@ -29,7 +29,7 @@ export default function RootLayout({children,}: Readonly<{children: React.ReactN
               <a href="/sohbet">
                 <div className="fixed right-3 bottom-3 cursor-pointer flex items-center justify-center opacity-60 hover:opacity-100 transition-all">
                   <PiChatCircleThin className="size-16" />
-                  <img src="söylesi.png" width={45} height={45} className="absolute"/>
+                  <img src={"https://ibb.co/vmYTnWD"} width={45} height={45} className="absolute"/>
                 </div>
               </a>
             </div>
