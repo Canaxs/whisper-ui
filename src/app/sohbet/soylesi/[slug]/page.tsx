@@ -21,6 +21,7 @@ import { VscCommentDiscussion } from "react-icons/vsc";
 import { Textarea } from '@/components/ui/textarea';
 import { Button } from '@/components/ui/button';
 import { getDispute } from '@/api/apiCalls';
+import Cookies from 'js-cookie'
 
 
 export default function SoylesiPage({
@@ -72,14 +73,13 @@ export default function SoylesiPage({
                         <span className="drop-shadow text-black text-sm">{dispute.user['username']}</span>
                     </div>
                     <div className="mr-5 max-sm:mr-1">
-                        <span className="text-base max-sm:text-sm">Lorem ipsum dolor sit, amet consectetur adipisicing elit. Obcaecati laboriosam et at quibusdam accusamus commodi deleniti 
-                        temporibus dicta qui omnis totam odio perferendis doloribus, itaque autem nostrum quaerat numquam repudiandae!</span>
+                        <span className="text-base max-sm:text-sm">{dispute.description}</span>
                     </div>
                     <div className="w-3/5 max-sm:w-full">
                         <a className="page-card w-full" href={"/kategori/spor/goztepetrabzonspor-maci-oncesi-son-dakika-37"}>
                             <Card className="mt-3 shadow-xl hover:shadow-2xl hover:shadow-gray-400 transition-all relative w-full">
                                 <div className="circle1 absolute bottom-0 m-auto flex justify-center items-center">
-                                    <span className="drop-shadow-xl font-medium text-black hidden line-clamp-1 ml-5 mr-5" dangerouslySetInnerHTML={{ __html: dispute.description }}>
+                                    <span className="drop-shadow-xl font-medium text-black hidden line-clamp-1 ml-5 mr-5" dangerouslySetInnerHTML={{ __html: dispute.whisper['title'] }}>
                                     </span>
                                 </div>
                                 <CardContent className="p-0">
@@ -92,7 +92,7 @@ export default function SoylesiPage({
                                         <div className="flex flex-col w-full p-1 z-20">
                                             <span className="text-white drop-shadow-xl text-xs font-medium">{dispute.whisper["category"]}</span>
                                             <span className="text-xl text-slate-100 drop-shadow mt-2 font-medium line-clamp-1 max-sm:text-sm max-md:text-lg ">
-                                                {dispute["whisper"]["title"]}
+                                                {dispute.whisper['title']}
                                             </span>
                                             <div className="p-0 mt-1 mb-1 ml-0">
                                                 <div className="flex flex-col">
@@ -120,20 +120,20 @@ export default function SoylesiPage({
                         <span className="text-gray-400 ml-2 text-sm"><span className='font-medium text-gray-600'>2.8M</span> Views</span>
                     </div>
                     <div className="flex mt-3 justify-around">
-                            <span className='flex'>
+                            <span className='flex items-center'>
                                 <SlLike  className="size-7 cursor-pointer hover:scale-110 transition-all hover:text-green-400"/>
-                                <span className='font-medium ml-1'>20</span>
+                                <span className='font-medium ml-1 mt-2'>20</span>
                             </span>
-                            <span className='flex'>
+                            <span className='flex items-center'>
                                 <SlDislike  className="size-7 cursor-pointer hover:scale-110 transition-all hover:text-red-400"/>
-                                <span className='font-medium ml-1'>20</span>
+                                <span className='font-medium ml-1 mt-2'>20</span>
                             </span>
-                            <span className='flex'>
+                            <span className='flex items-center'>
                                 <VscCommentDiscussion className='size-7'/>
                                 <span className='font-medium ml-1'>20</span>
                             </span>
                     </div>
-                    <div className='mt-10 flex'>
+                    <div className={Cookies.get("token") ? 'mt-10 flex' : 'hidden'}>
                         <Avatar className="w-7 h-7">
                             <AvatarImage src="https://github.com/shadcn.png" alt="@shadcn" />
                             <AvatarFallback>CN</AvatarFallback>
@@ -144,7 +144,7 @@ export default function SoylesiPage({
                         </div>
                     </div>
                     <div className='mt-10'>
-                    {Array.from({ length: 20 }).map((obj , index) => 
+                    {dispute.disputeComments.map((obj , index) => (
                         <div className='flex mt-3' key={"obj"+index}>
                             <div className='flex'>
                                 <Avatar className="w-7 h-7">
@@ -153,16 +153,15 @@ export default function SoylesiPage({
                                 </Avatar>
                                 <div className='flex flex-col ml-2'>
                                     <div>
-                                    <span className="drop-shadow text-black text-sm">meric</span>
+                                    <span className="drop-shadow text-black text-sm">user</span>
                                     <span className="text-gray-400 ml-2 text-base">·</span>
                                     <span className="text-gray-400 ml-2 text-sm">Oct 01</span>
                                     </div>
-                                    <span className='mt-1'>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Deserunt voluptatibus id laboriosam expedita, 
-                                    et suscipit est corporis reprehenderit fuga sequi aliquid officia aperiam sunt sed tempore nulla voluptates. Suscipit, laboriosam?</span>
+                                    <span className='mt-1'>{obj['comment']}</span>
                                 </div>
                             </div>
                         </div>
-                        )}
+                        ))}
                     </div>
                     <div>
                             
