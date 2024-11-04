@@ -123,3 +123,7 @@ export const getAllDispute = (page) => {
     return axios.post(Environment.baseUrl+"dispute/getAll",{params: {page , size: 10}});
 } 
 
+export const createDisputeComment = (disputeCommentDTO ,headerToken) => {
+    return axios.post(Environment.baseUrl+"dispute/createComment",disputeCommentDTO,{headers: {Authorization: "Bearer "+headerToken}})
+}
+

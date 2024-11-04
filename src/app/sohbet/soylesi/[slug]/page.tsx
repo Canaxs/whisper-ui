@@ -20,8 +20,10 @@ import { MdOutlineKeyboardBackspace } from "react-icons/md";
 import { VscCommentDiscussion } from "react-icons/vsc";
 import { Textarea } from '@/components/ui/textarea';
 import { Button } from '@/components/ui/button';
-import { getDispute } from '@/api/apiCalls';
+import { createDisputeComment, getDispute } from '@/api/apiCalls';
 import Cookies from 'js-cookie'
+import { description } from "@/components/Chart-Comp/ChartComp";
+import { useToast } from "@/components/ui/use-toast"
 
 
 export default function SoylesiPage({
@@ -42,8 +44,17 @@ export default function SoylesiPage({
         disputeComments: [],
     });
 
+    const { toast } = useToast();
+
+    const [isLogin , setLogin] = useState(false);
+
+    const [comment , setComment] = useState("");
+
     useEffect(() => {
         getDisputeFunc();
+        if(Cookies.get("token")) {
+            setLogin(true)
+        }
     }, [])
 
     async function getDisputeFunc() {
@@ -53,10 +64,30 @@ export default function SoylesiPage({
         })
     }
 
+    async function submitComment() {
+        const disputeCommentDTO = {
+            description : comment,
+            disputeId: (await params).slug
+        }
+        await createDisputeComment(disputeCommentDTO,Cookies.get("token")).then(() => {
+            toast({
+                variant: "success",
+                title: "Yorum oluşturuldu",
+                description: "Başarıyla Yorum eklendi"
+              })
+        },(exception) => {
+            toast({
+                variant: "destructive",
+                title: "Yorum Oluşturulamadı",
+                description: "Tekrar deneyiniz",
+              })
+        })
+    }
+
 
     return (
         <div className="w-full h-full">
-        {dispute ?  
+        {dispute.id != "" ?  
         <div className='w-full h-full'>
             <a href="/sohbet">
                 <MdOutlineKeyboardBackspace className="absolute left-2 top-2 size-10 cursor-pointer hover:scale-125 transition-all max-md:top-5 max-md:size-7 z-50" title="Anasayfa'ya Git" />
@@ -133,14 +164,14 @@ export default function SoylesiPage({
                                 <span className='font-medium ml-1'>20</span>
                             </span>
                     </div>
-                    <div className={Cookies.get("token") ? 'mt-10 flex' : 'hidden'}>
+                    <div className={isLogin ? 'mt-10 flex' : 'hidden'}>
                         <Avatar className="w-7 h-7">
                             <AvatarImage src="https://github.com/shadcn.png" alt="@shadcn" />
                             <AvatarFallback>CN</AvatarFallback>
                         </Avatar>
-                        <Textarea className='ml-2 w-4/5'></Textarea>
+                        <Textarea className='ml-2 w-4/5' onChange={(e) => setComment(e.target.value.toString())}></Textarea>
                         <div className='flex items-center ml-5'>
-                            <Button className='bg-gray-400'>Gönder</Button>
+                            <Button className='bg-gray-400' onClick={() => submitComment()}>Gönder</Button>
                         </div>
                     </div>
                     <div className='mt-10'>
