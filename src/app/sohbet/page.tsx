@@ -18,7 +18,7 @@ import { useEffect, useState } from "react";
 import Cookies from 'js-cookie'
 import { useToast } from "@/components/ui/use-toast"
 import { Input } from "@/components/ui/input";
-import { getWhispersFilter } from "@/api/apiCalls";
+import { createDispute, getAllDispute, getWhispersFilter } from "@/api/apiCalls";
 import { convertMenusEn } from "@/lib/menuEnum";
 import { Textarea } from "@/components/ui/textarea";
 
@@ -35,7 +35,12 @@ export default function AllChat() {
 
     const [notNew , setNotNew] = useState(false);
 
+    const [description , setDescription] = useState("");
+
+    const [page, setPage] = useState(0); 
+
     const [selectWhisper , setSelectWhisper] = useState({
+        id: "",
         title: "",
         img: "",
         category: "",
@@ -55,12 +60,28 @@ export default function AllChat() {
         totalElements: 0,
         totalPages: 0
     });
+
+    const [disputeData , setDisputeData] = useState({
+        content: [],
+        last: false,
+        empty: false,
+        first: false,
+        number: 0,
+        numberOfElements: 0,
+        pageable: {},
+        size: 0,
+        sort: {},
+        totalElements: 0,
+        totalPages: 0
+    });
+
     const { toast } = useToast();
 
     useEffect(() => {
         if(Cookies.get("token")) {
             setIsToken(true);
         }
+        getDisputeData();
     }, [])
 
     function dialogControl() {
@@ -141,6 +162,7 @@ export default function AllChat() {
           })
           setSelectNew(true);
           const selectWhisperConst = {
+            id: obj['id'],
             title: obj['title'],
             img: obj['imageURL'],
             category: obj['category'],
@@ -154,6 +176,7 @@ export default function AllChat() {
         setSelectNew(false);
         setDialogOpen(false);
         const clearWhisperConst = {
+            id: "",
             title: "",
             img: "",
             category: "",
@@ -175,6 +198,36 @@ export default function AllChat() {
         });
         setFilterText("");
     }
+
+    async function submit() {
+        const createDisputeRequest = {
+            description : description,
+            whisperId: selectWhisper.id
+        }
+        await createDispute(createDisputeRequest , Cookies.get("token")).then((res) => {
+            toast({
+                variant: "success",
+                title: "Söyleşi oluşturuldu",
+                description: "Başarıyla kayıt edildi "
+              })
+        }, (exception) => {
+            toast({
+                variant: "destructive",
+                title: "Söyleşi Oluşturulamadı",
+                description: "Tekrar deneyiniz",
+              })
+        }).finally(() => {
+            closeButton()
+        })
+        
+    }
+
+    async function getDisputeData() {
+        await getAllDispute(page).then((res) => {
+            setDisputeData(res.data)
+        })
+    }
+
     
 
     return (
@@ -245,13 +298,12 @@ export default function AllChat() {
                                     </div>
                                     <div className="grid items-center gap-4">
                                         <Label>Yorum</Label>
-                                        <Textarea>
-
+                                        <Textarea onChange={(e) => setDescription(e.target.value.toString())}>
                                         </Textarea>
                                     </div>
                                     </div>
                                 <DialogFooter>
-                                <Button type="submit">Gönder</Button>
+                                <Button type="submit" onClick={() => submit()}>Gönder</Button>
                                 <Button type="reset" className="bg-red-500 hover:bg-red-300" onClick={() => closeButton()}>İptal</Button>
                                 </DialogFooter>
                             </DialogContent>
@@ -263,10 +315,10 @@ export default function AllChat() {
                         </div>
                     </div>
                     <div className="mt-14 ml-[20%] w-3/5 max-xl:w-full max-xl:ml-0">
-                        {Array.from({ length: 50 }).map((obj , index) => 
-                        <div key={"chat"+index}>
-                            <ChatCard />
-                        </div>
+                        {disputeData.content.map((obj , index) => 
+                            <div key={"chat"+index}>
+                                <ChatCard obj={obj} />
+                            </div>
                         )}
                     </div>
                 </div>

@@ -111,4 +111,15 @@ export const getWhispersFilter = (whisperFilter , page) => {
     return axios.post(Environment.baseUrl+"whisper/getWhispersFilter",whisperFilter,{params: {page , size: 10}})
 }
 
+export const getDispute = (disputeId) => {
+    return axios.get(Environment.baseUrl+"dispute/getDispute/"+disputeId);
+}
+
+export const createDispute = (createDisputeRequest, headerToken) => {
+    return axios.post(Environment.baseUrl+"dispute/create",createDisputeRequest,{headers: {Authorization: "Bearer "+headerToken}});
+}
+
+export const getAllDispute = (page) => {
+    return axios.post(Environment.baseUrl+"dispute/getAll",{params: {page , size: 10}});
+} 
 
