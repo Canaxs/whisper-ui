@@ -1,5 +1,4 @@
 "use client";
-import { useRouter } from 'next/router'
 import {
     Avatar,
     AvatarFallback,
@@ -24,19 +23,21 @@ import { Button } from '@/components/ui/button';
 import { getDispute } from '@/api/apiCalls';
 
 
-export default function SoylesiPage() {
+export default function SoylesiPage({
+    params,
+}: {
+    params: Promise<{ slug: string }>
+}) {
 
     const [dispute , setDispute] = useState({});
 
-
-    const router = useRouter();
-
     useEffect(() => {
-        getDisputeFunc(router.query.slug)
+        getDisputeFunc();
     }, [])
 
-    async function getDisputeFunc(disputeId) {
-        await getDispute(disputeId).then((res) => {
+    async function getDisputeFunc() {
+        const slug = (await params).slug
+        await getDispute(slug).then((res) => {
             setDispute(res.data);
         })
     }
