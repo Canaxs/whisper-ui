@@ -30,7 +30,7 @@ export default function ChatCard(props) {
 
 
     return (
-        <div key={props.key} className="mt-5 border-gray-200 border rounded p-2 hover:shadow-xl transition-all cursor-pointer" onClick={() => routeLink()}>
+        <div key={props.key} className="mt-5 border-gray-200 border rounded p-2 hover:shadow-xl transition-all cursor-pointer">
             <div className="flex justify-start">
                 <Avatar className="w-7 h-7">
                     <AvatarImage src="https://github.com/shadcn.png" alt="@shadcn" />
@@ -42,7 +42,7 @@ export default function ChatCard(props) {
                         <span className="text-gray-400 drop-shadow ml-1 text-base">·</span>
                         <span className="text-gray-400 drop-shadow ml-1 text-sm">Oct 01</span>
                     </div>
-                    <div className="mr-5 max-sm:mr-1">
+                    <div className="mr-5 max-sm:mr-1" onClick={() => routeLink()}>
                         <span className="text-base line-clamp-2 max-sm:text-sm">{props.obj['description']}</span>
                     </div>
                     <div className="w-3/5 max-sm:w-full">

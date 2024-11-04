@@ -124,7 +124,7 @@ export default function SoylesiPage({
                         <span className="text-base max-sm:text-sm">{dispute.description}</span>
                     </div>
                     <div className="w-3/5 max-sm:w-full">
-                        <a className="page-card w-full" href={"/kategori/"+convertMenusEn(dispute.whisper["whisperCategory"])+"/"+dispute.whisper['whisperUrlName']}>
+                        <a className="page-card w-full" href={"/kategori/"+convertMenusEn(dispute.whisper["category"])+"/"+dispute.whisper['urlName']}>
                             <Card className="mt-3 shadow-xl hover:shadow-2xl hover:shadow-gray-400 transition-all relative w-full">
                                 <div className="circle1 absolute bottom-0 m-auto flex justify-center items-center">
                                     <span className="drop-shadow-xl font-medium text-black hidden line-clamp-1 ml-5 mr-5" dangerouslySetInnerHTML={{ __html: dispute.whisper['title'] }}>
