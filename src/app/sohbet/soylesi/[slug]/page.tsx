@@ -90,6 +90,10 @@ export default function SoylesiPage({
         })
     }
 
+    function getUserComment(user) {
+        return user['username'];
+    }
+
 
     return (
         <div className="w-full h-full">
@@ -159,15 +163,15 @@ export default function SoylesiPage({
                     <div className="flex mt-3 justify-around">
                             <span className='flex items-center'>
                                 <SlLike  className="size-7 cursor-pointer hover:scale-110 transition-all hover:text-green-400"/>
-                                <span className='font-medium ml-1 mt-2'>20</span>
+                                <span className='font-medium ml-1 mt-2'>0</span>
                             </span>
                             <span className='flex items-center'>
                                 <SlDislike  className="size-7 cursor-pointer hover:scale-110 transition-all hover:text-red-400"/>
-                                <span className='font-medium ml-1 mt-2'>20</span>
+                                <span className='font-medium ml-1 mt-2'>0</span>
                             </span>
                             <span className='flex items-center'>
                                 <VscCommentDiscussion className='size-7'/>
-                                <span className='font-medium ml-1'>20</span>
+                                <span className='font-medium ml-1'>{dispute.disputeComments.length}</span>
                             </span>
                     </div>
                     <div className={isLogin ? 'mt-10 flex' : 'hidden'}>
@@ -190,7 +194,7 @@ export default function SoylesiPage({
                                 </Avatar>
                                 <div className='flex flex-col ml-2'>
                                     <div>
-                                    <span className="drop-shadow text-black text-sm">user</span>
+                                    <span className="drop-shadow text-black text-sm">{getUserComment(obj['user'])}</span>
                                     <span className="text-gray-400 ml-2 text-base">·</span>
                                     <span className="text-gray-400 ml-2 text-sm">Oct 01</span>
                                     </div>
