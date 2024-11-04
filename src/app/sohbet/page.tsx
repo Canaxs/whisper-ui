@@ -345,7 +345,7 @@ export default function AllChat() {
                                 <PaginationItem>
                                         <PaginationLink className={(page-1) > 0 ? "" : "hidden"}>{page-1}</PaginationLink>
                                         <PaginationLink isActive>{page}</PaginationLink>
-                                        <PaginationLink className={(page+1) >= disputeData.totalPages ? "" : "hidden"}>{page+1}</PaginationLink>
+                                        <PaginationLink className={disputeData.totalPages > page ? "" : "hidden"}>{page+1}</PaginationLink>
                                     </PaginationItem>
                                 <PaginationItem>
                                     {page >= 1  && disputeData.totalPages > page ? <PaginationNext onClick={() => setPage(page+1)}/> 
