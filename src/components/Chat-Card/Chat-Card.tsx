@@ -40,7 +40,7 @@ export default function ChatCard(props) {
                     <div>
                         <span className="drop-shadow text-black text-sm">{props.obj['user']['username']}</span>
                         <span className="text-gray-400 drop-shadow ml-1 text-base">·</span>
-                        <span className="text-gray-400 drop-shadow ml-1 text-sm">Oct 01</span>
+                        <span className="text-gray-400 drop-shadow ml-1 text-sm">{props.date}</span>
                     </div>
                     <div className="mr-5 max-sm:mr-1" onClick={() => routeLink()}>
                         <span className="text-base line-clamp-2 max-sm:text-sm">{props.obj['description']}</span>

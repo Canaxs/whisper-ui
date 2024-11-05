@@ -26,6 +26,7 @@ import { description } from "@/components/Chart-Comp/ChartComp";
 import { useToast } from "@/components/ui/use-toast"
 import { useRouter } from "next/navigation";
 import { convertMenusEn } from "@/lib/menuEnum";
+import { convertDateMonth } from "@/lib/dateEnum";
 
 
 export default function SoylesiPage({
@@ -101,6 +102,27 @@ export default function SoylesiPage({
         return user['username'];
     }
 
+    function giveTheDate(date) {
+        let dateLet = date.split("-",3);
+        const month = convertDateMonth(dateLet[1]);
+        const daySplit = dateLet[2].split("T",2);
+        let day = daySplit[0];
+        const dayControl = day.split("");
+        
+        if(dayControl[0] === "0") {
+            day = dayControl[1];
+        }
+
+        return month +" "+day; 
+    }
+
+    function giveTheClock(date) {
+        let dateLet = date.split("T",2);
+        let clockLet = dateLet[1].split(".",2);
+        let clockSecondSp = clockLet[0].split(":",3);
+        return clockSecondSp[0]+":"+clockSecondSp[1];
+    }
+
 
     return (
         <div className="w-full h-full">
@@ -161,9 +183,9 @@ export default function SoylesiPage({
                         </a>
                     </div>
                     <div className='mt-3'>
-                        <span className="text-gray-400 ml-1 text-sm">11.36 PM</span>
+                        <span className="text-gray-400 ml-1 text-sm">{giveTheClock(dispute.createdDate)}</span>
                         <span className="text-gray-400 ml-2 text-base">·</span>
-                        <span className="text-gray-400 ml-2 text-sm">Oct 01</span>
+                        <span className="text-gray-400 ml-2 text-sm">{giveTheDate(dispute.createdDate)}</span>
                         <span className="text-gray-400 ml-2 text-base">·</span>
                         <span className="text-gray-400 ml-2 text-sm"><span className='font-medium text-gray-600'>2.8M</span> Views</span>
                     </div>
@@ -203,7 +225,7 @@ export default function SoylesiPage({
                                     <div>
                                     <span className="drop-shadow text-black text-sm">{getUserComment(obj['user'])}</span>
                                     <span className="text-gray-400 ml-2 text-base">·</span>
-                                    <span className="text-gray-400 ml-2 text-sm">Oct 01</span>
+                                    <span className="text-gray-400 ml-2 text-sm"></span>
                                     </div>
                                     <span className='mt-1'>{obj['comment']}</span>
                                 </div>

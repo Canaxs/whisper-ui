@@ -14,6 +14,7 @@ import { controlLike, likeWhisper } from "@/api/apiCalls";
 import Cookies from 'js-cookie'
 import { useToast } from "@/components/ui/use-toast"
 import { TbCategory } from "react-icons/tb";
+import { convertDateMonth } from "@/lib/dateEnum";
 
 
 
@@ -58,6 +59,27 @@ export default function WhisperContent(props) {
         }
     }
 
+    function giveTheDate(date) {
+        let dateLet = date.split("-",3);
+        const month = convertDateMonth(dateLet[1]);
+        const daySplit = dateLet[2].split("T",2);
+        let day = daySplit[0];
+        const dayControl = day.split("");
+        
+        if(dayControl[0] === "0") {
+            day = dayControl[1];
+        }
+
+        return month +" "+day; 
+    }
+
+    function giveTheClock(date) {
+        let dateLet = date.split("T",2);
+        let clockLet = dateLet[1].split(".",2);
+        let clockSecondSp = clockLet[0].split(":",3);
+        return clockSecondSp[0]+":"+clockSecondSp[1];
+    }
+
     return (
         <div className="mt-10 ml-[2%]">
             <div className="flex">
@@ -69,7 +91,7 @@ export default function WhisperContent(props) {
                 </div>
                 <div className="flex flex-col ml-2">
                     <span className="text-sm">{props.whisper.authorName}</span>
-                    <span className="text-xs">Oluşturulma Tarihi: {props.whisper.createdDate}</span>
+                    <span className="text-xs flex">Oluşturulma Tarihi: <span>{giveTheClock(props.whisper.createdDate)} · </span> {giveTheDate(props.whisper.createdDate)}</span>
                 </div>
             </div>
             <div className="mt-10">

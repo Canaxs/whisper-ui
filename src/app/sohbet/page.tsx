@@ -30,6 +30,7 @@ import {
     PaginationNext,
     PaginationPrevious,
   } from "@/components/ui/pagination"
+import { convertDateMonth } from "@/lib/dateEnum";
 
 export default function AllChat() {
 
@@ -245,6 +246,20 @@ export default function AllChat() {
         })
     }
 
+    function giveTheDate(date) {
+        let dateLet = date.split("-",3);
+        const month = convertDateMonth(dateLet[1]);
+        const daySplit = dateLet[2].split("T",2);
+        let day = daySplit[0];
+        const dayControl = day.split("");
+        
+        if(dayControl[0] === "0") {
+            day = dayControl[1];
+        }
+
+        return month +" "+day; 
+    }
+
     
 
     return (
@@ -334,7 +349,7 @@ export default function AllChat() {
                     <div className="mt-14 ml-[20%] w-3/5 max-xl:w-full max-xl:ml-0">
                         {disputeData.content.map((obj , index) => 
                             <div key={"chat"+index}>
-                                <ChatCard obj={obj} />
+                                <ChatCard obj={obj} date={giveTheDate(obj['createdDate'])}/>
                             </div>
                         )}
                     </div>
