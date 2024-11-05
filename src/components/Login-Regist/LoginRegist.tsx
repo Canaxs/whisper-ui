@@ -84,6 +84,7 @@ export default function LoginRegist() {
         }
         else {
             if(signPassword === signRPassword) {
+                let isCreate = false;
                 const userRequest = {
                     username: signUsername,
                     password: signRPassword,
@@ -95,8 +96,7 @@ export default function LoginRegist() {
                         title: "Kullanıcı Oluşturuldu",
                         description: res.data["username"]+" Hoşgeldiniz.",
                     })
-                    dispatch(addUser(res.data));
-                    router.push("/account");
+                    isCreate = true;
                 }, (exception) => {
                     setLoginBool(false);
                     toast({
@@ -105,6 +105,16 @@ export default function LoginRegist() {
                         description: "Başka bir isim deneyiniz.",
                     })
                 })
+                if(isCreate) {
+                    const authModel = {
+                        username: signUsername,
+                        password: signRPassword
+                    }
+                    await generateToken(authModel).then((res) => {
+                        dispatch(addUser(res.data));
+                    })
+                    router.push("/account");
+                }
             }
             else {
                 setLoginBool(false);
