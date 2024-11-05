@@ -60,7 +60,7 @@ export const getUserID = (userId) => {
 }
 
 export const createUser = (userRequest) => {
-    return axios.get(Environment.baseUrl+"user/createUser",userRequest);
+    return axios.post(Environment.baseUrl+"user/createUser",userRequest);
 }
 
 export const deleteWhisper = (whisperId) => {

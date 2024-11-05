@@ -154,7 +154,7 @@ export default function LoginRegist() {
             </Card>
         </TabsContent>
         <TabsContent value="register">
-            <Card>
+            <Card className={loginBool ? "before:content-[''] before:bg-gray-500 before:h-[400px] before:w-[400px] before:absolute before:opacity-60" : ""}>
             <CardHeader>
                 <CardTitle className="text-gray-700 drop-shadow-lg">Kayıt Ol</CardTitle>
                 <CardDescription>
