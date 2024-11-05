@@ -140,8 +140,8 @@ export default function SoylesiPage({
                     <AvatarFallback>CN</AvatarFallback>
                 </Avatar>
                 <div className="relative bottom-[2px] ml-3 mr-3">
-                    <div>
-                        <HovCard name={dispute.user['username']} />
+                    <div className="mb-1">
+                        <HovCard name={dispute.user['username']} buttonClass={"no-underline text-gray-500 h-5"} />
                     </div>
                     <div className="mr-5 max-sm:mr-1">
                         <span className="text-base max-sm:text-sm">{dispute.description}</span>
@@ -224,7 +224,7 @@ export default function SoylesiPage({
                                 </Avatar>
                                 <div className='flex flex-col ml-2'>
                                     <div>
-                                    <span className="drop-shadow text-black text-sm">{getUserComment(obj['user'])}</span>
+                                    <HovCard name={getUserComment(obj['user'])} buttonClass={"no-underline text-gray-500 h-5"} />
                                     <span className="text-gray-400 ml-2 text-base">·</span>
                                     <span className="text-gray-400 ml-2 text-sm"></span>
                                     </div>
