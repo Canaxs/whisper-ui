@@ -91,7 +91,7 @@ export default function WhisperContent(props) {
                 </div>
                 <div className="flex flex-col ml-2">
                     <span className="text-sm">{props.whisper.authorName}</span>
-                    <span className="text-xs flex">Oluşturulma Tarihi: <span>{giveTheClock(props.whisper.createdDate)} · </span> {giveTheDate(props.whisper.createdDate)}</span>
+                    <span className="text-xs flex">Oluşturulma Tarihi : <span className="ml-1">{giveTheClock(props.whisper.createdDate)} · </span> <span className="ml-1">{giveTheDate(props.whisper.createdDate)}</span></span>
                 </div>
             </div>
             <div className="mt-10">
