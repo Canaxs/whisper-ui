@@ -27,6 +27,7 @@ import { useToast } from "@/components/ui/use-toast"
 import { useRouter } from "next/navigation";
 import { convertMenusEn } from "@/lib/menuEnum";
 import { convertDateMonth } from "@/lib/dateEnum";
+import HovCard from "@/components/Hov-Card/HovCard";
 
 
 export default function SoylesiPage({
@@ -140,7 +141,7 @@ export default function SoylesiPage({
                 </Avatar>
                 <div className="relative bottom-[2px] ml-3 mr-3">
                     <div>
-                        <span className="drop-shadow text-black text-sm">{dispute.user['username']}</span>
+                        <HovCard name={dispute.user['username']} />
                     </div>
                     <div className="mr-5 max-sm:mr-1">
                         <span className="text-base max-sm:text-sm">{dispute.description}</span>

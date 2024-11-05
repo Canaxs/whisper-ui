@@ -18,6 +18,7 @@ import { SlLike  , SlDislike  } from "react-icons/sl";
 import { HiMiniChatBubbleLeftRight } from "react-icons/hi2";
 import { useRouter } from "next/navigation";
 import { convertMenusEn } from "@/lib/menuEnum";
+import HovCard from "../Hov-Card/HovCard";
 
 export default function ChatCard(props) {
 
@@ -37,8 +38,8 @@ export default function ChatCard(props) {
                     <AvatarFallback>CN</AvatarFallback>
                 </Avatar>
                 <div className="relative bottom-[2px] ml-3 mr-3">
-                    <div>
-                        <span className="drop-shadow text-black text-sm">{props.obj['user']['username']}</span>
+                    <div className="flex">
+                        <HovCard name={props.obj['user']['username']} />
                         <span className="text-gray-400 drop-shadow ml-1 text-base">·</span>
                         <span className="text-gray-400 drop-shadow ml-1 text-sm">{props.date}</span>
                     </div>
