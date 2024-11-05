@@ -21,7 +21,7 @@ import { LuUserCog } from "react-icons/lu";
 export type UserDto = {
     username: string
     userPoint: number,
-    authorities: []
+    authorities: string
 }
 
 export type Whisper = {
