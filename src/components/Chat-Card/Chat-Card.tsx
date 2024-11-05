@@ -38,8 +38,8 @@ export default function ChatCard(props) {
                     <AvatarFallback>CN</AvatarFallback>
                 </Avatar>
                 <div className="relative bottom-[2px] ml-3 mr-3">
-                    <div className="flex">
-                        <HovCard name={props.obj['user']['username']} />
+                    <div className="flex items-center">
+                        <HovCard name={props.obj['user']['username']} buttonClass={"no-underline text-gray-500 items-start"}/>
                         <span className="text-gray-400 drop-shadow ml-1 text-base">·</span>
                         <span className="text-gray-400 drop-shadow ml-1 text-sm">{props.date}</span>
                     </div>
