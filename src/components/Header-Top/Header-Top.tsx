@@ -74,7 +74,6 @@ export default function HeaderTop(props) {
                 role: Cookies.get("role"),
             })
         }
-        setIsUser(true);
     }
 
     async function controlInformation() {
@@ -94,9 +93,7 @@ export default function HeaderTop(props) {
                 }
             })
         }
-        else {
-            setIsUser(true);
-        }
+        setIsUser(true);
     }
 
     async function filterSearch() {
