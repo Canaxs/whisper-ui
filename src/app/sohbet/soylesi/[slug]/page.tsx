@@ -74,29 +74,43 @@ export default function SoylesiPage({
     }
 
     async function submitComment() {
-        let OK = false;
-        const disputeCommentDTO = {
-            description : comment,
-            disputeId: (await params).slug
-        }
-        await createDisputeComment(disputeCommentDTO,Cookies.get("token")).then(() => {
+        if(comment.length >= 3){
             toast({
-                variant: "success",
-                title: "Yorum oluşturuldu",
-                description: "Başarıyla Yorum eklendi"
-              })
-              OK = true;
-        },(exception) => {
+                variant: "waiting",
+                title: "Yorum Oluşturuluyor",
+                description: "Bekleyiniz.",
+            })
+            let OK = false;
+            const disputeCommentDTO = {
+                description : comment,
+                disputeId: (await params).slug
+            }
+            await createDisputeComment(disputeCommentDTO,Cookies.get("token")).then(() => {
+                toast({
+                    variant: "success",
+                    title: "Yorum oluşturuldu",
+                    description: "Başarıyla Yorum eklendi"
+                })
+                OK = true;
+            },(exception) => {
+                toast({
+                    variant: "destructive",
+                    title: "Yorum Oluşturulamadı",
+                    description: "Tekrar deneyiniz",
+                })
+            }).finally(() => {
+                if(OK) {
+                    getDisputeFunc();
+                }
+            })
+        }
+        else {
             toast({
                 variant: "destructive",
-                title: "Yorum Oluşturulamadı",
+                title: "Yorum Alanına En Az 3 karakter girmelisiniz.",
                 description: "Tekrar deneyiniz",
-              })
-        }).finally(() => {
-            if(OK) {
-                getDisputeFunc();
-            }
-        })
+            })
+        }
     }
 
     function getUserComment(user) {
@@ -132,19 +146,19 @@ export default function SoylesiPage({
             <a href="/sohbet">
                 <MdOutlineKeyboardBackspace className="absolute left-2 top-2 size-10 cursor-pointer hover:scale-125 transition-all max-md:top-5 max-md:size-7 z-50" title="Anasayfa'ya Git" />
             </a>
-        <div className='w-4/5 ml-[10%]'>
+        <div className='w-4/5 ml-[10%] max-sm:w-[95%] max-sm:ml-[2.5%] max-sm:mt-16'>
         <div className="mt-5 border-gray-200 border rounded p-2">
             <div className="flex justify-start">
                 <Avatar className="w-7 h-7">
                     <AvatarImage src="https://github.com/shadcn.png" alt="@shadcn" />
                     <AvatarFallback>CN</AvatarFallback>
                 </Avatar>
-                <div className="relative bottom-[2px] ml-3 mr-3">
+                <div className="relative bottom-[2px] ml-3 mr-3 w-full">
                     <div className="mb-1">
                         <HovCard name={dispute.user['username']} buttonClass={"no-underline text-gray-500 h-5"} />
                     </div>
                     <div className="mr-5 max-sm:mr-1">
-                        <span className="text-base max-sm:text-sm">{dispute.description}</span>
+                        <span className="text-base max-md:text-sm">{dispute.description}</span>
                     </div>
                     <div className="w-3/5 max-sm:w-full">
                         <a className="page-card w-full" href={"/kategori/"+convertMenusEn(dispute.whisper["category"])+"/"+dispute.whisper['urlName']}>
@@ -190,18 +204,18 @@ export default function SoylesiPage({
                         <span className="text-gray-400 ml-2 text-base">·</span>
                         <span className="text-gray-400 ml-2 text-sm"><span className='font-medium text-gray-600'>2.8M</span> Views</span>
                     </div>
-                    <div className="flex mt-3 justify-around">
+                    <div className="flex mt-3 justify-around max-sm:justify-between max-sm:ml-2 max-sm:mr-2 text-gray-600">
                             <span className='flex items-center'>
                                 <SlLike  className="size-7 cursor-pointer hover:scale-110 transition-all hover:text-green-400"/>
-                                <span className='font-medium ml-1 mt-2'>0</span>
+                                <span className='font-medium ml-1 mt-2 text-sm'>0</span>
                             </span>
                             <span className='flex items-center'>
                                 <SlDislike  className="size-7 cursor-pointer hover:scale-110 transition-all hover:text-red-400"/>
-                                <span className='font-medium ml-1 mt-2'>0</span>
+                                <span className='font-medium ml-1 mt-2 text-sm'>0</span>
                             </span>
                             <span className='flex items-center'>
                                 <VscCommentDiscussion className='size-7'/>
-                                <span className='font-medium ml-1'>{dispute.disputeComments.length}</span>
+                                <span className='font-medium ml-1 text-sm'>{dispute.disputeComments.length}</span>
                             </span>
                     </div>
                     <div className={isLogin ? 'mt-10 flex' : 'hidden'}>
@@ -228,7 +242,7 @@ export default function SoylesiPage({
                                     <span className="text-gray-400 ml-2 text-base">·</span>
                                     <span className="text-gray-400 ml-2 text-sm"></span>
                                     </div>
-                                    <span className='mt-1'>{obj['comment']}</span>
+                                    <span className='mt-1 max-md:text-sm'>{obj['comment']}</span>
                                 </div>
                             </div>
                         </div>
