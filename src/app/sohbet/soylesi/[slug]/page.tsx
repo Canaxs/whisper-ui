@@ -352,11 +352,11 @@ export default function SoylesiPage({
                     </div>
                     <div className="flex mt-7">
                         <span className="mr-2 text-base drop-shadow-md shadow-black">Etiketler : </span>
-                        {dispute.disputeTag['tags'].map((tag,index) => 
+                        {dispute.disputeTag != null ? dispute.disputeTag['tags'].map((tag,index) => 
                             <div className="bg-gray-100 text-gray-400 mr-2 p-1 rounded-lg shadow shadow-gray-600 text-xs" key={"tag"+index}>
                                 <span>{tag}</span>
                             </div>
-                        )}
+                        ) : ""}
                     </div>
                     <div className={isLogin ? 'mt-10 flex' : 'hidden'}>
                         <Avatar className="w-7 h-7">
