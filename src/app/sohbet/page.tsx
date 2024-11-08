@@ -307,8 +307,8 @@ export default function AllChat() {
                 <h3 className="text-center">Gündemdekiler</h3>
                 <hr className="mb-3 mt-3 text-black drop-shadow-md"/>
                 <div className="flex flex-col">
-                    { Array.from({ length: 15 }).map(() =>
-                        <span className="pt-2 cursor-pointer hover:scale-105 transition-all drop-shadow-md"><span className="font-medium text-gray-500 mr-1">#</span>Etiket</span>
+                    { Array.from({ length: 15 }).map((_,index) =>
+                        <span key={"array"+index} className="pt-2 cursor-pointer hover:scale-105 transition-all drop-shadow-md"><span className="font-medium text-gray-500 mr-1">#</span>Etiket</span>
                     )}
                 </div>
             </div>
