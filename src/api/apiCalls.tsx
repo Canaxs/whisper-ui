@@ -4,6 +4,9 @@ import TokenDTO from '@/models/TokenDTO';
 import { Artifika } from 'next/font/google';
 import { Whisper } from '@/components/Account-Info/AccountInfo';
 
+
+// Auth Api
+
 export const generateToken = authModel => {
     return axios.post(Environment.baseUrl+"auth/generateToken" ,authModel);
 };
@@ -11,6 +14,8 @@ export const generateToken = authModel => {
 export const isExpiredToken = (expireRequest) => {
     return axios.post<Boolean>(Environment.baseUrl+"auth/isExpiredToken",expireRequest);
 }
+
+// Whisper Api
 
 export const createWhisper = (formData, headerToken) => {
     return axios.post(Environment.baseUrl+"whisper/locked/create",formData,{
@@ -34,6 +39,8 @@ export const getWhispers = () => {
 export const getPendingWhispers = () => {
     return axios.get(Environment.baseUrl+"whisper/getPendingWhispers");
 }
+
+// User Api
 
 export const getUsers = (headerToken) => {
     return axios.get(Environment.baseUrl+"user/getUsers",{headers: {Authorization: "Bearer "+headerToken}});
@@ -63,6 +70,8 @@ export const createUser = (userRequest) => {
     return axios.post(Environment.baseUrl+"user/createUser",userRequest);
 }
 
+// Whisper Api
+
 export const deleteWhisper = (whisperId) => {
     return axios.delete(Environment.baseUrl+"whisper/locked/delete/"+whisperId);
 }
@@ -87,6 +96,8 @@ export const getCarouselSmall = () => {
     return axios.get<Whisper[]>(Environment.baseUrl+"whisper/carousel/small");
 }
 
+// Whisper Like Api
+
 export const controlLike = (whisperId , headerToken) => {
     return axios.get(Environment.baseUrl+"whisper/control/like/"+whisperId,{headers: {Authorization: "Bearer "+headerToken}});
 }
@@ -94,6 +105,24 @@ export const controlLike = (whisperId , headerToken) => {
 export const likeWhisper = (whisperId , headerToken) => {
     return axios.get(Environment.baseUrl+"whisper/locked/like/"+whisperId,{headers: {Authorization: "Bearer "+headerToken}});
 }
+
+export const controlDisLike = (whisperId , headerToken) => {
+    return axios.get(Environment.baseUrl+"whisper/control/dislike/"+whisperId,{headers: {Authorization: "Bearer "+headerToken}});
+}
+
+export const dislikeWhisper = (whisperId , headerToken) => {
+    return axios.get(Environment.baseUrl+"whisper/locked/dislike/"+whisperId,{headers: {Authorization: "Bearer "+headerToken}});
+}
+
+export const unLikeWhisper = (whisperId , headerToken) => {
+    return axios.get(Environment.baseUrl+"whisper/locked/unlike/"+whisperId,{headers: {Authorization: "Bearer "+headerToken}});
+}
+
+export const unDislikeWhisper = (whisperId , headerToken) => {
+    return axios.get(Environment.baseUrl+"whisper/locked/undislike/"+whisperId,{headers: {Authorization: "Bearer "+headerToken}});
+}
+
+// Whisper 3 Api
 
 export const updateIsActive = (whisperId , headerToken) => {
     return axios.get(Environment.baseUrl+"whisper/updateActive/"+whisperId,{headers: {Authorization: "Bearer "+headerToken}});
@@ -111,6 +140,8 @@ export const getWhispersFilter = (whisperFilter , page) => {
     return axios.post(Environment.baseUrl+"whisper/getWhispersFilter",whisperFilter,{params: {page , size: 10}})
 }
 
+// Dispute Api
+
 export const getDispute = (disputeId) => {
     return axios.get(Environment.baseUrl+"dispute/getDispute/"+disputeId);
 }
@@ -125,5 +156,31 @@ export const getAllDispute = (page) => {
 
 export const createDisputeComment = (disputeCommentDTO ,headerToken) => {
     return axios.post(Environment.baseUrl+"dispute/createComment",disputeCommentDTO,{headers: {Authorization: "Bearer "+headerToken}})
+}
+
+// dispute Like
+
+export const controlLikeDispute = (disputeId , headerToken) => {
+    return axios.get(Environment.baseUrl+"dispute/control/like/"+disputeId,{headers: {Authorization: "Bearer "+headerToken}});
+}
+
+export const likeDispute = (disputeId , headerToken) => {
+    return axios.get(Environment.baseUrl+"dispute/like/"+disputeId,{headers: {Authorization: "Bearer "+headerToken}});
+}
+
+export const controlDisLikeDispute = (disputeId , headerToken) => {
+    return axios.get(Environment.baseUrl+"dispute/control/dislike/"+disputeId,{headers: {Authorization: "Bearer "+headerToken}});
+}
+
+export const dislikeDispute = (disputeId , headerToken) => {
+    return axios.get(Environment.baseUrl+"dispute/dislike/"+disputeId,{headers: {Authorization: "Bearer "+headerToken}});
+}
+
+export const unLikeDispute = (disputeId , headerToken) => {
+    return axios.get(Environment.baseUrl+"dispute/unlike/"+disputeId,{headers: {Authorization: "Bearer "+headerToken}});
+}
+
+export const unDislikeDispute = (disputeId , headerToken) => {
+    return axios.get(Environment.baseUrl+"dispute/undislike/"+disputeId,{headers: {Authorization: "Bearer "+headerToken}});
 }
 

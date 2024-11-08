@@ -42,6 +42,10 @@ export default function AllChat() {
 
     const [isToken , setIsToken] = useState(false);
 
+    const [inputTagValue, setInputTagValue] = useState("");
+
+    const [tags , setTags] = useState([] as string[]);
+
     const [notNew , setNotNew] = useState(false);
 
     const [description , setDescription] = useState("");
@@ -209,6 +213,8 @@ export default function AllChat() {
             totalPages: 0
         });
         setFilterText("");
+        setTags([]);
+        setInputTagValue("");
     }
 
     async function submit() {
@@ -221,7 +227,8 @@ export default function AllChat() {
             let OK = false;
             const createDisputeRequest = {
                 description : description,
-                whisperId: selectWhisper.id
+                whisperId: selectWhisper.id,
+                tags: tags
             }
             await createDispute(createDisputeRequest , Cookies.get("token")).then((res) => {
                 toast({
@@ -273,10 +280,38 @@ export default function AllChat() {
         return month +" "+day; 
     }
 
+    function onChangeVirgule(value) {
+        if(tags.length != 5) {
+            if(value.includes(",")) {
+                setTags([...tags, value.split(",")[0]]);
+                setInputTagValue("");
+            }
+            else {
+                setInputTagValue(value);
+            }
+        }
+        else {
+            toast({
+                variant: "destructive",
+                title: "Daha fazla etiket oluşturamazsın",
+                description: "Limit Dolu",
+            })
+        }
+    }
+
     
 
     return (
         <div className="w-full relative h-full">
+            <div className="absolute max-xl:hidden w-52 border rounded-sm left-10 top-32 pl-5 pr-5 pt-2 shadow-lg">
+                <h3 className="text-center">Gündemdekiler</h3>
+                <hr className="mb-3 mt-3 text-black drop-shadow-md"/>
+                <div className="flex flex-col">
+                    { Array.from({ length: 15 }).map(() =>
+                        <span className="pt-2 cursor-pointer hover:scale-105 transition-all drop-shadow-md"><span className="font-medium text-gray-500 mr-1">#</span>Etiket</span>
+                    )}
+                </div>
+            </div>
             <div className="w-full">
                 <a href="/">
                     <MdOutlineKeyboardBackspace className="absolute left-2 top-2 size-10 cursor-pointer hover:scale-125 transition-all max-md:top-5 max-md:size-7 z-50" title="Anasayfa'ya Git" />
@@ -295,6 +330,7 @@ export default function AllChat() {
                                 <DialogHeader>
                                     <DialogTitle>Söyleşi Oluştur</DialogTitle>
                                     <DialogDescription>
+                                        Sadece 5 adet etiket oluşturabilirsiniz.
                                     </DialogDescription>
                                 </DialogHeader>
                                     <div className="grid gap-4 py-4">
@@ -343,8 +379,25 @@ export default function AllChat() {
                                     </div>
                                     <div className="grid items-center gap-4">
                                         <Label>Yorum</Label>
-                                        <Textarea onChange={(e) => setDescription(e.target.value.toString())}>
+                                        <Textarea className="focus-visible:ring-0 focus-visible:ring-offset-0"
+                                            placeholder="Yorum Yaz"
+                                          onChange={(e) => setDescription(e.target.value.toString())}>
                                         </Textarea>
+                                    </div>
+                                    <div className="grid items-center gap-1">
+                                        <Label>Etiket</Label>
+                                        <span className="text-xs text-gray-400 mb-2">(Kelimeleri girdikten sonra virgül ( , ) koymanız gerekiyor )</span>
+                                        <Input type="text" className="focus-visible:ring-0 focus-visible:ring-offset-0"
+                                        placeholder="Etiket Oluştur"
+                                        value={inputTagValue}
+                                        onChange={(e) => onChangeVirgule(e.target.value)}
+                                        />
+                                        <div className="mt-2 p-0">
+                                            <span>Etiketler : </span>
+                                            {tags.map((tag,index) => 
+                                                <span className="bg-gray-100 text-gray-400 p-1 shadow-md shadow-gray-400 mr-1 rounded-md" key={"tagspan"+index}>{tag}</span>
+                                            )}
+                                        </div>
                                     </div>
                                     </div>
                                 <DialogFooter>

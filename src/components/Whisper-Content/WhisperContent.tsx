@@ -10,7 +10,7 @@ import { TbWriting } from "react-icons/tb";
 import AbsoluteAdversiting from "../Advertising-Space/AbsoluteAdversiting";
 import WhisperComment from "../Whisper-Comment/WhisperComment";
 import { useEffect, useState } from "react";
-import { controlLike, likeWhisper } from "@/api/apiCalls";
+import { controlDisLike, controlLike, dislikeWhisper, likeWhisper, unDislikeWhisper, unLikeWhisper } from "@/api/apiCalls";
 import Cookies from 'js-cookie'
 import { useToast } from "@/components/ui/use-toast"
 import { TbCategory } from "react-icons/tb";
@@ -24,37 +24,133 @@ export default function WhisperContent(props) {
 
     const [likeExists, setLikeExists] = useState(false);
 
+    const [dislikeExists, setDisLikeExists] = useState(false);
+
     useEffect(() => {
         if(Cookies.get("username") != null) {
-            control();
+            controlLiked();
+            controlDisliked();
         }
     }, [])
 
-    async function control() {
+    async function controlLiked() {
         await controlLike(props.whisper.whisperLike.id,Cookies.get("token")).then((res) => {
             setLikeExists(res.data)
         })
     }
 
+    async function controlDisliked() {
+        await controlDisLike(props.whisper.whisperLike.id,Cookies.get("token")).then((res) => {
+            setDisLikeExists(res.data)
+        })
+    }
+
     async function like() {
+        if(!dislikeExists) {
+            if(Cookies.get("username") != null) {
+                await likeWhisper(props.whisper.whisperLike.id,Cookies.get("token")).then((res) => {
+                    setLikeExists(true);
+                    props.whisper.whisperLike.numberLike++;
+                    toast({
+                        variant: "success",
+                        title: "Bu Gönderiyi Beğendiniz",
+                        description: ":)",
+                    })
+                }, (exception) => {
+                    setLikeExists(false);
+                })
+            }
+            else {
+                toast({
+                    variant: "destructive",
+                    title: "Bu gönderiyi beğenemezsiniz.",
+                    description: "Gönderiyi beğenmeniz için giriş yapmanız gerekiyor.",
+                })
+            }
+        }
+        else {
+            toast({
+                variant: "destructive",
+                title: "Bu gönderiyi beğenemezsiniz",
+                description: "Gönderiyi beğenmeniz için dislike işleminizi geri almanız gerekiyor.",
+            })
+        }
+    }
+
+    async function dislike() {
+        if(!likeExists) {
+            if(Cookies.get("username") != null) {
+                await dislikeWhisper(props.whisper.whisperLike.id,Cookies.get("token")).then((res) => {
+                    setDisLikeExists(true);
+                    props.whisper.whisperLike.numberDislike++;
+                    toast({
+                        variant: "destructive",
+                        title: "Bu Gönderiyi Beğenmediniz",
+                        description: ":(",
+                    })
+                }, (exception) => {
+                    setDisLikeExists(false);
+                })
+            }
+            else {
+                toast({
+                    variant: "destructive",
+                    title: "Bu gönderiyi beğenemezsiniz.",
+                    description: "Gönderiyi beğenmemeniz için giriş yapmanız gerekiyor.",
+                })
+            }
+        }
+        else {
+            toast({
+                variant: "destructive",
+                title: "Bu gönderiyi beğenemezsiniz",
+                description: "Gönderiyi beğenmeniz için beğeni işleminizi geri almanız gerekiyor.",
+            })
+        }
+    }
+
+    async function unlike() {
         if(Cookies.get("username") != null) {
-            await likeWhisper(props.whisper.whisperLike.id,Cookies.get("token")).then((res) => {
-                setLikeExists(true);
-                props.whisper.whisperLike.numberLike++;
+            await unLikeWhisper(props.whisper.whisperLike.id,Cookies.get("token")).then((res) => {
+                setLikeExists(false);
+                props.whisper.whisperLike.numberLike--;
                 toast({
                     variant: "success",
-                    title: "Bu Gönderiyi Beğendiniz",
-                    description: ":)",
+                    title: "Beğeni geri alındı.",
+                    description: ":(",
                   })
             }, (exception) => {
-                setLikeExists(false);
+                setLikeExists(true);
             })
         }
         else {
             toast({
                 variant: "destructive",
-                title: "Bu gönderiyi beğenemezsiniz.",
-                description: "Gönderiyi beğenmeniz için giriş yapmanız gerekiyor.",
+                title: "Error",
+                description: "Beğeni geri alınırken Sorun Oluştu",
+              })
+        }
+    }
+
+    async function unDislike() {
+        if(Cookies.get("username") != null) {
+            await unDislikeWhisper(props.whisper.whisperLike.id,Cookies.get("token")).then((res) => {
+                setDisLikeExists(false);
+                props.whisper.whisperLike.numberDislike--;
+                toast({
+                    variant: "success",
+                    title: "Dislike geri alındı",
+                    description: ":)",
+                  })
+            }, (exception) => {
+                setDisLikeExists(true);
+            })
+        }
+        else {
+            toast({
+                variant: "destructive",
+                title: "Error",
+                description: "Dislike geri alınırken sorun oluştu.",
               })
         }
     }
@@ -97,13 +193,13 @@ export default function WhisperContent(props) {
             <div className="mt-10">
                 <div className="h-[0.1px] w-full bg-gray-100"></div>
                 <div className="flex">
-                    <div className={Cookies.get("username") != null ? "p-2 flex items-center hover:text-black text-gray-400 transition-all cursor-pointer" : "p-2 flex items-center hover:text-black text-gray-400 transition-all cursor-no-drop opacity-60"} onClick={likeExists ? () => null : () => like()}>
+                    <div className={Cookies.get("username") != null ? "p-2 flex items-center hover:text-black text-gray-400 transition-all cursor-pointer" : "p-2 flex items-center hover:text-black text-gray-400 transition-all cursor-no-drop opacity-60"} onClick={likeExists ? () => unlike() : () => like()}>
                         <SlLike className={likeExists ? "size-7 text-green-500" : "size-7"}/>
                         <span className={likeExists ? "mt-[5px] font-medium ml-1 text-green-500" : "mt-[5px] font-medium ml-1"}>{props.whisper.whisperLike.numberLike}</span>
                     </div>
-                    <div className={Cookies.get("username") ? "p-2 flex items-center hover:text-black text-gray-400 transition-all cursor-pointer" : "p-2 flex items-center hover:text-black text-gray-400 transition-all cursor-no-drop opacity-60"}>
-                        <SlDislike  className="size-7 mt-1"/>
-                        <span className="mt-[5px] font-medium ml-1">{props.whisper.whisperLike.numberDislike}</span>
+                    <div className={Cookies.get("username") ? "p-2 flex items-center hover:text-black text-gray-400 transition-all cursor-pointer" : "p-2 flex items-center hover:text-black text-gray-400 transition-all cursor-no-drop opacity-60"} onClick={dislikeExists ? () => unDislike() : () => dislike()}>
+                        <SlDislike  className={dislikeExists ? "text-red-500 size-7 mt-1" : "size-7 mt-1"}/>
+                        <span className={dislikeExists ? "text-red-500 mt-[5px] font-medium ml-1" : "mt-[5px] font-medium ml-1"}>{props.whisper.whisperLike.numberDislike}</span>
                     </div>
                 </div>
                 <div className="h-[0.1px] w-full bg-gray-100"></div>
@@ -134,13 +230,13 @@ export default function WhisperContent(props) {
             </div>
             <div className="mt-10">
                 <div className="flex">
-                    <div className={Cookies.get("username") != null ? "p-2 flex items-center hover:text-black text-gray-400 transition-all cursor-pointer" : "p-2 flex items-center hover:text-black text-gray-400 transition-all cursor-no-drop opacity-60"} onClick={likeExists ? () => null : () => like()}>
+                    <div className={Cookies.get("username") != null ? "p-2 flex items-center hover:text-black text-gray-400 transition-all cursor-pointer" : "p-2 flex items-center hover:text-black text-gray-400 transition-all cursor-no-drop opacity-60"} onClick={likeExists ? () => unlike() : () => like()}>
                         <SlLike className={likeExists ? " text-green-500 size-7": "size-7"}/>
                         <span className={likeExists ? "mt-[5px] font-medium ml-1 text-green-500" : "mt-[5px] font-medium ml-1" }>{props.whisper.whisperLike.numberLike}</span>
                     </div>
-                    <div className={Cookies.get("username") ? "p-2 flex items-center hover:text-black text-gray-400 transition-all cursor-pointer" : "p-2 flex items-center hover:text-black text-gray-400 transition-all cursor-no-drop opacity-60"}>
-                        <SlDislike  className="size-7 mt-1"/>
-                        <span className="mt-[5px] font-medium ml-1">{props.whisper.whisperLike.numberDislike}</span>
+                    <div className={Cookies.get("username") ? "p-2 flex items-center hover:text-black text-gray-400 transition-all cursor-pointer" : "p-2 flex items-center hover:text-black text-gray-400 transition-all cursor-no-drop opacity-60"} onClick={dislikeExists ? () => unDislike() : () => dislike()}>
+                        <SlDislike  className={dislikeExists ? "text-red-500 size-7 mt-1" : "size-7 mt-1"}/>
+                        <span className={dislikeExists ? "text-red-500 mt-[5px] font-medium ml-1" : "mt-[5px] font-medium ml-1"}>{props.whisper.whisperLike.numberDislike}</span>
                     </div>
                     <div className=" flex justify-center items-center">
                         <WhisperComment comment={props.whisper.whisperComment} whisperId={props.whisper['id']} />

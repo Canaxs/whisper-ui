@@ -32,12 +32,12 @@ export default function ChatCard(props) {
 
     return (
         <div key={props.key} className="mt-5 border-gray-200 border rounded p-2 hover:shadow-xl transition-all cursor-pointer">
-            <div className="flex justify-start">
+            <div className="flex w-full">
                 <Avatar className="w-7 h-7">
                     <AvatarImage src="https://github.com/shadcn.png" alt="@shadcn" />
                     <AvatarFallback>CN</AvatarFallback>
                 </Avatar>
-                <div className="relative bottom-[2px] ml-3 mr-3">
+                <div className="relative bottom-[2px] ml-3 mr-3 w-full">
                     <div className="flex items-center mb-1">
                         <HovCard name={props.obj['user']['username']} buttonClass={"no-underline text-gray-500 items-start h-5"}/>
                         <span className="text-gray-400 drop-shadow ml-1 text-base">·</span>
@@ -99,6 +99,15 @@ export default function ChatCard(props) {
                                     </a>
                                     <span className="ml-1 font-medium text-sm text-gray-500">{props.obj['commentSize']}</span>
                                 </div>
+                        </div>
+                    </div>
+                    <div className="flex justify-between">
+                        <div className="flex mt-3">
+                            {props.obj['tags']?.map((tag,index) => 
+                                <div className="bg-gray-100 text-gray-400 mr-2 p-1 rounded-lg shadow shadow-gray-600 text-xs" key={"chatTag"+index}>
+                                    <span>{tag}</span>
+                                </div>
+                            )}
                         </div>
                         <div className="flex items-center">
                             <img src="https://i.ibb.co/gyJ0BRk/soylenti-card.png" width={55} height={55} className="-rotate-12"/>

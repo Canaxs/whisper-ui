@@ -20,7 +20,7 @@ import { MdOutlineKeyboardBackspace } from "react-icons/md";
 import { VscCommentDiscussion } from "react-icons/vsc";
 import { Textarea } from '@/components/ui/textarea';
 import { Button } from '@/components/ui/button';
-import { createDisputeComment, getDispute } from '@/api/apiCalls';
+import { controlDisLikeDispute, controlLikeDispute, createDisputeComment, dislikeDispute, getDispute, isExpiredToken, likeDispute, unDislikeDispute, unLikeDispute } from '@/api/apiCalls';
 import Cookies from 'js-cookie'
 import { description } from "@/components/Chart-Comp/ChartComp";
 import { useToast } from "@/components/ui/use-toast"
@@ -46,11 +46,17 @@ export default function SoylesiPage({
         user: {},
         whisper: {},
         disputeComments: [],
+        disputeTag: {},
+        disputeLike: {}
     });
 
     const router = useRouter();
 
     const { toast } = useToast();
+
+    const [likeExists, setLikeExists] = useState(false);
+
+    const [dislikeExists, setDislikeExists] = useState(false);
 
     const [isLogin , setLogin] = useState(false);
 
@@ -60,8 +66,134 @@ export default function SoylesiPage({
         getDisputeFunc();
         if(Cookies.get("token")) {
             setLogin(true)
+            controlLike();
+            controlDisLike();
         }
     }, [])
+
+    async function controlLike() {
+        const slug = (await params).slug
+        await controlLikeDispute(slug , Cookies.get("token")).then((res) => {
+            setLikeExists(res.data);
+        })
+    }
+
+    async function controlDisLike() {
+        const slug = (await params).slug
+        await controlDisLikeDispute(slug , Cookies.get("token")).then((res) => {
+            setDislikeExists(res.data);
+        })
+    }
+
+    async function like() {
+        if(!dislikeExists) {
+            if(Cookies.get("username") != null) {
+                await likeDispute(dispute.id,Cookies.get("token")).then((res) => {
+                    setLikeExists(true);
+                    dispute.disputeLike['numberLike']++;
+                    toast({
+                        variant: "success",
+                        title: "Bu Söyleşiyi Beğendiniz",
+                        description: ":)",
+                    })
+                }, (exception) => {
+                    setLikeExists(false);
+                })
+            }
+            else {
+                toast({
+                    variant: "destructive",
+                    title: "Bu Söyleşiyi beğenemezsiniz.",
+                    description: "Söyleşiyi beğenmeniz için giriş yapmanız gerekiyor.",
+                })
+            }
+        }
+        else {
+            toast({
+                variant: "destructive",
+                title: "Bu Söyleşiyi beğenemezsiniz",
+                description: "Söyleşiyi beğenmeniz için dislike işleminizi geri almanız gerekiyor.",
+            })
+        }
+    }
+
+    async function dislike() {
+        if(!likeExists) {
+            if(Cookies.get("username") != null) {
+                await dislikeDispute(dispute.id,Cookies.get("token")).then((res) => {
+                    setDislikeExists(true);
+                    dispute.disputeLike['numberDislike']++;
+                    toast({
+                        variant: "destructive",
+                        title: "Bu Söyleşiyi Beğenmediniz",
+                        description: ":(",
+                    })
+                }, (exception) => {
+                    setDislikeExists(false);
+                })
+            }
+            else {
+                toast({
+                    variant: "destructive",
+                    title: "Bu Söyleşiyi beğenemezsiniz.",
+                    description: "Söyleşiyi beğenmemeniz için giriş yapmanız gerekiyor.",
+                })
+            }
+        }
+        else {
+            toast({
+                variant: "destructive",
+                title: "Bu Söyleşiyi beğenemezsiniz",
+                description: "Söyleşiyi beğenmeniz için beğeni işleminizi geri almanız gerekiyor.",
+            })
+        }
+    }
+
+    async function unlike() {
+        if(Cookies.get("username") != null) {
+            await unLikeDispute(dispute.id,Cookies.get("token")).then((res) => {
+                setLikeExists(false);
+                dispute.disputeLike['numberLike']--;
+                toast({
+                    variant: "success",
+                    title: "Beğeni geri alındı.",
+                    description: ":(",
+                  })
+            }, (exception) => {
+                setLikeExists(true);
+            })
+        }
+        else {
+            toast({
+                variant: "destructive",
+                title: "Error",
+                description: "Beğeni geri alınırken Sorun Oluştu",
+              })
+        }
+    }
+
+    async function unDislike() {
+        if(Cookies.get("username") != null) {
+            await unDislikeDispute(dispute.id,Cookies.get("token")).then((res) => {
+                setDislikeExists(false);
+                dispute.disputeLike['numberDislike']--;
+                toast({
+                    variant: "success",
+                    title: "Dislike geri alındı",
+                    description: ":)",
+                  })
+            }, (exception) => {
+                setDislikeExists(true);
+            })
+        }
+        else {
+            toast({
+                variant: "destructive",
+                title: "Error",
+                description: "Dislike geri alınırken sorun oluştu.",
+              })
+        }
+    }
 
 
     async function getDisputeFunc() {
@@ -205,18 +337,26 @@ export default function SoylesiPage({
                         <span className="text-gray-400 ml-2 text-sm"><span className='font-medium text-gray-600'>2.8M</span> Views</span>
                     </div>
                     <div className="flex mt-3 justify-around max-sm:justify-between max-sm:ml-2 max-sm:mr-2 text-gray-600">
-                            <span className='flex items-center'>
-                                <SlLike  className="size-7 cursor-pointer hover:scale-110 transition-all hover:text-green-400"/>
-                                <span className='font-medium ml-1 mt-2 text-sm'>0</span>
+                            <span className='flex items-center cursor-pointer '>
+                                <SlLike className={likeExists ? "size-7 hover:scale-110 transition-all hover:text-gray-600 text-green-400" : "size-7 hover:scale-110 transition-all hover:text-green-400"} onClick={likeExists ? () => unlike() : () => like()} />
+                                <span className='font-medium ml-1 mt-2 text-sm'>{dispute.disputeLike['numberLike']}</span>
                             </span>
-                            <span className='flex items-center'>
-                                <SlDislike  className="size-7 cursor-pointer hover:scale-110 transition-all hover:text-red-400"/>
-                                <span className='font-medium ml-1 mt-2 text-sm'>0</span>
+                            <span className='flex items-center cursor-pointer '>
+                                <SlDislike className={dislikeExists ? "size-7 hover:scale-110 transition-all text-red-400 hover:text-gray-600" :"size-7 hover:scale-110 transition-all hover:text-red-400"} onClick={dislikeExists ? () => unDislike() : () => dislike()}/>
+                                <span className='font-medium ml-1 mt-2 text-sm'>{dispute.disputeLike['numberDislike']}</span>
                             </span>
                             <span className='flex items-center'>
                                 <VscCommentDiscussion className='size-7'/>
                                 <span className='font-medium ml-1 text-sm'>{dispute.disputeComments.length}</span>
                             </span>
+                    </div>
+                    <div className="flex mt-7">
+                        <span className="mr-2 text-base drop-shadow-md shadow-black">Etiketler : </span>
+                        {dispute.disputeTag['tags'].map((tag,index) => 
+                            <div className="bg-gray-100 text-gray-400 mr-2 p-1 rounded-lg shadow shadow-gray-600 text-xs" key={"tag"+index}>
+                                <span>{tag}</span>
+                            </div>
+                        )}
                     </div>
                     <div className={isLogin ? 'mt-10 flex' : 'hidden'}>
                         <Avatar className="w-7 h-7">
