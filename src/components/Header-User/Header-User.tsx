@@ -60,6 +60,7 @@ export function HeaderUser(props) {
                         <DropdownMenuItem> <a href="/account">Profil</a></DropdownMenuItem>
                         <DropdownMenuItem> <a href="/account">Bildirimler</a></DropdownMenuItem>
                         <DropdownMenuItem> <a href="/account/write">Paylaşım Yap</a></DropdownMenuItem>
+                        <DropdownMenuItem> <a href="/sohbet">Söyleşi Alanı'na git</a></DropdownMenuItem>
                     </DropdownMenuGroup>
                     <DropdownMenuSeparator />
                     <DropdownMenuItem><a href="/">Yardım</a></DropdownMenuItem>
