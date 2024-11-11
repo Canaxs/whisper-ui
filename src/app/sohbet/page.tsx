@@ -18,7 +18,7 @@ import { useEffect, useState } from "react";
 import Cookies from 'js-cookie'
 import { useToast } from "@/components/ui/use-toast"
 import { Input } from "@/components/ui/input";
-import { createDispute, getAllDispute, getWhispersFilter } from "@/api/apiCalls";
+import { createDispute, getAllDispute, getMostUsedTags, getWhispersFilter } from "@/api/apiCalls";
 import { convertMenusEn } from "@/lib/menuEnum";
 import { Textarea } from "@/components/ui/textarea";
 import {
@@ -51,6 +51,8 @@ export default function AllChat() {
     const [description , setDescription] = useState("");
 
     const [page, setPage] = useState(1); 
+
+    const [mostTags , setMostTags] = useState([]);
 
     const [selectWhisper , setSelectWhisper] = useState({
         id: "",
@@ -95,6 +97,7 @@ export default function AllChat() {
             setIsToken(true);
         }
         getDisputeData();
+        mostTagsFunc();
     }, [])
 
     useEffect(() => {
@@ -299,6 +302,12 @@ export default function AllChat() {
         }
     }
 
+    async function mostTagsFunc() {
+        await getMostUsedTags().then((res) => {
+            setMostTags(res.data)
+        })
+    }
+
     
 
     return (
@@ -306,9 +315,9 @@ export default function AllChat() {
             <div className="absolute max-xl:hidden w-52 border rounded-sm left-10 top-32 pl-5 pr-5 pt-2 shadow-lg">
                 <h3 className="text-center">Gündemdekiler</h3>
                 <hr className="mb-3 mt-3 text-black drop-shadow-md"/>
-                <div className="flex flex-col">
-                    { Array.from({ length: 15 }).map((_,index) =>
-                        <span key={"array"+index} className="pt-2 cursor-pointer hover:scale-105 transition-all drop-shadow-md"><span className="font-medium text-gray-500 mr-1">#</span>Etiket</span>
+                <div className="flex flex-col mt-2">
+                    { mostTags.map((obj,index) =>
+                        <a className="mb-2 hover:scale-105 transition-all" href={"/sohbet/etiket/"+obj['tag']}><span key={"array"+index} className="pt-2 cursor-pointer drop-shadow-md"><span className="font-medium text-gray-500 mr-1">#</span>{obj['tag']}<span className="ml-1 relative bottom-[2px] px-2 py-1 bg-red-600 text-white drop-shadow-md rounded-full text-[9px] opacity-70 hover:opacity-100">{obj['count']}</span></span></a>
                     )}
                 </div>
             </div>

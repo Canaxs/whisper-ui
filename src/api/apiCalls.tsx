@@ -184,3 +184,13 @@ export const unDislikeDispute = (disputeId , headerToken) => {
     return axios.get(Environment.baseUrl+"dispute/undislike/"+disputeId,{headers: {Authorization: "Bearer "+headerToken}});
 }
 
+// Dispute Tag
+
+export const getMostUsedTags = () => {
+    return axios.get(Environment.baseUrl+"dispute/getMostUsedTags");
+}
+
+export const getDisputeTag = (disputeTag) => {
+    return axios.get(Environment.baseUrl+"dispute/getDisputeTag/"+disputeTag);
+}
+
