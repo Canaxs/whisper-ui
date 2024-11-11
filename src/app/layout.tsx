@@ -21,6 +21,9 @@ export default function RootLayout({children,}: Readonly<{children: React.ReactN
 
   return (
     <html lang="en" className="w-full h-full">
+      <head>
+        <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-2938362237500987" crossOrigin="anonymous"></script>
+      </head>
       <body className={inter.className+" w-full h-full"} style={{fontFamily: 'Poppins,sans-serif'}} >
       <StoreProvider>
         <Suspense fallback={null}>
