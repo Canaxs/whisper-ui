@@ -317,7 +317,7 @@ export default function AllChat() {
                 <hr className="mb-3 mt-3 text-black drop-shadow-md"/>
                 <div className="flex flex-col mt-2">
                     { mostTags.map((obj,index) =>
-                        <a className="mb-2 hover:scale-105 transition-all" href={"/sohbet/etiket/"+obj['tag']}><span key={"array"+index} className="pt-2 cursor-pointer drop-shadow-md"><span className="font-medium text-gray-500 mr-1">#</span>{obj['tag']}<span className="ml-1 relative bottom-[2px] px-2 py-1 bg-red-600 text-white drop-shadow-md rounded-full text-[9px] opacity-70 hover:opacity-100">{obj['count']}</span></span></a>
+                        <a key={"array"+index} className="mb-2 hover:scale-105 transition-all" href={"/sohbet/etiket/"+obj['tag']}><span className="pt-2 cursor-pointer drop-shadow-md"><span className="font-medium text-gray-500 mr-1">#</span>{obj['tag']}<span className="ml-1 relative bottom-[2px] px-2 py-1 bg-red-600 text-white drop-shadow-md rounded-full text-[9px] opacity-70 hover:opacity-100">{obj['count']}</span></span></a>
                     )}
                 </div>
             </div>
