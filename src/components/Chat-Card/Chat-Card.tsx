@@ -103,7 +103,7 @@ export default function ChatCard(props) {
                     </div>
                     <div className="flex justify-between">
                         <div className="flex mt-3">
-                            {props.obj['tags']?.map((tag,index) => 
+                            {props.tags?.map((tag,index) => 
                                 <div className="bg-gray-100 text-gray-400 mr-2 p-1 rounded-lg shadow shadow-gray-600 text-xs" key={"chatTag"+index}>
                                     <span>{tag}</span>
                                 </div>

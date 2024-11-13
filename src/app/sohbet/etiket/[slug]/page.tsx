@@ -37,7 +37,7 @@ export default function TagPage({
 
     useEffect(() => {
         getDisputeTagFunc();
-    })
+    }, [])
 
 
     async function getDisputeTagFunc() {
@@ -87,7 +87,7 @@ export default function TagPage({
             <div className="mt-14 ml-[20%] w-3/5 max-xl:w-full max-xl:ml-0">
                 {disputeDTO.length > 0 ?  disputeDTO.map((obj,index) => 
                     <div key={"etiket"+index}>
-                        <ChatCard obj={obj} date={giveTheDate(obj['createdDate'])}/>
+                        <ChatCard obj={obj} date={giveTheDate(obj['createdDate'])} tags={obj.disputeTag['tags']} />
                     </div>
                 ) :
                     <div className="flex justify-center w-full">

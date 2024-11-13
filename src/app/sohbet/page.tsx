@@ -433,7 +433,7 @@ export default function AllChat() {
                     <div className="mt-14 ml-[20%] w-3/5 max-xl:w-full max-xl:ml-0">
                         {disputeData.content.map((obj , index) => 
                             <div key={"chat"+index}>
-                                <ChatCard obj={obj} date={giveTheDate(obj['createdDate'])}/>
+                                <ChatCard obj={obj} date={giveTheDate(obj['createdDate'])} tags={obj['tags']} />
                             </div>
                         )}
                     </div>
