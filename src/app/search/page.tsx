@@ -13,6 +13,7 @@ import { TbWriting } from 'react-icons/tb';
 import { LiaTimesCircleSolid } from "react-icons/lia";
 import { convertMenusEn } from '@/lib/menuEnum';
 import SearchCompo from '@/components/Search-Comp/Search-Compo';
+import {Suspense} from "react";
 
 
 export default function SearchPage() {
@@ -57,6 +58,7 @@ export default function SearchPage() {
 
 
     return (
+        <Suspense fallback={<div>Loading...</div>}>
         <div>
             <div className="lg:w-[98%] 2xl:w-[65%] pt-1 lg:ml-[1%] 2xl:ml-[17%]">
                 <Header flag={"../../siyah-flag.png"} logo={"../../logo-black.png"} /> 
@@ -64,5 +66,6 @@ export default function SearchPage() {
             </div>
             <FooterArea src={"../../logo-white.png"}/>
         </div>
+        </Suspense>
     )
 }
