@@ -26,7 +26,6 @@ export default function RootLayout({children,}: Readonly<{children: React.ReactN
       </head>
       <body className={inter.className+" w-full h-full"} style={{fontFamily: 'Poppins,sans-serif'}} >
       <StoreProvider>
-        <Suspense fallback={null}>
             <div className="w-full h-full">  
               {children}
               <a href="/sohbet">
@@ -36,7 +35,6 @@ export default function RootLayout({children,}: Readonly<{children: React.ReactN
                 </div>
               </a>
             </div>
-          </Suspense>
         <Toaster />
       </StoreProvider>
       </body>

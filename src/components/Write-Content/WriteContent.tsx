@@ -22,7 +22,7 @@ import {
     AlertDialogTrigger,
   } from "@/components/ui/alert-dialog"
 import { useEffect, useState } from "react"
-import { createWhisper } from "@/api/apiCalls"
+import { createWhisper, writeLimitDrop } from "@/api/apiCalls"
 import Cookies from 'js-cookie';
 import { ToastAction } from "@/components/ui/toast"
 import { useToast } from "@/components/ui/use-toast"
@@ -82,6 +82,10 @@ export default function WriteContent() {
                 title: "Söylenti Haber Kayıt Edildi",
                 description: ""+new Date().toLocaleDateString("tr-TR"),
               })
+
+              writeLimitDrop(Cookies.get("token")).then((res) => {
+              })
+
         }
     }
 

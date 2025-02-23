@@ -6,7 +6,8 @@ const initialState = {
     username:"",
     token: "",
     userPoint: "",
-    role: ""
+    role: "",
+    isSubscribe: ""
   },
 };
 
@@ -20,13 +21,15 @@ export const userSlice = createSlice({
         Cookies.set("username",state.data.username);
         Cookies.set("userPoint",state.data.userPoint);
         Cookies.set("role",state.data.role);
+        Cookies.set("isSubscribe",state.data.isSubscribe)
     },
     clearUser : (state) => {
       state.data = {
         username:"",
         token: "",
         userPoint: "",
-        role: ""
+        role: "",
+        isSubscribe: ""
       };
     }
   }

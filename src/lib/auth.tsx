@@ -9,7 +9,7 @@ export const  isAuth = async (request) => {
     let bool: Boolean = false;
 
     if(token != null) {
-        if(request.url.substring(Environment.domain.length).includes(urlConfig[0])) {
+        if(request.url.substring(Environment.domain.length).includes(urlConfig[0]) || request.url.substring(Environment.domain.length).includes(urlConfig[2])) {
            
             const authorizationModel = {
                 authorization : token
@@ -32,4 +32,4 @@ export const  isAuth = async (request) => {
     return bool;
 }
 
-const urlConfig = ['account','panel']
+const urlConfig = ['account','panel','plan']

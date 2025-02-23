@@ -14,7 +14,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { useEffect, useState } from "react";
 import { useAppSelector } from "@/lib/hooks";
 import Cookies from 'js-cookie'
-import  { getUserWhispersCalls } from "@/api/apiCalls";
+import  { getSubscribe, getUserWhispersCalls } from "@/api/apiCalls";
 
 
 export type Whisper = {
@@ -28,6 +28,19 @@ export type Whisper = {
     createdDate: string
 }
 
+export type Subscription = {
+    createdBy: string,
+    createdDate: string,
+    updatedBy: string,
+    updatedDate: string,
+    planName: string,
+    writeLimit: number,
+    writeLimitDef: number,
+    earning: boolean,
+    exclusive: boolean,
+    id: number
+}
+
 export default function AccountInfo() {
 
     const [userData,setUserData] = useState({
@@ -35,6 +48,8 @@ export default function AccountInfo() {
         userPoint: "",
         role: "",
     });
+
+    const [subsInfo , setSubsInfo] = useState<Subscription>();
 
     const [whispers , setWhispers] = useState<Whisper[]>([]);
 
@@ -46,9 +61,16 @@ export default function AccountInfo() {
         })
     }
 
+    function getSubscribeInfo() {
+        getSubscribe(Cookies.get("token")).then((res)=> {
+            setSubsInfo(res.data);
+        })
+    }
+
     useEffect(() => {
         uploadInformation();
         getUserWhispers();
+        getSubscribeInfo();
     }, [])
 
     const data = useAppSelector((state) => state.user.data); 
@@ -110,7 +132,7 @@ export default function AccountInfo() {
                 </Card>
             </div>
             <div>
-                <div className="w-full flex justify-center"> 
+                <div className="w-full flex max-lg:flex-col justify-center"> 
                     <Card className="w-1/2 m-2 max-lg:w-[98%] max-lg:ml-[1%]" key={"card2"}>
                         <CardHeader className="text-center">
                             <CardTitle className="max-sm:text-xl">Paylaşım Bilgileri</CardTitle>
@@ -156,6 +178,51 @@ export default function AccountInfo() {
                             <img src="../logo-black.png" width={"50px"} height={"50px"} alt="Söylenti" className="float-right"/>
                         </CardFooter>
                     </Card>
+                    <Card className="w-1/2 m-2 max-lg:w-[98%] max-lg:ml-[1%]" key={"card1"}>
+                    <CardHeader className="text-center">
+                        <CardTitle className="max-sm:text-xl">Üyelik Bilgileri</CardTitle>
+                        <CardDescription style={{marginTop: "15px"}} className="max-sm:text-xs">Lorem ipsum dolor, sit amet consectetur adipisicing elit. </CardDescription>
+                    </CardHeader>
+                    <CardContent>
+                        <form>
+                        <div className="grid w-full items-center gap-4">
+                            <div className="flex justify-around w-9/12 ml-[7.5%]">
+                                <div className="flex flex-col space-y-2.5 pt-2 pb-2 w-1/2">
+                                <Label htmlFor="name" className="text-base max-sm:text-sm">Plan Adı</Label>
+                                <Label htmlFor="name" className="font-normal cursor-pointer max-sm:text-sm">{subsInfo?.planName}</Label>
+                                </div>
+                                <div className="flex flex-col space-y-2.5 pt-2 pb-2 w-1/2">
+                                    <Label htmlFor="name" className="text-base max-sm:text-sm">Yenilenme Tarihi</Label>
+                                    <Label htmlFor="name" className="font-normal cursor-pointer max-sm:text-sm">{subsInfo?.createdDate.split("T")[0]}</Label>
+                                </div>
+                            </div>
+                            <div className="flex justify-around w-9/12 ml-[7.5%]">
+                                <div className="flex flex-col space-y-2.5 pt-2 pb-2 w-1/2">
+                                    <Label htmlFor="name" className="text-base max-sm:text-sm">Para Kazanma</Label>
+                                    <Label htmlFor="name" className="font-normal cursor-pointer max-sm:text-sm">{subsInfo?.earning ? "Açık" : "Kapalı"}</Label>
+                                </div>
+                                <div className="flex flex-col space-y-2.5 pt-2 pb-2 w-1/2">
+                                    <Label htmlFor="name" className="text-base max-sm:text-sm">Seçkin Hesap</Label>
+                                    <Label htmlFor="name" className="font-normal cursor-pointer max-sm:text-sm">{subsInfo?.exclusive ? "Aktif" : "Aktif Değil"}</Label>
+                                </div>
+                            </div>
+                            <div className="flex justify-around w-9/12 ml-[7.5%]">
+                                <div className="flex flex-col space-y-2.5 pt-2 pb-2 w-1/2">
+                                    <Label htmlFor="name" className="text-base max-sm:text-sm">Paylaşım Limiti</Label>
+                                    <Label htmlFor="name" className="font-normal cursor-pointer max-sm:text-sm">{subsInfo?.writeLimitDef}</Label>
+                                </div>
+                                <div className="flex flex-col space-y-2.5 pt-2 pb-2 w-1/2">
+                                    <Label htmlFor="name" className="text-base max-sm:text-sm">Kalan Limit</Label>
+                                    <Label htmlFor="name" className="font-normal cursor-pointer max-sm:text-sm">{subsInfo?.writeLimit}</Label>
+                                </div>
+                            </div>
+                        </div>
+                        </form>
+                    </CardContent>
+                    <CardFooter className="flex justify-end">
+                        <img src="../logo-black.png" width={"50px"} height={"50px"} alt="Söylenti" className="float-right"/>
+                    </CardFooter>
+                </Card>
             </div>
             </div>
             <div className="mt-10">

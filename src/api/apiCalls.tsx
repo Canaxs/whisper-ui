@@ -194,3 +194,18 @@ export const getDisputeTag = (disputeTag) => {
     return axios.get(Environment.baseUrl+"dispute/getDisputeTag/"+disputeTag);
 }
 
+//UserPlan
+
+export const updatePlan = (updatePlanReq,headerToken) => {
+    return axios.post(Environment.baseUrl+"user/updatePlan",updatePlanReq,{headers: {Authorization: "Bearer "+headerToken}});
+}
+
+// Subscribe
+
+export const getSubscribe = (headerToken) => {
+    return axios.get(Environment.baseUrl+"user/getSubscribe",{headers: {Authorization: "Bearer "+headerToken}});
+}
+
+export const writeLimitDrop = (headerToken) => {
+    return axios.get(Environment.baseUrl+"user/writeLimitDrop",{headers: {Authorization: "Bearer "+headerToken}});
+}

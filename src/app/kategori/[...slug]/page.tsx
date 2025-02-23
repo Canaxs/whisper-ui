@@ -139,7 +139,7 @@ export default function Docs({
             <div className="lg:w-[98%] 2xl:w-[65%] pt-1 lg:ml-[1%] 2xl:ml-[17%]">
                 <Header flag={"../../siyah-flag.png"} logo={"../../logo-black.png"} />
                 <div className="mt-10 ml-[10%] mr-[10%] mb-4">
-                { whispers.content.length != 0 ? whispers.content?.map((content,index) =>
+                { whispers.content?.length != 0 ? whispers.content?.map((content,index) =>
                 <a className="page-card" href={"/kategori/"+params.slug[0]+"/"+content["urlName"]} key={index}>
                     <Card className="mt-3 shadow-xl hover:shadow-2xl hover:shadow-black transition-all relative">
                         <div className="circle1 absolute bottom-0 m-auto flex justify-center items-center">
