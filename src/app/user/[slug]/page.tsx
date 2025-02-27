@@ -95,7 +95,7 @@ export default function UserPage() {
                             <div className="flex items-center gap-1">
                                 <SlBadge className="size-7 mt-2 mr-4" title="Rozet"/>
                                 {userDto?.badges.map((data,index) => (
-                                    <img src={data['badgeURL']} className="w-8 h-8 object-cover mt-1 transition-all hover:scale-110" title={data['badge']+" Rozeti"}  />
+                                    <img key={"badgeImage"+index} src={data['badgeURL']} className="w-8 h-8 object-cover mt-1 transition-all hover:scale-110" title={data['badge']+" Rozeti"}  />
                                 ))}
                             </div>
                         </div>

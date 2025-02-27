@@ -207,7 +207,7 @@ export default function WhisperContent(props) {
                         <span className="text-base">{props.whisper.authorName}</span>
                         <div className="flex">
                             {badges?.map((data,index) => (
-                                <img src={data.badgeURL} className="w-5 h-5 hover:scale-110 transition-all" title={data.badge+" Rozeti"}/>
+                                <img key={"dataBadge"+index} src={data.badgeURL} className="w-5 h-5 hover:scale-110 transition-all" title={data.badge+" Rozeti"}/>
                             ))}
                         </div>
                     </div>
