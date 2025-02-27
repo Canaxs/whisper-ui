@@ -209,3 +209,25 @@ export const getSubscribe = (headerToken) => {
 export const writeLimitDrop = (headerToken) => {
     return axios.get(Environment.baseUrl+"user/writeLimitDrop",{headers: {Authorization: "Bearer "+headerToken}});
 }
+
+//Badges
+
+export const createBadge = (badgeData,headerToken) => {
+    return axios.post(Environment.baseUrl+"user/createBadge",badgeData,{headers: {Authorization: "Bearer "+headerToken}});
+}
+
+export const addBadge = (userBadgeAddRequest,headerToken) => {
+    return axios.post(Environment.baseUrl+"user/addBadge",userBadgeAddRequest,{headers: {Authorization: "Bearer "+headerToken}});
+}
+
+export const deleteBadge = (userBadgeAddRequest,headerToken) => {
+    return axios.post(Environment.baseUrl+"user/deleteBadge",userBadgeAddRequest,{headers: {Authorization: "Bearer "+headerToken}});
+}
+
+export const allBadges = (headerToken) => {
+    return axios.get(Environment.baseUrl+"user/allBadges",{headers: {Authorization: "Bearer "+headerToken}});
+}
+
+export const getUserBadges = (username) => {
+    return axios.get(Environment.baseUrl+"user/getUserBadges/"+username);
+}

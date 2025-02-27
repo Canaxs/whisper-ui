@@ -2,6 +2,10 @@ import { Label } from "@radix-ui/react-label"
 import { BiSolidDashboard } from "react-icons/bi";
 import { GiPostStamp } from "react-icons/gi";
 import { FaUsers , FaUsersGear } from "react-icons/fa6";
+import { SlBadge } from "react-icons/sl";
+import { TbBadges } from "react-icons/tb";
+
+
 import Cookies from 'js-cookie'
 import { useEffect, useState } from "react";
 
@@ -27,6 +31,8 @@ export default function DashboardMenu(props) {
                 <li className="p-3 border m-3 opacity-70 hover:opacity-100 transition-all hover:bg-gray-600 hover:text-white hover:rounded-xl"><a href="/panel/whispers" className="flex items-center font-medium text-sm"><GiPostStamp className="size-5 mr-3" />Paylaşımlar</a></li>
                 <li className="p-3 border m-3 opacity-70 hover:opacity-100 transition-all hover:bg-gray-600 hover:text-white hover:rounded-xl"><a href="/panel/users" className="flex items-center font-medium text-sm"><FaUsers className="size-5 mr-3" />Kullanıcılar</a></li>
                 <li className="p-3 border m-3 opacity-70 hover:opacity-100 transition-all hover:bg-gray-600 hover:text-white hover:rounded-xl"><a href="/panel/mods" className="flex items-center font-medium text-sm"><FaUsersGear className="size-5 mr-3" />Yetkililer</a></li>
+                <li className="p-3 border m-3 opacity-70 hover:opacity-100 transition-all hover:bg-gray-600 hover:text-white hover:rounded-xl"><a href="/panel/create-badge" className="flex items-center font-medium text-sm"><TbBadges className="size-5 mr-3" />Rozetler</a></li>
+                <li className="p-3 border m-3 opacity-70 hover:opacity-100 transition-all hover:bg-gray-600 hover:text-white hover:rounded-xl"><a href="/panel/badges" className="flex items-center font-medium text-sm"><SlBadge className="size-5 mr-3" />Rozet Atama</a></li>
             </ul>
         </div>
     )

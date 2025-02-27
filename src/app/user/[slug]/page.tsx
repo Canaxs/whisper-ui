@@ -15,13 +15,16 @@ import NewsCard from "@/components/News-Card/NewsCard";
 import { FiUser } from "react-icons/fi";
 import { GiNorthStarShuriken } from "react-icons/gi";
 import { LuUserCog } from "react-icons/lu";
+import { SlBadge } from "react-icons/sl";
+
 
 
 
 export type UserDto = {
     username: string
     userPoint: number,
-    authorities: string
+    authorities: string,
+    badges: []
 }
 
 export type Whisper = {
@@ -86,8 +89,14 @@ export default function UserPage() {
                                 <span className="text-2xl drop-shadow mt-3 max-lg:text-base">{userDto?.userPoint}</span>
                             </div>
                             <div className="flex items-center">
-                                <LuUserCog className="size-7 mt-2 mr-4" title="Puan"/>
+                                <LuUserCog className="size-7 mt-2 mr-4" title="Rol"/>
                                 <span className="text-2xl drop-shadow mt-3 max-lg:text-base">{userDto?.authorities}</span>
+                            </div>
+                            <div className="flex items-center gap-1">
+                                <SlBadge className="size-7 mt-2 mr-4" title="Rozet"/>
+                                {userDto?.badges.map((data,index) => (
+                                    <img src={data['badgeURL']} className="w-8 h-8 object-cover mt-1 transition-all hover:scale-110" title={data['badge']+" Rozeti"}  />
+                                ))}
                             </div>
                         </div>
                     </div>

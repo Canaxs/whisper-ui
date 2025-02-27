@@ -10,12 +10,18 @@ import { TbWriting } from "react-icons/tb";
 import AbsoluteAdversiting from "../Advertising-Space/AbsoluteAdversiting";
 import WhisperComment from "../Whisper-Comment/WhisperComment";
 import { useEffect, useState } from "react";
-import { controlDisLike, controlLike, dislikeWhisper, likeWhisper, unDislikeWhisper, unLikeWhisper } from "@/api/apiCalls";
+import { controlDisLike, controlLike, dislikeWhisper, getUserBadges, likeWhisper, unDislikeWhisper, unLikeWhisper } from "@/api/apiCalls";
 import Cookies from 'js-cookie'
 import { useToast } from "@/components/ui/use-toast"
 import { TbCategory } from "react-icons/tb";
 import { convertDateMonth } from "@/lib/dateEnum";
 
+export type BadgeEntity = {
+    id: number,
+    badge: string,
+    badgeURL: string,
+    badgeType: string
+}
 
 
 export default function WhisperContent(props) {
@@ -26,11 +32,14 @@ export default function WhisperContent(props) {
 
     const [dislikeExists, setDisLikeExists] = useState(false);
 
+    const [badges , setBadges] = useState<BadgeEntity[]>([]);
+
     useEffect(() => {
         if(Cookies.get("username") != null) {
             controlLiked();
             controlDisliked();
         }
+        getBadgesFunc();
     }, [])
 
     async function controlLiked() {
@@ -176,6 +185,14 @@ export default function WhisperContent(props) {
         return clockSecondSp[0]+":"+clockSecondSp[1];
     }
 
+    function getBadgesFunc() {
+        getUserBadges(props.whisper.authorName).then((res) => {
+            setBadges(res.data);
+        },(exception) => {
+            
+        })
+    }
+
     return (
         <div className="mt-10 ml-[2%]">
             <div className="flex">
@@ -186,7 +203,14 @@ export default function WhisperContent(props) {
                     </Avatar>
                 </div>
                 <div className="flex flex-col ml-2">
-                    <span className="text-sm">{props.whisper.authorName}</span>
+                    <div className="flex gap-1">
+                        <span className="text-base">{props.whisper.authorName}</span>
+                        <div className="flex">
+                            {badges?.map((data,index) => (
+                                <img src={data.badgeURL} className="w-5 h-5 hover:scale-110 transition-all" title={data.badge+" Rozeti"}/>
+                            ))}
+                        </div>
+                    </div>
                     <span className="text-xs flex">Oluşturulma Tarihi : <span className="ml-1">{giveTheClock(props.whisper.createdDate)} · </span> <span className="ml-1">{giveTheDate(props.whisper.createdDate)}</span></span>
                 </div>
             </div>
