@@ -77,7 +77,7 @@ export function HeaderNotify() {
                     <DropdownMenuGroup>
                         {notificationDTO?.notificationList.map((data,index) => (
                             <React.Fragment key={"notify"+index}>
-                                <DropdownMenuItem className="cursor-pointer hover:drop-shadow transition-all" onClick={() => selectNotify(data)}>{menuItemText(data['text'],data['actionInfo'])}</DropdownMenuItem>
+                                <DropdownMenuItem className={data['isRead'] ? "cursor-pointer hover:drop-shadow transition-all" : "cursor-pointer hover:drop-shadow transition-all bg-gray-200"} onClick={() => selectNotify(data)}>{menuItemText(data['text'],data['actionInfo'])}</DropdownMenuItem>
                                 <DropdownMenuSeparator />
                             </React.Fragment>
                         ))}
