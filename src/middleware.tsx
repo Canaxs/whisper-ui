@@ -51,7 +51,6 @@ export async function middleware(request: NextRequest) {
         }
         
         const bool = await isAuth(request);
-        console.log("bool: "+bool)
         if(bool) {
             return response;
         } 

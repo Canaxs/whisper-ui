@@ -231,3 +231,18 @@ export const allBadges = (headerToken) => {
 export const getUserBadges = (username) => {
     return axios.get(Environment.baseUrl+"user/getUserBadges/"+username);
 }
+
+//Notification 
+
+export const getUserNotifications = (headerToken) => {
+    return axios.get(Environment.baseUrl+"notify/getUserNotifications",{headers: {Authorization: "Bearer "+headerToken}});
+}
+
+export const readUpdate = (notificationId,headerToken) => {
+    return axios.get(Environment.baseUrl+"notify/readUpdate/"+notificationId,{headers: {Authorization: "Bearer "+headerToken}});
+}
+
+export const activeUpdate = (notificationId,headerToken) => {
+    return axios.get(Environment.baseUrl+"notify/activeUpdate/"+notificationId,{headers: {Authorization: "Bearer "+headerToken}});
+}
+
