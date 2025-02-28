@@ -65,9 +65,11 @@ export function HeaderNotify() {
             <DropdownMenu>
                 <DropdownMenuTrigger asChild>
                         <div className="cursor-pointer relative">
-                            <div className="absolute flex items-center drop-shadow-lg shadow-gray-400 justify-center bottom-5 right-0 p-2 w-3 h-3 bg-red-500 text-white rounded-xl">
+                            {notificationDTO?.unReadNotify != 0 &&
+                            <div className="absolute flex items-center drop-shadow-lg shadow-gray-400 justify-center bottom-5 right-0 p-2 w-3 h-3 bg-blue-500 text-white rounded-xl">
                                 <span className="text-xs">{notificationDTO?.unReadNotify}</span>
                             </div>
+                            }
                             <IoIosNotifications className="size-7 mr-2 text-gray-400 hover:text-gray-700 transition-all"/>
                         </div>
                 </DropdownMenuTrigger>

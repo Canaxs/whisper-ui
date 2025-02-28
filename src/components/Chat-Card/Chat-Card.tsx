@@ -39,7 +39,7 @@ export default function ChatCard(props) {
                 </Avatar>
                 <div className="relative bottom-[2px] ml-3 mr-3 w-full">
                     <div className="flex items-center mb-1">
-                        <HovCard name={props.obj['user']['username']} buttonClass={"no-underline text-gray-500 items-start h-5"}/>
+                        <HovCard name={props.obj['user']} buttonClass={"no-underline text-gray-500 items-start h-5"}/>
                         <span className="text-gray-400 drop-shadow ml-1 text-base">·</span>
                         <span className="text-gray-400 drop-shadow ml-1 text-sm">{props.date}</span>
                     </div>
@@ -87,11 +87,11 @@ export default function ChatCard(props) {
                         <div className="flex mt-3">
                                 <div className="flex">
                                     <SlLike  className="size-5 cursor-pointer hover:scale-110 transition-all hover:text-green-400"/>
-                                    <span className="ml-1 font-medium text-sm text-gray-500">{"5"}</span>
+                                    <span className="ml-1 font-medium text-sm text-gray-500">{props.obj['disputeLikeSize']}</span>
                                 </div>
                                 <div className="flex">
                                     <SlDislike  className="size-5 ml-3 cursor-pointer hover:scale-110 transition-all hover:text-red-400"/>
-                                    <span className="ml-1 font-medium text-sm text-gray-500">{"5"}</span>
+                                    <span className="ml-1 font-medium text-sm text-gray-500">{props.obj['disputeDisLikeSize']}</span>
                                 </div>
                                 <div className="flex">
                                     <a href={"/sohbet/soylesi/"+props.obj['id']}>
