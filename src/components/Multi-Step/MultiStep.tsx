@@ -13,7 +13,8 @@ import { useToast } from "../ui/use-toast"
 import { current } from '@reduxjs/toolkit'
 import { updatePlan } from '@/api/apiCalls'
 import Cookies from 'js-cookie'
-import { useRouter } from 'next/navigation'
+import { redirect, useRouter } from 'next/navigation'
+import { Environment } from '@/environments/environments'
 
 type Inputs = z.infer<typeof FormDataSchema>
 
@@ -35,7 +36,7 @@ export default function MultiStep() {
   const [previousStep, setPreviousStep] = useState(0)
   const [currentStep, setCurrentStep] = useState(0)
   const [selectPlan , setSelectPlan] = useState("FREE");
-  const [isPayment , setIsPayment] = useState(false);
+  const [isPayment , setIsPayment] = useState(true);
   const delta = currentStep - previousStep
 
   const { toast } = useToast();
@@ -134,14 +135,7 @@ export default function MultiStep() {
           })
         })
         next();
-        setTimeout(() => {
-          toast({
-            variant: "success",
-            title: "Yönlendiriliyorsunuz...",
-            description: "Bekleyin",
-          })
-        },1000)
-        router.push("/")
+        window.location.href= Environment.domain+"account";
       }
       catch(e) {
       }
@@ -250,7 +244,7 @@ export default function MultiStep() {
               <div className='col-span-full'>
                 <label htmlFor='street' className='block text-sm font-medium leading-6 text-gray-900'>Kart Üzerindeki İsim</label>
                     <div className='mt-2'>
-                    <input type='text' id='street' {...register('cardName')} autoComplete='street-address' disabled={isPayment}
+                    <input type='text' id='street' {...register('cardName')} autoComplete='street-address' value={"Name Surname"} disabled={isPayment}
                         className='block p-3 w-1/5 rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-sky-600 sm:text-sm sm:leading-6'
                     />
                     {errors.cardName?.message && (
@@ -263,7 +257,7 @@ export default function MultiStep() {
                 <div className='col-span-2'>
                 <label htmlFor='street' className='block text-sm font-medium leading-6 text-gray-900'>Kart Numarası</label>
                     <div className='mt-2'>
-                    <input type='text' id='street' {...register('cardNumber')} autoComplete='street-address' disabled={isPayment}
+                    <input type='text' id='street' {...register('cardNumber')} autoComplete='street-address' value={"0000 0000 0000 0000"} disabled={isPayment}
                         className='block w-full p-3 rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-sky-600 sm:text-sm sm:leading-6'
                     />
                     {errors.cardNumber?.message && (
@@ -276,7 +270,7 @@ export default function MultiStep() {
                 <div className='col-span-1'>
                 <label htmlFor='street' className='block text-sm font-medium leading-6 text-gray-900'>Son Kullanma Tarihi</label>
                     <div className='mt-2'>
-                    <input type='text' id='street' {...register('expirationDate')} autoComplete='street-address' disabled={isPayment}
+                    <input type='text' id='street' {...register('expirationDate')} autoComplete='street-address' value={"00/00"} disabled={isPayment}
                         className='block p-3 w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-sky-600 sm:text-sm sm:leading-6'
                     />
                     {errors.expirationDate?.message && (
@@ -289,7 +283,7 @@ export default function MultiStep() {
                 <div className='col-span-1'>
                 <label htmlFor='street' className='block text-sm font-medium leading-6 text-gray-900'>CVC</label>
                     <div className='mt-2'>
-                    <input type='text' id='street' {...register('cvc')} autoComplete='street-address' disabled={isPayment}
+                    <input type='text' id='street' {...register('cvc')} autoComplete='street-address' value={"000"} disabled={isPayment}
                         className='block p-3 w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-sky-600 sm:text-sm sm:leading-6'
                     />
                     {errors.cvc?.message && (
@@ -301,7 +295,7 @@ export default function MultiStep() {
                 </div>
             </div>
             <div className='flex mt-5'>
-                <Button className='bg-gray-600' onClick={payment}>Ödeme Yap</Button>
+                <Button className='bg-gray-600 cursor-no-drop opacity-70'>Ödeme Yap(Kullanıma Kapalıdır)</Button>
             </div>
           </motion.div>
         )}
