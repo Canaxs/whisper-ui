@@ -167,7 +167,7 @@ export default function Docs({
                                     <div className="p-0 mt-3 mb-3 ml-0">
                                         <div className="flex flex-col">
                                             <div className="flex items-center text-slate-100">
-                                                <TbWriting className="size-5 mr-2"/>
+                                                <TbWriting className="size-5 mr-2" />
                                                 <span className="text-xs drop-shadow-lg pt-2 pb-1">{content["authorName"]}</span>
                                             </div>
                                             <div className="flex mt-1 items-center text-slate-100">
