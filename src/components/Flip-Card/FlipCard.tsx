@@ -3,6 +3,7 @@ import HovCard from "../Hov-Card/HovCard";
 import { GrResources } from "react-icons/gr";
 import { BiLike , BiDislike } from "react-icons/bi";
 import { TbUserStar } from "react-icons/tb";
+import Image from 'next/image';
 
 
 export default function FlipCard(props) {
@@ -11,7 +12,12 @@ export default function FlipCard(props) {
             <div className="flip-card-inner relative w-full max-md:h-[300px] h-[400px] border rounded-md shadow-xl hover:shadow-2xl hover:shadow-black transition-all" style={{transformStyle: "preserve-3d" , transition: "transform 0.6s"}}>
                 <div className="front-card absolute w-full h-full shadow-md overflow-hidden rounded-md" style={{backfaceVisibility: "hidden"}}>
                     <div className="absolute w-full h-full z-10 rounded-md">
-                        <img src={props.imageURL ? props.imageURL : "logo-black.png"} className="relative z-10 object-cover w-full h-full opacity-100 rounded-md" style={props.imageURL ? {backgroundColor : "rgba(0,0,0,.8)"} : {backgroundColor : ""} } />
+                        <Image src={props.imageURL || "/logo-black.png"} 
+                            alt="Image" fill className="rounded-md" 
+                             priority 
+                             placeholder="empty" 
+                             style={props.imageURL ? {backgroundColor : "rgba(0,0,0,.8)",objectFit: "cover"} : {backgroundColor : "",objectFit: "cover"} } 
+                             />
                     </div>
                     <div className="absolute w-full h-full z-20" style={{backgroundColor : "rgba(0,0,0,.1)"}}>
                     </div>

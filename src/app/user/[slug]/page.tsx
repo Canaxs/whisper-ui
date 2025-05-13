@@ -16,7 +16,7 @@ import { FiUser } from "react-icons/fi";
 import { GiNorthStarShuriken } from "react-icons/gi";
 import { LuUserCog } from "react-icons/lu";
 import { SlBadge } from "react-icons/sl";
-
+import Image from 'next/image';
 
 
 
@@ -95,7 +95,17 @@ export default function UserPage() {
                             <div className="flex items-center gap-1">
                                 <SlBadge className="size-7 mt-2 mr-4" title="Rozet"/>
                                 {userDto?.badges.map((data,index) => (
-                                    <img key={"badgeImage"+index} src={data['badgeURL']} className="w-8 h-8 object-cover mt-1 transition-all hover:scale-110" title={data['badge']+" Rozeti"}  />
+                                    <div key={"badge:"+index} className="mt-1 transition-all hover:scale-110">
+                                        <Image src={data['badgeURL']} 
+                                            alt={data['badge']+" Rozeti"} 
+                                            className="hover:scale-110 transition-all rounded-md" 
+                                            width={32}
+                                            height={32}
+                                            style={{ objectFit: 'cover'}} 
+                                            title={data['badge']+" Rozeti"}
+                                            priority 
+                                            placeholder="empty" />
+                                        </div>
                                 ))}
                             </div>
                         </div>

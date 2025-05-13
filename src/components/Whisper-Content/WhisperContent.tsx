@@ -15,6 +15,7 @@ import Cookies from 'js-cookie'
 import { useToast } from "@/components/ui/use-toast"
 import { TbCategory } from "react-icons/tb";
 import { convertDateMonth } from "@/lib/dateEnum";
+import Image from 'next/image';
 
 export type BadgeEntity = {
     id: number,
@@ -207,7 +208,17 @@ export default function WhisperContent(props) {
                         <span className="text-base">{props.whisper.authorName}</span>
                         <div className="flex">
                             {badges?.map((data,index) => (
-                                <img key={"dataBadge"+index} src={data.badgeURL} className="w-5 h-5 hover:scale-110 transition-all" title={data.badge+" Rozeti"}/>
+                                <div key={"badge:"+index}>
+                                    <Image src={data.badgeURL} 
+                                        alt={data.badge+" Rozeti"} 
+                                        className="hover:scale-110 transition-all rounded-md" 
+                                        width={20}
+                                        height={20}
+                                        style={{ objectFit: 'cover'}} 
+                                        title={data.badge+" Rozeti"}
+                                        priority 
+                                        placeholder="empty" />
+                                </div>
                             ))}
                         </div>
                     </div>
@@ -231,7 +242,14 @@ export default function WhisperContent(props) {
             <div className="mt-8">
                 <h1 className="text-5xl max-sm:text-xl max-md:text-2xl max-lg:text-3xl max-xl:text-4xl drop-shadow-lg font-sans">{props.whisper.title}</h1>
                 <div className="flex justify-center mt-7 mb-2">
-                    <img src={props.whisper.imageURL ? props.whisper.imageURL :"../../logo-black.png"} width={"70%"} height={"70%"} className="rounded-lg"/>
+                    <div className="relative w-[70%] h-[70%] aspect-[16/9]">
+                        <Image src={props.whisper.imageURL || "/logo-black.png"} 
+                            alt="Image" fill
+                            className="rounded-md relative" 
+                            style={{ objectFit: 'cover' }} 
+                            priority 
+                            placeholder="empty" />
+                    </div>
                 </div>
                 <div className="mt-5">
                     <span dangerouslySetInnerHTML={{ __html: props.whisper.description }} className="leading-7 whitespace-pre-wrap">

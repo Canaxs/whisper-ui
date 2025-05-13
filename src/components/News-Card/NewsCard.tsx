@@ -9,6 +9,7 @@ import {
 import HovCard from "../Hov-Card/HovCard"
 import { GrResources } from "react-icons/gr";
 import { TbWriting } from "react-icons/tb";
+import Image from 'next/image';
 
 
 
@@ -21,7 +22,13 @@ export default function NewsCard(props) {
             </CardHeader>
             <CardContent className="p-2">
                 <div className="h-[200px] w-full max-md:h-[140px] max-sm:h-[110px]">
-                    <img src={props.img} className="w-full h-full object-cover"/>
+                    <div className="h-full w-full relative">
+                        <Image src={props.img || "/logo-black.png"} 
+                            alt="Image" fill className="rounded-md" 
+                            style={{ objectFit: 'cover' }} 
+                            priority 
+                            placeholder="empty" />
+                    </div>
                 </div>
             </CardContent>
             <CardFooter className="pl-3 mt-1 mb-0">

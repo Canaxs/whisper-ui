@@ -29,6 +29,7 @@ import { GrResources } from "react-icons/gr";
 import { TbWriting } from "react-icons/tb";
 import { BiLike , BiDislike } from "react-icons/bi";
 import { TbUserStar } from "react-icons/tb";
+import Image from 'next/image';
 
 
 export default function Docs({
@@ -149,7 +150,11 @@ export default function Docs({
                         <CardContent className="p-0">
                             <div className="flex w-full h-full">
                                 <div className="w-full h-full absolute z-0 rounded-lg">
-                                    <img src={content['imageURL'] ? content['imageURL'] :"../../logo-black.png"} className="rounded-lg h-full w-full object-cover"/>
+                                    <Image src={content['imageURL'] || "/logo-black.png"} 
+                                        alt="Image" fill className="rounded-md" 
+                                        style={{ objectFit: 'cover' }} 
+                                        priority 
+                                        placeholder="empty" />
                                 </div>
                                 <div className="absolute z-10 w-full h-full rounded-lg" style={{backgroundColor: "rgba(0,0,0,.3)"}}>
 

@@ -10,7 +10,8 @@ import React, { useState, useEffect } from "react";
 import { Whisper } from "../Account-Info/AccountInfo";
 import { getCarouselSmall } from "@/api/apiCalls";
 import { convertMenusEn } from "@/lib/menuEnum";
-import Autoplay from "embla-carousel-autoplay"
+import Autoplay from "embla-carousel-autoplay";
+import Image from 'next/image';
 
 export default function CarouselTwo(props) {
 
@@ -38,8 +39,12 @@ export default function CarouselTwo(props) {
                                 <div className={props.bigClass}>
                                     <Card className={props.bigClass}>
                                         <CardContent className={"flex items-center justify-center w-full p-0 "+props.bigClass}>
-                                            <div className="w-full h-full rounded-md z-10">
-                                                <img src={obj.imageURL ? obj.imageURL : "../logo-black.png"} className="w-full h-full rounded-md object-cover" />
+                                            <div className="w-full h-full rounded-md z-10 relative">
+                                                <Image src={obj.imageURL || "/logo-black.png"} 
+                                                    alt="Image" fill className="rounded-md" 
+                                                    style={{ objectFit: 'cover' }} 
+                                                    priority 
+                                                    placeholder="empty" />
                                             </div>
                                             <div className="absolute bottom-10 w-5/6 text-center line-clamp-2 p-2 rounded z-30" style={{backgroundColor : "rgba(0,0,0,.5)"}}>
                                                 <span className="drop-shadow text-base font-medium text-white">{obj.title}</span>
@@ -65,7 +70,11 @@ export default function CarouselTwo(props) {
                                 <Card className={props.smallClass}>
                                 <CardContent className={"flex items-center justify-center h-full p-0 relative"}>
                                     <div className="absolute w-full h-full rounded-md z-10">
-                                        <img src={obj.imageURL ? obj.imageURL :"../logo-black.png"} className="w-full h-full rounded-md object-cover"/>
+                                        <Image src={obj.imageURL || "/logo-black.png"} 
+                                                    alt="Image" fill className="rounded-md" 
+                                                    style={{ objectFit: 'cover' }} 
+                                                    priority 
+                                                    placeholder="empty" />
                                     </div>
                                     <a href={"/kategori/"+convertMenusEn(obj.category)+"/"+obj.urlName} className="absolute w-full h-full rounded-md z-20 flex justify-center items-center" style={{backgroundColor : "rgba(0,0,0,.3)"}}>
                                         <p className="z-30 text-white text-base">{index+1}</p>
