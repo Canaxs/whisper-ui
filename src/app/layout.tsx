@@ -8,6 +8,7 @@ import { RootState } from "@/lib/store";
 import { Toaster } from "@/components/ui/toaster"
 import { Suspense } from "react";
 import { PiChatCircleThin } from "react-icons/pi";
+import Head from "next/head";
 
 
 const inter = Inter({ subsets: ["latin"] });
@@ -21,9 +22,12 @@ export default function RootLayout({children,}: Readonly<{children: React.ReactN
 
   return (
     <html lang="en" className="w-full h-full">
-      <head>
-        <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-2938362237500987" crossOrigin="anonymous"></script>
-      </head>
+      <Head>
+        <meta name="description" content="Söylenti.com - Türkiye'nin en güncel haber platformu. Futbol, teknoloji, kripto, magazin, siyaset ve daha fazlası!" />
+        <meta name="keywords" content="Söylenti, Türkiye haberleri, genç haber platformu, futbol haberleri, teknoloji haberleri, kripto para, magazin, gündem, sosyal medya, kullanıcı paylaşımları, dedikodular, spor, siyaset haberleri, popüler içerikler, para kazanma, paylaşım yaparak kazanma, haber paylaşma platformu, gençler için haber, son dakika, Türkiye gündemi, dijital medya, influencer, popüler haberler, genç kitle, interaktif haber" />
+        <meta name="author" content="Söylenti" />
+        <title>Söylenti - Güncel Haberler ve Söylentiler</title>
+      </Head>
       <body className={inter.className+" w-full h-full"} style={{fontFamily: 'Poppins,sans-serif'}} >
       <StoreProvider>
             <div className="w-full h-full">  

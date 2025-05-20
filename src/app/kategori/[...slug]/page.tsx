@@ -154,7 +154,7 @@ export default function Docs({
                                         alt="Image" fill className="rounded-md" 
                                         style={{ objectFit: 'cover' }} 
                                         priority 
-                                        placeholder="empty" />
+                                        placeholder="blur" />
                                 </div>
                                 <div className="absolute z-10 w-full h-full rounded-lg" style={{backgroundColor: "rgba(0,0,0,.3)"}}>
 

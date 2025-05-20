@@ -44,7 +44,7 @@ export default function CarouselTwo(props) {
                                                     alt="Image" fill className="rounded-md" 
                                                     style={{ objectFit: 'cover' }} 
                                                     priority 
-                                                    placeholder="empty" />
+                                                    placeholder="blur" />
                                             </div>
                                             <div className="absolute bottom-10 w-5/6 text-center line-clamp-2 p-2 rounded z-30" style={{backgroundColor : "rgba(0,0,0,.5)"}}>
                                                 <span className="drop-shadow text-base font-medium text-white">{obj.title}</span>

@@ -15,7 +15,7 @@ export default function FlipCard(props) {
                         <Image src={props.imageURL || "/logo-black.png"} 
                             alt="Image" fill className="rounded-md" 
                              priority 
-                             placeholder="empty" 
+                             placeholder="blur" 
                              style={props.imageURL ? {backgroundColor : "rgba(0,0,0,.8)",objectFit: "cover"} : {backgroundColor : "",objectFit: "cover"} } 
                              />
                     </div>
