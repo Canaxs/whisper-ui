@@ -2,10 +2,10 @@ import HeaderTop from "../Header-Top/Header-Top";
 import Navigation from "../Navigation-Menu/Navigation";
 import ToggleMenu from "../ToggleMenu/ToggleMenu";
 
-export default function Header(props) { 
+export default function Header() { 
     return ( 
         <div className="mt-3">
-            <HeaderTop flag={props.flag} logo={props.logo} />
+            <HeaderTop />
             <div className="w-full flex justify-between">
                 <div className="xl:w-[90%] w-[80%]">
                     <Navigation />
