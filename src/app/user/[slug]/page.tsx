@@ -140,9 +140,7 @@ export default function UserPage() {
                             <NewsCard
                               title={obj.title}
                               img={
-                                obj.imageURL
-                                  ? obj.imageURL
-                                  : "../logo-black.png"
+                                obj.imageURL ? obj.imageURL : "/logo-black.png"
                               }
                               name={obj.authorName}
                               source={obj.source}

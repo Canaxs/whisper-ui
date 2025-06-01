@@ -246,7 +246,6 @@ export default function WhisperContent(props) {
                     style={{ objectFit: "cover" }}
                     title={data.badge + " Rozeti"}
                     priority
-                    placeholder="blur"
                   />
                 </div>
               ))}

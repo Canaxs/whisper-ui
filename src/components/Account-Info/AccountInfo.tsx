@@ -13,6 +13,7 @@ import NewsCard from "@/components/News-Card/NewsCard";
 import { useDispatch, useSelector } from "react-redux";
 import { useEffect, useState } from "react";
 import { useAppSelector } from "@/lib/hooks";
+import Image from "next/image";
 import Cookies from "js-cookie";
 import { getSubscribe, getUserWhispersCalls } from "@/api/apiCalls";
 
@@ -124,10 +125,10 @@ export default function AccountInfo() {
             </form>
           </CardContent>
           <CardFooter className="flex justify-end">
-            <img
-              src="../logo-black.png"
-              width={"50px"}
-              height={"50px"}
+            <Image
+              src="/logo-black.png"
+              width={50}
+              height={50}
               alt="Söylenti"
               className="float-right"
             />
@@ -174,10 +175,10 @@ export default function AccountInfo() {
             </form>
           </CardContent>
           <CardFooter className="flex justify-end">
-            <img
-              src="../logo-black.png"
-              width={"50px"}
-              height={"50px"}
+            <Image
+              src="/logo-black.png"
+              width={50}
+              height={50}
               alt="Söylenti"
               className="float-right"
             />
@@ -299,10 +300,10 @@ export default function AccountInfo() {
               </form>
             </CardContent>
             <CardFooter className="flex justify-end">
-              <img
-                src="../logo-black.png"
-                width={"50px"}
-                height={"50px"}
+              <Image
+                src="/logo-black.png"
+                width={50}
+                height={50}
                 alt="Söylenti"
                 className="float-right"
               />
@@ -418,10 +419,10 @@ export default function AccountInfo() {
               </form>
             </CardContent>
             <CardFooter className="flex justify-end">
-              <img
-                src="../logo-black.png"
-                width={"50px"}
-                height={"50px"}
+              <Image
+                src="/logo-black.png"
+                width={50}
+                height={50}
                 alt="Söylenti"
                 className="float-right"
               />
@@ -443,7 +444,7 @@ export default function AccountInfo() {
                 <a href={"/user/" + obj.authorName}>
                   <NewsCard
                     title={obj.title}
-                    img={obj.imageURL ? obj.imageURL : "../logo-black.png"}
+                    img={obj.imageURL ? obj.imageURL : "/logo-black.png"}
                     name={obj.authorName}
                     source={obj.source}
                     category={obj.category}
