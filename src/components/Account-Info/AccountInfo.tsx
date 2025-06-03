@@ -1,4 +1,3 @@
-import { Button } from "@/components/ui/button";
 import {
   Card,
   CardContent,
@@ -7,12 +6,9 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
-import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import NewsCard from "@/components/News-Card/NewsCard";
-import { useDispatch, useSelector } from "react-redux";
 import { useEffect, useState } from "react";
-import { useAppSelector } from "@/lib/hooks";
 import Image from "next/image";
 import Cookies from "js-cookie";
 import { getSubscribe, getUserWhispersCalls } from "@/api/apiCalls";
@@ -68,11 +64,23 @@ export default function AccountInfo() {
 
   useEffect(() => {
     uploadInformation();
-    getUserWhispers();
-    getSubscribeInfo();
-  }, []);
 
-  const data = useAppSelector((state) => state.user.data);
+    const fetchData = async () => {
+      try {
+        const [whisperRes, subsRes] = await Promise.all([
+          getUserWhispersCalls(Cookies.get("username")),
+          getSubscribe(Cookies.get("token")),
+        ]);
+
+        setWhispers(whisperRes.data);
+        setSubsInfo(subsRes.data);
+      } catch (err) {
+        console.error("Veri alınırken hata oluştu:", err);
+      }
+    };
+
+    fetchData();
+  }, []);
 
   function getUserWhispers() {
     getUserWhispersCalls(Cookies.get("username")).then((res) => {
@@ -434,30 +442,33 @@ export default function AccountInfo() {
         <span className="text-xl font-semibold ml-3 text-slate-600">
           Paylaşımlarınız
         </span>
-        {whispers.length != 0 ? (
-          <div className="flex flex-wrap mt-8">
-            {whispers.map((obj, index) => (
-              <div
-                key={"right-package" + index}
-                className="w-[24%] ml-[1%] mt-3 max-lg:w-[32%] max-md:w-[49%] max-sm:w-[46%] max-sm:ml-[2%]"
-              >
-                <a href={"/user/" + obj.authorName}>
-                  <NewsCard
-                    title={obj.title}
-                    img={obj.imageURL ? obj.imageURL : "/logo-black.png"}
-                    name={obj.authorName}
-                    source={obj.source}
-                    category={obj.category}
-                  />
-                </a>
-              </div>
-            ))}
-          </div>
+        {whispers ? (
+          whispers.length > 0 ? (
+            <div className="flex flex-wrap mt-8">
+              {whispers.map((obj, index) => (
+                <div
+                  key={"right-package" + index}
+                  className="w-[24%] ml-[1%] mt-3 max-lg:w-[32%] max-md:w-[49%] max-sm:w-[46%] max-sm:ml-[2%]"
+                >
+                  <a href={"/user/" + obj.authorName}>
+                    <NewsCard
+                      title={obj.title}
+                      img={obj.imageURL ? obj.imageURL : "/logo-black.png"}
+                      name={obj.authorName}
+                      source={obj.source}
+                      category={obj.category}
+                    />
+                  </a>
+                </div>
+              ))}
+            </div>
+          ) : (
+            <div className="text-center w-full mt-10 text-gray-600 text-lg">
+              Paylaşımınız yok.
+            </div>
+          )
         ) : (
-          <div
-            role="status"
-            className={"mr-10 flex justify-center items-center"}
-          >
+          <div role="status" className="mr-10 flex justify-center items-center">
             <svg
               aria-hidden="true"
               className="w-20 h-20 text-gray-200 animate-spin dark:text-gray-600 fill-gray-600"
