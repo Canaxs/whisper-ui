@@ -140,6 +140,16 @@ export default function LoginRegist() {
 
         <TabsContent value="login">
           <Card className="border-0 shadow-none bg-transparent">
+            {loginBool && (
+              <div className="absolute inset-0 bg-white/90 backdrop-blur-sm z-10 flex items-center justify-center">
+                <div className="text-center space-y-4">
+                  <Loader2 className="h-8 w-8 animate-spin text-gray-600 mx-auto" />
+                  <p className="text-sm text-gray-600 font-medium">
+                    Giriş yapılıyor...
+                  </p>
+                </div>
+              </div>
+            )}
             <CardHeader className="space-y-1 pb-4">
               <CardTitle className="text-2xl font-bold text-gray-800 text-center">
                 Giriş Yap
@@ -204,6 +214,16 @@ export default function LoginRegist() {
 
         <TabsContent value="register">
           <Card className="border-0 shadow-none bg-transparent">
+            {loginBool && (
+              <div className="absolute inset-0 bg-white/90 backdrop-blur-sm z-10 flex items-center justify-center">
+                <div className="text-center space-y-4">
+                  <Loader2 className="h-8 w-8 animate-spin text-gray-600 mx-auto" />
+                  <p className="text-sm text-gray-600 font-medium">
+                    Kayıt oluşturuluyor...
+                  </p>
+                </div>
+              </div>
+            )}
             <CardHeader className="space-y-1 pb-4">
               <CardTitle className="text-2xl font-bold text-gray-800 text-center">
                 Kayıt Ol
