@@ -1,3 +1,4 @@
+import React, { useState } from "react";
 import { TbWriting } from "react-icons/tb"
 import { GrResources } from "react-icons/gr"
 import { BiLike, BiDislike } from "react-icons/bi"
@@ -14,8 +15,18 @@ interface FlipCardProps {
 }
 
 export default function FlipCard(props: FlipCardProps) {
+  const [flipped, setFlipped] = useState(false);
+
+  // Mobilde tıklama ile flip
+  const handleFlip = () => {
+    if (typeof window !== "undefined" && window.innerWidth < 768) setFlipped((f) => !f);
+  };
+
   return (
-    <div className="flip-card w-full h-auto rounded-xl perspective-1000">
+    <div
+      className={`flip-card w-full min-w-[170px] h-auto rounded-xl perspective-1000${flipped ? " flipped" : ""}`}
+      onClick={handleFlip}
+    >
       <div className="flip-card-inner relative w-full max-md:h-[300px] h-[400px] rounded-xl shadow-lg hover:shadow-2xl hover:shadow-black/20 transition-all duration-500 preserve-3d group">
         {/* Front Card */}
         <div className="front-card absolute w-full h-full overflow-hidden rounded-xl backface-hidden">

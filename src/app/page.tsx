@@ -126,10 +126,10 @@ export default function Home() {
               <h3 className="text-3xl font-bold text-neutral-600 drop-shadow-md backdrop-blur-sm px-4 py-2 w-fit ml-[1%] mb-6 max-sm:ml-[2%]">
                 Güncel Haberler
               </h3>
-              <div className="flex flex-wrap">
+              <div className="flex flex-wrap justify-center">
                 {whispers.map((obj, index) => (
                   <div
-                    className="w-[24%] ml-[1%] mt-3 max-lg:w-[32%] max-md:w-[49%] max-sm:w-[46%] max-sm:ml-[2%]"
+                    className="w-[24%] min-w-[170px] ml-[1%] mt-3 max-lg:w-[32%] max-md:w-[49%] max-sm:w-full max-sm:min-w-[90vw] max-sm:ml-0"
                     key={"index" + index}
                   >
                     <a
