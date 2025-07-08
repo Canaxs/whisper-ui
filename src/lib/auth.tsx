@@ -2,34 +2,28 @@
 import { isExpiredToken } from "@/api/apiCalls";
 import { Environment } from "@/environments/environments";
 
-export const  isAuth = async (request) => {
+const urlConfig = ['account', 'panel', 'plan'];
+
+export const isAuth = async (request: any): Promise<boolean> => {
     const token = request.cookies.get("token")?.value;
     const role = request.cookies.get("role")?.value;
+    if (!token) return false;
 
-    let bool: Boolean = false;
+    // Path'i güvenli şekilde al
+    const pathname = request.nextUrl?.pathname || request.url?.replace(Environment.domain, "") || "";
 
-    if(token != null) {
-        if(request.url.substring(Environment.domain.length).includes(urlConfig[0]) || request.url.substring(Environment.domain.length).includes(urlConfig[2])) {
-           
-            const authorizationModel = {
-                authorization : token
-            }
-            await isExpiredToken(authorizationModel).then((res) => {
-                bool = !res.data;
-            })
-            return bool; 
+    try {
+        if (pathname.startsWith("/account") || pathname.startsWith("/plan")) {
+            const { data } = await isExpiredToken({ authorization: token });
+            return !data;
         }
-        else if (request.url.substring(Environment.domain.length).includes(urlConfig[1]) && role.includes("ROLE_MOD") ) {
-            const authorizationModel = {
-                authorization : token
-            }
-            await isExpiredToken(authorizationModel).then((res) => {
-                bool = !res.data;
-            })
-            return bool; 
+        if (pathname.startsWith("/panel") && role && role.includes("ROLE_MOD")) {
+            const { data } = await isExpiredToken({ authorization: token });
+            return !data;
         }
+    } catch (e) {
+        // API hatası olursa yetkisiz say
+        return false;
     }
-    return bool;
-}
-
-const urlConfig = ['account','panel','plan']
+    return false;
+};
