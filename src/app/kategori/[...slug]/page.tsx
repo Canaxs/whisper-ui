@@ -158,17 +158,17 @@ export default function Docs({
         <div className="flex-1">
           <div className="grid grid-cols-1 xl:grid-cols-10">
             <div className="xl:col-span-8">
-              <div className="mb-6 mt-5 mx-5">
-                <div className="flex items-center justify-between p-4 hover:shadow-lg hover:bg-gray-50 transition-all bg-white rounded-xl shadow-md border border-gray-100">
-                  <div className="flex items-center gap-3">
-                    <div className="w-10 h-10 bg-gradient-to-br from-blue-500 to-purple-600 rounded-lg flex items-center justify-center">
-                      <IconComponent className="w-5 h-5 text-white" />
+              <div className="mb-6 mt-5 mx-2 sm:mx-5">
+                <div className="flex flex-col sm:flex-row items-center justify-between p-3 sm:p-4 hover:shadow-lg hover:bg-gray-50 transition-all bg-white rounded-xl shadow-md border border-gray-100">
+                  <div className="flex items-center gap-3 mb-3 sm:mb-0">
+                    <div className="w-8 h-8 sm:w-10 sm:h-10 bg-gradient-to-br from-blue-500 to-purple-600 rounded-lg flex items-center justify-center">
+                      <IconComponent className="w-4 h-4 sm:w-5 sm:h-5 text-white" />
                     </div>
                     <div>
-                      <h1 className="text-xl font-bold text-gray-900">
+                      <h1 className="text-lg sm:text-xl font-bold text-gray-900">
                         {convertMenusTR(params.slug[0])}
                       </h1>
-                      <p className="text-sm text-gray-500">
+                      <p className="text-xs sm:text-sm text-gray-500">
                         En güncel {convertMenusTR(params.slug[0])} haberleri
                       </p>
                     </div>
@@ -177,12 +177,12 @@ export default function Docs({
                   <div className="flex items-center gap-2">
                     <Badge
                       variant="secondary"
-                      className="bg-orange-100 text-orange-700"
+                      className="bg-orange-100 text-orange-700 text-xs"
                     >
                       <Flame className="w-3 h-3 mr-1" />
                       Trend
                     </Badge>
-                    <Badge variant="outline" className="text-gray-600">
+                    <Badge variant="outline" className="text-gray-600 text-xs">
                       <Users className="w-3 h-3 mr-1" />
                       2.4k
                     </Badge>
@@ -190,72 +190,61 @@ export default function Docs({
                 </div>
               </div>
               <div className="w-full">
-                <div className="mt-10 ml-[10%] mr-[10%] mb-4">
+                <div className="mt-10 mx-auto mb-4 max-w-5xl px-2 sm:px-4">
                   {whispers.content?.length != 0 ? (
-                    whispers.content?.map((content, index) => (
-                      <a
-                        className="page-card"
-                        href={
-                          "/kategori/" +
-                          params.slug[0] +
-                          "/" +
-                          content["urlName"]
-                        }
-                        key={index}
-                      >
-                        <Card className="mt-3 shadow-xl hover:shadow-2xl hover:shadow-black transition-all relative gap-0 py-0 border-0">
-                          <div className="circle1 absolute bottom-0 m-auto flex justify-center items-center">
-                            <span
-                              className="drop-shadow-xl font-medium text-black hidden line-clamp-2 ml-5 mr-5"
-                              dangerouslySetInnerHTML={{
-                                __html: content["description"],
-                              }}
-                            ></span>
-                          </div>
-                          <CardContent className="p-0">
-                            <div className="flex w-full h-full">
-                              <div className="w-full h-full absolute z-0 rounded-lg">
-                                <Image
-                                  src={content["imageURL"] || "/logo-black.png"}
-                                  alt="Image"
-                                  fill
-                                  className="rounded-md"
-                                  style={{ objectFit: "cover" }}
-                                />
-                              </div>
-                              <div
-                                className="absolute z-10 w-full h-full rounded-lg"
-                                style={{ backgroundColor: "rgba(0,0,0,.3)" }}
-                              ></div>
-                              <div className="flex flex-col pt-7 pl-7 w-full p-6 z-20">
-                                <span className="text-white drop-shadow-xl text-xs font-medium">
-                                  {params.slug[0].toUpperCase()}
-                                </span>
-                                <span className="text-3xl text-slate-100 drop-shadow mt-2 font-medium line-clamp-1 max-md:line-clamp-2 max-sm:text-sm max-md:text-lg max-lg:text-xl max-xl:text-2xl">
-                                  {content["title"]}
-                                </span>
-                                <div className="p-0 mt-3 mb-3 ml-0">
-                                  <div className="flex flex-col">
-                                    <div className="flex items-center text-slate-100">
-                                      <TbWriting className="size-5 mr-2" />
-                                      <span className="text-xs drop-shadow-lg pt-2 pb-1">
-                                        {content["authorName"]}
-                                      </span>
+                    <div className="flex flex-col gap-6">
+                      {whispers.content?.map((content, index) => (
+                        <a
+                          className="page-card"
+                          href={
+                            "/kategori/" +
+                            params.slug[0] +
+                            "/" +
+                            content["urlName"]
+                          }
+                          key={index}
+                        >
+                          <Card className="w-full min-w-[90vw] max-w-2xl mx-auto mb-2 shadow-xl hover:shadow-2xl hover:shadow-black transition-all relative gap-0 py-0 border-0 rounded-2xl overflow-hidden">
+                            <div className="circle1 absolute bottom-0 m-auto flex justify-center items-center">
+                              <span
+                                className="drop-shadow-xl font-medium text-black hidden line-clamp-2 ml-5 mr-5"
+                                dangerouslySetInnerHTML={{
+                                  __html: content["description"],
+                                }}
+                              ></span>
+                            </div>
+                            <CardContent className="p-0">
+                              <div className="flex flex-col sm:flex-row w-full h-full">
+                                <div className="relative w-full sm:w-2/5 h-48 sm:h-40 flex-shrink-0">
+                                  <Image
+                                    src={content["imageURL"] || "/logo-black.png"}
+                                    alt="Image"
+                                    fill
+                                    className="rounded-l-2xl object-cover"
+                                    style={{ objectFit: "cover" }}
+                                  />
+                                  <div className="absolute z-10 w-full h-full rounded-l-2xl" style={{ backgroundColor: "rgba(0,0,0,.3)" }}></div>
+                                </div>
+                                <div className="flex flex-col justify-between p-4 w-full">
+                                  <span className="text-orange-500 font-semibold text-xs mb-1">{params.slug[0].toUpperCase()}</span>
+                                  <span className="text-lg sm:text-2xl text-gray-900 font-bold line-clamp-2 mb-2">{content["title"]}</span>
+                                  <div className="flex flex-col gap-1">
+                                    <div className="flex items-center text-gray-700">
+                                      <TbWriting className="size-4 mr-2" />
+                                      <span className="text-xs font-medium">{content["authorName"]}</span>
                                     </div>
-                                    <div className="flex mt-1 items-center text-slate-100">
-                                      <GrResources className="size-5 mr-2" />
-                                      <span className="text-xs drop-shadow-lg">
-                                        {content["source"]}
-                                      </span>
+                                    <div className="flex items-center text-gray-500">
+                                      <GrResources className="size-4 mr-2" />
+                                      <span className="text-xs">{content["source"]}</span>
                                     </div>
                                   </div>
                                 </div>
                               </div>
-                            </div>
-                          </CardContent>
-                        </Card>
-                      </a>
-                    ))
+                            </CardContent>
+                          </Card>
+                        </a>
+                      ))}
+                    </div>
                   ) : (
                     <div
                       role="status"
@@ -352,7 +341,7 @@ export default function Docs({
                 </div>
               </div>
             </div>
-            <div className="space-y-2 xl:col-span-2 max-xl:bg-white bg-[#F5F5F5] min-h-screen">
+            <div className="space-y-4 xl:space-y-2 xl:col-span-2 max-xl:bg-gray-50 bg-[#F5F5F5] min-h-screen max-xl:rounded-lg max-xl:m-2 max-xl:shadow-md">
               <Categories />
               <RightSidebarTalks />
               <Authors />
@@ -398,7 +387,7 @@ export default function Docs({
               </div>
             )}
           </div>
-          <div className="space-y-2 max-xl:bg-white xl:col-span-2 bg-[#F5F5F5] min-h-screen">
+          <div className="space-y-4 xl:space-y-2 xl:col-span-2 max-xl:bg-gray-50 bg-[#F5F5F5] min-h-screen max-xl:rounded-lg max-xl:m-2 max-xl:shadow-md">
             <Categories />
             <RightSidebarTalks />
             <Authors />
