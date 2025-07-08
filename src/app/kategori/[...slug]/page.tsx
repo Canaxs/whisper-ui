@@ -190,7 +190,7 @@ export default function Docs({
                 </div>
               </div>
               <div className="w-full">
-                <div className="mt-10 mx-auto mb-4 max-w-5xl px-2 sm:px-4">
+                <div className="mt-10 mx-auto mb-4 max-w-4xl px-2 sm:px-4 lg:px-6">
                   {whispers.content?.length != 0 ? (
                     <div className="flex flex-col gap-6">
                       {whispers.content?.map((content, index) => (
@@ -204,7 +204,7 @@ export default function Docs({
                           }
                           key={index}
                         >
-                          <Card className="w-full min-w-[90vw] max-w-2xl mx-auto mb-2 shadow-xl hover:shadow-2xl hover:shadow-black transition-all relative gap-0 py-0 border-0 rounded-2xl overflow-hidden">
+                          <Card className="w-full shadow-xl hover:shadow-2xl hover:shadow-black transition-all relative gap-0 py-0 border-0 rounded-2xl overflow-hidden">
                             <div className="circle1 absolute bottom-0 m-auto flex justify-center items-center">
                               <span
                                 className="drop-shadow-xl font-medium text-black hidden line-clamp-2 ml-5 mr-5"
