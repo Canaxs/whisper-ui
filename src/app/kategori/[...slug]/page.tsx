@@ -190,7 +190,7 @@ export default function Docs({
                 </div>
               </div>
               <div className="w-full">
-                <div className="mt-10 mx-auto mb-4 max-w-5xl px-2 sm:px-4 lg:px-6">
+                <div className="mt-10 mx-auto mb-4 max-w-7xl px-2 sm:px-4 lg:px-6">
                   {whispers.content?.length != 0 ? (
                     <div className="flex flex-col gap-6">
                       {whispers.content?.map((content, index) => (
