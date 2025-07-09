@@ -7,6 +7,8 @@ import { useAppSelector } from "@/lib/hooks";
 import { RootState } from "@/lib/store";
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
+import { Card, CardContent } from "@/components/ui/card";
+import { User, Settings } from "lucide-react";
 
 export default function Info() {
   return (
@@ -14,10 +16,33 @@ export default function Info() {
       <div className="flex-1">
         <div className="grid grid-cols-1">
           <div>
-            <div className="mr-2 mb-2 ml-2 mt-12">
-              <h3 className="text-3xl font-bold text-neutral-600 drop-shadow-md backdrop-blur-sm px-4 py-2 w-fit ml-[1%] mb-6 max-sm:ml-[2%]">
-                Hesap Paneli
-              </h3>
+            <div className="m-10">
+              {/* Hero Section - Hesap Paneli Header */}
+              <div className="w-full lg:w-4/5 mb-6">
+                <Card className="relative overflow-hidden rounded-xl shadow-lg border-0 bg-gradient-to-r from-blue-600 to-indigo-700">
+                  <CardContent className="p-4 md:p-6">
+                    <div className="flex items-center space-x-4">
+                      <div className="w-12 h-12 bg-white/20 backdrop-blur-sm rounded-xl flex items-center justify-center">
+                        <User className="w-6 h-6 text-white" />
+                      </div>
+                      <div>
+                        <h1 className="text-2xl font-bold text-white mb-1">
+                          Hesap Paneli
+                        </h1>
+                        <p className="text-blue-100 text-sm">
+                          Hesap bilgilerinizi görüntüleyin ve yönetin
+                        </p>
+                      </div>
+                      <div className="ml-auto">
+                        <div className="w-10 h-10 bg-white/20 backdrop-blur-sm rounded-lg flex items-center justify-center">
+                          <Settings className="w-5 h-5 text-white" />
+                        </div>
+                      </div>
+                    </div>
+                  </CardContent>
+                </Card>
+              </div>
+              
               <AccountInfo />
             </div>
           </div>

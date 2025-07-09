@@ -7,11 +7,24 @@ import {
   CardTitle,
 } from "@/components/ui/card";
 import { Label } from "@/components/ui/label";
+import { Badge } from "@/components/ui/badge";
 import NewsCard from "@/components/News-Card/NewsCard";
 import { useEffect, useState } from "react";
 import Image from "next/image";
 import Cookies from "js-cookie";
 import { getSubscribe, getUserWhispersCalls } from "@/api/apiCalls";
+import { 
+  User, 
+  Shield, 
+  TrendingUp, 
+  Crown, 
+  Eye, 
+  Calendar,
+  DollarSign,
+  FileText,
+  Star,
+  Zap
+} from "lucide-react";
 
 export type Whisper = {
   authorName: string;
@@ -89,403 +102,425 @@ export default function AccountInfo() {
   }
 
   return (
-    <div className="mt-10 mr-2 mb-2 ml-2">
-      <div className="flex max-lg:flex-col">
-        <Card
-          className="w-1/2 m-2 h-full max-lg:w-[98%] max-lg:ml-[1%]"
-          key={"card1"}
-        >
-          <CardHeader className="text-center">
-            <CardTitle className="max-sm:text-xl">Hesap Bilgileri</CardTitle>
-            <CardDescription
-              style={{ marginTop: "15px" }}
-              className="max-sm:text-xs"
-            >
+    <div className="space-y-6">
+      <div className="flex max-lg:flex-col gap-4">
+        <Card className="flex-1 hover:shadow-xl hover:shadow-blue-100/50 transition-all duration-300 transform hover:-translate-y-1 border-0 shadow-lg" key={"card1"}>
+          <CardHeader className="text-center pb-3">
+            <div className="w-10 h-10 bg-gradient-to-br from-blue-400 to-blue-600 rounded-lg flex items-center justify-center mx-auto mb-2 shadow-lg">
+              <User className="w-5 h-5 text-white" />
+            </div>
+            <CardTitle className="max-sm:text-lg text-lg line-clamp-1">Hesap Bilgileri</CardTitle>
+            <CardDescription className="max-sm:text-xs text-xs line-clamp-2">
               Değiştirmek istediğiniz bilginizin üzerine çift tıklayın
             </CardDescription>
           </CardHeader>
-          <CardContent>
+          <CardContent className="pb-3">
             <form>
-              <div className="grid w-full items-center gap-4">
-                <div className="flex flex-col space-y-2.5 pt-2 pb-2">
-                  <Label htmlFor="name" className="text-base max-sm:text-sm">
+              <div className="grid w-full items-center gap-3">
+                <div className="flex flex-col space-y-1.5">
+                  <Label htmlFor="name" className="text-sm font-medium text-gray-600 flex items-center">
+                    <Shield className="w-3 h-3 mr-2" />
                     Kullanıcı Adı
                   </Label>
-                  <Label
-                    htmlFor="name"
-                    className="font-normal cursor-pointer max-sm:text-sm"
-                  >
-                    {userData.username}
-                  </Label>
+                  <div className="p-2 bg-gradient-to-r from-gray-50 to-gray-100 rounded-lg border border-gray-200/50">
+                    <Label className="font-medium text-gray-900 cursor-pointer text-sm">
+                      {userData.username}
+                    </Label>
+                  </div>
                 </div>
-                <div className="flex flex-col space-y-2.5 pt-2 pb-2">
-                  <Label htmlFor="name" className="text-base max-sm:text-sm">
+                <div className="flex flex-col space-y-1.5">
+                  <Label htmlFor="name" className="text-sm font-medium text-gray-600 flex items-center">
+                    <Shield className="w-3 h-3 mr-2" />
                     Şifre
                   </Label>
-                  <Label
-                    htmlFor="name"
-                    className="font-normal cursor-pointer max-sm:text-sm"
-                  >
-                    ********
-                  </Label>
+                  <div className="p-2 bg-gradient-to-r from-gray-50 to-gray-100 rounded-lg border border-gray-200/50">
+                    <Label className="font-medium text-gray-900 cursor-pointer text-sm">
+                      ********
+                    </Label>
+                  </div>
                 </div>
               </div>
             </form>
           </CardContent>
-          <CardFooter className="flex justify-end">
+          <CardFooter className="flex justify-end pt-2">
             <Image
               src="/logo-black.png"
-              width={50}
-              height={50}
+              width={32}
+              height={32}
               alt="Söylenti"
-              className="float-right"
+              className="opacity-60"
             />
           </CardFooter>
         </Card>
-        <Card className="w-1/2 m-2 max-lg:w-[98%] max-lg:ml-[1%]" key={"card3"}>
-          <CardHeader className="text-center">
-            <CardTitle className="max-sm:text-xl">
+        
+        <Card className="flex-1 hover:shadow-xl hover:shadow-green-100/50 transition-all duration-300 transform hover:-translate-y-1 border-0 shadow-lg" key={"card3"}>
+          <CardHeader className="text-center pb-3">
+            <div className="w-10 h-10 bg-gradient-to-br from-green-400 to-green-600 rounded-lg flex items-center justify-center mx-auto mb-2 shadow-lg">
+              <TrendingUp className="w-5 h-5 text-white" />
+            </div>
+            <CardTitle className="max-sm:text-lg text-lg line-clamp-1">
               Kullanıcı Bilgileri
             </CardTitle>
-            <CardDescription
-              style={{ marginTop: "15px" }}
-              className="max-sm:text-xs"
-            >
-              Puanınız , paylaşımlarınız göz önünde bulundurularak arttırılır
+            <CardDescription className="max-sm:text-xs text-xs line-clamp-2">
+              Puanınız, paylaşımlarınız göz önünde bulundurularak arttırılır
             </CardDescription>
           </CardHeader>
-          <CardContent>
+          <CardContent className="pb-3">
             <form>
-              <div className="grid w-full items-center gap-4">
-                <div className="flex flex-col space-y-2.5 pt-2 pb-2">
-                  <Label htmlFor="name" className="text-base max-sm:text-sm">
+              <div className="grid w-full items-center gap-3">
+                <div className="flex flex-col space-y-1.5">
+                  <Label htmlFor="name" className="text-sm font-medium text-gray-600 flex items-center">
+                    <Star className="w-3 h-3 mr-2" />
                     Puan
                   </Label>
-                  <Label
-                    htmlFor="name"
-                    className="font-normal cursor-pointer max-sm:text-sm"
-                  >
-                    {userData.userPoint}
-                  </Label>
+                  <div className="p-2 bg-gradient-to-r from-gray-50 to-gray-100 rounded-lg border border-gray-200/50">
+                    <Label className="font-medium text-gray-900 cursor-pointer text-sm flex items-center">
+                      {userData.userPoint}
+                      <Badge variant="secondary" className="ml-2 bg-gradient-to-r from-green-400 to-green-500 text-white text-xs shadow-sm">
+                        <Zap className="w-3 h-3 mr-1" />
+                        Aktif
+                      </Badge>
+                    </Label>
+                  </div>
                 </div>
-                <div className="flex flex-col space-y-2.5 pt-2 pb-2">
-                  <Label htmlFor="name" className="text-base max-sm:text-sm">
+                <div className="flex flex-col space-y-1.5">
+                  <Label htmlFor="name" className="text-sm font-medium text-gray-600 flex items-center">
+                    <Crown className="w-3 h-3 mr-2" />
                     Yetki Tipi
                   </Label>
-                  <Label
-                    htmlFor="name"
-                    className="font-normal cursor-pointer max-sm:text-sm"
-                  >
-                    {userData.role}
-                  </Label>
+                  <div className="p-2 bg-gradient-to-r from-gray-50 to-gray-100 rounded-lg border border-gray-200/50">
+                    <Label className="font-medium text-gray-900 cursor-pointer text-sm">
+                      {userData.role}
+                    </Label>
+                  </div>
                 </div>
               </div>
             </form>
           </CardContent>
-          <CardFooter className="flex justify-end">
+          <CardFooter className="flex justify-end pt-2">
             <Image
               src="/logo-black.png"
-              width={50}
-              height={50}
+              width={32}
+              height={32}
               alt="Söylenti"
-              className="float-right"
+              className="opacity-60"
             />
           </CardFooter>
         </Card>
       </div>
-      <div>
-        <div className="w-full flex max-lg:flex-col justify-center">
-          <Card
-            className="w-1/2 m-2 max-lg:w-[98%] max-lg:ml-[1%]"
-            key={"card2"}
-          >
-            <CardHeader className="text-center">
-              <CardTitle className="max-sm:text-xl">
-                Paylaşım Bilgileri
-              </CardTitle>
-              <CardDescription
-                style={{ marginTop: "15px" }}
-                className="max-sm:text-xs"
-              >
-                Kazancınız, paylaşmış olduğunuz haberlerin tıklanma sayısına
-                göre belirlenmektedir
-              </CardDescription>
-            </CardHeader>
-            <CardContent>
-              <form>
-                <div className="grid w-full items-center gap-4">
-                  <div className="flex justify-around w-9/12 ml-[7.5%]">
-                    <div className="flex flex-col space-y-2.5 pt-2 pb-2 w-1/2">
-                      <Label
-                        htmlFor="name"
-                        className="text-base max-sm:text-sm"
-                      >
-                        Toplam Tıklanma
-                      </Label>
-                      <Label
-                        htmlFor="name"
-                        className="font-normal cursor-pointer max-sm:text-sm"
-                      >
+      
+      <div className="flex max-lg:flex-col gap-4">
+        <Card className="flex-1 hover:shadow-xl hover:shadow-purple-100/50 transition-all duration-300 transform hover:-translate-y-1 border-0 shadow-lg" key={"card2"}>
+          <CardHeader className="text-center pb-3">
+            <div className="w-10 h-10 bg-gradient-to-br from-purple-400 to-purple-600 rounded-lg flex items-center justify-center mx-auto mb-2 shadow-lg">
+              <Eye className="w-5 h-5 text-white" />
+            </div>
+            <CardTitle className="max-sm:text-lg text-lg line-clamp-1">
+              Paylaşım Bilgileri
+            </CardTitle>
+            <CardDescription className="max-sm:text-xs text-xs line-clamp-2">
+              Kazancınız, paylaşmış olduğunuz haberlerin tıklanma sayısına göre belirlenmektedir
+            </CardDescription>
+          </CardHeader>
+          <CardContent className="pb-3">
+            <form>
+              <div className="grid w-full items-center gap-3">
+                <div className="grid grid-cols-2 gap-3">
+                  <div className="flex flex-col space-y-1.5">
+                    <Label className="text-sm font-medium text-gray-600 flex items-center">
+                      <Eye className="w-3 h-3 mr-2" />
+                      Toplam Tıklanma
+                    </Label>
+                    <div className="p-2 bg-gradient-to-r from-gray-50 to-gray-100 rounded-lg border border-gray-200/50">
+                      <Label className="font-medium text-gray-900 cursor-pointer text-sm">
                         51.462
                       </Label>
                     </div>
-                    <div className="flex flex-col space-y-2.5 pt-2 pb-2 ml-10 w-1/2 ">
-                      <Label
-                        htmlFor="name"
-                        className="text-base max-sm:text-sm"
-                      >
-                        Ortalama Tıklanma
-                      </Label>
-                      <Label
-                        htmlFor="name"
-                        className="font-normal cursor-pointer max-sm:text-sm"
-                      >
+                  </div>
+                  <div className="flex flex-col space-y-1.5">
+                    <Label className="text-sm font-medium text-gray-600 flex items-center">
+                      <TrendingUp className="w-3 h-3 mr-2" />
+                      Ortalama Tıklanma
+                    </Label>
+                    <div className="p-2 bg-gradient-to-r from-gray-50 to-gray-100 rounded-lg border border-gray-200/50">
+                      <Label className="font-medium text-gray-900 cursor-pointer text-sm">
                         7.345
                       </Label>
                     </div>
                   </div>
-                  <div className="flex justify-between w-9/12 ml-[7.5%]">
-                    <div className="flex flex-col space-y-2.5 pt-2 pb-2 w-1/2">
-                      <Label
-                        htmlFor="name"
-                        className="text-base max-sm:text-sm"
-                      >
-                        Toplam Paylaşım
-                      </Label>
-                      <Label
-                        htmlFor="name"
-                        className="font-normal cursor-pointer max-sm:text-sm"
-                      >
+                </div>
+                <div className="grid grid-cols-2 gap-3">
+                  <div className="flex flex-col space-y-1.5">
+                    <Label className="text-sm font-medium text-gray-600 flex items-center">
+                      <FileText className="w-3 h-3 mr-2" />
+                      Toplam Paylaşım
+                    </Label>
+                    <div className="p-2 bg-gradient-to-r from-gray-50 to-gray-100 rounded-lg border border-gray-200/50">
+                      <Label className="font-medium text-gray-900 cursor-pointer text-sm">
                         7
                       </Label>
                     </div>
-                    <div className="flex flex-col space-y-2.5 pt-2 pb-2 ml-10 w-1/2">
-                      <Label
-                        htmlFor="name"
-                        className="text-base max-sm:text-sm"
-                      >
-                        Aylık Ortalama Paylaşım
-                      </Label>
-                      <Label
-                        htmlFor="name"
-                        className="font-normal cursor-pointer max-sm:text-sm"
-                      >
+                  </div>
+                  <div className="flex flex-col space-y-1.5">
+                    <Label className="text-sm font-medium text-gray-600 flex items-center">
+                      <Calendar className="w-3 h-3 mr-2" />
+                      Aylık Ortalama
+                    </Label>
+                    <div className="p-2 bg-gradient-to-r from-gray-50 to-gray-100 rounded-lg border border-gray-200/50">
+                      <Label className="font-medium text-gray-900 cursor-pointer text-sm">
                         3
                       </Label>
                     </div>
                   </div>
-                  <div className="flex justify-between w-9/12 ml-[7.5%]">
-                    <div className="flex flex-col space-y-2.5 pt-2 pb-2 w-1/2">
-                      <Label
-                        htmlFor="name"
-                        className="text-base max-sm:text-sm"
-                      >
-                        Toplam Kazanç
-                      </Label>
-                      <Label
-                        htmlFor="name"
-                        className="font-normal cursor-pointer max-sm:text-sm"
-                      >
+                </div>
+                <div className="grid grid-cols-2 gap-3">
+                  <div className="flex flex-col space-y-1.5">
+                    <Label className="text-sm font-medium text-gray-600 flex items-center">
+                      <DollarSign className="w-3 h-3 mr-2" />
+                      Toplam Kazanç
+                    </Label>
+                    <div className="p-2 bg-gradient-to-r from-gray-50 to-gray-100 rounded-lg border border-gray-200/50">
+                      <Label className="font-medium text-gray-900 cursor-pointer text-sm">
                         245 TL
                       </Label>
                     </div>
-                    <div className="flex flex-col space-y-2.5 pt-2 pb-2 ml-10 w-1/2">
-                      <Label
-                        htmlFor="name"
-                        className="text-base max-sm:text-sm"
-                      >
-                        Ortalama Kazanç
-                      </Label>
-                      <Label
-                        htmlFor="name"
-                        className="font-normal cursor-pointer max-sm:text-sm"
-                      >
+                  </div>
+                  <div className="flex flex-col space-y-1.5">
+                    <Label className="text-sm font-medium text-gray-600 flex items-center">
+                      <DollarSign className="w-3 h-3 mr-2" />
+                      Ortalama Kazanç
+                    </Label>
+                    <div className="p-2 bg-gradient-to-r from-gray-50 to-gray-100 rounded-lg border border-gray-200/50">
+                      <Label className="font-medium text-gray-900 cursor-pointer text-sm">
                         35 TL
                       </Label>
                     </div>
                   </div>
                 </div>
-              </form>
-            </CardContent>
-            <CardFooter className="flex justify-end">
-              <Image
-                src="/logo-black.png"
-                width={50}
-                height={50}
-                alt="Söylenti"
-                className="float-right"
-              />
-            </CardFooter>
-          </Card>
-          <Card
-            className="w-1/2 m-2 max-lg:w-[98%] max-lg:ml-[1%]"
-            key={"card1"}
-          >
-            <CardHeader className="text-center">
-              <CardTitle className="max-sm:text-xl">Üyelik Bilgileri</CardTitle>
-              <CardDescription
-                style={{ marginTop: "15px" }}
-                className="max-sm:text-xs"
-              >
-                Lorem ipsum dolor, sit amet consectetur adipisicing elit.{" "}
-              </CardDescription>
-            </CardHeader>
-            <CardContent>
-              <form>
-                <div className="grid w-full items-center gap-4">
-                  <div className="flex justify-around w-9/12 ml-[7.5%]">
-                    <div className="flex flex-col space-y-2.5 pt-2 pb-2 w-1/2">
-                      <Label
-                        htmlFor="name"
-                        className="text-base max-sm:text-sm"
-                      >
-                        Plan Adı
-                      </Label>
-                      <Label
-                        htmlFor="name"
-                        className="font-normal cursor-pointer max-sm:text-sm"
-                      >
+              </div>
+            </form>
+          </CardContent>
+          <CardFooter className="flex justify-end pt-2">
+            <Image
+              src="/logo-black.png"
+              width={32}
+              height={32}
+              alt="Söylenti"
+              className="opacity-60"
+            />
+          </CardFooter>
+        </Card>
+        
+        <Card className="flex-1 hover:shadow-xl hover:shadow-orange-100/50 transition-all duration-300 transform hover:-translate-y-1 border-0 shadow-lg" key={"card1"}>
+          <CardHeader className="text-center pb-3">
+            <div className="w-10 h-10 bg-gradient-to-br from-orange-400 to-orange-600 rounded-lg flex items-center justify-center mx-auto mb-2 shadow-lg">
+              <Crown className="w-5 h-5 text-white" />
+            </div>
+            <CardTitle className="max-sm:text-lg text-lg line-clamp-1">Üyelik Bilgileri</CardTitle>
+            <CardDescription className="max-sm:text-xs text-xs line-clamp-2">
+              Aktif üyelik planınız ve özellikleriniz
+            </CardDescription>
+          </CardHeader>
+          <CardContent className="pb-3">
+            <form>
+              <div className="grid w-full items-center gap-3">
+                <div className="grid grid-cols-2 gap-3">
+                  <div className="flex flex-col space-y-1.5">
+                    <Label className="text-sm font-medium text-gray-600 flex items-center">
+                      <Crown className="w-3 h-3 mr-2" />
+                      Plan Adı
+                    </Label>
+                    <div className="p-2 bg-gradient-to-r from-gray-50 to-gray-100 rounded-lg border border-gray-200/50">
+                      <Label className="font-medium text-gray-900 cursor-pointer text-sm">
                         {subsInfo?.planName}
                       </Label>
                     </div>
-                    <div className="flex flex-col space-y-2.5 pt-2 pb-2 w-1/2">
-                      <Label
-                        htmlFor="name"
-                        className="text-base max-sm:text-sm"
-                      >
-                        Yenilenme Tarihi
-                      </Label>
-                      <Label
-                        htmlFor="name"
-                        className="font-normal cursor-pointer max-sm:text-sm"
-                      >
+                  </div>
+                  <div className="flex flex-col space-y-1.5">
+                    <Label className="text-sm font-medium text-gray-600 flex items-center">
+                      <Calendar className="w-3 h-3 mr-2" />
+                      Yenilenme Tarihi
+                    </Label>
+                    <div className="p-2 bg-gradient-to-r from-gray-50 to-gray-100 rounded-lg border border-gray-200/50">
+                      <Label className="font-medium text-gray-900 cursor-pointer text-sm">
                         {subsInfo?.createdDate.split("T")[0]}
                       </Label>
                     </div>
                   </div>
-                  <div className="flex justify-around w-9/12 ml-[7.5%]">
-                    <div className="flex flex-col space-y-2.5 pt-2 pb-2 w-1/2">
-                      <Label
-                        htmlFor="name"
-                        className="text-base max-sm:text-sm"
-                      >
-                        Para Kazanma
-                      </Label>
-                      <Label
-                        htmlFor="name"
-                        className="font-normal cursor-pointer max-sm:text-sm"
-                      >
-                        {subsInfo?.earning ? "Açık" : "Kapalı"}
-                      </Label>
-                    </div>
-                    <div className="flex flex-col space-y-2.5 pt-2 pb-2 w-1/2">
-                      <Label
-                        htmlFor="name"
-                        className="text-base max-sm:text-sm"
-                      >
-                        Seçkin Hesap
-                      </Label>
-                      <Label
-                        htmlFor="name"
-                        className="font-normal cursor-pointer max-sm:text-sm"
-                      >
-                        {subsInfo?.exclusive ? "Aktif" : "Aktif Değil"}
+                </div>
+                <div className="grid grid-cols-2 gap-3">
+                  <div className="flex flex-col space-y-1.5">
+                    <Label className="text-sm font-medium text-gray-600 flex items-center">
+                      <DollarSign className="w-3 h-3 mr-2" />
+                      Para Kazanma
+                    </Label>
+                    <div className="p-2 bg-gradient-to-r from-gray-50 to-gray-100 rounded-lg border border-gray-200/50">
+                      <Label className="font-medium text-gray-900 cursor-pointer text-sm">
+                        {subsInfo?.earning ? (
+                          <Badge variant="secondary" className="bg-gradient-to-r from-green-400 to-green-500 text-white text-xs shadow-sm">
+                            Açık
+                          </Badge>
+                        ) : (
+                          <Badge variant="secondary" className="bg-gradient-to-r from-red-400 to-red-500 text-white text-xs shadow-sm">
+                            Kapalı
+                          </Badge>
+                        )}
                       </Label>
                     </div>
                   </div>
-                  <div className="flex justify-around w-9/12 ml-[7.5%]">
-                    <div className="flex flex-col space-y-2.5 pt-2 pb-2 w-1/2">
-                      <Label
-                        htmlFor="name"
-                        className="text-base max-sm:text-sm"
-                      >
-                        Paylaşım Limiti
+                  <div className="flex flex-col space-y-1.5">
+                    <Label className="text-sm font-medium text-gray-600 flex items-center">
+                      <Star className="w-3 h-3 mr-2" />
+                      Seçkin Hesap
+                    </Label>
+                    <div className="p-2 bg-gradient-to-r from-gray-50 to-gray-100 rounded-lg border border-gray-200/50">
+                      <Label className="font-medium text-gray-900 cursor-pointer text-sm">
+                        {subsInfo?.exclusive ? (
+                          <Badge variant="secondary" className="bg-gradient-to-r from-purple-400 to-purple-500 text-white text-xs shadow-sm">
+                            Aktif
+                          </Badge>
+                        ) : (
+                          <Badge variant="secondary" className="bg-gradient-to-r from-gray-400 to-gray-500 text-white text-xs shadow-sm">
+                            Aktif Değil
+                          </Badge>
+                        )}
                       </Label>
-                      <Label
-                        htmlFor="name"
-                        className="font-normal cursor-pointer max-sm:text-sm"
-                      >
+                    </div>
+                  </div>
+                </div>
+                <div className="grid grid-cols-2 gap-3">
+                  <div className="flex flex-col space-y-1.5">
+                    <Label className="text-sm font-medium text-gray-600 flex items-center">
+                      <FileText className="w-3 h-3 mr-2" />
+                      Paylaşım Limiti
+                    </Label>
+                    <div className="p-2 bg-gradient-to-r from-gray-50 to-gray-100 rounded-lg border border-gray-200/50">
+                      <Label className="font-medium text-gray-900 cursor-pointer text-sm">
                         {subsInfo?.writeLimitDef}
                       </Label>
                     </div>
-                    <div className="flex flex-col space-y-2.5 pt-2 pb-2 w-1/2">
-                      <Label
-                        htmlFor="name"
-                        className="text-base max-sm:text-sm"
-                      >
-                        Kalan Limit
-                      </Label>
-                      <Label
-                        htmlFor="name"
-                        className="font-normal cursor-pointer max-sm:text-sm"
-                      >
+                  </div>
+                  <div className="flex flex-col space-y-1.5">
+                    <Label className="text-sm font-medium text-gray-600 flex items-center">
+                      <Zap className="w-3 h-3 mr-2" />
+                      Kalan Limit
+                    </Label>
+                    <div className="p-2 bg-gradient-to-r from-gray-50 to-gray-100 rounded-lg border border-gray-200/50">
+                      <Label className="font-medium text-gray-900 cursor-pointer text-sm">
                         {subsInfo?.writeLimit}
                       </Label>
                     </div>
                   </div>
                 </div>
-              </form>
-            </CardContent>
-            <CardFooter className="flex justify-end">
-              <Image
-                src="/logo-black.png"
-                width={50}
-                height={50}
-                alt="Söylenti"
-                className="float-right"
-              />
-            </CardFooter>
-          </Card>
-        </div>
+              </div>
+            </form>
+          </CardContent>
+          <CardFooter className="flex justify-end pt-2">
+            <Image
+              src="/logo-black.png"
+              width={32}
+              height={32}
+              alt="Söylenti"
+              className="opacity-60"
+            />
+          </CardFooter>
+        </Card>
       </div>
-      <div className="mt-10">
-        <span className="text-xl font-semibold ml-3 text-slate-600">
-          Paylaşımlarınız
-        </span>
+      
+      <div className="mt-8">
+        <div className="flex items-center space-x-3 mb-6">
+          <div className="w-8 h-8 bg-gradient-to-br from-blue-400 to-blue-600 rounded-lg flex items-center justify-center shadow-lg">
+            <FileText className="w-4 h-4 text-white" />
+          </div>
+          <h2 className="text-xl font-semibold text-gray-800">
+            Paylaşımlarınız
+          </h2>
+        </div>
         {whispers ? (
           whispers.length > 0 ? (
-            <div className="flex flex-wrap mt-8">
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4">
               {whispers.map((obj, index) => (
-                <div
-                  key={"right-package" + index}
-                  className="w-[24%] ml-[1%] mt-3 max-lg:w-[32%] max-md:w-[49%] max-sm:w-[46%] max-sm:ml-[2%]"
-                >
-                  <a href={"/user/" + obj.authorName}>
-                    <NewsCard
-                      title={obj.title}
-                      img={obj.imageURL ? obj.imageURL : "/logo-black.png"}
-                      name={obj.authorName}
-                      source={obj.source}
-                      category={obj.category}
-                    />
-                  </a>
+                <div key={"whisper-" + index} className="group">
+                  <Card className="overflow-hidden hover:shadow-xl hover:shadow-blue-100/50 transition-all duration-300 transform hover:-translate-y-1 border-0 shadow-lg h-full">
+                    <div className="relative">
+                      <div className="aspect-video overflow-hidden">
+                        <Image
+                          src={obj.imageURL ? obj.imageURL : "/logo-black.png"}
+                          alt={obj.title}
+                          width={300}
+                          height={200}
+                          className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
+                        />
+                        <div className="absolute inset-0 bg-gradient-to-t from-black/20 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+                      </div>
+                      <div className="absolute top-2 right-2">
+                        <Badge variant="secondary" className="bg-gradient-to-r from-blue-500 to-purple-600 text-white text-xs shadow-lg font-medium">
+                          {obj.category}
+                        </Badge>
+                      </div>
+                      <div className="absolute inset-0 bg-gradient-to-t from-blue-500/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+                    </div>
+                    <CardContent className="p-4 flex flex-col h-full">
+                      <div className="space-y-3 flex-1">
+                        <div className="h-10 flex items-start">
+                          <h3 className="font-semibold text-gray-900 text-sm leading-tight line-clamp-2">
+                            {obj.title}
+                          </h3>
+                        </div>
+                        
+                        <div className="flex items-center justify-between text-xs text-gray-500">
+                          <div className="flex items-center space-x-1">
+                            <div className="w-3 h-3 bg-gradient-to-r from-blue-400 to-purple-500 rounded-full flex items-center justify-center">
+                              <User className="w-2 h-2 text-white" />
+                            </div>
+                            <span className="font-medium">{obj.authorName}</span>
+                          </div>
+                          <div className="flex items-center space-x-1">
+                            <Calendar className="w-3 h-3 text-gray-400" />
+                            <span>{new Date(obj.createdDate).toLocaleDateString('tr-TR')}</span>
+                          </div>
+                        </div>
+                        
+                        {obj.source && (
+                          <div className="flex items-center space-x-1 text-xs text-gray-400">
+                            <div className="w-3 h-3 bg-gradient-to-r from-green-400 to-blue-500 rounded-full flex items-center justify-center">
+                              <Eye className="w-2 h-2 text-white" />
+                            </div>
+                            <span className="truncate font-medium">{obj.source}</span>
+                          </div>
+                        )}
+                      </div>
+                      
+                      <div className="mt-3 pt-3 border-t border-gray-100">
+                        <div className="flex items-center justify-between">
+                          <div className="flex items-center space-x-2">
+                            <div className="w-2 h-2 bg-green-400 rounded-full animate-pulse"></div>
+                            <span className="text-xs text-gray-500">Aktif</span>
+                          </div>
+                          <div className="flex items-center space-x-1 text-xs text-gray-400">
+                            <TrendingUp className="w-3 h-3" />
+                            <span>Görüntüleniyor</span>
+                          </div>
+                        </div>
+                      </div>
+                    </CardContent>
+                  </Card>
                 </div>
               ))}
             </div>
           ) : (
-            <div className="text-center w-full mt-10 text-gray-600 text-lg">
-              Paylaşımınız yok.
+            <div className="text-center w-full py-12">
+              <div className="w-16 h-16 bg-gradient-to-br from-gray-100 to-gray-200 rounded-full flex items-center justify-center mx-auto mb-4 shadow-lg">
+                <FileText className="w-8 h-8 text-gray-400" />
+              </div>
+              <p className="text-gray-600 text-lg">Henüz paylaşımınız bulunmuyor.</p>
+              <p className="text-gray-500 text-sm mt-2">İlk paylaşımınızı yapmak için yazma sayfasına gidin.</p>
             </div>
           )
         ) : (
-          <div role="status" className="mr-10 flex justify-center items-center">
-            <svg
-              aria-hidden="true"
-              className="w-20 h-20 text-gray-200 animate-spin dark:text-gray-600 fill-gray-600"
-              viewBox="0 0 100 101"
-              fill="none"
-              xmlns="http://www.w3.org/2000/svg"
-            >
-              <path
-                d="M100 50.5908C100 78.2051 77.6142 100.591 50 100.591C22.3858 100.591 0 78.2051 0 50.5908C0 22.9766 22.3858 0.59082 50 0.59082C77.6142 0.59082 100 22.9766 100 50.5908ZM9.08144 50.5908C9.08144 73.1895 27.4013 91.5094 50 91.5094C72.5987 91.5094 90.9186 73.1895 90.9186 50.5908C90.9186 27.9921 72.5987 9.67226 50 9.67226C27.4013 9.67226 9.08144 27.9921 9.08144 50.5908Z"
-                fill="currentColor"
-              />
-              <path
-                d="M93.9676 39.0409C96.393 38.4038 97.8624 35.9116 97.0079 33.5539C95.2932 28.8227 92.871 24.3692 89.8167 20.348C85.8452 15.1192 80.8826 10.7238 75.2124 7.41289C69.5422 4.10194 63.2754 1.94025 56.7698 1.05124C51.7666 0.367541 46.6976 0.446843 41.7345 1.27873C39.2613 1.69328 37.813 4.19778 38.4501 6.62326C39.0873 9.04874 41.5694 10.4717 44.0505 10.1071C47.8511 9.54855 51.7191 9.52689 55.5402 10.0491C60.8642 10.7766 65.9928 12.5457 70.6331 15.2552C75.2735 17.9648 79.3347 21.5619 82.5849 25.841C84.9175 28.9121 86.7997 32.2913 88.1811 35.8758C89.083 38.2158 91.5421 39.6781 93.9676 39.0409Z"
-                fill="currentFill"
-              />
-            </svg>
-            <span className="sr-only">Loading...</span>
+          <div role="status" className="flex justify-center items-center py-12">
+            <div className="w-16 h-16 border-4 border-gray-200 border-t-blue-600 rounded-full animate-spin shadow-lg"></div>
+            <span className="sr-only">Yükleniyor...</span>
           </div>
         )}
       </div>

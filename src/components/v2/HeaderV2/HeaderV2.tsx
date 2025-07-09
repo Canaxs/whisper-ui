@@ -238,14 +238,16 @@ export default function HeaderV2() {
               </div>
             ) : userData.username != null ? (
               <React.Fragment>
-                <div className="flex mr-5 cursor-pointer text-gray-700 transition-all hover:scale-110">
-                  <Link href="/account/write" className="flex max-sm:hidden">
-                    <TfiWrite className="mr-2 size-5 hover:text-black transition-all" />
-                    <Label className="cursor-pointer text-sm drop-shadow-xl">
-                      Yaz
-                    </Label>
-                  </Link>
-                </div>
+                <Link href="/account/write" className="max-sm:hidden">
+                  <Button 
+                    className="bg-gradient-to-r from-gray-700 to-gray-800 hover:from-gray-800 hover:to-gray-900 text-white font-medium px-4 py-2 rounded-full shadow-lg hover:shadow-xl transition-all duration-300 transform hover:scale-105 group relative overflow-hidden"
+                  >
+                    <div className="absolute inset-0 bg-gradient-to-r from-white/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+                    <TfiWrite className="mr-2 size-5 group-hover:rotate-12 transition-transform duration-300" />
+                    <span className="relative z-10">Yaz</span>
+                    <div className="absolute -inset-1 bg-gradient-to-r from-gray-700 to-gray-800 rounded-full blur opacity-25 group-hover:opacity-40 transition-opacity duration-300"></div>
+                  </Button>
+                </Link>
                 <HeaderNotify />
                 <HeaderUser
                   username={userData.username}
