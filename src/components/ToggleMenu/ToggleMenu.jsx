@@ -96,8 +96,8 @@ export default function ToggleMenu(props) {
             <CiMenuBurger className="transition-transform group-hover:scale-110 duration-200" />
           </Button>
         </SheetTrigger>
-        <SheetContent side={"left"} className="w-80 p-0 bg-white">
-          <SheetHeader className="p-6 bg-gradient-to-r from-white-50 via-gray-100 to-slate-100 border-b border-gray-100">
+        <SheetContent side={"left"} className="w-80 p-0 bg-white flex flex-col max-h-screen">
+          <SheetHeader className="p-6 bg-gradient-to-r from-white-50 via-gray-100 to-slate-100 border-b border-gray-100 flex-shrink-0">
             <SheetTitle className="flex justify-center">
               <Link href="/">
                 <Image
@@ -115,7 +115,7 @@ export default function ToggleMenu(props) {
             </SheetDescription>
           </SheetHeader>
 
-          <div className="h-full overflow-y-auto p-4">
+          <div className="flex-1 overflow-y-auto p-4 min-h-0">
             <Category />
             <h3 className="text-lg font-semibold mb-4 mt-4 text-gray-800">
               Diğer
