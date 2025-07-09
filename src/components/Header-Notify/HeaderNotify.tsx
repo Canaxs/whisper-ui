@@ -76,10 +76,10 @@ export function HeaderNotify() {
     }
   }
 
-  function getTimeAgo(timestamp) {
+  function getTimeAgo(timestamp: string | Date) {
     const now = new Date();
     const time = new Date(timestamp);
-    const diffInMinutes = Math.floor((now - time) / (1000 * 60));
+    const diffInMinutes = Math.floor((now.getTime() - time.getTime()) / (1000 * 60));
     
     if (diffInMinutes < 1) return "Az önce";
     if (diffInMinutes < 60) return `${diffInMinutes} dk önce`;
