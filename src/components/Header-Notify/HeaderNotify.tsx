@@ -99,7 +99,7 @@ export function HeaderNotify() {
             <IoIosNotifications className="size-6 text-gray-600 group-hover:text-gray-800 transition-colors" />
             
             {/* Animated Notification Badge */}
-            {notificationDTO?.unReadNotify > 0 && (
+            {notificationDTO?.unReadNotify && notificationDTO.unReadNotify > 0 && (
               <div className="absolute -top-1 -right-1">
                 <Badge 
                   variant="destructive" 
@@ -111,7 +111,7 @@ export function HeaderNotify() {
             )}
             
             {/* Pulse Animation for Unread Notifications */}
-            {notificationDTO?.unReadNotify > 0 && (
+            {notificationDTO?.unReadNotify && notificationDTO.unReadNotify > 0 && (
               <div className="absolute inset-0 rounded-full bg-red-500/20 animate-ping"></div>
             )}
           </Button>
@@ -123,7 +123,7 @@ export function HeaderNotify() {
               <Bell className="w-5 h-5 text-gray-600" />
               <span className="font-semibold text-gray-900">Bildirimler</span>
             </div>
-            {notificationDTO?.unReadNotify > 0 && (
+            {notificationDTO?.unReadNotify && notificationDTO.unReadNotify > 0 && (
               <Badge variant="secondary" className="bg-blue-100 text-blue-700">
                 {notificationDTO.unReadNotify} yeni
               </Badge>
@@ -131,7 +131,7 @@ export function HeaderNotify() {
           </DropdownMenuLabel>
           
           <DropdownMenuGroup className="p-2">
-            {notificationDTO?.notificationList?.length > 0 ? (
+            {notificationDTO?.notificationList && notificationDTO.notificationList.length > 0 ? (
               notificationDTO.notificationList.map((data, index) => (
                 <DropdownMenuItem
                   key={"notify" + index}
@@ -147,7 +147,7 @@ export function HeaderNotify() {
                       <Avatar className="w-8 h-8">
                         <AvatarImage src="https://github.com/shadcn.png" />
                         <AvatarFallback className="bg-gradient-to-br from-blue-500 to-purple-600 text-white text-xs">
-                          {data["text"]?.charAt(0) || "N"}
+                          {(data["text"] as string)?.charAt(0) || "N"}
                         </AvatarFallback>
                       </Avatar>
                     </div>
@@ -185,7 +185,7 @@ export function HeaderNotify() {
             )}
           </DropdownMenuGroup>
           
-          {notificationDTO?.notificationList?.length > 0 && (
+          {notificationDTO?.notificationList && notificationDTO.notificationList.length > 0 && (
             <div className="p-3 border-t">
               <Button 
                 variant="ghost" 
