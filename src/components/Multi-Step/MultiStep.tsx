@@ -36,7 +36,7 @@ export default function MultiStep() {
   const [previousStep, setPreviousStep] = useState(0)
   const [currentStep, setCurrentStep] = useState(0)
   const [selectPlan , setSelectPlan] = useState("FREE");
-  const [isPayment , setIsPayment] = useState(true);
+  const [isPayment , setIsPayment] = useState(false);
   const delta = currentStep - previousStep
 
   const { toast } = useToast();
@@ -84,60 +84,44 @@ export default function MultiStep() {
   }
 
   const payment = () => {
-    if(watch('cardName').length > 0 && 
-      watch('cardNumber').length > 0  && 
-      watch('cvc').length > 0 && 
-      watch('expirationDate').length > 0 &&
-      !isPayment) {
-        setIsPayment(true);
-        toast({
-          variant: "success",
-          title: "Ödeme Yapıldı",
-          description: "Güle Güle Kullanın",
-        })
+    if(!isPayment) {
+      setIsPayment(true);
+      toast({
+        variant: "success",
+        title: "Ödeme Yapıldı",
+        description: "Ödeme başarıyla gerçekleştirildi.",
+      })
     }
     else {
-      if(isPayment) {
-        toast({
-          variant: "destructive",
-          title: "Ödeme Zaten Yapıldı",
-          description: "",
-        })
-      }
-      else {
-        toast({
-          variant: "destructive",
-          title: "Lütfen Kart Bilgilerini Eksiksiz Şekilde Doldurun",
-          description: "Tekrar deneyiniz.",
-        })
-      }
+      toast({
+        variant: "destructive",
+        title: "Ödeme Zaten Yapıldı",
+        description: "Ödeme işlemi daha önce gerçekleştirilmiş.",
+      })
     }
   }
 
-  const confirm = () => {
+  const confirm = async () => {
     if(isPayment) {
       const updatePlanReq = {
         planName: selectPlan
       }
       try {
-        updatePlan(updatePlanReq,Cookies.get("token")).then((res) => {
-          Cookies.set("isSubscribe",true);
-          toast({
-            variant: "success",
-            title: "Plan Aktifleştirildi",
-            description: "Güle Güle Kullanın",
-          })
-        }, (exception) => {
-          toast({
-            variant: "destructive",
-            title: "Plan Oluşturulurken Hata ile Karşılaşıldı",
-            description: "Tekrar deneyiniz.",
-          })
-        })
+        await updatePlan(updatePlanReq, Cookies.get("token"));
+        Cookies.set("isSubscribe", true);
+        toast({
+          variant: "success",
+          title: "Plan Aktifleştirildi",
+          description: "Güle Güle Kullanın",
+        });
         next();
-        window.location.href= Environment.domain+"account";
-      }
-      catch(e) {
+        router.push("/account");
+      } catch(exception) {
+        toast({
+          variant: "destructive",
+          title: "Plan Oluşturulurken Hata ile Karşılaşıldı",
+          description: "Tekrar deneyiniz.",
+        });
       }
     }
     else {
@@ -147,7 +131,6 @@ export default function MultiStep() {
         description: "Ödeme işlemi gerçekleştikten sonra tekrar deneyiniz.",
       })
     }
-
   }
 
   const clickPlan = (str,str2) => {
@@ -210,18 +193,18 @@ export default function MultiStep() {
             <p className='mt-1 text-sm leading-6 text-gray-600'>
               <label>Söylenti</label> Hoşgeldin
             </p>
-            <div className='mt-10 flex'>
-                <div className='w-1/4 m-3 ml-0'>
-                    <StepCard title={"Ücretsiz Plan"} classProps={selectPlan != "FREE" ? "hover:shadow-lg hover:bg-gray-50 cursor-pointer transition-all w-full h-64" : "hover:shadow-lg cursor-pointer transition-all w-full h-64 bg-gray-100"} posts={"5"} money={false} exclusive={false} wage={"0"} onClick={() => clickPlan("FREE","Ücretsiz Plan")} />
+            <div className='mt-10 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6'>
+                <div>
+                    <StepCard title={"Ücretsiz Plan"} classProps={selectPlan != "FREE" ? "hover:shadow-lg hover:bg-gray-50 cursor-pointer transition-all w-full h-80" : "hover:shadow-lg cursor-pointer transition-all w-full h-80 bg-gray-100"} posts={"5"} money={false} exclusive={false} wage={"0"} onClick={() => clickPlan("FREE","Ücretsiz Plan")} />
                 </div>
-                <div className='w-1/4 m-3'>
-                    <StepCard title={"Başlangıç Plan"} classProps={selectPlan != "BASIC" ? "hover:shadow-lg hover:bg-gray-50 cursor-pointer transition-all w-full h-64" : "hover:shadow-lg cursor-pointer transition-all w-full h-64 bg-gray-100"} posts={"20"} money={false} exclusive={false} wage={"35"} onClick={() => clickPlan("BASIC","Başlangıç Plan")} />
+                <div>
+                    <StepCard title={"Başlangıç Plan"} classProps={selectPlan != "BASIC" ? "hover:shadow-lg hover:bg-gray-50 cursor-pointer transition-all w-full h-80" : "hover:shadow-lg cursor-pointer transition-all w-full h-80 bg-gray-100"} posts={"20"} money={false} exclusive={false} wage={"35"} onClick={() => clickPlan("BASIC","Başlangıç Plan")} />
                 </div>
-                <div className='w-1/4 m-3'>
-                    <StepCard title={"Standart Plan"} classProps={selectPlan != "STANDARD" ? "hover:shadow-lg hover:bg-gray-50 cursor-pointer transition-all w-full h-64" : "hover:shadow-lg cursor-pointer transition-all w-full h-64 bg-gray-100"} posts={"35"} money={true} exclusive={false} wage={"50"} onClick={() => clickPlan("STANDARD","Standart Plan")} />
+                <div>
+                    <StepCard title={"Standart Plan"} classProps={selectPlan != "STANDARD" ? "hover:shadow-lg hover:bg-gray-50 cursor-pointer transition-all w-full h-80" : "hover:shadow-lg cursor-pointer transition-all w-full h-80 bg-gray-100"} posts={"35"} money={true} exclusive={false} wage={"50"} onClick={() => clickPlan("STANDARD","Standart Plan")} />
                 </div>
-                <div className='w-1/4 m-3'>
-                    <StepCard title={"Premium Plan"} classProps={selectPlan != "PREMIUM" ? "hover:shadow-lg hover:bg-gray-50 cursor-pointer transition-all w-full h-64" : "hover:shadow-lg cursor-pointer transition-all w-full h-64 bg-gray-100"} posts={"Sınırsız"} money={true} exclusive={true} wage={"100"} onClick={() => clickPlan("PREMIUM","Premium Plan")} />
+                <div>
+                    <StepCard title={"Premium Plan"} classProps={selectPlan != "PREMIUM" ? "hover:shadow-lg hover:bg-gray-50 cursor-pointer transition-all w-full h-80" : "hover:shadow-lg cursor-pointer transition-all w-full h-80 bg-gray-100"} posts={"Sınırsız"} money={true} exclusive={true} wage={"100"} onClick={() => clickPlan("PREMIUM","Premium Plan")} />
                 </div>
             </div>
           </motion.div>
@@ -244,7 +227,7 @@ export default function MultiStep() {
               <div className='col-span-full'>
                 <label htmlFor='street' className='block text-sm font-medium leading-6 text-gray-900'>Kart Üzerindeki İsim</label>
                     <div className='mt-2'>
-                    <input type='text' id='street' {...register('cardName')} autoComplete='street-address' value={"Name Surname"} disabled={isPayment}
+                    <input type='text' id='street' {...register('cardName')} autoComplete='street-address' defaultValue={"Name Surname"} disabled={isPayment}
                         className='block p-3 w-1/5 rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-sky-600 sm:text-sm sm:leading-6'
                     />
                     {errors.cardName?.message && (
@@ -257,7 +240,7 @@ export default function MultiStep() {
                 <div className='col-span-2'>
                 <label htmlFor='street' className='block text-sm font-medium leading-6 text-gray-900'>Kart Numarası</label>
                     <div className='mt-2'>
-                    <input type='text' id='street' {...register('cardNumber')} autoComplete='street-address' value={"0000 0000 0000 0000"} disabled={isPayment}
+                    <input type='text' id='street' {...register('cardNumber')} autoComplete='street-address' defaultValue={"0000 0000 0000 0000"} disabled={isPayment}
                         className='block w-full p-3 rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-sky-600 sm:text-sm sm:leading-6'
                     />
                     {errors.cardNumber?.message && (
@@ -270,7 +253,7 @@ export default function MultiStep() {
                 <div className='col-span-1'>
                 <label htmlFor='street' className='block text-sm font-medium leading-6 text-gray-900'>Son Kullanma Tarihi</label>
                     <div className='mt-2'>
-                    <input type='text' id='street' {...register('expirationDate')} autoComplete='street-address' value={"00/00"} disabled={isPayment}
+                    <input type='text' id='street' {...register('expirationDate')} autoComplete='street-address' defaultValue={"00/00"} disabled={isPayment}
                         className='block p-3 w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-sky-600 sm:text-sm sm:leading-6'
                     />
                     {errors.expirationDate?.message && (
@@ -283,7 +266,7 @@ export default function MultiStep() {
                 <div className='col-span-1'>
                 <label htmlFor='street' className='block text-sm font-medium leading-6 text-gray-900'>CVC</label>
                     <div className='mt-2'>
-                    <input type='text' id='street' {...register('cvc')} autoComplete='street-address' value={"000"} disabled={isPayment}
+                    <input type='text' id='street' {...register('cvc')} autoComplete='street-address' defaultValue={"000"} disabled={isPayment}
                         className='block p-3 w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-sky-600 sm:text-sm sm:leading-6'
                     />
                     {errors.cvc?.message && (
@@ -295,7 +278,14 @@ export default function MultiStep() {
                 </div>
             </div>
             <div className='flex mt-5'>
-                <Button className='bg-gray-600 cursor-no-drop opacity-70'>Ödeme Yap(Kullanıma Kapalıdır)</Button>
+                <Button 
+                  type="button"
+                  onClick={payment}
+                  disabled={isPayment}
+                  className={isPayment ? 'bg-gray-600 cursor-no-drop opacity-70' : 'bg-green-600 hover:bg-green-700'}
+                >
+                  {isPayment ? 'Ödeme Yapıldı' : 'Ödeme Yap'}
+                </Button>
             </div>
           </motion.div>
         )}
