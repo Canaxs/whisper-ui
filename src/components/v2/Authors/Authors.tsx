@@ -10,7 +10,7 @@ const authors = [
 
 export default function Authors() {
   return (
-    <Card className="p-4 lg:p-6 mt-5 bg-[#F5F5F5] max-xl:border max-xl:m-5 gap-0 py-0 border-0 rounded-none shadow-none max-lg:mb-5 max-xl:bg-white max-xl:rounded-lg">
+    <div className="p-4">
       <h2 className="text-base lg:text-lg font-semibold mb-4 text-neutral-800 mt-4">
         Popüler Yazarlar
       </h2>
@@ -42,6 +42,6 @@ export default function Authors() {
           </div>
         ))}
       </div>
-    </Card>
+    </div>
   );
 }

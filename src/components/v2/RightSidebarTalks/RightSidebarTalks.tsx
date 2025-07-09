@@ -47,7 +47,7 @@ export default function RightSidebarTalks() {
     }, [])
 
     return (
-        <div className="space-y-2 p-4 lg:p-6 max-xl:border max-xl:bg-white max-xl:rounded-lg max-xl:m-5 max-xl:shadow-md bg-[#F5F5F5]">
+        <div className="space-y-2 p-4">
             <h2 className="text-base lg:text-lg font-semibold mb-4 text-neutral-800">Söyleşiler</h2>
           {disputeData.content.length === 0 ? (
             <div className="flex flex-col items-center justify-center py-8">

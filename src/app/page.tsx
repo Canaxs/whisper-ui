@@ -121,11 +121,15 @@ export default function Home() {
       <div className="flex-1">
         <div className="grid grid-cols-1 xl:grid-cols-10">
           <div className="xl:col-span-8">
-            <CarouselOne bigClass="h-[500px]" smallClass="h-[50px]" />
+            <CarouselOne bigClass="h-[500px] max-md:h-[300px] max-sm:h-[250px]" smallClass="h-[50px]" />
             <div className="mr-2 mb-2 ml-2 mt-12">
-              <h3 className="text-3xl font-bold text-neutral-600 drop-shadow-md backdrop-blur-sm px-4 py-2 w-fit ml-[1%] mb-6 max-sm:ml-[2%]">
-                Güncel Haberler
-              </h3>
+              <div className="flex items-center gap-4 mb-8 max-sm:mb-6">
+                <div className="w-1 h-8 bg-gradient-to-b from-blue-500 to-purple-600 rounded-full"></div>
+                <h3 className="text-2xl font-bold text-gray-800 max-sm:text-xl">
+                  Öne Çıkan İçerikler
+                </h3>
+                <div className="flex-1 h-px bg-gradient-to-r from-gray-300 to-transparent"></div>
+              </div>
               <div className="flex flex-wrap justify-center">
                 {whispers.map((obj, index) => (
                   <div
@@ -156,7 +160,7 @@ export default function Home() {
               </div>
             </div>
           </div>
-          <div className="space-y-2 xl:col-span-2 bg-[#F5F5F5] max-xl:bg-white min-h-screen">
+          <div className="space-y-2 xl:col-span-2 bg-[#F5F5F5] min-h-screen">
             <Categories />
             <RightSidebarTalks />
             <Authors />

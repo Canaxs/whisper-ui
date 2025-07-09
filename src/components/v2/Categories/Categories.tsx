@@ -3,7 +3,7 @@ import { PenLine, User } from "lucide-react";
 
 export default function Categories() {
     return (
-        <div className="p-6 max-xl:border max-xl:bg-white max-xl:rounded-lg max-xl:m-5 max-xl:shadow-md">
+        <div className="p-6">
             <div className="max-w-md mx-auto">
                 <h1 className="text-xl font-bold text-neutral-900 mb-8 tracking-tight drop-shadow-sm">Akış</h1>
 

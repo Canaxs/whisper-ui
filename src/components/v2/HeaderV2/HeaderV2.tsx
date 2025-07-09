@@ -142,7 +142,7 @@ export default function HeaderV2() {
           <div className="lg:hidden">
             <ToggleMenu />
           </div>
-          <div className="flex items-center space-x-4 max-lg:hidden">
+          <div className="flex items-center space-x-4">
             <Link href="/">
               <Image
                 src="/logo-black.png"
@@ -157,7 +157,7 @@ export default function HeaderV2() {
           </div>
 
           {/* Search Input */}
-          <div className="relative w-full lg:max-w-[450px] md:max-w-[300px] sm:max-w-[250px] max-w-[200px] mx-auto">
+          <div className="relative max-lg:hidden w-full lg:max-w-[450px] md:max-w-[300px] sm:max-w-[250px] max-w-[200px] mx-auto">
             <Search className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-400 w-4 h-4" />
             <Input
               placeholder="Haber ara..."
