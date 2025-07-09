@@ -7,7 +7,7 @@ import { useRouter,useSearchParams } from 'next/navigation'
 
 export default function Plan() {
 
-    const [isSubscribe , setIsSubscribe] = useState(true);
+    const [showPlanSelection, setShowPlanSelection] = useState(true);
 
     const router = useRouter();
 
@@ -16,13 +16,13 @@ export default function Plan() {
         if (isSubscribe === "true") {
             router.push("/account");
         } else {
-            setIsSubscribe(false);
+            setShowPlanSelection(false);
         }
     } , [])
 
     return (
         <div>
-            <div className={isSubscribe ? "hidden" : ""}>
+            <div className={showPlanSelection ? "hidden" : ""}>
                 <MultiStep />
             </div>
         </div>
