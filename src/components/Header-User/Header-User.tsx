@@ -121,7 +121,7 @@ export function HeaderUser(props) {
             {role?.includes("ROLE_MOD") && (
               <DropdownMenuItem className="flex items-center space-x-3 p-3 rounded-lg hover:bg-gray-50 cursor-pointer">
                 <Settings className="w-4 h-4 text-gray-600" />
-                <Link href="/panel/dashboard" className="flex-1">Panel'e Git</Link>
+                <Link href="/panel/dashboard" className="flex-1">Panel&apos;e Git</Link>
               </DropdownMenuItem>
             )}
           </DropdownMenuGroup>

@@ -3,6 +3,8 @@ import AbsoluteAdversiting from "@/components/Advertising-Space/AbsoluteAdversit
 import FooterArea from "@/components/Footer-Area/FooterArea";
 import Header from "@/components/Header/Header";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
+import { Card, CardContent } from "@/components/ui/card";
+import { Badge } from "@/components/ui/badge";
 import { usePathname } from "next/navigation";
 
 import { getUser, getUserWhispersCalls } from "@/api/apiCalls";
@@ -17,6 +19,16 @@ import MainLayout from "@/components/v2/MainLayout/MainLayout";
 import Categories from "@/components/v2/Categories/Categories";
 import RightSidebarTalks from "@/components/v2/RightSidebarTalks/RightSidebarTalks";
 import Authors from "@/components/v2/Authors/Authors";
+import { 
+  User, 
+  Star, 
+  Shield, 
+  Award, 
+  FileText, 
+  TrendingUp,
+  Calendar,
+  Eye
+} from "lucide-react";
 
 export type UserDto = {
   username: string;
@@ -68,113 +80,272 @@ export default function UserPage() {
       <div className="flex-1">
         <div className="grid grid-cols-1 xl:grid-cols-10">
           <div className="xl:col-span-8">
-            <div className="mt-10 ml-3">
-              <div className="flex ml-4">
-                <div>
-                  <Avatar className="h-40 w-40">
-                    <AvatarImage
-                      src="https://github.com/shadcn.png"
-                      alt="@shadcn"
-                    />
-                    <AvatarFallback>CN</AvatarFallback>
-                  </Avatar>
+            <div className="mt-8 m-5">
+              {/* Hero Section */}
+              <div className="w-full mb-8">
+                <Card className="relative overflow-hidden rounded-2xl shadow-2xl border-0 bg-gradient-to-br from-indigo-900 via-purple-900 to-pink-900">
+                  {/* Background Pattern */}
+                  <div className="absolute inset-0 bg-gradient-to-r from-purple-500/10 to-pink-500/10"></div>
+                  <div className="absolute top-0 right-0 w-32 h-32 bg-gradient-to-br from-purple-500/20 to-transparent rounded-full blur-3xl"></div>
+                  <div className="absolute bottom-0 left-0 w-24 h-24 bg-gradient-to-tr from-pink-500/20 to-transparent rounded-full blur-2xl"></div>
+                  
+                  <CardContent className="relative p-6 md:p-8">
+                    <div className="flex flex-col md:flex-row items-center md:items-start space-y-6 md:space-y-0 md:space-x-8">
+                      {/* Avatar Section */}
+                      <div className="relative">
+                        <div className="relative">
+                          <Avatar className="h-32 w-32 md:h-40 md:w-40 border-4 border-white/20 shadow-2xl">
+                            <AvatarImage
+                              src="https://github.com/shadcn.png"
+                              alt={userDto?.username}
+                            />
+                            <AvatarFallback className="text-2xl font-bold bg-gradient-to-br from-indigo-400 to-purple-400 text-white">
+                              {userDto?.username?.charAt(0).toUpperCase()}
+                            </AvatarFallback>
+                          </Avatar>
+                          {/* Online Status */}
+                          <div className="absolute bottom-2 right-2 w-6 h-6 bg-green-400 border-4 border-white rounded-full shadow-lg"></div>
+                        </div>
+                      </div>
+
+                      {/* User Info Section */}
+                      <div className="flex-1 text-center md:text-left">
+                        <div className="mb-4">
+                          <h1 className="text-3xl md:text-4xl font-bold text-white mb-2 bg-gradient-to-r from-white to-gray-200 bg-clip-text text-transparent">
+                            {userDto?.username}
+                          </h1>
+                          <p className="text-purple-200 text-lg">
+                            Aktif Kullanıcı
+                          </p>
+                        </div>
+
+                        {/* Stats Grid */}
+                        <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+                          <div className="bg-white/10 backdrop-blur-sm rounded-xl p-4 text-center">
+                            <div className="w-8 h-8 bg-gradient-to-br from-yellow-400 to-orange-500 rounded-lg flex items-center justify-center mx-auto mb-2">
+                              <Star className="w-4 h-4 text-white" />
+                            </div>
+                            <div className="text-white font-bold text-lg">{userDto?.userPoint || 0}</div>
+                            <div className="text-purple-200 text-xs">Toplam Puan</div>
+                          </div>
+                          
+                          <div className="bg-white/10 backdrop-blur-sm rounded-xl p-4 text-center">
+                            <div className="w-8 h-8 bg-gradient-to-br from-blue-400 to-purple-500 rounded-lg flex items-center justify-center mx-auto mb-2">
+                              <FileText className="w-4 h-4 text-white" />
+                            </div>
+                            <div className="text-white font-bold text-lg">{whispers.length}</div>
+                            <div className="text-purple-200 text-xs">Paylaşım</div>
+                          </div>
+                          
+                          <div className="bg-white/10 backdrop-blur-sm rounded-xl p-4 text-center">
+                            <div className="w-8 h-8 bg-gradient-to-br from-green-400 to-emerald-500 rounded-lg flex items-center justify-center mx-auto mb-2">
+                              <TrendingUp className="w-4 h-4 text-white" />
+                            </div>
+                            <div className="text-white font-bold text-lg">{userDto?.badges?.length || 0}</div>
+                            <div className="text-purple-200 text-xs">Rozet</div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </CardContent>
+                </Card>
+              </div>
+
+              {/* User Details Cards */}
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
+                {/* User Info Card */}
+                <Card className="hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1 border-0 shadow-lg">
+                  <CardContent className="p-6">
+                    <div className="flex items-center space-x-3 mb-4">
+                      <div className="w-10 h-10 bg-gradient-to-br from-blue-400 to-blue-600 rounded-lg flex items-center justify-center">
+                        <User className="w-5 h-5 text-white" />
+                      </div>
+                      <h2 className="text-xl font-bold text-gray-800">Kullanıcı Bilgileri</h2>
+                    </div>
+                    
+                    <div className="space-y-4">
+                      <div className="flex items-center justify-between p-3 bg-gradient-to-r from-gray-50 to-gray-100 rounded-lg">
+                        <div className="flex items-center space-x-3">
+                          <div className="w-8 h-8 bg-blue-100 rounded-lg flex items-center justify-center">
+                            <User className="w-4 h-4 text-blue-600" />
+                          </div>
+                          <span className="font-medium text-gray-700">Kullanıcı Adı</span>
+                        </div>
+                        <span className="font-bold text-gray-900">{userDto?.username}</span>
+                      </div>
+                      
+                      <div className="flex items-center justify-between p-3 bg-gradient-to-r from-gray-50 to-gray-100 rounded-lg">
+                        <div className="flex items-center space-x-3">
+                          <div className="w-8 h-8 bg-yellow-100 rounded-lg flex items-center justify-center">
+                            <Star className="w-4 h-4 text-yellow-600" />
+                          </div>
+                          <span className="font-medium text-gray-700">Puan</span>
+                        </div>
+                        <Badge variant="secondary" className="bg-gradient-to-r from-yellow-400 to-orange-500 text-white font-bold">
+                          {userDto?.userPoint || 0}
+                        </Badge>
+                      </div>
+                      
+                      <div className="flex items-center justify-between p-3 bg-gradient-to-r from-gray-50 to-gray-100 rounded-lg">
+                        <div className="flex items-center space-x-3">
+                          <div className="w-8 h-8 bg-purple-100 rounded-lg flex items-center justify-center">
+                            <Shield className="w-4 h-4 text-purple-600" />
+                          </div>
+                          <span className="font-medium text-gray-700">Rol</span>
+                        </div>
+                        <Badge variant="secondary" className="bg-gradient-to-r from-purple-400 to-purple-500 text-white font-bold">
+                          {userDto?.authorities}
+                        </Badge>
+                      </div>
+                    </div>
+                  </CardContent>
+                </Card>
+
+                {/* Badges Card */}
+                <Card className="hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1 border-0 shadow-lg">
+                  <CardContent className="p-6">
+                    <div className="flex items-center space-x-3 mb-4">
+                      <div className="w-10 h-10 bg-gradient-to-br from-green-400 to-green-600 rounded-lg flex items-center justify-center">
+                        <Award className="w-5 h-5 text-white" />
+                      </div>
+                      <h2 className="text-xl font-bold text-gray-800">Rozetler</h2>
+                    </div>
+                    
+                    {userDto?.badges && userDto.badges.length > 0 ? (
+                      <div className="grid grid-cols-2 gap-3">
+                        {userDto.badges.map((data, index) => (
+                          <div
+                            key={"badge:" + index}
+                            className="group relative p-3 bg-gradient-to-r from-gray-50 to-gray-100 rounded-lg hover:shadow-md transition-all duration-300 transform hover:scale-105"
+                          >
+                            <div className="flex items-center space-x-3">
+                              <Image
+                                src={data["badgeURL"]}
+                                alt={data["badge"] + " Rozeti"}
+                                className="rounded-lg shadow-sm"
+                                width={32}
+                                height={32}
+                                style={{ objectFit: "cover" }}
+                                title={data["badge"] + " Rozeti"}
+                                priority
+                                placeholder="empty"
+                              />
+                              <div>
+                                <p className="font-medium text-sm text-gray-800">{data["badge"]}</p>
+                                <p className="text-xs text-gray-500">Rozet</p>
+                              </div>
+                            </div>
+                          </div>
+                        ))}
+                      </div>
+                    ) : (
+                      <div className="text-center py-8">
+                        <div className="w-16 h-16 bg-gray-100 rounded-full flex items-center justify-center mx-auto mb-4">
+                          <Award className="w-8 h-8 text-gray-400" />
+                        </div>
+                        <p className="text-gray-600">Henüz rozet kazanılmamış</p>
+                        <p className="text-gray-500 text-sm mt-2">Aktif olun ve rozetler kazanın!</p>
+                      </div>
+                    )}
+                  </CardContent>
+                </Card>
+              </div>
+
+              {/* Paylaşımlar Section */}
+              <div className="mb-8">
+                <div className="flex items-center space-x-3 mb-6">
+                  <div className="w-8 h-8 bg-gradient-to-br from-blue-400 to-blue-600 rounded-lg flex items-center justify-center shadow-lg">
+                    <FileText className="w-4 h-4 text-white" />
+                  </div>
+                  <h2 className="text-xl font-semibold text-gray-800">
+                    Paylaşımları
+                  </h2>
                 </div>
-                <div className="ml-5 flex flex-col mt-5">
-                  <div className="flex items-center">
-                    <FiUser className="size-7 mr-4" title="Kullanıcı Adı" />
-                    <span className="text-2xl drop-shadow max-lg:text-base">
-                      {userDto?.username}
-                    </span>
-                  </div>
-                  <div className="flex items-center">
-                    <GiNorthStarShuriken
-                      className="size-7 mt-2 mr-4"
-                      title="Puan"
-                    />
-                    <span className="text-2xl drop-shadow mt-3 max-lg:text-base">
-                      {userDto?.userPoint}
-                    </span>
-                  </div>
-                  <div className="flex items-center">
-                    <LuUserCog className="size-7 mt-2 mr-4" title="Rol" />
-                    <span className="text-2xl drop-shadow mt-3 max-lg:text-base">
-                      {userDto?.authorities}
-                    </span>
-                  </div>
-                  <div className="flex items-center gap-1">
-                    <SlBadge className="size-7 mt-2 mr-4" title="Rozet" />
-                    {userDto?.badges.map((data, index) => (
-                      <div
-                        key={"badge:" + index}
-                        className="mt-1 transition-all hover:scale-110"
-                      >
-                        <Image
-                          src={data["badgeURL"]}
-                          alt={data["badge"] + " Rozeti"}
-                          className="hover:scale-110 transition-all rounded-md"
-                          width={32}
-                          height={32}
-                          style={{ objectFit: "cover" }}
-                          title={data["badge"] + " Rozeti"}
-                          priority
-                          placeholder="empty"
-                        />
+                
+                {whispers.length > 0 ? (
+                  <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4">
+                    {whispers.map((obj, index) => (
+                      <div key={"whisper-" + index} className="group">
+                        <Card className="overflow-hidden hover:shadow-xl hover:shadow-blue-100/50 transition-all duration-300 transform hover:-translate-y-1 border-0 shadow-lg h-full">
+                          <div className="relative">
+                            <div className="aspect-video overflow-hidden">
+                              <Image
+                                src={obj.imageURL ? obj.imageURL : "/logo-black.png"}
+                                alt={obj.title}
+                                width={300}
+                                height={200}
+                                className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
+                              />
+                              {/* Gradient Overlay */}
+                              <div className="absolute inset-0 bg-gradient-to-t from-black/20 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+                            </div>
+                            <div className="absolute top-2 right-2">
+                              <Badge variant="secondary" className="bg-gradient-to-r from-blue-500 to-purple-600 text-white text-xs shadow-lg font-medium">
+                                {obj.category}
+                              </Badge>
+                            </div>
+                            {/* Hover Overlay */}
+                            <div className="absolute inset-0 bg-gradient-to-t from-blue-500/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+                          </div>
+                          <CardContent className="p-4 flex flex-col h-full">
+                            <div className="space-y-3 flex-1">
+                              {/* Fixed Height Title */}
+                              <div className="h-10 flex items-start">
+                                <h3 className="font-semibold text-gray-900 text-sm leading-tight line-clamp-2">
+                                  {obj.title}
+                                </h3>
+                              </div>
+                              
+                              <div className="flex items-center justify-between text-xs text-gray-500">
+                                <div className="flex items-center space-x-1">
+                                  <div className="w-3 h-3 bg-gradient-to-r from-blue-400 to-purple-500 rounded-full flex items-center justify-center">
+                                    <User className="w-2 h-2 text-white" />
+                                  </div>
+                                  <span className="font-medium">{obj.authorName}</span>
+                                </div>
+                                <div className="flex items-center space-x-1">
+                                  <Calendar className="w-3 h-3 text-gray-400" />
+                                  <span>{new Date(obj.createdDate).toLocaleDateString('tr-TR')}</span>
+                                </div>
+                              </div>
+                              
+                              {obj.source && (
+                                <div className="flex items-center space-x-1 text-xs text-gray-400">
+                                  <div className="w-3 h-3 bg-gradient-to-r from-green-400 to-blue-500 rounded-full flex items-center justify-center">
+                                    <Eye className="w-2 h-2 text-white" />
+                                  </div>
+                                  <span className="truncate font-medium">{obj.source}</span>
+                                </div>
+                              )}
+                            </div>
+                            
+                            {/* Bottom Action Bar */}
+                            <div className="mt-3 pt-3 border-t border-gray-100">
+                              <div className="flex items-center justify-between">
+                                <div className="flex items-center space-x-2">
+                                  <div className="w-2 h-2 bg-green-400 rounded-full animate-pulse"></div>
+                                  <span className="text-xs text-gray-500">Aktif</span>
+                                </div>
+                                <div className="flex items-center space-x-1 text-xs text-gray-400">
+                                  <TrendingUp className="w-3 h-3" />
+                                  <span>Görüntüleniyor</span>
+                                </div>
+                              </div>
+                            </div>
+                          </CardContent>
+                        </Card>
                       </div>
                     ))}
                   </div>
-                </div>
-              </div>
-              <div className="mt-10">
-                <span className="text-xl drop-shadow ml-4 font-medium text-gray-700">
-                  Paylaşımları
-                </span>
-                <div>
-                  {whispers.length != 0 ? (
-                    <div className="flex flex-wrap mt-8">
-                      {whispers.map((obj, index) => (
-                        <div
-                          key={"right-package" + index}
-                          className="w-[24%] ml-[1%] mt-3 max-lg:w-[32%] max-md:w-[49%] max-sm:w-[46%] max-sm:ml-[2%]"
-                        >
-                          <a href={"/user/" + obj.authorName}>
-                            <NewsCard
-                              title={obj.title}
-                              img={
-                                obj.imageURL ? obj.imageURL : "/logo-black.png"
-                              }
-                              name={obj.authorName}
-                              source={obj.source}
-                              category={obj.category}
-                            />
-                          </a>
-                        </div>
-                      ))}
+                ) : (
+                  <div className="text-center w-full py-12">
+                    <div className="w-16 h-16 bg-gradient-to-br from-gray-100 to-gray-200 rounded-full flex items-center justify-center mx-auto mb-4 shadow-lg">
+                      <FileText className="w-8 h-8 text-gray-400" />
                     </div>
-                  ) : (
-                    <div
-                      role="status"
-                      className={"mr-10 flex justify-center items-center"}
-                    >
-                      <svg
-                        aria-hidden="true"
-                        className="w-20 h-20 text-gray-200 animate-spin dark:text-gray-600 fill-gray-600"
-                        viewBox="0 0 100 101"
-                        fill="none"
-                        xmlns="http://www.w3.org/2000/svg"
-                      >
-                        <path
-                          d="M100 50.5908C100 78.2051 77.6142 100.591 50 100.591C22.3858 100.591 0 78.2051 0 50.5908C0 22.9766 22.3858 0.59082 50 0.59082C77.6142 0.59082 100 22.9766 100 50.5908ZM9.08144 50.5908C9.08144 73.1895 27.4013 91.5094 50 91.5094C72.5987 91.5094 90.9186 73.1895 90.9186 50.5908C90.9186 27.9921 72.5987 9.67226 50 9.67226C27.4013 9.67226 9.08144 27.9921 9.08144 50.5908Z"
-                          fill="currentColor"
-                        />
-                        <path
-                          d="M93.9676 39.0409C96.393 38.4038 97.8624 35.9116 97.0079 33.5539C95.2932 28.8227 92.871 24.3692 89.8167 20.348C85.8452 15.1192 80.8826 10.7238 75.2124 7.41289C69.5422 4.10194 63.2754 1.94025 56.7698 1.05124C51.7666 0.367541 46.6976 0.446843 41.7345 1.27873C39.2613 1.69328 37.813 4.19778 38.4501 6.62326C39.0873 9.04874 41.5694 10.4717 44.0505 10.1071C47.8511 9.54855 51.7191 9.52689 55.5402 10.0491C60.8642 10.7766 65.9928 12.5457 70.6331 15.2552C75.2735 17.9648 79.3347 21.5619 82.5849 25.841C84.9175 28.9121 86.7997 32.2913 88.1811 35.8758C89.083 38.2158 91.5421 39.6781 93.9676 39.0409Z"
-                          fill="currentFill"
-                        />
-                      </svg>
-                      <span className="sr-only">Loading...</span>
-                    </div>
-                  )}
-                </div>
+                    <p className="text-gray-600 text-lg">Henüz paylaşım bulunmuyor.</p>
+                    <p className="text-gray-500 text-sm mt-2">Bu kullanıcının henüz paylaşımı yok.</p>
+                  </div>
+                )}
               </div>
             </div>
           </div>
