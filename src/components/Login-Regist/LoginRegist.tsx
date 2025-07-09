@@ -19,6 +19,7 @@ import { useDispatch } from "react-redux";
 import { useRouter } from "next/navigation";
 import { useToast } from "@/components/ui/use-toast";
 import { Loader2 } from "lucide-react";
+import Cookies from "js-cookie";
 
 export default function LoginRegist() {
   const [username, setUsername] = useState("");
@@ -48,7 +49,13 @@ export default function LoginRegist() {
         title: "Giriş Başarılı",
         description: "Hoşgeldiniz.",
       });
-      router.push("/account");
+      // Kullanıcının plan durumunu kontrol et
+      const isSubscribe = Cookies.get("isSubscribe");
+      if (isSubscribe === "true") {
+        router.push("/account");
+      } else {
+        router.push("/plan");
+      }
     } catch (e) {
       setLoginBool(false);
       toast({
@@ -102,7 +109,8 @@ export default function LoginRegist() {
           await generateToken(authModel).then((res) => {
             dispatch(addUser(res.data));
           });
-          router.push("/account");
+          // Yeni kullanıcılar için plan seçimi sayfasına yönlendir
+          router.push("/plan");
         }
       } else {
         setLoginBool(false);

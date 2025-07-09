@@ -12,11 +12,11 @@ export default function Plan() {
     const router = useRouter();
 
     useEffect(() => {
-        if(!Cookies.get("isSubscribe") || Cookies.get("isSubscribe") === "true") {
-            router.push("/")
-        }
-        else {
-            setIsSubscribe(false)
+        const isSubscribe = Cookies.get("isSubscribe");
+        if (isSubscribe === "true") {
+            router.push("/account");
+        } else {
+            setIsSubscribe(false);
         }
     } , [])
 
