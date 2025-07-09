@@ -1,4 +1,3 @@
-
 "use client";
 import { MdOutlineKeyboardBackspace } from "react-icons/md";
 import { Label } from "@radix-ui/react-label";
@@ -308,31 +307,33 @@ export default function AllChat() {
         })
     }
 
-    
-
     return (
-        <div className="w-full relative h-full">
-            <div className="absolute max-xl:hidden w-52 border rounded-sm left-10 top-32 pl-5 pr-5 pt-2 shadow-lg">
-                <h3 className="text-center">Gündemdekiler</h3>
-                <hr className="mb-3 mt-3 text-black drop-shadow-md"/>
-                <div className="flex flex-col mt-2">
+        <div className="w-full min-h-screen relative bg-gradient-to-br from-blue-50 via-white to-amber-50">
+            <a href="/" className="fixed left-4 top-6 z-30 sm:left-6 sm:top-8">
+                <MdOutlineKeyboardBackspace className="size-10 cursor-pointer hover:scale-125 transition-all text-gray-400 hover:text-gray-700 bg-white/80 rounded-full shadow-lg p-1 backdrop-blur" title="Geri Dön" />
+            </a>
+            <div className="absolute max-xl:hidden w-56 border rounded-2xl left-8 top-28 pl-4 pr-4 pt-4 pb-4 shadow-xl bg-white/80 backdrop-blur-lg">
+                <h3 className="text-center text-base font-bold text-gray-700 tracking-wide mb-2">Gündemdekiler</h3>
+                <hr className="mb-3 mt-2 text-gray-200"/>
+                <div className="flex flex-col gap-2 mt-1">
                     { mostTags.map((obj,index) =>
-                        <a key={"array"+index} className="mb-2 hover:scale-105 transition-all" href={"/sohbet/etiket/"+obj['tag']}><span className="pt-2 cursor-pointer drop-shadow-md"><span className="font-medium text-gray-500 mr-1">#</span>{obj['tag']}<span className="ml-1 relative bottom-[2px] px-2 py-1 bg-red-600 text-white drop-shadow-md rounded-full text-[9px] opacity-70 hover:opacity-100">{obj['count']}</span></span></a>
+                        <a key={"array"+index} className="hover:scale-105 transition-all" href={"/sohbet/etiket/"+obj['tag']}>
+                            <span className="inline-flex items-center gap-1 px-3 py-1 rounded-full bg-gradient-to-r from-blue-100 to-amber-100 text-blue-700 font-semibold text-xs shadow-sm border border-blue-200">
+                                <span className="font-medium text-blue-400">#</span>{obj['tag']}
+                                <span className="ml-1 px-2 py-0.5 bg-red-500/80 text-white rounded-full text-[10px] font-bold shadow">{obj['count']}</span>
+                            </span>
+                        </a>
                     )}
                 </div>
             </div>
             <div className="w-full">
-                <a href="/">
-                    <MdOutlineKeyboardBackspace className="absolute left-2 top-2 size-10 cursor-pointer hover:scale-125 transition-all max-md:top-5 max-md:size-7 z-50" title="Anasayfa'ya Git" />
-                </a>
-                <div className="w-3/4 ml-[12.5%] max-sm:w-[90%] max-sm:ml-[5%] max-sm:top-10 relative top-5">
-                    <div className="flex justify-between w-full items-center">
-                        <div className="flex items-center">
+                <div className="w-3/4 ml-[12.5%] max-sm:w-[95%] max-sm:ml-[2.5%] max-sm:top-10 relative top-5">
+                    <div className="flex justify-between w-full items-center mb-6">
                         <Dialog open={dialogOpen}>
                             <DialogTrigger asChild>
-                                <div className={isToken ? "flex items-center hover:shadow-gray-200 hover:bg-gray-100 hover:shadow-xl transition-all cursor-pointer border border-gray-200 shadow-md p-2 rounded" : "flex items-center opacity-30 cursor-no-drop transition-all border border-gray-200 shadow-md p-2 rounded"} onClick={() => dialogControl()}>
-                                    <PiPencilSimpleLine className={isToken ? "mr-1 size-7 max-sm:size-5 hover:text-black transition-all cursor-pointer" : "cursor-no-drop mr-1 size-7 max-sm:size-5"}/>
-                                    <Label className={isToken ? "text-base max-sm:text-sm drop-shadow-xl cursor-pointer" : "text-base max-sm:text-sm drop-shadow-xl cursor-no-drop"}>Yaz</Label>
+                                <div className={isToken ? "flex items-center gap-2 bg-blue-600 hover:bg-blue-700 transition-all cursor-pointer border border-gray-200 shadow-lg px-4 py-2 rounded-xl" : "flex items-center gap-2 opacity-30 cursor-no-drop transition-all border border-gray-200 shadow px-3 py-1 rounded-lg"} onClick={() => dialogControl()}>
+                                    <PiPencilSimpleLine className={isToken ? "size-6 max-sm:size-5 text-white" : "cursor-no-drop size-6 max-sm:size-5"}/>
+                                    <Label className={isToken ? "text-base max-sm:text-xs font-bold text-white cursor-pointer" : "text-sm max-sm:text-xs font-semibold cursor-no-drop"}>Yaz</Label>
                                 </div>
                             </DialogTrigger>
                             <DialogContent className={Cookies.get("token") ? "sm:max-w-[425px]" : "hidden"}>
@@ -342,17 +343,17 @@ export default function AllChat() {
                                         Sadece 5 adet etiket oluşturabilirsiniz.
                                     </DialogDescription>
                                 </DialogHeader>
-                                    <div className="grid gap-4 py-4">
+                                <div className="grid gap-4 py-4">
                                     <div className="grid gap-4">
-                                    <Label>Söylenti Haber</Label>
-                                    <Input type="text" id="search" placeholder="Haber Seç..." className={!selectNew ? "rounded-lg border shadow-md md:min-w-[80%] h-10 focus-visible:ring-0 focus-visible:ring-offset-0 focus-visible:ring-white" : "hidden"}
-                                        onChange={(e) => setFilterText(e.target.value.toString())}
+                                        <Label>Söylenti Haber</Label>
+                                        <Input type="text" id="search" placeholder="Haber Seç..." className={!selectNew ? "rounded-lg border shadow-md md:min-w-[80%] h-10 focus-visible:ring-0 focus-visible:ring-offset-0 focus-visible:ring-white" : "hidden"}
+                                            onChange={(e) => setFilterText(e.target.value.toString())}
                                         /> 
                                         <div className={selectNew ? "hidden" : ""}>
                                             <div id="filterData" className={filterData.content.length != 0 ? "max-h-[300px] w-[88%] absolute top-[165px] rounded-b-lg z-40 bg-white shadow-xl overflow-y-scroll" : "w-[88%] h-auto absolute top-[165px] rounded-b-lg z-40 "} 
                                                 onMouseLeave={() => mouseLeave()}>
                                                 { filterData.totalElements > 0 ?
-                                                filterData.content.map((obj, index) => 
+                                                    filterData.content.map((obj, index) => 
                                                         <div className="h-10 w-full flex cursor-pointer shadow-md mt-2 items-center p-2 rounded-b-lg" key={"filter"+index} onClick={() => whisperClick(obj)}>
                                                             <div className="w-[20%]">
                                                                 <img src={obj["imageURL"]} alt="Söylenti" className="w-[50px] h-[35px] max-sm:w-[30px] max-sm:h-[25px] " title="Söylenti"/>
@@ -362,15 +363,14 @@ export default function AllChat() {
                                                                 <span className="line-clamp-1 text-sm font-medium text-gray-800">{obj['title']}</span>
                                                             </div>
                                                         </div>
-                                                )
-                                                : 
-                                                notNew ? 
-                                                <div className="h-[50px] shadow-md rounded-b-lg flex justify-center items-center z-30">
-                                                    <span className="text-center p-5 text-black">Haber Bulunamadı</span>
-                                                </div>
-                                                :
-                                                <div>
-                                                </div>
+                                                    )
+                                                    : 
+                                                    notNew ? 
+                                                        <div className="h-[50px] shadow-md rounded-b-lg flex justify-center items-center z-30">
+                                                            <span className="text-center p-5 text-black">Haber Bulunamadı</span>
+                                                        </div>
+                                                    :
+                                                        <div></div>
                                                 }
                                             </div>
                                         </div>
@@ -390,16 +390,16 @@ export default function AllChat() {
                                         <Label>Yorum</Label>
                                         <Textarea className="focus-visible:ring-0 focus-visible:ring-offset-0"
                                             placeholder="Yorum Yaz"
-                                          onChange={(e) => setDescription(e.target.value.toString())}>
+                                            onChange={(e) => setDescription(e.target.value.toString())}>
                                         </Textarea>
                                     </div>
                                     <div className="grid items-center gap-1">
                                         <Label>Etiket</Label>
                                         <span className="text-xs text-gray-400 mb-2">(Kelimeleri girdikten sonra virgül ( , ) koymanız gerekiyor )</span>
                                         <Input type="text" className="focus-visible:ring-0 focus-visible:ring-offset-0"
-                                        placeholder="Etiket Oluştur"
-                                        value={inputTagValue}
-                                        onChange={(e) => onChangeVirgule(e.target.value)}
+                                            placeholder="Etiket Oluştur"
+                                            value={inputTagValue}
+                                            onChange={(e) => onChangeVirgule(e.target.value)}
                                         />
                                         <div className="mt-2 p-0">
                                             <span>Etiketler : </span>
@@ -408,38 +408,39 @@ export default function AllChat() {
                                             )}
                                         </div>
                                     </div>
-                                    </div>
+                                </div>
                                 <DialogFooter>
-                                <Button type="submit" onClick={() => submit()}>Gönder</Button>
-                                <Button type="reset" className="bg-red-500 hover:bg-red-300" onClick={() => closeButton()}>İptal</Button>
+                                    <Button type="submit" onClick={() => submit()}>Gönder</Button>
+                                    <Button type="reset" className="bg-red-500 hover:bg-red-300" onClick={() => closeButton()}>İptal</Button>
                                 </DialogFooter>
                             </DialogContent>
-                            </Dialog>
-                        </div>
-                        <h1 className="drop-shadow-md text-black text-3xl m-5 max-md:text-xl max-sm:text-lg text-center">Söyleşi Alanı</h1>
+                        </Dialog>
+                        <h1 className="text-3xl font-extrabold text-gray-900 text-center flex-1 drop-shadow-sm tracking-tight">Söyleşi Alanı</h1>
                         <div className="">
-                            <a href="/"><img src="../../logo-black.png" width={50} height={50} className="cursor-pointer hover:-rotate-6 transition-all" /></a>
+                            <a href="/">
+                                <img src="../../logo-black.png" width={54} height={54} className="cursor-pointer hover:-rotate-6 transition-all drop-shadow-lg rounded-2xl bg-white/80 p-1" />
+                            </a>
                         </div>
                     </div>
                     {disputeData.content.length === 0 ? 
-                    <div role="status" className="mr-10 flex justify-center h-[500px] items-center">
-                        <svg aria-hidden="true" className="w-20 h-20 text-gray-200 animate-spin dark:text-gray-600 fill-gray-600" viewBox="0 0 100 101" fill="none" xmlns="http://www.w3.org/2000/svg">
-                            <path d="M100 50.5908C100 78.2051 77.6142 100.591 50 100.591C22.3858 100.591 0 78.2051 0 50.5908C0 22.9766 22.3858 0.59082 50 0.59082C77.6142 0.59082 100 22.9766 100 50.5908ZM9.08144 50.5908C9.08144 73.1895 27.4013 91.5094 50 91.5094C72.5987 91.5094 90.9186 73.1895 90.9186 50.5908C90.9186 27.9921 72.5987 9.67226 50 9.67226C27.4013 9.67226 9.08144 27.9921 9.08144 50.5908Z" fill="currentColor"/>
-                            <path d="M93.9676 39.0409C96.393 38.4038 97.8624 35.9116 97.0079 33.5539C95.2932 28.8227 92.871 24.3692 89.8167 20.348C85.8452 15.1192 80.8826 10.7238 75.2124 7.41289C69.5422 4.10194 63.2754 1.94025 56.7698 1.05124C51.7666 0.367541 46.6976 0.446843 41.7345 1.27873C39.2613 1.69328 37.813 4.19778 38.4501 6.62326C39.0873 9.04874 41.5694 10.4717 44.0505 10.1071C47.8511 9.54855 51.7191 9.52689 55.5402 10.0491C60.8642 10.7766 65.9928 12.5457 70.6331 15.2552C75.2735 17.9648 79.3347 21.5619 82.5849 25.841C84.9175 28.9121 86.7997 32.2913 88.1811 35.8758C89.083 38.2158 91.5421 39.6781 93.9676 39.0409Z" fill="currentFill"/>
-                        </svg>
-                        <span className="sr-only">Loading...</span>
-                    </div>
+                        <div className="flex flex-col items-center justify-center h-[500px]">
+                            <svg aria-hidden="true" className="w-24 h-24 text-blue-200 animate-spin fill-blue-400 mb-4" viewBox="0 0 100 101" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <path d="M100 50.5908C100 78.2051 77.6142 100.591 50 100.591C22.3858 100.591 0 78.2051 0 50.5908C0 22.9766 22.3858 0.59082 50 0.59082C77.6142 0.59082 100 22.9766 100 50.5908ZM9.08144 50.5908C9.08144 73.1895 27.4013 91.5094 50 91.5094C72.5987 91.5094 90.9186 73.1895 90.9186 50.5908C90.9186 27.9921 72.5987 9.67226 50 9.67226C27.4013 9.67226 9.08144 27.9921 9.08144 50.5908Z" fill="currentColor"/>
+                                <path d="M93.9676 39.0409C96.393 38.4038 97.8624 35.9116 97.0079 33.5539C95.2932 28.8227 92.871 24.3692 89.8167 20.348C85.8452 15.1192 80.8826 10.7238 75.2124 7.41289C69.5422 4.10194 63.2754 1.94025 56.7698 1.05124C51.7666 0.367541 46.6976 0.446843 41.7345 1.27873C39.2613 1.69328 37.813 4.19778 38.4501 6.62326C39.0873 9.04874 41.5694 10.4717 44.0505 10.1071C47.8511 9.54855 51.7191 9.52689 55.5402 10.0491C60.8642 10.7766 65.9928 12.5457 70.6331 15.2552C75.2735 17.9648 79.3347 21.5619 82.5849 25.841C84.9175 28.9121 86.7997 32.2913 88.1811 35.8758C89.083 38.2158 91.5421 39.6781 93.9676 39.0409Z" fill="currentFill"/>
+                            </svg>
+                            <span className="text-lg text-gray-400 font-semibold">Söyleşi bulunamadı veya yükleniyor...</span>
+                        </div>
                     :
-                    <div className="mt-14 ml-[20%] w-3/5 max-xl:w-full max-xl:ml-0">
-                        {disputeData.content.map((obj , index) => 
-                            <div key={"chat"+index}>
-                                <ChatCard obj={obj} date={giveTheDate(obj['createdDate'])} tags={obj['tags']} />
-                            </div>
-                        )}
-                    </div>
+                        <div className="mt-14 ml-[20%] w-3/5 max-xl:w-full max-xl:ml-0 flex flex-col gap-8">
+                            {disputeData.content.map((obj , index) => 
+                                <div key={"chat"+index} className="rounded-2xl bg-white/80 backdrop-blur-lg shadow-xl p-6 border border-gray-100">
+                                    <ChatCard obj={obj} date={giveTheDate(obj['createdDate'])} tags={obj['tags']} />
+                                </div>
+                            )}
+                        </div>
                     }
-                    <div className="mt-5">
-                    <Pagination>
+                    <div className="mt-8 flex justify-center">
+                        <Pagination>
                             <PaginationContent>
                                 <PaginationItem>
                                     {page <= 1 ? <PaginationPrevious className="opacity-20 cursor-no-drop"/>
@@ -447,10 +448,10 @@ export default function AllChat() {
                                     }
                                 </PaginationItem>
                                 <PaginationItem>
-                                        <PaginationLink className={(page-1) > 0 ? "" : "hidden"}>{page-1}</PaginationLink>
-                                        <PaginationLink isActive>{page}</PaginationLink>
-                                        <PaginationLink className={disputeData.totalPages > page ? "" : "hidden"}>{page+1}</PaginationLink>
-                                    </PaginationItem>
+                                    <PaginationLink className={(page-1) > 0 ? "" : "hidden"}>{page-1}</PaginationLink>
+                                    <PaginationLink isActive>{page}</PaginationLink>
+                                    <PaginationLink className={disputeData.totalPages > page ? "" : "hidden"}>{page+1}</PaginationLink>
+                                </PaginationItem>
                                 <PaginationItem>
                                     {page >= 1  && disputeData.totalPages > page ? <PaginationNext onClick={() => setPage(page+1)}/> 
                                     : <PaginationNext className="opacity-20 cursor-no-drop" /> 

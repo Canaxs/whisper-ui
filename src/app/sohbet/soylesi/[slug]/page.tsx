@@ -272,133 +272,103 @@ export default function SoylesiPage({
 
 
     return (
-        <div className="w-full h-full">
+        <div className="w-full min-h-screen flex justify-center bg-[#F5F5F5] py-8 px-2 relative">
+        {/* Geri Dön tuşu: sayfanın en solunda, sticky */}
+        <a href="/sohbet" className="fixed left-4 top-6 z-30 sm:left-6 sm:top-8">
+            <MdOutlineKeyboardBackspace className="size-9 sm:size-10 cursor-pointer hover:scale-125 transition-all text-gray-400 hover:text-gray-700 bg-white/80 rounded-full shadow p-1" title="Geri Dön" />
+        </a>
         {dispute.id != "" ?  
-        <div className='w-full h-full'>
-            <a href="/sohbet">
-                <MdOutlineKeyboardBackspace className="absolute left-2 top-2 size-10 cursor-pointer hover:scale-125 transition-all max-md:top-5 max-md:size-7 z-50" title="Anasayfa'ya Git" />
-            </a>
-        <div className='w-4/5 ml-[10%] max-sm:w-[95%] max-sm:ml-[2.5%] max-sm:mt-16'>
-        <div className="mt-5 border-gray-200 border rounded p-2">
-            <div className="flex justify-start">
-                <Avatar className="w-7 h-7">
+        <div className="w-full max-w-3xl bg-white rounded-2xl shadow-lg p-0 sm:p-6 flex flex-col gap-4">
+            {/* Üst Bilgi */}
+            <div className="flex items-center gap-3 pt-8 sm:pt-0 pl-12 sm:pl-0">
+                <Avatar className="w-10 h-10">
                     <AvatarImage src="https://github.com/shadcn.png" alt="@shadcn" />
                     <AvatarFallback>CN</AvatarFallback>
                 </Avatar>
-                <div className="relative bottom-[2px] ml-3 mr-3 w-full">
-                    <div className="mb-1">
-                        <HovCard name={dispute.user['username']} buttonClass={"no-underline text-gray-500 h-5"} />
-                    </div>
-                    <div className="mr-5 max-sm:mr-1">
-                        <span className="text-base max-md:text-sm">{dispute.description}</span>
-                    </div>
-                    <div className="w-3/5 max-sm:w-full">
-                        <a className="page-card w-full" href={"/kategori/"+convertMenusEn(dispute.whisper["category"])+"/"+dispute.whisper['urlName']}>
-                            <Card className="mt-3 shadow-xl hover:shadow-2xl hover:shadow-gray-400 transition-all relative w-full">
-                                <div className="circle1 absolute bottom-0 m-auto flex justify-center items-center">
-                                    <span className="drop-shadow-xl font-medium text-black hidden line-clamp-1 ml-5 mr-5" dangerouslySetInnerHTML={{ __html: dispute.whisper['title'] }}>
-                                    </span>
-                                </div>
-                                <CardContent className="p-0">
-                                    <div className="flex w-full h-full">
-                                        <div className="w-full h-full absolute z-0 rounded-lg">
-                                            <img src={dispute.whisper["imageURL"]} className="rounded-lg h-full w-full object-cover"/>
-                                        </div>
-                                        <div className="absolute z-10 w-full h-full rounded-lg" style={{backgroundColor: "rgba(0,0,0,.5)"}}>
-                                        </div>
-                                        <div className="flex flex-col w-full p-1 z-20">
-                                            <span className="text-white drop-shadow-xl text-xs font-medium">{dispute.whisper["category"]}</span>
-                                            <span className="text-xl text-slate-100 drop-shadow mt-2 font-medium line-clamp-1 max-sm:text-sm max-md:text-lg ">
-                                                {dispute.whisper['title']}
-                                            </span>
-                                            <div className="p-0 mt-1 mb-1 ml-0">
-                                                <div className="flex flex-col">
-                                                    <div className="flex items-center text-slate-100">
-                                                        <TbWriting className="size-3 mr-2"/>
-                                                        <span className="text-xs drop-shadow-lg pt-1 pb-1">{dispute.whisper["authorName"]}</span>
-                                                    </div>
-                                                    <div className="flex mt-1 items-center text-slate-100">
-                                                        <GrResources className="size-3 mr-2"/>
-                                                        <span className="text-xs drop-shadow-lg">{dispute.whisper["source"]}</span>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </CardContent>
-                            </Card>
-                        </a>
-                    </div>
-                    <div className='mt-3'>
-                        <span className="text-gray-400 ml-1 text-sm">{giveTheClock(dispute.createdDate)}</span>
-                        <span className="text-gray-400 ml-2 text-base">·</span>
-                        <span className="text-gray-400 ml-2 text-sm">{giveTheDate(dispute.createdDate)}</span>
-                        <span className="text-gray-400 ml-2 text-base">·</span>
-                        <span className="text-gray-400 ml-2 text-sm"><span className='font-medium text-gray-600'>2.8M</span> Views</span>
-                    </div>
-                    <div className="flex mt-3 justify-around max-sm:justify-between max-sm:ml-2 max-sm:mr-2 text-gray-600">
-                            <span className='flex items-center cursor-pointer '>
-                                <SlLike className={likeExists ? "size-7 hover:scale-110 transition-all hover:text-gray-600 text-green-400" : "size-7 hover:scale-110 transition-all hover:text-green-400"} onClick={likeExists ? () => unlike() : () => like()} />
-                                <span className='font-medium ml-1 mt-2 text-sm'>{dispute.disputeLike['numberLike']}</span>
-                            </span>
-                            <span className='flex items-center cursor-pointer '>
-                                <SlDislike className={dislikeExists ? "size-7 hover:scale-110 transition-all text-red-400 hover:text-gray-600" :"size-7 hover:scale-110 transition-all hover:text-red-400"} onClick={dislikeExists ? () => unDislike() : () => dislike()}/>
-                                <span className='font-medium ml-1 mt-2 text-sm'>{dispute.disputeLike['numberDislike']}</span>
-                            </span>
-                            <span className='flex items-center'>
-                                <VscCommentDiscussion className='size-7'/>
-                                <span className='font-medium ml-1 text-sm'>{dispute.disputeComments.length}</span>
-                            </span>
-                    </div>
-                    <div className="flex mt-7">
-                        <span className="mr-2 text-base drop-shadow-md shadow-black">Etiketler : </span>
-                        {dispute.disputeTag != null ? dispute.disputeTag['tags'].map((tag,index) => 
-                            <div className="bg-gray-100 text-gray-400 mr-2 p-1 rounded-lg shadow shadow-gray-600 text-xs" key={"tag"+index}>
-                                <span>{tag}</span>
-                            </div>
-                        ) : ""}
-                    </div>
-                    <div className={isLogin ? 'mt-10 flex' : 'hidden'}>
-                        <Avatar className="w-7 h-7">
-                            <AvatarImage src="https://github.com/shadcn.png" alt="@shadcn" />
-                            <AvatarFallback>CN</AvatarFallback>
-                        </Avatar>
-                        <Textarea className='ml-2 w-4/5' onChange={(e) => setComment(e.target.value.toString())}></Textarea>
-                        <div className='flex items-center ml-5'>
-                            <Button className='bg-gray-400' onClick={() => submitComment()}>Gönder</Button>
-                        </div>
-                    </div>
-                    <div className='mt-10'>
-                    {dispute.disputeComments.map((obj , index) => (
-                        <div className='flex mt-3' key={"obj"+index}>
-                            <div className='flex'>
-                                <Avatar className="w-7 h-7">
-                                    <AvatarImage src="https://github.com/shadcn.png" alt="@shadcn" />
-                                    <AvatarFallback>CN</AvatarFallback>
-                                </Avatar>
-                                <div className='flex flex-col ml-2'>
-                                    <div>
-                                    <HovCard name={getUserComment(obj['user'])} buttonClass={"no-underline text-gray-500 h-5"} />
-                                    <span className="text-gray-400 ml-2 text-base">·</span>
-                                    <span className="text-gray-400 ml-2 text-sm"></span>
-                                    </div>
-                                    <span className='mt-1 max-md:text-sm'>{obj['comment']}</span>
-                                </div>
-                            </div>
-                        </div>
-                        ))}
-                    </div>
-                    <div>
-                            
-                    </div>
+                <div className="flex flex-col">
+                    <span className="font-semibold text-gray-900 text-base">{dispute.user['username']}</span>
+                    <span className="text-xs text-gray-400">{giveTheDate(dispute.createdDate)} · {giveTheClock(dispute.createdDate)}</span>
                 </div>
             </div>
-        </div>
-        </div>
+            {/* İçerik */}
+            <div className="flex flex-col gap-2">
+                <span className="text-2xl font-medium my-2 text-gray-900 leading-tight">{dispute.description}</span>
+                {dispute.whisper["imageURL"] && (
+                  <div className="w-full aspect-[16/9] rounded-xl overflow-hidden bg-gray-100 border border-gray-200 relative transition-transform duration-300 ease-in-out group hover:scale-105 max-sm:hover:scale-100">
+                    <img src={dispute.whisper["imageURL"]} className="w-full h-full object-cover"/>
+                    {/* Overlay: Kategori ve Başlık */}
+                    <a
+                      href={`/kategori/${convertMenusEn(dispute.whisper["category"])}${dispute.whisper['urlName'] ? "/"+dispute.whisper['urlName'] : ''}`}
+                      className="absolute left-0 bottom-0 w-full bg-gradient-to-t from-black/70 via-black/30 to-transparent px-6 py-4 transition-all duration-200 cursor-pointer group-hover:from-black/90 group-hover:via-black/50"
+                      style={{textDecoration: 'none'}}
+                    >
+                      <span className="block text-xs font-semibold text-gray-200 uppercase tracking-wide mb-1">{dispute.whisper["category"]}</span>
+                      <span className="block text-xl sm:text-2xl font-semibold text-white drop-shadow-lg line-clamp-2 group-hover:underline">{dispute.whisper['title']}</span>
+                      <div className="flex flex-wrap gap-4 mt-2 text-gray-200 text-xs">
+                        <span className="flex items-center gap-1"><TbWriting className="w-4 h-4"/><span>{dispute.whisper["authorName"]}</span></span>
+                        <span className="flex items-center gap-1"><GrResources className="w-4 h-4"/><span>{dispute.whisper["source"]}</span></span>
+                      </div>
+                    </a>
+                  </div>
+                )}
+            </div>
+            {/* Beğeni, Dislike, Yorum Barı */}
+            <div className="flex items-center justify-between gap-4 border-y border-gray-100 py-3 px-1 text-gray-600">
+                <span className='flex items-center gap-1 cursor-pointer select-none' onClick={likeExists ? () => unlike() : () => like()}>
+                    <SlLike className={likeExists ? "size-6 text-green-500" : "size-6 hover:text-green-500 transition-all"} />
+                    <span className='font-medium text-sm'>{dispute.disputeLike['numberLike']}</span>
+                </span>
+                <span className='flex items-center gap-1 cursor-pointer select-none' onClick={dislikeExists ? () => unDislike() : () => dislike()}>
+                    <SlDislike className={dislikeExists ? "size-6 text-red-500" : "size-6 hover:text-red-500 transition-all"} />
+                    <span className='font-medium text-sm'>{dispute.disputeLike['numberDislike']}</span>
+                </span>
+                <span className='flex items-center gap-1'>
+                    <VscCommentDiscussion className='size-6'/>
+                    <span className='font-medium text-sm'>{dispute.disputeComments.length}</span>
+                </span>
+                <span className="text-xs text-gray-400 ml-auto">{giveTheDate(dispute.createdDate)} · {giveTheClock(dispute.createdDate)}</span>
+            </div>
+            {/* Etiketler */}
+            {dispute.disputeTag && dispute.disputeTag['tags'] && dispute.disputeTag['tags'].length > 0 && (
+              <div className="flex flex-wrap gap-2 mt-2">
+                {dispute.disputeTag['tags'].map((tag,index) => 
+                  <span className="bg-gray-100 text-gray-500 px-2 py-1 rounded-lg text-xs" key={"tag"+index}>{tag}</span>
+                )}
+              </div>
+            )}
+            {/* Yorum Ekleme Alanı */}
+            {isLogin && (
+              <div className='flex items-start gap-2 mt-6 bg-gray-50 rounded-xl p-3 border border-gray-100'>
+                <Avatar className="w-8 h-8">
+                  <AvatarImage src="https://github.com/shadcn.png" alt="@shadcn" />
+                  <AvatarFallback>CN</AvatarFallback>
+                </Avatar>
+                <Textarea className='flex-1 min-h-[40px] max-h-32 resize-y rounded-lg' onChange={(e) => setComment(e.target.value.toString())} placeholder="Yorumunuzu yazın..."/>
+                <Button className='bg-gray-700 text-white rounded-lg px-4 py-2' onClick={() => submitComment()}>Gönder</Button>
+              </div>
+            )}
+            {/* Yorumlar */}
+            <div className='mt-6 flex flex-col gap-4'>
+              {dispute.disputeComments.map((obj , index) => (
+                <div className='flex items-start gap-3' key={"obj"+index}>
+                  <Avatar className="w-8 h-8">
+                    <AvatarImage src="https://github.com/shadcn.png" alt="@shadcn" />
+                    <AvatarFallback>CN</AvatarFallback>
+                  </Avatar>
+                  <div className='flex flex-col bg-gray-50 rounded-xl px-3 py-2 border border-gray-100 w-full'>
+                    <div className="flex items-center gap-2 mb-1">
+                      <HovCard name={getUserComment(obj['user'])} buttonClass={"no-underline text-gray-700 h-5 font-semibold"} />
+                      <span className="text-gray-400 text-xs">{giveTheDate(dispute.createdDate)}</span>
+                    </div>
+                    <span className='text-sm text-gray-800'>{obj['comment']}</span>
+                  </div>
+                </div>
+              ))}
+            </div>
         </div>
         : 
-        <div role="status" className="mr-10 flex justify-center h-[500px] items-center">
-            <svg aria-hidden="true" className="w-20 h-20 text-gray-200 animate-spin dark:text-gray-600 fill-gray-600" viewBox="0 0 100 101" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <div role="status" className="flex justify-center items-center w-full h-[400px]">
+            <svg aria-hidden="true" className="w-16 h-16 text-gray-200 animate-spin dark:text-gray-600 fill-gray-600" viewBox="0 0 100 101" fill="none" xmlns="http://www.w3.org/2000/svg">
                 <path d="M100 50.5908C100 78.2051 77.6142 100.591 50 100.591C22.3858 100.591 0 78.2051 0 50.5908C0 22.9766 22.3858 0.59082 50 0.59082C77.6142 0.59082 100 22.9766 100 50.5908ZM9.08144 50.5908C9.08144 73.1895 27.4013 91.5094 50 91.5094C72.5987 91.5094 90.9186 73.1895 90.9186 50.5908C90.9186 27.9921 72.5987 9.67226 50 9.67226C27.4013 9.67226 9.08144 27.9921 9.08144 50.5908Z" fill="currentColor"/>
                 <path d="M93.9676 39.0409C96.393 38.4038 97.8624 35.9116 97.0079 33.5539C95.2932 28.8227 92.871 24.3692 89.8167 20.348C85.8452 15.1192 80.8826 10.7238 75.2124 7.41289C69.5422 4.10194 63.2754 1.94025 56.7698 1.05124C51.7666 0.367541 46.6976 0.446843 41.7345 1.27873C39.2613 1.69328 37.813 4.19778 38.4501 6.62326C39.0873 9.04874 41.5694 10.4717 44.0505 10.1071C47.8511 9.54855 51.7191 9.52689 55.5402 10.0491C60.8642 10.7766 65.9928 12.5457 70.6331 15.2552C75.2735 17.9648 79.3347 21.5619 82.5849 25.841C84.9175 28.9121 86.7997 32.2913 88.1811 35.8758C89.083 38.2158 91.5421 39.6781 93.9676 39.0409Z" fill="currentFill"/>
             </svg>

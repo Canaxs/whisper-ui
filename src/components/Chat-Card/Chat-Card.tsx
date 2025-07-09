@@ -21,100 +21,70 @@ import { convertMenusEn } from "@/lib/menuEnum";
 import HovCard from "../Hov-Card/HovCard";
 
 export default function ChatCard(props) {
-
     const router = useRouter();
-
-
     function routeLink() {
         router.push("/sohbet/soylesi/"+props.obj['id']);
     }
-
-
     return (
-        <div key={props.key} className="mt-5 border-gray-200 border rounded p-2 hover:shadow-xl transition-all cursor-pointer">
-            <div className="flex w-full">
-                <Avatar className="w-7 h-7">
-                    <AvatarImage src="https://github.com/shadcn.png" alt="@shadcn" />
-                    <AvatarFallback>CN</AvatarFallback>
-                </Avatar>
-                <div className="relative bottom-[2px] ml-3 mr-3 w-full">
-                    <div className="flex items-center mb-1">
-                        <HovCard name={props.obj['user']} buttonClass={"no-underline text-gray-500 items-start h-5"}/>
-                        <span className="text-gray-400 drop-shadow ml-1 text-base">·</span>
-                        <span className="text-gray-400 drop-shadow ml-1 text-sm">{props.date}</span>
-                    </div>
-                    <div className="mr-5 max-sm:mr-1" onClick={() => routeLink()}>
-                        <span className="text-base line-clamp-2 max-sm:text-sm">{props.obj['description']}</span>
-                    </div>
-                    <div className="w-3/5 max-sm:w-full">
-                        <a className="page-card w-full" href={"/kategori/"+convertMenusEn(props.obj["whisperCategory"])+"/"+props.obj['whisperUrlName']}>
-                            <Card className="mt-3 shadow-xl hover:shadow-2xl hover:shadow-gray-400 transition-all relative w-full">
-                                <div className="circle1 absolute bottom-0 m-auto flex justify-center items-center">
-                                    <span className="drop-shadow-xl font-medium text-black hidden line-clamp-1 ml-5 mr-5" dangerouslySetInnerHTML={{ __html: props.obj['whisperTitle'] }}>
-                                    </span>
-                                </div>
-                                <CardContent className="p-0">
-                                    <div className="flex w-full h-full">
-                                        <div className="w-full h-full absolute z-0 rounded-lg">
-                                            <img src={props.obj['whisperImageURL']} className="rounded-lg h-full w-full object-cover"/>
-                                        </div>
-                                        <div className="absolute z-10 w-full h-full rounded-lg" style={{backgroundColor: "rgba(0,0,0,.5)"}}>
-                                        </div>
-                                        <div className="flex flex-col w-full p-1 z-20">
-                                            <span className="text-white drop-shadow-xl text-xs font-medium">{props.obj['whisperCategory']}</span>
-                                            <span className="text-xl text-slate-100 drop-shadow mt-2 font-medium line-clamp-1 max-sm:text-sm max-md:text-lg ">
-                                                {props.obj['whisperTitle']}
-                                            </span>
-                                            <div className="p-0 mt-1 mb-1 ml-0">
-                                                <div className="flex flex-col">
-                                                    <div className="flex items-center text-slate-100">
-                                                        <TbWriting className="size-3 mr-2"/>
-                                                        <span className="text-xs drop-shadow-lg pt-1 pb-1">{props.obj['whisperAuthorName']}</span>
-                                                    </div>
-                                                    <div className="flex mt-1 items-center text-slate-100">
-                                                        <GrResources className="size-3 mr-2"/>
-                                                        <span className="text-xs drop-shadow-lg">{props.obj['whisperSource']}</span>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </CardContent>
-                            </Card>
-                        </a>
-                    </div>
-                    <div className="flex justify-between">
-                        <div className="flex mt-3">
-                                <div className="flex">
-                                    <SlLike  className="size-5 cursor-pointer hover:scale-110 transition-all hover:text-green-400"/>
-                                    <span className="ml-1 font-medium text-sm text-gray-500">{props.obj['disputeLikeSize']}</span>
-                                </div>
-                                <div className="flex">
-                                    <SlDislike  className="size-5 ml-3 cursor-pointer hover:scale-110 transition-all hover:text-red-400"/>
-                                    <span className="ml-1 font-medium text-sm text-gray-500">{props.obj['disputeDisLikeSize']}</span>
-                                </div>
-                                <div className="flex">
-                                    <a href={"/sohbet/soylesi/"+props.obj['id']}>
-                                        <HiMiniChatBubbleLeftRight className="size-6 ml-5 relative bottom-[2px] text-gray-400 hover:scale-110 transition-all cursor-pointer" />
-                                    </a>
-                                    <span className="ml-1 font-medium text-sm text-gray-500">{props.obj['commentSize']}</span>
-                                </div>
-                        </div>
-                    </div>
-                    <div className="flex justify-between">
-                        <div className="flex mt-3">
-                            {props.tags?.map((tag,index) => 
-                                <div className="bg-gray-100 text-gray-400 mr-2 p-1 rounded-lg shadow shadow-gray-600 text-xs" key={"chatTag"+index}>
-                                    <span>{tag}</span>
-                                </div>
-                            )}
-                        </div>
-                        <div className="flex items-center">
-                            <img src="https://i.ibb.co/gyJ0BRk/soylenti-card.png" width={55} height={55} className="-rotate-12"/>
-                        </div>
-                    </div>
-                </div>
+        <div
+          className="mt-5 rounded-xl bg-white shadow-sm hover:shadow-lg hover:scale-[1.01] transition-all cursor-pointer group overflow-hidden border border-gray-100 max-w-xl mx-auto"
+          onClick={routeLink}
+        >
+          {/* Üst Bilgi */}
+          <div className="flex items-center gap-2 px-4 pt-4">
+            <Avatar className="w-7 h-7">
+              <AvatarImage src="https://github.com/shadcn.png" alt="@shadcn" />
+              <AvatarFallback>CN</AvatarFallback>
+            </Avatar>
+            <div className="flex flex-col">
+              <span className="font-semibold text-gray-900 text-xs">{props.obj['user']}</span>
+              <span className="text-[11px] text-gray-400">{props.date}</span>
             </div>
+          </div>
+          {/* Haber Görseli ve Overlay */}
+          <div className="w-full aspect-[16/7] relative mt-3">
+            <img src={props.obj['whisperImageURL']} className="w-full h-full object-cover"/>
+            <a
+              href={`/kategori/${convertMenusEn(props.obj["whisperCategory"])}${props.obj['whisperUrlName'] ? "/"+props.obj['whisperUrlName'] : ''}`}
+              className="absolute left-0 bottom-0 w-full bg-gradient-to-t from-black/70 via-black/30 to-transparent px-6 py-4 transition-all duration-200 cursor-pointer group-hover:from-black/90 group-hover:via-black/50"
+              style={{textDecoration: 'none'}}
+              onClick={e => e.stopPropagation()}
+            >
+              <span className="block text-[11px] font-semibold text-gray-200 uppercase tracking-wide mb-1">{props.obj['whisperCategory']}</span>
+              <span className="block text-base sm:text-lg font-semibold text-white drop-shadow-lg line-clamp-2 group-hover:underline">{props.obj['whisperTitle']}</span>
+              <div className="flex flex-wrap gap-3 mt-2 text-gray-200 text-[11px]">
+                <span className="flex items-center gap-1"><TbWriting className="w-3 h-3"/><span>{props.obj['whisperAuthorName']}</span></span>
+                <span className="flex items-center gap-1"><GrResources className="w-3 h-3"/><span>{props.obj['whisperSource']}</span></span>
+              </div>
+            </a>
+          </div>
+          {/* Açıklama */}
+          <div className="px-4 mt-2">
+            <span className="text-sm line-clamp-2 text-gray-800 max-sm:text-xs">{props.obj['description']}</span>
+          </div>
+          {/* Beğeni, Dislike, Yorum Barı */}
+          <div className="flex items-center justify-between gap-2 border-y border-gray-100 py-2 px-4 text-gray-600 mt-3">
+            <span className='flex items-center gap-1 select-none'>
+              <SlLike className="size-4" />
+              <span className='font-medium text-xs'>{props.obj['disputeLikeSize']}</span>
+            </span>
+            <span className='flex items-center gap-1 select-none'>
+              <SlDislike className="size-4" />
+              <span className='font-medium text-xs'>{props.obj['disputeDisLikeSize']}</span>
+            </span>
+            <span className='flex items-center gap-1'>
+              <HiMiniChatBubbleLeftRight className="size-5 text-gray-400" />
+              <span className='font-medium text-xs'>{props.obj['commentSize']}</span>
+            </span>
+          </div>
+          {/* Etiketler */}
+          {props.tags && props.tags.length > 0 && (
+            <div className="flex flex-wrap gap-2 px-4 py-2">
+              {props.tags.map((tag,index) => 
+                <span className="bg-gray-100 text-gray-500 px-2 py-1 rounded-lg text-[11px]" key={"chatTag"+index}>{tag}</span>
+              )}
+            </div>
+          )}
         </div>
     )
 }
