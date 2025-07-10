@@ -11,11 +11,15 @@ import {
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import Image from "next/image";
+import React, { useState } from "react";
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
 import { CiMenuBurger } from "react-icons/ci";
 import { MenusTR, Menus } from "@/lib/menuEnum";
 import { Badge } from "@/components/ui/badge";
+import { useToast } from "@/components/ui/use-toast";
+import { useRouter } from "next/navigation";
+import { Search } from "lucide-react";
 import {
   Dumbbell,
   Cpu,
@@ -36,6 +40,35 @@ const menuIcons = [Dumbbell, Cpu, Gavel, Banknote, Newspaper, Globe, Camera];
 const popularCategories = [1, 3, 4, 6];
 
 export default function ToggleMenu(props) {
+
+  const [filterText, setFilterText] = useState("");
+  const { toast } = useToast();
+  const router = useRouter();
+
+  const handleEnterKey = (e) => {
+    if (e.key === "Enter") {
+      const trimmed = filterText.trim();
+      if (trimmed.length === 0) {
+        toast({
+          variant: "destructive",
+          title: "Boş arama yapılamaz",
+          description: "Lütfen bir kelime giriniz.",
+        });
+      } else {
+        toast({
+          variant: "success",
+          title: "Arama Sayfasına Yönlendiriliyorsunuz",
+          description: `Aranan Kelime: ${trimmed}`,
+        });
+        router.push(`/search?t=${trimmed}`);
+      }
+    }
+  };
+
+  const handleNavigation = (url) => {
+    router.push(url);
+  };
+
   function menusGet(num) {
     const str = MenusTR[num];
     return str?.substring(0, 1).toUpperCase() + str?.substring(1, str.length);
@@ -54,7 +87,10 @@ export default function ToggleMenu(props) {
           const isPopular = popularCategories.includes(index);
           return (
             <SheetClose asChild key={"toggleMenu" + index}>
-              <a href={"/kategori/" + Menus[index]}>
+              <button
+                onClick={() => handleNavigation("/kategori/" + Menus[index])}
+                className="w-full text-left"
+              >
                 <div className="group relative flex items-center p-3 rounded-lg hover:bg-gray-100 transition-all duration-200 cursor-pointer">
                   <div className="w-8 h-8 rounded-lg bg-gradient-to-br from-gray-300 to-slate-400 flex items-center justify-center mr-3 group-hover:scale-110 transition-transform duration-200">
                     <IconComponent className="w-4 h-4 text-white" />
@@ -77,7 +113,7 @@ export default function ToggleMenu(props) {
                     </div>
                   </div>
                 </div>
-              </a>
+              </button>
             </SheetClose>
           );
         })}
@@ -120,8 +156,11 @@ export default function ToggleMenu(props) {
             <h3 className="text-lg font-semibold mb-4 mt-4 text-gray-800">
               Diğer
             </h3>
-            <SheetClose className="w-full">
-              <a href="/soylenti/yazarlar">
+            <SheetClose asChild>
+              <button
+                onClick={() => handleNavigation("/soylenti/yazarlar")}
+                className="w-full text-left"
+              >
                 <div className="group relative flex items-center p-3 rounded-lg hover:bg-gray-100 transition-all duration-200 cursor-pointer">
                   <div className="w-8 h-8 rounded-lg bg-gradient-to-br from-gray-300 to-slate-400 flex items-center justify-center mr-3 group-hover:scale-110 transition-transform duration-200">
                     <User className="w-4 h-4 text-white" />
@@ -135,10 +174,13 @@ export default function ToggleMenu(props) {
                     </div>
                   </div>
                 </div>
-              </a>
+              </button>
             </SheetClose>
-            <SheetClose className="w-full">
-              <a href="/sohbet">
+            <SheetClose asChild>
+              <button
+                onClick={() => handleNavigation("/sohbet")}
+                className="w-full text-left"
+              >
                 <div className="group relative flex items-center p-3 rounded-lg hover:bg-gray-100 transition-all duration-200 cursor-pointer">
                   <div className="w-8 h-8 rounded-lg bg-gradient-to-br from-gray-300 to-slate-400 flex items-center justify-center mr-3 group-hover:scale-110 transition-transform duration-200">
                     <PenLine className="w-4 h-4 text-white" />
@@ -152,8 +194,19 @@ export default function ToggleMenu(props) {
                     </div>
                   </div>
                 </div>
-              </a>
+              </button>
             </SheetClose>
+            <div className="mt-4">
+              <div className="relative w-full">
+                <Search className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-400 w-4 h-4" />
+                <Input
+                  placeholder="Haber ara..."
+                  className="w-full pl-10 bg-gray-50/50 border-gray-200 focus:bg-white rounded-full"
+                  onChange={(e) => setFilterText(e.target.value)}
+                  onKeyDown={handleEnterKey}
+                />
+              </div>
+            </div>
           </div>
         </SheetContent>
       </Sheet>
