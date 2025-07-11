@@ -80,8 +80,8 @@ export const updateWhisper = (updateWhisper) => {
     return axios.get(Environment.baseUrl+"whisper/locked/update",updateWhisper);
 }
 
-export const getBestUserPoint = () => {
-    return axios.get(Environment.baseUrl+"whisper/getBestUserPoint");
+export const getBestUserPoint = (page,size) => {
+    return axios.get(Environment.baseUrl+"whisper/getBestUserPoint",{params: {page , size}});
 }
 
 export const getUserWhispersCalls = (username) => {

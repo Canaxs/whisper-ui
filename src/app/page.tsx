@@ -39,25 +39,40 @@ export type Whisper = {
 export default function Home() {
   const [width, setWidth] = useState(0);
   const [whispers, setWhispers] = useState<Whisper[]>([]);
+  const [whisperCount , setWhisperCount] = useState(12);
 
   const handleWindowResize = () => {
     setWidth(window.innerWidth);
   };
 
   useEffect(() => {
+      const width = window.innerWidth;
+      
+      if (width >= 1024) {
+        setWhisperCount(12);
+      } else if (width >= 768) {
+        setWhisperCount(9);
+      } else if (width >= 640) {
+        setWhisperCount(8);
+      } else {
+        setWhisperCount(6);
+      }
+  },[width]);
+
+  useEffect(() => {
     handleWindowResize();
     window.addEventListener("resize", handleWindowResize);
     return () => window.removeEventListener("resize", handleWindowResize);
-  }, [width]);
-
-  useEffect(() => {
-    getBestWhispers();
   }, []);
 
-  async function getBestWhispers() {
-    await getBestUserPoint()
+  useEffect(() => {
+    getBestWhispers(0,whisperCount);
+  }, [whisperCount]);
+
+  async function getBestWhispers(page,size) {
+    await getBestUserPoint(page,size)
       .then((res) => {
-        setWhispers(res.data);
+        setWhispers(res.data.content);
       })
       .finally(() => {
         console.log("Whispers Completed");
@@ -68,53 +83,6 @@ export default function Home() {
     str = str[0].toUpperCase() + str.slice(1);
     return str;
   }
-
-  /* return (
-        <div>
-        <div className="lg:w-[98%] 2xl:w-[65%] pt-1 lg:ml-[1%] 2xl:ml-[17%]">
-            <Header flag={"siyah-flag.png"} logo={"logo-black.png"} />
-            <ContentCarousel />
-            <div className="mt-8 flex flex-wrap">
-                {whispers.map((obj, index) => advertisingBoolean(index) ?  
-                    <div className="w-[24%] ml-[1%] mt-3 max-lg:w-[32%] max-md:w-[49%] max-sm:w-[46%] max-sm:ml-[2%]" key={"index"+index}>
-                        <a href={"kategori/"+convertMenusEn(obj.category)+"/"+obj.urlName}>
-                            <FlipCard title={obj.title} imageURL={obj.imageURL} keyNumber={index} name={obj.authorName} category={convertCategoryName(convertMenusEn(obj.category))} source={obj.source} 
-                            description={obj.description} />
-                        </a>
-                    </div>
-                : 
-                    <React.Fragment key={"reactFragmentKey"}>
-                        <div className="w-[24%] ml-[1%] mt-3 max-lg:w-[32%] max-md:w-[49%] max-sm:w-[46%] max-sm:ml-[2%]">
-                            <a href={"kategori/"+convertMenusEn(obj.category)+"/"+obj.urlName}>
-                            <FlipCard title={obj.title} imageURL={obj.imageURL} keyNumber={index} name={obj.authorName} category={convertCategoryName(convertMenusEn(obj.category))} source={obj.source} 
-                            description={obj.description} />
-                            </a>
-                        </div>
-                        <Adversiting oneClass="w-[98%] ml-[1%] h-[100px] mt-5 mb-2 rounded" />
-                    </React.Fragment>
-                )}
-            </div>
-            <div className={whispers.length == 0 ? "h-64" : "hidden"}></div>
-            <Adversiting oneClass={"w-[98%] ml-[1%] h-[100px] mt-5 mb-2 rounded"}/>
-            <AbsoluteAdversiting class="left"/>
-            <AbsoluteAdversiting class="right"/>
-        </div>
-        <FooterArea src={"logo-white.png"}/>
-        </div>
-    )
-<div className="flex-1">
-                <div className="grid grid-cols-1 xl:grid-cols-10">
-                  Left Content 
-                  <div className="xl:col-span-8"> </div>
-                  <div className="space-y-2 xl:col-span-2 bg-[#F5F5F5] min-h-screen">
-                    <Categories />
-                    <RightSidebarTalks />
-                    <Authors />
-                  </div>
-                </div>
-              </div>
-    
-        */
 
   return (
     <MainLayout>
@@ -131,7 +99,7 @@ export default function Home() {
                 <div className="flex-1 h-px bg-gradient-to-r from-gray-300 to-transparent"></div>
               </div>
               <div className="flex flex-wrap justify-center">
-                {whispers.map((obj, index) => (
+                {whispers.length > 0 ? whispers.map((obj, index) => (
                   <div
                     className="w-[24%] min-w-[170px] ml-[1%] mt-3 max-lg:w-[32%] max-md:w-[49%] max-sm:w-full max-sm:min-w-[90vw] max-sm:ml-0"
                     key={"index" + index}
@@ -156,8 +124,25 @@ export default function Home() {
                       />
                     </a>
                   </div>
-                ))}
+                ))
+                :
+                <div className="flex flex-col items-center justify-center py-8">
+                  <svg className="animate-spin h-12 w-12 text-gray-400 mb-2" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+                    <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"></circle>
+                    <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8v4a4 4 0 00-4 4H4z"></path>
+                  </svg>
+                  <span className="text-gray-500 text-sm">Yükleniyor...</span>
+                </div>
+              }
               </div>
+              {whispers.length > 0 &&
+              <div className="mt-8 max-sm:mt-6 text-center">
+                <Button className="relative overflow-hidden bg-gray-900 text-white px-8 py-3 rounded-lg transition-all duration-300 hover:shadow-lg group hover:text-gray-900 border-0 focus:border-0 focus:outline-none focus-visible:ring-0 focus-visible:ring-offset-0">
+                  <span className="relative z-10">Daha Fazla Haber</span>
+                  <div className="absolute inset-0 bg-white transform -translate-x-full group-hover:translate-x-0 transition-transform duration-300 ease-out"></div>
+                </Button>
+              </div>
+              }
             </div>
           </div>
           <div className="space-y-2 xl:col-span-2 bg-[#F5F5F5] min-h-screen">
