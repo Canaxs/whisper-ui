@@ -40,12 +40,15 @@ export default function Home() {
   const [width, setWidth] = useState(0);
   const [whispers, setWhispers] = useState<Whisper[]>([]);
   const [whisperCount , setWhisperCount] = useState(12);
+  const [currentPage , setCurrentPage] = useState(0);
+  const [isLoading, setIsLoading] = useState(false);
+  const [isLoadingMore, setIsLoadingMore] = useState(false);
 
   const handleWindowResize = () => {
     setWidth(window.innerWidth);
   };
 
-  useEffect(() => {
+  /*useEffect(() => {
       const width = window.innerWidth;
       
       if (width >= 1024) {
@@ -58,6 +61,7 @@ export default function Home() {
         setWhisperCount(6);
       }
   },[width]);
+  */
 
   useEffect(() => {
     handleWindowResize();
@@ -66,17 +70,32 @@ export default function Home() {
   }, []);
 
   useEffect(() => {
-    getBestWhispers(0,whisperCount);
+    setIsLoading(true);
+    getBestWhispers(currentPage,whisperCount);
   }, [whisperCount]);
 
   async function getBestWhispers(page,size) {
     await getBestUserPoint(page,size)
       .then((res) => {
-        setWhispers(res.data.content);
+        if(page === 0) {
+          setWhispers(res.data.content);
+          setIsLoading(false);
+        }
+        else {
+          setWhispers(prevWhispers => [...prevWhispers, ...res.data.content]);
+          setIsLoadingMore(false);
+        }
       })
       .finally(() => {
         console.log("Whispers Completed");
       });
+  }
+
+  async function loadMoreWhispers() {
+    setIsLoadingMore(true);
+    const nextPage = currentPage + 1;
+    setCurrentPage(nextPage);
+    await getBestWhispers(nextPage,whisperCount);
   }
 
   function convertCategoryName(str) {
@@ -99,10 +118,14 @@ export default function Home() {
                 <div className="flex-1 h-px bg-gradient-to-r from-gray-300 to-transparent"></div>
               </div>
               <div className="flex flex-wrap justify-center">
-                {whispers.length > 0 ? whispers.map((obj, index) => (
+                {!isLoading && whispers.length > 0 ? whispers.map((obj, index) => (
                   <div
-                    className="w-[24%] min-w-[170px] ml-[1%] mt-3 max-lg:w-[32%] max-md:w-[49%] max-sm:w-full max-sm:min-w-[90vw] max-sm:ml-0"
+                    className="w-[24%] min-w-[170px] ml-[1%] mt-3 max-lg:w-[32%] max-md:w-[49%] max-sm:w-full max-sm:min-w-[90vw] max-sm:ml-0 animate-fade-in"
                     key={"index" + index}
+                    style={{
+                      animationDelay: `${(index % 12) * 0.1}s`,
+                      animation: 'fadeInUp 0.6s ease-out forwards'
+                    }}
                   >
                     <a
                       href={
@@ -135,9 +158,27 @@ export default function Home() {
                 </div>
               }
               </div>
-              {whispers.length > 0 &&
+              
+              {/* Loading More Indicator */}
+              {isLoadingMore && (
+                <div className="mt-8 max-sm:mt-6 text-center">
+                  <div className="flex items-center justify-center space-x-2">
+                    <svg className="animate-spin h-6 w-6 text-gray-400" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+                      <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"></circle>
+                      <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8v4a4 4 0 00-4 4H4z"></path>
+                    </svg>
+                    <span className="text-gray-500 text-sm">Yeni haberler yükleniyor...</span>
+                  </div>
+                </div>
+              )}
+              
+              {whispers.length > 0 && whispers.length <= 36 && !isLoadingMore &&
               <div className="mt-8 max-sm:mt-6 text-center">
-                <Button className="relative overflow-hidden bg-gray-900 text-white px-8 py-3 rounded-lg transition-all duration-300 hover:shadow-lg group hover:text-gray-900 border-0 focus:border-0 focus:outline-none focus-visible:ring-0 focus-visible:ring-offset-0">
+                <Button 
+                  onClick={loadMoreWhispers} 
+                  disabled={isLoadingMore}
+                  className="relative overflow-hidden bg-gray-900 text-white px-8 py-3 rounded-lg transition-all duration-300 hover:shadow-lg group hover:text-gray-900 border-0 focus:border-0 focus:outline-none focus-visible:ring-0 focus-visible:ring-offset-0 disabled:opacity-50 disabled:cursor-not-allowed"
+                >
                   <span className="relative z-10">Daha Fazla Haber</span>
                   <div className="absolute inset-0 bg-white transform -translate-x-full group-hover:translate-x-0 transition-transform duration-300 ease-out"></div>
                 </Button>
@@ -152,6 +193,23 @@ export default function Home() {
           </div>
         </div>
       </div>
+      
+      <style jsx>{`
+        @keyframes fadeInUp {
+          from {
+            opacity: 0;
+            transform: translateY(20px);
+          }
+          to {
+            opacity: 1;
+            transform: translateY(0);
+          }
+        }
+        
+        .animate-fade-in {
+          opacity: 0;
+        }
+      `}</style>
     </MainLayout>
   );
 }
